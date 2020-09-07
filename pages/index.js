@@ -1,31 +1,58 @@
 // @generated: @expo/next-adapter@2.1.0
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 //import { setGlobals } from '../utils';
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
+
+import {StateProvider} from "../components/State";
+import Main from "../components/Main";
 
 
-export default function App() {
+function App(props) {
 
-  //setGlobals();
+  const isWeb = Platform.OS === 'web';
+  let url = '';
+  let get_vew = '/';
+  if (isWeb && typeof window !== 'undefined') {
+      url = window.location.href;
+      if (window.location.pathname.length > 1) {
+          get_vew = window.location.pathname.split('?')[0]
+      }
+  }
+
+  const initialState = {
+    view: get_vew,
+    isWeb: isWeb,
+    url: url,
+    fontsReady: false
+  };
+  
+  const reducer = (state, action) => {
+    console.log('state', state, 'action', action)
+    switch (action.type) {
+      case 'setView':
+        console.log('set view called', action)
+        return {
+          ...state,
+          view: action.view
+        };
+      case 'fontsReady':
+        return {
+          ...state,
+          fontsReady: action.value
+        };
+        
+      default:
+        return state;
+    }
+  };
+  
 
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Text style={styles.text}>Welcome to Expo + Next.js 👋</Text>
-      </View>
-    </NavigationContainer>
+      <StateProvider initialState={initialState} reducer={reducer}>
+        <Main />
+      </StateProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 16,
-  },
-});
+export default App;

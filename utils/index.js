@@ -1,2 +1,3 @@
 export { getData, getAllData } from './getData';
-export { getState, setState } from './state.js';
+export { getStyles } from './getStyles';
+export { getImage } from './getImage';
