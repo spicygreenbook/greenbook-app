@@ -1,22 +1,72 @@
+import { Dimensions } from 'react-native';
+
 const allStyles = {
     nav: function(config) {
         return {
-            marginTop: config.isWeb ? 0 : 100,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            right: 0,
+            height: config.isWeb ? 120 : 160,
+            paddingTop: config.isWeb ? 0 : 40,
             flex: 1,
             flexDirection: 'row',
-            backgroundColor: '#000'
+            zIndex: 2,
+            elevation: 2
+            //backgroundColor: '#000'
+        }
+    },
+    body: function(config) {
+        return {
+            zIndex: 1,
+            marginTop: config.isWeb ? 0 : 40
+        }
+    },
+    image_fill: function(config) {
+        return {
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            right: 0,
+            resizeMode: 'cover'
+        }
+    },
+    text_hero: function(config) {
+        return {
+            fontFamily: 'KnockoutBold',
+            fontSize: 30,
+            color: '#fff'
+        }
+    },
+    text_nav: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: 12,
+            color: '#fff'
+        }
+    },
+    middle_all: function(config) {
+        return {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
         }
     }
 }
 
 export function getStyles(key, config) {
     let ret = {};
+
+    config.windowWidth = Dimensions.get('window').width;
+
     key.split(',').forEach(style_key => {
+        style_key = (style_key || '').trim()
         ret[style_key] = {};
-        if (allStyles[key]) {
-            ret[style_key] = allStyles[key](config);
+        if (allStyles[style_key]) {
+            ret[style_key] = allStyles[style_key](config);
         } else {
-            console.error('those styles were not found')
+            console.error('those styles were not found', style_key)
         }
     })
     return ret;

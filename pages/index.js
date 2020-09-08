@@ -6,6 +6,7 @@ import 'react-native-gesture-handler';
 
 import {StateProvider} from "../components/State";
 import Main from "../components/Main";
+import { Dimensions } from 'react-native';
 
 
 function App(props) {
@@ -24,7 +25,11 @@ function App(props) {
     view: get_vew,
     isWeb: isWeb,
     url: url,
-    fontsReady: false
+    fontsReady: false,
+    dimensions: {
+        window: Dimensions.get("window"),
+        screen: Dimensions.get("screen")
+    }
   };
   
   const reducer = (state, action) => {
@@ -40,6 +45,11 @@ function App(props) {
         return {
           ...state,
           fontsReady: action.value
+        };
+      case 'setDimensions':
+        return {
+          ...state,
+          dimensions: action.value
         };
         
       default:
