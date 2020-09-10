@@ -14,9 +14,10 @@ import { Dimensions } from 'react-native';
 
 function Main(props) {
 
-  const [{ view, isWeb }, dispatch] = useStateValue();
+  const [{ view, isWeb, theme }, dispatch] = useStateValue();
 
   const styles = StyleSheet.create(getStyles('body', {isWeb}));
+
   const onChangeScreenSize = ({ set_window, set_screen }) => {
     const get_window = Dimensions.get("window");
     const get_screen = Dimensions.get("screen");
@@ -29,12 +30,20 @@ function Main(props) {
   };
 
   const [ fontsReady, fontsError ] = useFonts({
-      'KnockoutBold': {
+      'ApercuMedium': {
           uri: require('../public/fonts/ApercuRegular.ttf'),
           display: 'fallback',
       },
-      'ApercuMedium': {
+      'KnockoutBold': {
           uri: require('../public/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf'),
+          display: 'fallback',
+      },
+      'KnockoutNOTSURE1': {
+          uri: require('../public/fonts/Knockout_HTF50-Welterweight_Regular.otf'),
+          display: 'fallback',
+      },
+      'KnockoutNOTSURE2': {
+          uri: require('../public/fonts/Knockout_HTF48-Featherweight_Regular.otf'),
           display: 'fallback',
       }
   });
@@ -48,6 +57,13 @@ function Main(props) {
 
   useEffect(() => {
     console.log('view has changed to', view);
+    let theme = 'light';
+    if (view && view.length > 1 && view != '/' && view != '') {
+      theme = 'light'
+    } else {
+      theme = 'dark'
+    }
+    dispatch({type: 'setTheme', value: theme})
   }, [view])
 
   if (!fontsReady) {
@@ -56,7 +72,7 @@ function Main(props) {
 
   return (
       <View>
-          <Nav />
+          <Nav theme={theme} />
           <ScrollView style={styles.body}>
             { view === '/about' ? 
               <About {...props} />

@@ -1,18 +1,40 @@
 import React from 'react';
-import Link from "next/link";
+import { default as NextLink } from "next/link";
 import { useStateValue } from "../components/State";
-import {Text, StyleSheet, Button} from 'react-native';
+import { Text, StyleSheet, Button } from 'react-native';
+import { getStyles, Theme } from '../utils';
 
-function SwitchLink(props) {
+export function Link(props) {
 
     const [{ view, isWeb }, dispatch] = useStateValue();
-    console.log('link view', view, 'isweb', isWeb, 'props', props)
+
+    if (props.children) {
+        if (isWeb) {
+            return <NextLink href={props.href || ''}>
+                <a href={props.href || ''} onClick={() => dispatch({type: 'setView', view: props.href || ''})} style={{textDecoration: 'none'}}>
+                    {props.children}
+                </a>
+            </NextLink>
+        }
+    }
+
     return (
-        isWeb ? <Link href={props.href || ''}><a href={props.href || ''} onClick={() => dispatch({type: 'setView', view: props.href})}>{props.title}</a></Link>
+        isWeb ? <NextLink href={props.href || ''}>
+            <a href={props.href || ''} onClick={() => dispatch({type: 'setView', view: props.href || ''})}>
+                {props.title}
+            </a>
+        </NextLink>
         : 
-        <Button title={props.title || 'asdf'} onPress={() => dispatch({type: 'setView', view: props.href})} />
+        <Button title={props.title || 'asdf'} color={Theme.green} onPress={() => dispatch({type: 'setView', view: props.href})} {...props} />
     )
 
 }
 
-export default SwitchLink;
+export function Click(url, config) {
+    const [{ view, isWeb }, dispatch] = useStateValue();
+    if (isWeb) {
+        dispatch({type: 'setView', view: url})
+    }
+    return
+}
+

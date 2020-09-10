@@ -34,8 +34,11 @@ const allStyles = {
     },
     text_hero: function(config) {
         return {
+            textAlign: 'left',
             fontFamily: 'KnockoutBold',
-            fontSize: 30,
+            fontSize: config.windowWidth < 900 ? 48 : 82,
+            lineHeight: config.windowWidth < 900 ? 50 : 98,
+            textTransform: 'uppercase',
             color: '#fff'
         }
     },
@@ -70,4 +73,8 @@ export function getStyles(key, config) {
         }
     })
     return ret;
+}
+
+export const Theme = {
+    green: '#006233'
 }

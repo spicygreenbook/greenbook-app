@@ -51,6 +51,11 @@ function App(props) {
           ...state,
           dimensions: action.value
         };
+      case 'setTheme':
+        return {
+          ...state,
+          theme: action.value
+        };
         
       default:
         return state;
