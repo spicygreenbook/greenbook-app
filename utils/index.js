@@ -1,3 +1,4 @@
-export { getData, getAllData } from './getData';
-export { getStyles, Theme } from './getStyles';
+export { getData, getDataAsync, getAllData } from './getData';
+export { getStyles, Theme, GridWidth } from './getStyles';
 export { getImage } from './getImage';
+export { StateReducer } from './StateReducer';

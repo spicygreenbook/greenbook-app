@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { getStyles, Theme } from '../utils';
 import {useStateValue} from "../components/State";
 import { AntDesign } from '@expo/vector-icons'; 
@@ -7,7 +7,7 @@ import { Link, Click } from '../components/Link';
 
 export default function(props) {
 
-    const [{ view, isWeb, theme, dimensions }, dispatch] = useStateValue();
+    const [{ view, isWeb, theme, dimensions, menuOpen }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('nav, text_nav', {isWeb, theme}));
 
     return (
@@ -32,15 +32,16 @@ export default function(props) {
             <View style={{padding: 20, flex: dimensions.window.width < 900 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end'}}>
                 {dimensions.window.width < 900 ? (
                     <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
-                        <TouchableHighlight onPress={() => {
+                        <TouchableOpacity onPress={() => {
                             console.log('yolo');
+                            dispatch({type: 'menuOpen', value: true})
                             alert('yolo');
-                        }}>
+                        }} style={{height: 40, width: 40, backgroundColor: 'orange'}}>
                             <View style={{width: 40}}>
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2, marginBottom: 20}} />
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2}} />
                             </View>
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 ) : (
                     <React.Fragment>

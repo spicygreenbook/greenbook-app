@@ -19,6 +19,7 @@ const allStyles = {
     body: function(config) {
         return {
             zIndex: 1,
+            elevation: 1,
             marginTop: config.isWeb ? 0 : 40
         }
     },
@@ -76,5 +77,17 @@ export function getStyles(key, config) {
 }
 
 export const Theme = {
-    green: '#006233'
+    green: '#006233',
+    green_bg: '#006633'
+}
+
+export const GridWidth = (config) => {
+    if (!config.containerWidth){ config.containerWidth = Dimensions.get('window').width };
+    if (config.minWidth) {
+        let fits = Math.floor(config.containerWidth / config.minWidth);
+        console.log('fits', fits)
+        return (1 / fits) * 100
+    } else {
+        return 100
+    }
 }
