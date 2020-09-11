@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+//import {TouchableOpacity} from 'react-native-gesture-handler';
 import { getStyles, Theme } from '../utils';
 import {useStateValue} from "../components/State";
 import { AntDesign } from '@expo/vector-icons'; 
@@ -13,35 +14,38 @@ export default function(props) {
     return (
         <View style={styles.nav}>
             <View style={{padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: '#fff'}}>
-                {props.theme == 'light' ? 
-                    <Image
-                        style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
-                        alt="Spicy Green Book"
-                        source={isWeb ? {uri: '/images/logo_nav_light.png'} : require('../public/images/logo_nav_light.png')}
-                        onPress={() => { Click('/'); }}
-                    />
-                    :
-                    <Image
-                        style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
-                        alt="Spicy Green Book"
-                        source={isWeb ? {uri: '/images/logo_nav_dark.png'} : require('../public/images/logo_nav_dark.png')}
-                        onPress={() => { Click('/'); }}
-                    />
-                }
+                <TouchableOpacity style={{width: '100%', height: 80}} onPress={() => { 
+                    dispatch({type: 'setView', view: "/"})
+                }}>
+                    {props.theme == 'light' ? 
+                        <Image
+                            style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
+                            alt="Spicy Green Book"
+                            source={isWeb ? {uri: '/images/logo_nav_light.png'} : require('../public/images/logo_nav_light.png')}
+                        />
+                        :
+                        <Image
+                            style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
+                            alt="Spicy Green Book"
+                            source={isWeb ? {uri: '/images/logo_nav_dark.png'} : require('../public/images/logo_nav_dark.png')}
+                        />
+                    }
+                </TouchableOpacity>
             </View>
             <View style={{padding: 20, flex: dimensions.window.width < 900 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end'}}>
                 {dimensions.window.width < 900 ? (
                     <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
-                        <TouchableOpacity onPress={() => {
-                            console.log('yolo');
-                            dispatch({type: 'menuOpen', value: true})
-                            alert('yolo');
-                        }} style={{height: 40, width: 40, backgroundColor: 'orange'}}>
-                            <View style={{width: 40}}>
+                        <View style={{width: 40}}>
+                            <Button title="Menu" style={{height: 40, backgroundColor: 'orange'}} onPress={() => {
+                                console.log('yolo');
+                                dispatch({type: 'menuOpen', value: true})
+                                dispatch({type: 'setView', view: "/about"})
+                                alert('yolo');
+                            }}>
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2, marginBottom: 20}} />
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2}} />
-                            </View>
-                        </TouchableOpacity>
+                            </Button>
+                        </View>
                     </View>
                 ) : (
                     <React.Fragment>

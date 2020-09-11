@@ -1,7 +1,7 @@
 import React from 'react';
 import { default as NextLink } from "next/link";
 import { useStateValue } from "../components/State";
-import { Text, StyleSheet, Button, View, Linking } from 'react-native';
+import { Text, StyleSheet, Button, View, TouchableOpacity, Linking } from 'react-native';
 import { getStyles, Theme } from '../utils';
 
 export function Link(props) {
@@ -17,7 +17,7 @@ export function Link(props) {
 
     if (props.children) {
         if (isWeb) {
-            return external ? 
+            return !external ? 
                 <NextLink href={props.href || ''}>
                     <a href={props.href || ''} onClick={handleURL} style={{textDecoration: 'none'}}>
                         {props.children}
@@ -27,7 +27,7 @@ export function Link(props) {
                 {props.children}
             </a>
         } else {
-            return <View onPress={() => Linking.openURL(props.href)}>{props.children}</View>
+            return <TouchableOpacity onPress={() => Linking.openURL(props.href)}>{props.children}</TouchableOpacity>
         }
     }
 
@@ -45,9 +45,7 @@ export function Link(props) {
 
 export function Click(url, config) {
     const [{ view, isWeb }, dispatch] = useStateValue();
-    if (isWeb) {
-        dispatch({type: 'setView', view: url})
-    }
+    dispatch({type: 'setView', view: url || ''})
     return
 }
 
