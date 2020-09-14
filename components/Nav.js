@@ -12,7 +12,7 @@ export default function(props) {
     const styles = StyleSheet.create(getStyles('nav, text_nav', {isWeb, theme}));
 
     return (
-        <View style={styles.nav}>
+        <View style={[styles.nav, props.isScrolled ? {backgroundColor: '#000'} : {}]}>
             <View style={{padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: '#fff'}}>
                 <TouchableOpacity style={{width: '100%', height: 80}} onPress={() => { 
                     dispatch({type: 'setView', view: "/"})

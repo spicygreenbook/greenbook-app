@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, Text, Button, Image, ImageBackground, ActivityIndicator} from 'react-native';
 import { Link } from "../components/Link"; 
+import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import { getStyles, Theme, getDataAsync, GridWidth } from '../utils';
 
 function Page(props) {
@@ -40,34 +41,36 @@ function Page(props) {
                     </View>
                 </ImageBackground>
             </View>
-            <View style={{backgroundColor: Theme.green_bg, flexDirection: 'row', flexWrap: 'wrap'}}>
-                {loadingPress ? (
-                    <ActivityIndicator size="large" />
-                ) : errorPress ? (
-                    <Text>{errorPress}</Text>
-                ) : (
-                    <React.Fragment>
-                        {press.map((pressRow, p) => 
-                            (<View style={{width: GridWidth({minWidth: 140})}} key={'press' + p}>
-                                <Link href={pressRow.link}>
-                                    <Image source={{uri: pressRow.press_site_logo.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
-                                </Link>
-                            </View>)
-                        )}
-                    </React.Fragment>
-                )
-                }
+            <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 80, paddingBottom: 80}}>
+                <View style={{justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
+                    {loadingPress ? (
+                        <ActivityIndicator size="large" />
+                    ) : errorPress ? (
+                        <Text>{errorPress}</Text>
+                    ) : (
+                        <React.Fragment>
+                            {press.map((pressRow, p) => 
+                                (<View style={{width: GridWidth({minWidth: 140})}} key={'press' + p}>
+                                    <Link href={pressRow.link}>
+                                        <Image source={{uri: pressRow.press_site_logo.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
+                                    </Link>
+                                </View>)
+                            )}
+                        </React.Fragment>
+                    )
+                    }
+                </View>
             </View>
             <View style={styles.section}>
-                <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-                    <View style={{flex: 1}}>
-                        <Image
-                            style={{width: '100%', resizeMode: 'contain'}}
+                <View style={dimensions.window.width < 900 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+                    <View style={dimensions.window.width < 700 ? {aspectRatio: 1.37245} : {flex: 1, aspectRatio: 1.37245}}>
+                        <ResponsiveImage
+                            style={{width: 804, resizeMode: 'contain', aspectRatio: 1.37245}}
                             alt="Spicy Green Book"
                             source={isWeb ? {uri: '/images/home_green_book.png'} : require('../public/images/home_green_book.png')}
                         />
                     </View>
-                    <View style={{flex: 2}}>
+                    <View style={dimensions.window.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
                         <Text style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
                         <Text style={styles.text_body}>
                             Inspired by Victor Green, Spicy Green Book is a team of volunteers committed to help complie a directory of black owned businesses.

@@ -15,6 +15,7 @@ import { Dimensions } from 'react-native';
 function Main(props) {
 
   const [{ view, isWeb, theme }, dispatch] = useStateValue();
+  const [ isScrolled, setIsScrolled ] = useState({});
 
   const styles = StyleSheet.create(getStyles('body', {isWeb}));
 
@@ -72,8 +73,14 @@ function Main(props) {
 
   return (
       <View>
-          <Nav theme={theme} />
-          <ScrollView style={styles.body}>
+          <Nav isScrolled={isScrolled} theme={theme} />
+          <ScrollView style={styles.body} onScroll={(e) => {
+            if (!isScrolled && e.nativeEvent.contentOffset.y > 0) {
+              setIsScrolled(true);
+            } else if (isScrolled && e.nativeEvent.contentOffset.y < 1) {
+              setIsScrolled(false);
+            }
+          }}>
             { view === '/about' ? 
               <About {...props} />
               :
