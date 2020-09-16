@@ -25,7 +25,9 @@ const allStyles = {
     },
     section: function(config) {
         return {
-            padding: 20
+            padding: 20,
+            paddingTop: 80,
+            paddingBottom: 80,
         }
     },
     image_fill: function(config) {
@@ -63,6 +65,22 @@ const allStyles = {
             color: '#006233'
         }
     },
+    text_header2: function(config) {
+        return {
+            fontFamily: 'KnockoutBold',
+            fontSize: config.windowWidth < 900 ? 40 : 75,
+            lineHeight: config.windowWidth < 900 ? 42 : 66,
+            color: '#006233'
+        }
+    },
+    text_header3: function(config) {
+        return {
+            fontFamily: 'KnockoutBold',
+            fontSize: config.windowWidth < 900 ? 22 : 55,
+            lineHeight: config.windowWidth < 900 ? 26 : 66,
+            color: '#006233'
+        }
+    },
     text_body: function(config) {
         return {
             fontFamily: 'ApercuMedium',
@@ -76,6 +94,27 @@ const allStyles = {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center'
+        }
+    },
+    button_white: function(config) {
+        return {
+            borderWidth: 1,
+            borderColor: '#fff',
+            backgroundColor: 'rgba(0,0,0,0)',
+            alignItems: 'center',
+            height: 80,
+            paddingLeft: 60,
+            paddingRight: 60,
+            flexDirection: 'row'
+        }
+    },
+    button_white_text: function(config) {
+        return {
+            textTransform: 'uppercase',
+            fontFamily: 'ApercuMedium',
+            fontSize: 12,
+            lineHeight: 15,
+            color: '#fff'
         }
     }
 }
@@ -111,7 +150,7 @@ export const GridWidth = (config) => {
         let fits = Math.floor(config.containerWidth / config.minWidth);
         if (fits < 1) { fits = 1; }
 
-        console.log('fits', fits)
+        //console.log('fits', fits)
         return ((1 / fits) * 100) + '%'
     } else {
         return 100

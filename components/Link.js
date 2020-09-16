@@ -15,6 +15,26 @@ export function Link(props) {
         }
     }
 
+    if (props.button) {
+        const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
+        return isWeb ? <NextLink href={props.href || ''}>
+            <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
+                <View style={styles[props.button]}>
+                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                </View>
+            </View>
+        </NextLink>
+        : 
+        <TouchableOpacity onPress={handleURL}>
+            <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
+                <View style={styles[props.button]}>
+                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+    }
+
+
     if (props.children) {
         if (isWeb) {
             return !external ? 
