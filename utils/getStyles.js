@@ -28,6 +28,13 @@ const allStyles = {
             padding: 20,
             paddingTop: 80,
             paddingBottom: 80,
+            flexDirection: 'row',
+            justifyContent: 'center'
+        }
+    },
+    content: function(config) {
+        return {
+            maxWidth: 1024
         }
     },
     image_fill: function(config) {
@@ -62,6 +69,7 @@ const allStyles = {
             fontFamily: 'KnockoutBold',
             fontSize: config.windowWidth < 900 ? 22 : 75,
             lineHeight: config.windowWidth < 900 ? 26 : 90,
+            textTransform: 'uppercase',
             color: '#006233'
         }
     },
@@ -70,14 +78,25 @@ const allStyles = {
             fontFamily: 'KnockoutBold',
             fontSize: config.windowWidth < 900 ? 40 : 75,
             lineHeight: config.windowWidth < 900 ? 42 : 66,
+            textTransform: 'uppercase',
             color: '#006233'
         }
     },
     text_header3: function(config) {
         return {
-            fontFamily: 'KnockoutBold',
+            fontFamily: 'KnockoutFeatherWeight',
             fontSize: config.windowWidth < 900 ? 22 : 55,
             lineHeight: config.windowWidth < 900 ? 26 : 66,
+            textTransform: 'uppercase',
+            color: '#006233'
+        }
+    },
+    text_header4: function(config) {
+        return {
+            fontFamily: 'KnockoutWelterWeight',
+            fontSize: config.windowWidth < 900 ? 16 : 24,
+            lineHeight: config.windowWidth < 900 ? 20 : 29,
+            textTransform: 'uppercase',
             color: '#006233'
         }
     },
@@ -86,6 +105,14 @@ const allStyles = {
             fontFamily: 'ApercuMedium',
             fontSize: config.windowWidth < 900 ? 18 : 28,
             lineHeight: config.windowWidth < 900 ? 22 : 36,
+            color: '#006233'
+        }
+    },
+    text_body2: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: config.windowWidth < 900 ? 15 : 32,
+            lineHeight: config.windowWidth < 900 ? 20 : 42,
             color: '#006233'
         }
     },
@@ -139,6 +166,12 @@ export function getStyles(key, config) {
 export const Theme = {
     green: '#006233',
     green_bg: '#006633'
+}
+
+export const sizeConfig = (config) => {
+
+    if (!config.containerWidth){ config.containerWidth = Dimensions.get('window').width };
+
 }
 
 export const GridWidth = (config) => {

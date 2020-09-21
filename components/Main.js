@@ -39,11 +39,11 @@ function Main(props) {
           uri: require('../public/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf'),
           display: 'fallback',
       },
-      'KnockoutNOTSURE1': {
+      'KnockoutWelterWeight': {
           uri: require('../public/fonts/Knockout_HTF50-Welterweight_Regular.otf'),
           display: 'fallback',
       },
-      'KnockoutNOTSURE2': {
+      'KnockoutFeatherWeight': {
           uri: require('../public/fonts/Knockout_HTF48-Featherweight_Regular.otf'),
           display: 'fallback',
       }
