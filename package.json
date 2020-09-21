@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
+    "aws-sdk": "^2.755.0",
     "expo": "~38.0.0",
     "expo-font": "~8.2.1",
     "imagemin-optipng": "^8.0.0",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.3.5",
     "next-fonts": "^1.4.0",
     "next-optimized-images": "^2.6.2",

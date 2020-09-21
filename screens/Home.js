@@ -3,7 +3,7 @@ import { useStateValue } from "../components/State";
 import { StyleSheet, View, ScrollView, Text, Button, SGBButton, Image, ImageBackground, ActivityIndicator} from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
-import { getStyles, Theme, getDataAsync, GridWidth } from '../utils';
+import { getStyles, Theme, getDataAsync, GridWidth, displayDate } from '../utils';
 
 function Page(props) {
 
@@ -18,6 +18,10 @@ function Page(props) {
     const [ errorUpdates, setErrorUpdates ] = useState('');
     const [ updates, setUpdates ] = useState([]);
 
+    const [ loadingInstagram, setLoadingInstagram ] = useState(true);
+    const [ errorInstagram, setErrorInstagram ] = useState('');
+    const [ instagram, setInstagram ] = useState([]);
+
     useEffect( () => {
         getDataAsync({
             type: 'press'
@@ -30,6 +34,7 @@ function Page(props) {
             setLoadingPress(false);
             setErrorPress('Failed to load latest press updates.');
         })
+
         getDataAsync({
             type: 'updates'
         }).then(updates => {
@@ -40,6 +45,18 @@ function Page(props) {
             console.error(err);
             setLoadingUpdates(false);
             setErrorUpdates('Failed to load latest updates.');
+        })
+
+        getDataAsync({
+            type: 'instagram'
+        }).then(instagram => {
+            console.log('instagram izz', instagram)
+            setLoadingInstagram(false);
+            setInstagram(instagram)
+        }).catch(err => {
+            console.error(err);
+            setLoadingInstagram(false);
+            setErrorInstagram('Failed to load latest instagram.');
         })
     }, [])
 
@@ -136,10 +153,33 @@ function Page(props) {
                         ) : (
                             <React.Fragment>
                                 {updates.map((update, i) => (
-                                    <View style={{flex: 1, width: 300, whiteSpace: 'normal', margin: 10}} key={'update' + i}>
+                                    <View style={{flex: 1, width: 300, margin: 10}} key={'update' + i}>
                                         <Image source={{uri: update.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
                                         <Text style={styles.text_header4}>{update.title}</Text>
                                         <Text>{update.date}</Text>
+                                    </View>
+                                ))}
+                            </React.Fragment>
+                        )}
+                    </ScrollView>
+                </View>
+            </View>
+
+            <View style={[styles.section, {flex:1}]}>
+                <View style={[styles.content, {flex:1}]}>
+                    <Text style={[styles.text_header3, {marginBottom: 20}]}>
+                        FOLLOW @SPICYGREENBOOK
+                    </Text>
+                    <ScrollView horizontal={true} style={{flexDirection: 'row', flex:1, marginLeft: -10, marginRight: -10}}>
+                        {loadingUpdates ? (
+                            <ActivityIndicator size="large" />
+                        ) : errorUpdates ? (
+                            <Text>{errorUpdates}</Text>
+                        ) : (
+                            <React.Fragment>
+                                {instagram.map((update, i) => (
+                                    <View style={{flex: 1, width: 300, margin: 10}} key={'instagram' + i}>
+                                        <Image source={{uri: update.thumbnail}} style={{width: 300, height:300, resizeMode: 'cover'}} />
                                     </View>
                                 ))}
                             </React.Fragment>

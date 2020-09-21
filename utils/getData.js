@@ -175,43 +175,49 @@ async function getData(config) {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.staff.order%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'press') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.press.date%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
+    } else if (config.type === 'instagram') {
+        url = `http://localhost:3000/api/instagram`
     }
     if (url) {
         let data = await fetch(url);
-        let parsed_data = [];
-        let getLoop = async (nextInfo) => {
-            nextInfo.results.map((doc, i) => {
-                parsed_data.push(doc);
-            })
-            if (nextInfo.next_page) {
-                console.log('fetching', nextInfo.next_page)
-                let data = await fetch(nextInfo.next_page);
-                getLoop(await data.json());
-            }
-        }
-        await getLoop(await data.json());
-
-        //console.log('parsed_data', parsed_data)
-
-        //console.log('parsed', parsed_data)
-        rows = parsed_data.map((doc, i) => {
-            let content = {};
-            Object.keys(doc.data[config.type]).forEach(key => {
-                if (doc.data[config.type][key].type === 'Group') {
-                    content[key] = getPrismicGroupAdvanced(doc.data[config.type][key]);
-                } else {
-                    content[key] = getPrismicValue(doc.data[config.type][key]);
+        if (config.type === 'instagram') {
+            rows = await data.json();
+        } else {
+            let parsed_data = [];
+            let getLoop = async (nextInfo) => {
+                nextInfo.results.map((doc, i) => {
+                    parsed_data.push(doc);
+                })
+                if (nextInfo.next_page) {
+                    console.log('fetching', nextInfo.next_page)
+                    let data = await fetch(nextInfo.next_page);
+                    getLoop(await data.json());
                 }
-                content['_' + key] = doc.data[config.type][key];
+            }
+            await getLoop(await data.json());
+
+            //console.log('parsed_data', parsed_data)
+            //console.log('parsed', parsed_data)
+
+            rows = parsed_data.map((doc, i) => {
+                let content = {};
+                Object.keys(doc.data[config.type]).forEach(key => {
+                    if (doc.data[config.type][key].type === 'Group') {
+                        content[key] = getPrismicGroupAdvanced(doc.data[config.type][key]);
+                    } else {
+                        content[key] = getPrismicValue(doc.data[config.type][key]);
+                    }
+                    content['_' + key] = doc.data[config.type][key];
+                })
+                return content;
             })
-            return content;
-        })
+        }
     }
     return rows
 }
 
 async function getAllData(config) {
-    let types = ['listing', 'updates', 'press', 'staff'];
+    let types = ['listing', 'updates', 'press', 'staff', 'instagram'];
     let ret = {};
     types.forEach(type => {
         /*ret[type] = async getData({
