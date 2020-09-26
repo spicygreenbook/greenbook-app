@@ -151,6 +151,7 @@ async function getContent(config) {
 
 async function getData(config) {
     if (!config){ config = {}; }
+    if (!config.limit) {config.limit = 100}
     if (config.ref_id) {
         console.log('using custom master ref', config.ref_id)
         var master_ref = config.ref_id;
@@ -176,7 +177,7 @@ async function getData(config) {
     } else if (config.type === 'press') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.press.date%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'instagram') {
-        url = `http://localhost:3000/api/instagram`
+        url = `http://danix:3000/api/instagram`
     }
     if (url) {
         let data = await fetch(url);
@@ -189,7 +190,7 @@ async function getData(config) {
                     parsed_data.push(doc);
                 })
                 if (nextInfo.next_page) {
-                    console.log('fetching', nextInfo.next_page)
+                    console.log('fetching next page', nextInfo.next_page)
                     let data = await fetch(nextInfo.next_page);
                     getLoop(await data.json());
                 }
@@ -200,7 +201,12 @@ async function getData(config) {
             //console.log('parsed', parsed_data)
 
             rows = parsed_data.map((doc, i) => {
-                let content = {};
+                let content = {
+                    id: doc.id,
+                    uid: doc.uid,
+                    created: new Date(doc.first_publication_date).getTime(),
+                    updated: new Date(doc.last_publication_date).getTime(),
+                };
                 Object.keys(doc.data[config.type]).forEach(key => {
                     if (doc.data[config.type][key].type === 'Group') {
                         content[key] = getPrismicGroupAdvanced(doc.data[config.type][key]);

@@ -1,9 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, ScrollView, Text, Button, SGBButton, Image, ImageBackground, ActivityIndicator} from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, Text, Button, SGBButton, Image, ImageBackground, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
+import RichText from "../components/RichText"; 
 import { getStyles, Theme, getDataAsync, GridWidth, displayDate } from '../utils';
+import { Entypo } from '@expo/vector-icons'; 
+
+let currentIndexListing = 0;
+const viewableItemsChangedListing = ({ viewableItems, changed }) => {
+    console.log("Visible items are", viewableItems);
+    console.log("Changed in this iteration", changed);
+    currentIndexListing = viewableItems && viewableItems[0] && viewableItems[0].index;
+}
+const viewableItemsChangedConfigListing = {
+    itemVisiblePercentThreshold: 50
+};
 
 function Page(props) {
 
@@ -21,6 +33,10 @@ function Page(props) {
     const [ loadingInstagram, setLoadingInstagram ] = useState(true);
     const [ errorInstagram, setErrorInstagram ] = useState('');
     const [ instagram, setInstagram ] = useState([]);
+
+    const [ loadingListings, setLoadingListings ] = useState(true);
+    const [ errorListings, setErrorListings ] = useState('');
+    const [ Listings, setListings ] = useState([]);
 
     useEffect( () => {
         getDataAsync({
@@ -58,7 +74,30 @@ function Page(props) {
             setLoadingInstagram(false);
             setErrorInstagram('Failed to load latest instagram.');
         })
+
+        getDataAsync({
+            type: 'listing'
+        }).then(listings => {
+            console.log('Listings izz', listings)
+            setLoadingListings(false);
+            setListings(listings)
+        }).catch(err => {
+            console.error(err);
+            setLoadingListings(false);
+            setErrorListings('Failed to load latest listings.');
+        })
     }, [])
+
+    let newListingRef;
+    const scrollToIndexListing = (obj, len) => {
+        if (obj.index < 0) { obj.index = 0; }
+        if (obj.index > len-1) { obj.index = len-1; }
+        if (newListingRef) {
+            newListingRef.scrollToIndex(obj)
+        } else {
+            console.log('no listing ref')
+        }
+    }
 
     return (
         <View>
@@ -115,53 +154,90 @@ function Page(props) {
                 </View>
             </View>
 
-            <ScrollView style={{height: 700, backgroundColor: '#000', position: 'relative'}}>
-                <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
-                </ImageBackground>
-                <View style={{
-                    position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                }}>
-                    <View style={{flex: 2}}>
-                        <Text style={[styles.text_header3, {color: '#fff'}]}>
-                            NEW LISTING
-                        </Text>
-                    </View>
-                    <View style={{flex: 1}}>
-                        <Text style={{color: '#fff'}}>arrow</Text>
-                    </View>
-                    <View style={{flex: 2}}>
-                        <Text style={[styles.text_header2, {color: '#fff'}]}>
-                            ALAMAR KITCHEN AND BAR
-                        </Text>
-                        <Link button={'button_white'} title={'Learn More'} href="/" style={{marginTop: 40}}/>
-                    </View>
-                </View>
-            </ScrollView>
+            <View style={{backgroundColor: '#000', position: 'relative'}}>
+                {loadingListings ? (
+                    <ActivityIndicator size="large" />
+                ) : errorListings ? (
+                    <Text style={{color: '#fff'}}>{errorListings}</Text>
+                ) : (
+                    <React.Fragment>
+                        <FlatList
+                            horizontal
+                            data={Listings.sort((a,b) => {
+                                    return a.time - b.time
+                                }).slice(0,10)
+                            }
+                            ref={(ref) => { newListingRef = ref; }}
+                            onViewableItemsChanged={viewableItemsChangedListing}
+                            viewabilityConfig={viewableItemsChangedConfigListing}
+                            renderItem={({ item, index, separators }) => (
+                                <View>
+                                    <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.window.width, height: 700}}>
+                                    </ImageBackground>
+                                    <View style={{
+                                        position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between'
+                                    }}>
+                                        <View style={{flex: 2}}>
+                                            <Text style={[styles.text_header3, {color: '#fff'}]}>
+                                                NEW LISTING
+                                            </Text>
+                                        </View>
+                                        <View style={{flex: 1, height: 200}}>
+                                        </View>
+                                        <View style={{flex: 2}}>
+                                            <Text style={[styles.text_header2, {color: '#fff'}]}>
+                                                {item.name}
+                                            </Text>
+                                            <Link button={'button_white'} title={'Learn More'} href={'/biz/' + item.uid} style={{marginTop: 40}}/>
+                                        </View>
+                                    </View>
+                                </View>
+                            )}
+                            keyExtractor={(item, index) => 'listing' + index}
+                        />
+                        <View style={{position: 'absolute', top: '50%', marginTop: -100, left:10, right:10, height: 200, flex: 1}}>
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                <View style={{flex: 1}}>
+                                    <TouchableOpacity onPress={(e) => scrollToIndexListing({animated: true, index: currentIndexListing-1}, 10)}>
+                                        <Entypo name="chevron-thin-left" size={48} color="#fff" />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{flex: 1, alignItems: 'flex-end'}}>
+                                    <TouchableOpacity onPress={(e) => scrollToIndexListing({animated: true, index: currentIndexListing+1}, 10)}>
+                                        <Entypo name="chevron-thin-right" size={48} color="#fff" />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </React.Fragment>
+                )}
+            </View>
 
             <View style={[styles.section, {flex:1}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Text style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES
                     </Text>
-                    <ScrollView horizontal={true} style={{flexDirection: 'row', flex:1, marginLeft: -10, marginRight: -10}}>
-                        {loadingUpdates ? (
-                            <ActivityIndicator size="large" />
-                        ) : errorUpdates ? (
-                            <Text>{errorUpdates}</Text>
-                        ) : (
-                            <React.Fragment>
-                                {updates.map((update, i) => (
-                                    <View style={{flex: 1, width: 300, margin: 10}} key={'update' + i}>
-                                        <Image source={{uri: update.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
-                                        <Text style={styles.text_header4}>{update.title}</Text>
-                                        <Text>{update.date}</Text>
-                                    </View>
-                                ))}
-                            </React.Fragment>
-                        )}
-                    </ScrollView>
+                    {loadingUpdates ? (
+                        <ActivityIndicator size="large" />
+                    ) : errorUpdates ? (
+                        <Text>{errorUpdates}</Text>
+                    ) : (
+                        <FlatList
+                            horizontal={true}
+                            data={updates}
+                            renderItem={({ item, index, separators }) => (
+                                <View style={{ margin: 10}} key={'update' + index}>
+                                    <Image source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
+                                    <Text style={styles.text_header4}>{item.title}</Text>
+                                    <Text>{item.date}</Text>
+                                </View>
+                            )}
+                            keyExtractor={(item, index) => 'update' + index}
+                        />
+                    )}
                 </View>
             </View>
 
@@ -170,21 +246,22 @@ function Page(props) {
                     <Text style={[styles.text_header3, {marginBottom: 20}]}>
                         FOLLOW @SPICYGREENBOOK
                     </Text>
-                    <ScrollView horizontal={true} style={{flexDirection: 'row', flex:1, marginLeft: -10, marginRight: -10}}>
-                        {loadingUpdates ? (
-                            <ActivityIndicator size="large" />
-                        ) : errorUpdates ? (
-                            <Text>{errorUpdates}</Text>
-                        ) : (
-                            <React.Fragment>
-                                {instagram.map((update, i) => (
-                                    <View style={{flex: 1, width: 300, margin: 10}} key={'instagram' + i}>
-                                        <Image source={{uri: update.thumbnail}} style={{width: 300, height:300, resizeMode: 'cover'}} />
-                                    </View>
-                                ))}
-                            </React.Fragment>
-                        )}
-                    </ScrollView>
+                    {loadingUpdates ? (
+                        <ActivityIndicator size="large" />
+                    ) : errorUpdates ? (
+                        <Text>{errorUpdates}</Text>
+                    ) : (
+                        <FlatList
+                            horizontal={true}
+                            data={instagram}
+                            renderItem={({ item, index, separators }) => (
+                                <View style={{flex: 1, width: 300, margin: 10}}>
+                                    <Image source={{uri: item.thumbnail}} style={{width: 300, height:300, resizeMode: 'cover'}} />
+                                </View>
+                            )}
+                            keyExtractor={(item, index) => 'instagram' + index}
+                        />
+                    )}
                 </View>
             </View>
 
