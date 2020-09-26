@@ -272,13 +272,6 @@ function Page(props) {
                 </View>
             </View>
 
-            <View>
-                <Link href="/about" title="About Screen" />
-            </View>
-
-            <View style={{height: 100}}>
-                <Text>hi</Text>
-            </View>
         </View>
     );
 }

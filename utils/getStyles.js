@@ -1,5 +1,10 @@
 import { Dimensions } from 'react-native';
 
+const theme = {
+    green: '#006233',
+    green_bg: '#006633'
+}
+
 const allStyles = {
     nav: function(config) {
         return {
@@ -14,6 +19,12 @@ const allStyles = {
             zIndex: 2,
             elevation: 2
             //backgroundColor: '#000'
+        }
+    },
+    footer: function(config) {
+        return {
+            flexDirection: 'row',
+            backgroundColor: theme.green_bg
         }
     },
     body: function(config) {
@@ -58,6 +69,13 @@ const allStyles = {
         }
     },
     text_nav: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: 12,
+            color: '#fff'
+        }
+    },
+    text_footer: function(config) {
         return {
             fontFamily: 'ApercuMedium',
             fontSize: 12,
@@ -163,10 +181,7 @@ export function getStyles(key, config) {
     return ret;
 }
 
-export const Theme = {
-    green: '#006233',
-    green_bg: '#006633'
-}
+export const Theme = theme;
 
 export const sizeConfig = (config) => {
 

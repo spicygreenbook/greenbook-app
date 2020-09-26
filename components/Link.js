@@ -39,7 +39,7 @@ export function Link(props) {
         if (isWeb) {
             return !external ? 
                 <NextLink href={props.href || ''}>
-                    <a href={props.href || ''} onClick={handleURL} style={{textDecoration: 'none'}}>
+                    <a href={props.href || ''} onClick={handleURL} style={{...props.style, textDecoration: 'none'}}>
                         {props.children}
                     </a>
                 </NextLink>

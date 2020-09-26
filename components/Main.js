@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native';
 //import { setGlobals } from '../utils';
 
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 import Home from '../screens/Home';
 import About from '../screens/About';
 import {useStateValue} from "../components/State";
@@ -87,6 +88,7 @@ function Main(props) {
               <Home {...props} />
             }
           </ScrollView>
+          <Footer theme={theme} />
       </View>
   );
 }
