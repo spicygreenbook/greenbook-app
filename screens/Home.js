@@ -22,46 +22,51 @@ function Page(props) {
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, section, content', {isWeb}));
 
-    const [ loadingPress, setLoadingPress ] = useState(true);
+    const [ loadingPress, setLoadingPress ] = useState(!!props.press);
     const [ errorPress, setErrorPress ] = useState('');
-    const [ press, setPress ] = useState([]);
+    const [ press, setPress ] = useState(props.press || []);
 
-    const [ loadingUpdates, setLoadingUpdates ] = useState(true);
+    const [ loadingUpdates, setLoadingUpdates ] = useState(!!props.updates);
     const [ errorUpdates, setErrorUpdates ] = useState('');
-    const [ updates, setUpdates ] = useState([]);
+    const [ updates, setUpdates ] = useState(props.updates || []);
 
     const [ loadingInstagram, setLoadingInstagram ] = useState(true);
     const [ errorInstagram, setErrorInstagram ] = useState('');
     const [ instagram, setInstagram ] = useState([]);
 
-    const [ loadingListings, setLoadingListings ] = useState(true);
+    const [ loadingListings, setLoadingListings ] = useState(!!props.listings);
     const [ errorListings, setErrorListings ] = useState('');
-    const [ Listings, setListings ] = useState([]);
+    const [ Listings, setListings ] = useState(props.listings || []);
 
     useEffect( () => {
-        getDataAsync({
-            type: 'press'
-        }).then(press => {
-            console.log('press izz', press)
-            setLoadingPress(false);
-            setPress(press)
-        }).catch(err => {
-            console.error(err);
-            setLoadingPress(false);
-            setErrorPress('Failed to load latest press updates.');
-        })
 
-        getDataAsync({
-            type: 'updates'
-        }).then(updates => {
-            console.log('updates izz', updates)
-            setLoadingUpdates(false);
-            setUpdates(updates)
-        }).catch(err => {
-            console.error(err);
-            setLoadingUpdates(false);
-            setErrorUpdates('Failed to load latest updates.');
-        })
+        if (!props.press) {
+            getDataAsync({
+                type: 'press'
+            }).then(press => {
+                console.log('press izz', press)
+                setLoadingPress(false);
+                setPress(press)
+            }).catch(err => {
+                console.error(err);
+                setLoadingPress(false);
+                setErrorPress('Failed to load latest press updates.');
+            })
+        }
+
+        if (!props.updates) {
+            getDataAsync({
+                type: 'updates'
+            }).then(updates => {
+                console.log('updates izz', updates)
+                setLoadingUpdates(false);
+                setUpdates(updates)
+            }).catch(err => {
+                console.error(err);
+                setLoadingUpdates(false);
+                setErrorUpdates('Failed to load latest updates.');
+            })
+        }
 
         getDataAsync({
             type: 'instagram'
@@ -75,17 +80,19 @@ function Page(props) {
             setErrorInstagram('Failed to load latest instagram.');
         })
 
-        getDataAsync({
-            type: 'listing'
-        }).then(listings => {
-            console.log('Listings izz', listings)
-            setLoadingListings(false);
-            setListings(listings)
-        }).catch(err => {
-            console.error(err);
-            setLoadingListings(false);
-            setErrorListings('Failed to load latest listings.');
-        })
+        if (!props.listings) {
+            getDataAsync({
+                type: 'listing'
+            }).then(listings => {
+                console.log('Listings izz', listings)
+                setLoadingListings(false);
+                setListings(listings)
+            }).catch(err => {
+                console.error(err);
+                setLoadingListings(false);
+                setErrorListings('Failed to load latest listings.');
+            })
+        }
     }, [])
 
     let newListingRef;
