@@ -47,7 +47,10 @@ export function Link(props) {
                 {props.children}
             </a>
         } else {
-            return <TouchableOpacity onPress={() => Linking.openURL(props.href)}>{props.children}</TouchableOpacity>
+            return !external ? 
+                <TouchableOpacity onPress={handleURL}>{props.children}</TouchableOpacity>
+                :
+                <TouchableOpacity onPress={() => Linking.openURL(props.href)}>{props.children}</TouchableOpacity>
         }
     }
 
