@@ -20,7 +20,7 @@ const viewableItemsChangedConfigListing = {
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content', {isWeb}));
 
     const [ loadingPress, setLoadingPress ] = useState(!!props.press);
     const [ errorPress, setErrorPress ] = useState('');
@@ -111,7 +111,7 @@ function Page(props) {
             <View style={{height: 700, backgroundColor: '#000'}}>
                 <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
                     <View style={[styles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
-                        <Text style={styles.text_hero}>
+                        <Text accessibilityRole="header" aria-level="1"  style={styles.text_hero}>
                             Support{"\n"}
                             Black Owned{"\n"}
                             Businesses
@@ -150,12 +150,15 @@ function Page(props) {
                             />
                         </View>
                         <View style={dimensions.window.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
-                            <Text style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
+                            <Text accessibilityRole="header" aria-level="2" style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
                             <Text style={styles.text_body}>
                                 Inspired by Victor Green, Spicy Green Book is a team of volunteers committed to help complie a directory of black owned businesses.
                                  
                                 Our mission is to establish a space to help people who seek to create change within their communities.
                             </Text>
+                            <Link href="/about" style={{marginTop: 40}}>
+                                <Text>Learn More</Text>
+                            </Link>
                         </View>
                     </View>
                 </View>
@@ -170,6 +173,7 @@ function Page(props) {
                     <React.Fragment>
                         <FlatList
                             horizontal
+                            showsHorizontalScrollIndicator={false}
                             data={Listings.sort((a,b) => {
                                     return a.time - b.time
                                 }).slice(0,10)
@@ -194,7 +198,7 @@ function Page(props) {
                                         <View style={{flex: 1, height: 200}}>
                                         </View>
                                         <View style={{flex: 2}}>
-                                            <Text style={[styles.text_header2, {color: '#fff'}]}>
+                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header2, {color: '#fff'}]}>
                                                 {item.name}
                                             </Text>
                                             <Link button={'button_white'} title={'Learn More'} href={'/biz/' + item.uid} style={{marginTop: 40}}/>
@@ -224,7 +228,7 @@ function Page(props) {
 
             <View style={[styles.section, {flex:1}]}>
                 <View style={[styles.content, {flex:1}]}>
-                    <Text style={[styles.text_header3, {marginBottom: 20}]}>
+                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES
                     </Text>
                     {loadingUpdates ? (
@@ -250,9 +254,11 @@ function Page(props) {
 
             <View style={[styles.section, {flex:1}]}>
                 <View style={[styles.content, {flex:1}]}>
-                    <Text style={[styles.text_header3, {marginBottom: 20}]}>
-                        FOLLOW @SPICYGREENBOOK
-                    </Text>
+                    <Link href="https://instagram.com/spicygreenbook">
+                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
+                            FOLLOW @SPICYGREENBOOK
+                        </Text>
+                    </Link>
                     {loadingUpdates ? (
                         <ActivityIndicator size="large" />
                     ) : errorUpdates ? (
@@ -262,13 +268,48 @@ function Page(props) {
                             horizontal={true}
                             data={instagram}
                             renderItem={({ item, index, separators }) => (
-                                <View style={{flex: 1, width: 300, margin: 10}}>
-                                    <Image source={{uri: item.thumbnail}} style={{width: 300, height:300, resizeMode: 'cover'}} />
+                                <View style={{flex: 1, width: 180, margin: 10}}>
+                                    <Image source={{uri: item.thumbnail}} style={{width: 180, height:180, resizeMode: 'cover'}} />
                                 </View>
                             )}
                             keyExtractor={(item, index) => 'instagram' + index}
                         />
                     )}
+                </View>
+            </View>
+
+            <View style={[styles.section, {flex:1}]}>
+                <View style={[styles.content, {flex:1}]}>
+                    <View>
+                        <Text style={[styles.text_header3, {marginBottom: 20}]}>
+                            How can I help?
+                        </Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={{flex: 3, borderRightWidth: 2, borderColor: Theme.green}}>
+                            <Link href="/add">
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <View style={{flex: 1}}>
+                                        <Image source={require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
+                                    </View>
+                                    <View style={{flex: 3}}>
+                                        <Text>Add a listing</Text>
+                                    </View>
+                                </View>
+                            </Link>
+                        </View>
+                        <View style={{flex: 4, paddingLeft: 40, paddingTop: 50}}>
+                            <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
+                            <Text style={[styles.text_quote]}>
+                                It is certain, in any case, that ignorance,
+                                allied with power, is the most ferocious enemy
+                                justice can have.
+                            </Text>
+                            <Text style={[styles.text_quote]}>
+                                - James Baldwin
+                            </Text>
+                        </View>
+                    </View>
                 </View>
             </View>
 

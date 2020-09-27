@@ -1,5 +1,5 @@
-export { getData, getDataAsync, getAllData } from './getData';
+export { getData, getDataAsync, getAllData, getContent } from './getData';
 export { getStyles, Theme, GridWidth } from './getStyles';
 export { getImage } from './getImage';
-export { StateReducer } from './StateReducer';
+export { StateReducer, InitialState } from './StateReducer';
 export { displayDate } from './DisplayDate';

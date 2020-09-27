@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-unfetch'
 
 function getPrismicGroupAdvanced(ref) {
     return ref.value.map(line => {
@@ -249,4 +250,5 @@ module.exports = {
     getDataAsync: getDataAsync,
     getData: getData,
     getAllData: getAllData,
+    getContent: getContent,
 }

@@ -23,7 +23,6 @@ const allStyles = {
     },
     footer: function(config) {
         return {
-            flexDirection: 'row',
             backgroundColor: theme.green_bg
         }
     },
@@ -39,13 +38,16 @@ const allStyles = {
             padding: 20,
             paddingTop: 80,
             paddingBottom: 80,
-            flexDirection: 'row',
+            alignContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
             justifyContent: 'center'
         }
     },
     content: function(config) {
         return {
-            maxWidth: 1024
+            maxWidth: '100%',
+            width: 1024
         }
     },
     image_fill: function(config) {
@@ -131,6 +133,15 @@ const allStyles = {
             fontFamily: 'ApercuMedium',
             fontSize: config.windowWidth < 900 ? 15 : 32,
             lineHeight: config.windowWidth < 900 ? 20 : 42,
+            color: '#006233'
+        }
+    },
+    text_quote: function(config) {
+        return {
+            fontFamily: 'ApercuLight',
+            fontStyle: 'italic',
+            fontSize: config.windowWidth < 900 ? 55 : 28,
+            lineHeight: config.windowWidth < 900 ? 65 : 36,
             color: '#006233'
         }
     },

@@ -36,6 +36,10 @@ function Main(props) {
           uri: require('../public/fonts/ApercuRegular.ttf'),
           display: 'fallback',
       },
+      'ApercuLight': {
+          uri: require('../public/fonts/ApercuLight.ttf'),
+          display: 'fallback',
+      },
       'KnockoutBold': {
           uri: require('../public/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf'),
           display: 'fallback',
