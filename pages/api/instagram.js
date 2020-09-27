@@ -23,31 +23,31 @@ async function handler(req, res) {
     const handleFinal = (response) => {
         if (error) {
             res.statusCode = 500;
-            res.json({error: error});
+            return res.json({error: error});
         } else {
             res.setHeader('Cache-Control', 'public, s-maxage=3600, maxage=3600, stale-while-revalidate');
             res.statusCode = 200;
-            res.json(response);
+            return res.json(response);
         }
     }
 
-    let now = Date.now();
-    let cacheDuration = 1000 * 60 * 60; // 1 hour
+    let now = Math.round(Date.now() / 1000);
+    let cacheDuration = 60 * 60; // 1 hour
     // first try to get the cached results from DynamoDB on AWS
     return docClient.get({TableName: tableName, Key: {name: 'sgb-instagram'}}, async (err, data) => {
         if (err) {
             console.error(err);
             error = 'Error connecting to backend cache service, please try again';
-            handleFinal()
+            return handleFinal()
         } else {
-            console.log('data', data)
-            if (data && data.Item && data.Item.value && (!data.Item.lastUpdated || data.Item.lastUpdated < (now - cacheDuration))) {
-                console.log('deliver from aws cache');
-                handleFinal(JSON.parse(data.Item.value));
+            let lastUpdated = data && data.Item && data.Item.value && data.Item.lastUpdated;
+            if (lastUpdated > (now - cacheDuration)) {
+                //console.log('deliver from aws cache', 'now', now, 'item last updated', lastUpdated);
+                return handleFinal(JSON.parse(data.Item.value));
             } else {
-                console.log('fetch from instagram');
-                let data = await fetch('https://www.instagram.com/spicygreenbook/?__a=1');
-                let json = await data.json();
+                console.log('fetch from instagram cause', lastUpdated, '<', (now - cacheDuration));
+                let new_data = await fetch('https://www.instagram.com/spicygreenbook/?__a=1');
+                let json = await new_data.json();
                 let formatted = [];
                 try {
                     formatted = json.graphql.user.edge_owner_to_timeline_media.edges.map(item => {
@@ -66,25 +66,25 @@ async function handler(req, res) {
 
                     docClient.put({
                         TableName: tableName,
-                        Item:{
+                        Item: {
                             name: 'sgb-instagram',
                             value: JSON.stringify(formatted),
                             lastUpdated: now
                         }
-                    }, (err, data) => {
+                    }, (err, put_data) => {
                         if (err) {
                             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
                             error = 'Error updating cache on backend cache service, please try again';
                             handleFinal();
                         } else {
-                            console.log("Added item:", JSON.stringify(data, null, 2));
-                            handleFinal(formatted);
+                            console.log("Added item:", put_data);
+                            return handleFinal(formatted);
                         }
                     });
 
                 } else {
                     error = 'Invalid json from instagram sadly';
-                    handleFinal();
+                    return handleFinal();
                 }
             }
         }
