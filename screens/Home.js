@@ -285,8 +285,8 @@ function Page(props) {
                             How can I help?
                         </Text>
                     </View>
-                    <View style={{flexDirection: 'row'}}>
-                        <View style={{flex: 3, borderRightWidth: 2, borderColor: Theme.green}}>
+                    <View style={{flexDirection: dimensions.window.width ? 'column' : 'row'}}>
+                        <View style={{flex: dimensions.window.width < 800 ? 'none' : 3, borderRightWidth: dimensions.window.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.window.width < 800 ? '100%' : 'auto'}}>
                             <Link href="/add">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View style={{flex: 1}}>
@@ -298,7 +298,7 @@ function Page(props) {
                                 </View>
                             </Link>
                         </View>
-                        <View style={{flex: 4, paddingLeft: 40, paddingTop: 50}}>
+                        <View style={{flex: dimensions.window.width < 800 ? 'none' : 4, paddingLeft: 40, paddingTop: 50}}>
                             <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
                             <Text style={[styles.text_quote]}>
                                 It is certain, in any case, that ignorance,

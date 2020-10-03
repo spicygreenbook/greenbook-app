@@ -3,6 +3,7 @@ import { WebView } from 'react-native-webview';
 import { useStateValue } from "../components/State";
 import { getStyles, Theme } from '../utils';
 import { View, Text, StyleSheet} from 'react-native';
+import { Link } from "../components/Link"; 
 
 function renderHTML(markup, spans) {
     let parts = {0: ''};
@@ -10,7 +11,7 @@ function renderHTML(markup, spans) {
     let i = 0;
     let spans_start = {};
     let spans_end = {};
-    let segment_map = {0: 'text'};
+    let segment_map = {0: {type: 'text'}};
     spans.forEach(span => {
         spans_start[span.start] = span
         spans_end[span.end] = span
@@ -19,21 +20,32 @@ function renderHTML(markup, spans) {
         if (spans_start[i]) {
             segment++;
             parts[segment] = '';
-            segment_map[segment] = spans_start[i].type
+            segment_map[segment] = spans_start[i]
         } else if (spans_end[i]) {
             segment++;
             parts[segment] = '';
-            segment_map[segment] = 'text'
+            segment_map[segment] = {type: 'text'}
         }
         parts[segment] += '' + (markup[i] || '');
     }
     console.log(parts, segment_map);
     return Object.keys(parts).map((part, i) => (
-        <Text key={'subpart' + i} style={
-            segment_map[i] === 'strong' ? {fontWeight: 'bold'}
+
+        segment_map[i].type === 'hyperlink' ? 
+            <Link href={segment_map[i].data.value.url} key={'subpart' + i} style={
+                segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
+                :
+                {}
+            }>
+                {parts[part] || ''}
+            </Link>
+        : <Text key={'subpart' + i} style={
+            segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
             :
             {}
-        }>{parts[part] || ''}</Text>))
+        }>
+            {parts[part] || ''}
+        </Text>))
 }
 
 export function RichText(props) {
