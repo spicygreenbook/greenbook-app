@@ -12,8 +12,8 @@ export default function(props) {
     const styles = StyleSheet.create(getStyles('nav, text_nav', {isWeb, theme}));
 
     return (
-        <View style={[styles.nav, props.isScrolled ? {backgroundColor: '#000'} : {}]}>
-            <View style={{padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: '#fff'}}>
+        <View style={[styles.nav, props.isScrolled ? {backgroundColor: props.theme == 'light' ? '#fff' : '#000'} : {backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'}]}>
+            <View style={{padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: props.theme == 'light' ? Theme.green : '#fff'}}>
                 <TouchableOpacity style={{width: '100%', height: 80}} onPress={() => { 
                     dispatch({type: 'setView', view: "/"})
                 }}>
@@ -40,7 +40,6 @@ export default function(props) {
                                 console.log('yolo');
                                 dispatch({type: 'menuOpen', value: true})
                                 dispatch({type: 'setView', view: "/about"})
-                                alert('yolo');
                             }}>
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2, marginBottom: 20}} />
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2}} />
@@ -49,20 +48,23 @@ export default function(props) {
                     </View>
                 ) : (
                     <React.Fragment>
-                        <View style={{flex: 3}} />
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={{flex: Math.floor(dimensions.window.width/800)}} />
+                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                            <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>
+                        </View>
+                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
                                 <Link href="/about"><Text style={styles.text_nav}>About</Text></Link>
-                                <AntDesign name="down" size={22} color="#fff" style={{marginLeft: 10}} />
+                                <AntDesign name="down" size={22} color={props.theme === 'light' ? Theme.green : '#fff'} style={{marginLeft: 10}} />
                             </View>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column'}}>
+                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/join"><Text style={styles.text_nav}>Join</Text></Link>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column'}}>
+                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/donate"><Text style={styles.text_nav}>Donate</Text></Link>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column'}}>
+                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/volunteer"><Text style={styles.text_nav}>Volunteer</Text></Link>
                         </View>
                     </React.Fragment>
