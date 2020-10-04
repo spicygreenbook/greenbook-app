@@ -72,6 +72,26 @@ function Main(props) {
     dispatch({type: 'setTheme', value: theme})
   }, [view])
 
+  function scrollEventListener() {
+    if (window && document) {
+        let y = document.body.scrollTop || document.documentElement.scrollTop;
+        if (!isScrolled && y > 0) {
+          setIsScrolled(true);
+        } else if (isScrolled && y < 1) {
+          setIsScrolled(false);
+        }
+    }
+  }
+
+  if (isWeb) {
+    useEffect(() => {
+      window.addEventListener('scroll', scrollEventListener, false)
+      return () => {
+        window.removeEventListener('scroll', scrollEventListener, false)
+      }
+    })
+  }
+
   if (!fontsReady) {
     return ( <Text>Loading...</Text> )
   }
@@ -80,12 +100,14 @@ function Main(props) {
       <View>
           <Nav isScrolled={isScrolled} theme={theme} />
           <ScrollView style={styles.body} onScroll={(e) => {
+            console.log(e);
+            console.log(e.nativeEvent.contentOffset.y)
             if (!isScrolled && e.nativeEvent.contentOffset.y > 0) {
               setIsScrolled(true);
             } else if (isScrolled && e.nativeEvent.contentOffset.y < 1) {
               setIsScrolled(false);
             }
-          }}>
+          }} scrollEventThrottle={16}>
             { view === '/about' ? 
               <About {...props} />
               :

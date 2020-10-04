@@ -37,7 +37,7 @@ function renderHTML(markup, spans) {
                 :
                 {}
             }>
-                {parts[part] || ''}
+                <Text>{parts[part] || ''}</Text>
             </Link>
         : <Text key={'subpart' + i} style={
             segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
