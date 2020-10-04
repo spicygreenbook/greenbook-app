@@ -1,44 +1,50 @@
-# [Next.js Example](https://www.nextjs.org/)
+# greenbook-app
+Code base for the android, ios, and responseive web apps for [spicygreenbook.com](https://spicygreenbook.com) which is a directory of local black-owned businesses that users can find to support
 
-<p>
-  <!-- Web -->
-  <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
-</p>
+## Want to report a bug or issue with the website?
+Use the [issues](https://github.com/spicygreenbook/greenbook-app/issues) section on this page to let us know!
 
-Using Next.js with Expo will enable you to [server side render](https://nextjs.org/features/server-side-rendering) the web part of your Expo app. This demo shows you how to setup your universal application to use use advanced universal modules from the Expo SDK like Camera, Gestures, Permissions, etc... with the Next.js tool-chain!
+## How To Contribute Code
+The app is built with [Expo](https://expo.io/) + [NextJS](https://nextjs.org/) and is hosted/deployed on [Vercel](https://www.vercel.com) (formerly now.sh)
 
-> 🚨 SSR is an experimental feature with Expo so modules might not be fully optimized for Next.js. If you find bugs please report them on the [Expo repo](https://github.com/expo/expo/issues) or [expo-cli repo](https://github.com/expo/expo-cli/issues) with the `[nextjs]` tag in the title.
+## What do I need to know to contribute code?
+**Absolutely Critical**: JavaScript
 
-### ⚽️ Running in the browser
+**Helps a lot**: Git/GitHub, Expo.io, React/React Native, NextJS, CSS, HTML, Understanding fetching JSON data from an API
 
-For the most updated guide you should refer to the Expo docs: [Using Next.js](https://docs.expo.io/versions/latest/guides/using-nextjs/). Here are the [latest docs on master](https://github.com/expo/expo/blob/master/docs/pages/versions/unversioned/guides/using-nextjs.md).
+## How to get started coding on this app
+```sh
+    # clone the repo
+    git clone git@github.com:spicygreenbook/greenbook-app.git
 
-In this approach you would be using SSR for web in your universal project. This is the recommended path because it gives you full access to the features of Expo and Next.js.
+    # change your directory into the greenbook repo
+    cd greenbook-app
 
-- Bootstrap your project with Expo
-  - Install the CLI: `npm i -g expo-cli`
-  - Create a project: `expo init --template blank`
-  - `cd` into the project
-- Install the adapter:
-  - **yarn:** `yarn add @expo/next-adapter`
-  - npm: `npm i --save @expo/next-adapter`
-- Add Next.js support: `yarn next-expo`
-  - Always commit your changes first!
-  - You can optionally choose which customizations you want to do with `--customize or -c`
-  - Force reload changes with `--force or -f`
-- Start the project with `yarn next dev`
-  - Go to `http://localhost:3000/` to see your project!
+    # install node modules
+    npm install
 
-### 🏁 New Commands
+    # install expo
+    npm install expo-cli --global
 
-- **Starting web**
-  - 🚫 `expo start:web`
-  - ✅ `yarn next dev`
+    # run expo.io
+    expo start
 
-- **Building web**
-  - 🚫 `expo build:web`
-  - ✅ `yarn next build`
+    # run nextjs (for web)
+    # this should make http://localhost:3000 available in your web browser
+    npx next dev
 
-### 👀 More Info
+```
 
-- [Next Adapter repo](https://github.com/expo/expo-cli/tree/master/packages/next-adapter)
+## Workflow
+  Use the expo.io app that opens on your localhost as well as an android and ios device to test everything you develop on both android and ios so that you do not get too far into development without properly supporting each device.
+
+  Use your web browser and check both mobile and desktop sized views to ensure the responsive web app works on all device sizes.
+
+  When necessary, is the isWeb flag to determine when to use web compatible components and methods or mobile device options.
+
+## What should I work on?
+  We have [a design here](https://www.figma.com/file/7FrZMsARS2MdTWsG7SjCnN/SGB?node-id=238%3A393) that you can review to determine what to work on. Please reach out to [Dan](https://github.com/pleaseshutup) pleaseshutup at gmail.com to let him know what you intend to work on. I (dan) intend to build the whole thing as time allows if nobody else comes along to help, however, I would appreciate any help I can get.
+
+## Slack
+Our slack is at [spicy-green-book.slack.com](https://spicy-green-book.slack.com) if you want to be part of the community. We have a channel specifically for the coders to collaborate on.
+
