@@ -39,6 +39,8 @@ export const InitialState = (props) => {
   const isWeb = Platform.OS === 'web';
   let url = '';
   let get_vew = '/';
+  let theme = 'light';
+
   if (isWeb && typeof window !== 'undefined') {
       url = window.location.href;
       if (window.location.pathname.length > 1) {
@@ -46,9 +48,16 @@ export const InitialState = (props) => {
       }
   }
 
+  if (get_vew && get_vew.length > 1 && get_vew != '/' && get_vew != '') {
+    theme = 'light'
+  } else {
+    theme = 'dark'
+  }
+
   return {
     view: get_vew,
     isWeb: isWeb,
+    theme: theme,
     url: url,
     fontsReady: false,
     dimensions: {
