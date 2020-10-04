@@ -28,7 +28,7 @@ function renderHTML(markup, spans) {
         }
         parts[segment] += '' + (markup[i] || '');
     }
-    console.log(parts, segment_map);
+
     return Object.keys(parts).map((part, i) => (
 
         segment_map[i].type === 'hyperlink' ? 
