@@ -7,6 +7,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Home from '../screens/Home';
 import About from '../screens/About';
+import List from '../screens/List';
 import {useStateValue} from "../components/State";
 import { useFonts } from 'expo-font';
 import { getStyles, getImage } from '../utils';
@@ -69,6 +70,7 @@ function Main(props) {
     } else {
       theme = 'dark'
     }
+    console.log('theme', theme)
     dispatch({type: 'setTheme', value: theme})
   }, [view])
 
@@ -108,10 +110,10 @@ function Main(props) {
               setIsScrolled(false);
             }
           }} scrollEventThrottle={16}>
-            { view === '/about' ? 
-              <About {...props} />
-              :
-              <Home {...props} />
+            {
+                view === '/about' ? <About {...props} />
+                : view === '/search' ? <List {...props} />
+                : <Home {...props} />
             }
           </ScrollView>
           <Footer theme={theme} />
