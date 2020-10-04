@@ -9,13 +9,13 @@ export function ResponsiveImage(props) {
     return (
         <View onLayout={(event) => {
             let w = props.style.width;
-            console.log('w', w, 'layout view width', event.nativeEvent.layout.width)
+            //console.log('w', w, 'layout view width', event.nativeEvent.layout.width)
             if (w > event.nativeEvent.layout.width) {
                 console.log('force smaller width')
                 w = event.nativeEvent.layout.width
             }
             setWidth(w);
-            console.log('set height', w, props.style.aspectRatio)
+            //console.log('set height', w, props.style.aspectRatio)
             setHeight(w * (props.style.aspectRatio || 0.72));
         }}>
             <Image
