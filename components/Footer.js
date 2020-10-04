@@ -27,6 +27,9 @@ export default function(props) {
                 <View style={{flex:1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
                     <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingTop: 40, paddingBottom:40, paddingRight: 40}}>
                         <View style={{flex: 1}}>
+                            <Link href="/search"><Text style={styles.text_footer}>Browse</Text></Link>
+                        </View>
+                        <View style={{flex: 1}}>
                             <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
                         </View>
                         <View style={{flex: 1}}>
