@@ -74,7 +74,7 @@ const allStyles = {
         return {
             fontFamily: 'ApercuMedium',
             fontSize: 12,
-            color: '#fff'
+            color: config.theme === 'light' ? theme.green : '#fff'
         }
     },
     text_footer: function(config) {
