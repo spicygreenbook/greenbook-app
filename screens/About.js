@@ -3,7 +3,6 @@ import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
-import Head from "next/head";
 import { getStyles, Theme, getContent } from '../utils';
 
 
@@ -32,30 +31,11 @@ function Page(props) {
         <React.Fragment>
         { pageLoading ?
             <View style={{marginTop: 200, marginBottom: 200}}>
-                <ActivityIndicator size="large" />
+                <ActivityIndicator color={Theme.green} size="large" />
             </View>
         : (
             <React.Fragment>
-                <Head>
-                    <title>{content.page_title} - Spicy Green Book</title>
-                    {content.description && 
-                        <meta
-                        name="description"
-                        content={content.description}
-                        key="description"
-                        />
-                    }
-                    {content.description && 
-                        <meta
-                        name="og:description"
-                        content={content.description}
-                        key="og:description"
-                        />
-                    }
-                    <meta property="og:title" content={content.page_title + " - Spicy Green Book"} key="title" />
-                    <meta property="og:url" content={"https://spicygreenbook.com/" + content.uid } key="og:url" />
-                </Head>
-                <View style={[styles.section, {backgroundColor: Theme.green_bg, paddingTop: 180}]}>
+                  <View style={[styles.section, {backgroundColor: Theme.green_bg, paddingTop: 180}]}>
                     <View style={[styles.content, {flexDirection: 'column', alignItems: 'center'}]}>
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>

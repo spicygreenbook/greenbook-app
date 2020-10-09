@@ -12,7 +12,7 @@ function App(props) {
   const initialState = InitialState(props);
   return (
       <StateProvider initialState={initialState} reducer={StateReducer}>
-        <Main />
+        <Main {...props} />
       </StateProvider>
   );
 }

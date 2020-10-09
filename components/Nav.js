@@ -36,14 +36,12 @@ export default function(props) {
                 {dimensions.window.width < 900 ? (
                     <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                         <View style={{width: 40}}>
-                            <Button title="Menu" style={{height: 40, backgroundColor: 'orange'}} onPress={() => {
-                                console.log('yolo');
+                            <TouchableOpacity onPress={() => {
                                 dispatch({type: 'menuOpen', value: true})
-                                dispatch({type: 'setView', view: "/about"})
                             }}>
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2, marginBottom: 20}} />
                                 <View style={{borderColor: props.theme === 'light' ? Theme.green : '#fff', borderBottomWidth: 2}} />
-                            </Button>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 ) : (

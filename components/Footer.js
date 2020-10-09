@@ -13,16 +13,6 @@ export default function(props) {
 
     return (
         <View style={styles.footer}>
-            <View style={{flexDirection: 'column', alignItems: 'center'}}>
-                <View style={{flex: 1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
-                    <View style={{flex: 1, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingRight: 40, paddingTop: 40, paddingBottom: 40}}>
-                        <Text style={[styles.text_header3, {color: '#fff'}]}>Subscribe</Text>
-                    </View>
-                    <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', paddingLeft: 40, paddingTop: 40, paddingBottom: 40}}>
-                        <Text>yolo</Text>
-                    </View>
-                </View>
-            </View>
             <View style={{flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2}}>
                 <View style={{flex:1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
                     <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingTop: 40, paddingBottom:40, paddingRight: 40}}>

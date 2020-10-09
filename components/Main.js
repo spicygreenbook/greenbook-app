@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import Home from '../screens/Home';
 import About from '../screens/About';
 import List from '../screens/List';
+import Menu from '../components/Menu';
 import {useStateValue} from "../components/State";
 import { useFonts } from 'expo-font';
 import { getStyles, getImage } from '../utils';
@@ -16,8 +17,8 @@ import { Dimensions } from 'react-native';
 
 function Main(props) {
 
-  const [{ view, isWeb, theme }, dispatch] = useStateValue();
-  const [ isScrolled, setIsScrolled ] = useState({});
+  const [{ view, isWeb, theme, menuOpen }, dispatch] = useStateValue();
+  const [ isScrolled, setIsScrolled ] = useState(false);
 
   const styles = StyleSheet.create(getStyles('body', {isWeb}));
 
@@ -98,25 +99,42 @@ function Main(props) {
     return ( <Text>Loading...</Text> )
   }
 
+  function renderContent(props) {
+      return (
+          view === '/about' ? <About {...props} />
+          : view === '/search' ? <List {...props} />
+          : <Home {...props} />
+      )
+  }
+
   return (
       <View>
-          <Nav isScrolled={isScrolled} theme={theme} />
-          <ScrollView style={styles.body} onScroll={(e) => {
-            console.log(e);
-            console.log(e.nativeEvent.contentOffset.y)
-            if (!isScrolled && e.nativeEvent.contentOffset.y > 0) {
-              setIsScrolled(true);
-            } else if (isScrolled && e.nativeEvent.contentOffset.y < 1) {
-              setIsScrolled(false);
-            }
-          }} scrollEventThrottle={16}>
-            {
-                view === '/about' ? <About {...props} />
-                : view === '/search' ? <List {...props} />
-                : <Home {...props} />
-            }
-          </ScrollView>
-          <Footer theme={theme} />
+          {menuOpen ? (
+            <Menu />
+          ) : (
+            <React.Fragment>
+              <Nav isScrolled={isScrolled} theme={theme} />
+              
+              { isWeb ? (
+                  <View style={styles.body}>
+                    {renderContent(props)}
+                  </View>
+                 ) : (
+                  <ScrollView style={styles.body} onScroll={(e) => {
+                    console.log(e);
+                    console.log(e.nativeEvent.contentOffset.y)
+                    if (!isScrolled && e.nativeEvent.contentOffset.y > 0) {
+                      setIsScrolled(true);
+                    } else if (isScrolled && e.nativeEvent.contentOffset.y < 1) {
+                      setIsScrolled(false);
+                    }
+                  }} scrollEventThrottle={16}>
+                    {renderContent(props)}
+                  </ScrollView>
+                 )}
+             <Footer theme={theme} />
+            </React.Fragment>
+          )}
       </View>
   );
 }

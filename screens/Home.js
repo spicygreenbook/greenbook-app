@@ -20,7 +20,7 @@ const viewableItemsChangedConfigListing = {
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer', {isWeb}));
 
     const [ loadingPress, setLoadingPress ] = useState(!!props.press);
     const [ errorPress, setErrorPress ] = useState('');
@@ -122,7 +122,7 @@ function Page(props) {
             <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 60, paddingBottom: 60}}>
                 <View style={{justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
                     {loadingPress ? (
-                        <ActivityIndicator size="large" />
+                        <ActivityIndicator color={Theme.green} size="large" />
                     ) : errorPress ? (
                         <Text>{errorPress}</Text>
                     ) : (
@@ -166,7 +166,7 @@ function Page(props) {
 
             <View style={{backgroundColor: '#000', position: 'relative'}}>
                 {loadingListings ? (
-                    <ActivityIndicator size="large" />
+                    <ActivityIndicator color={Theme.green} size="large" />
                 ) : errorListings ? (
                     <Text style={{color: '#fff'}}>{errorListings}</Text>
                 ) : (
@@ -232,7 +232,7 @@ function Page(props) {
                         UPDATES
                     </Text>
                     {loadingUpdates ? (
-                        <ActivityIndicator size="large" />
+                        <ActivityIndicator color={Theme.green} size="large" />
                     ) : errorUpdates ? (
                         <Text>{errorUpdates}</Text>
                     ) : (
@@ -260,7 +260,7 @@ function Page(props) {
                         </Text>
                     </Link>
                     {loadingUpdates ? (
-                        <ActivityIndicator size="large" />
+                        <ActivityIndicator color={Theme.green} size="large" />
                     ) : errorUpdates ? (
                         <Text>{errorUpdates}</Text>
                     ) : (
@@ -285,8 +285,8 @@ function Page(props) {
                             How can I help?
                         </Text>
                     </View>
-                    <View style={{flexDirection: dimensions.window.width ? 'column' : 'row'}}>
-                        <View style={{flex: dimensions.window.width < 800 ? 'none' : 3, borderRightWidth: dimensions.window.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.window.width < 800 ? '100%' : 'auto'}}>
+                    <View style={{flexDirection: dimensions.window.width < 800 ? 'column' : 'row'}}>
+                        <View style={{flex: dimensions.window.width < 800 ? 1 : 3, borderRightWidth: dimensions.window.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.window.width < 800 ? '100%' : 'auto'}}>
                             <Link href="/add">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View style={{flex: 1}}>
@@ -298,7 +298,7 @@ function Page(props) {
                                 </View>
                             </Link>
                         </View>
-                        <View style={{flex: dimensions.window.width < 800 ? 'none' : 4, paddingLeft: 40, paddingTop: 50}}>
+                        <View style={{flex: dimensions.window.width < 800 ? 1 : 4, paddingLeft: 40, paddingTop: 50}}>
                             <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
                             <Text style={[styles.text_quote]}>
                                 It is certain, in any case, that ignorance,
@@ -312,6 +312,19 @@ function Page(props) {
                     </View>
                 </View>
             </View>
+
+            {/*<View style={styles.footer}>
+                <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                    <View style={{flex: 1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
+                        <View style={{flex: 1, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingRight: 40, paddingTop: 40, paddingBottom: 40}}>
+                            <Text style={[styles.text_header3, {color: '#fff'}]}>Subscribe</Text>
+                        </View>
+                        <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', paddingLeft: 40, paddingTop: 40, paddingBottom: 40}}>
+                            <Text>yolo</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>*/}
 
         </View>
     );

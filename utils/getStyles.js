@@ -7,8 +7,7 @@ const theme = {
 
 const allStyles = {
     nav: function(config) {
-        return {
-            position: 'absolute',
+        let ret = {
             left: 0,
             top: 0,
             right: 0,
@@ -20,6 +19,12 @@ const allStyles = {
             elevation: 2
             //backgroundColor: '#000'
         }
+        if (config.isWeb) {
+            ret.position = 'fixed'
+        } else {
+            ret.position = 'absolute';
+        }
+        return ret
     },
     footer: function(config) {
         return {
@@ -170,6 +175,15 @@ const allStyles = {
             fontFamily: 'ApercuMedium',
             fontSize: 12,
             lineHeight: 15,
+            color: '#fff'
+        }
+    },
+    text_menu: function(config) {
+        return {
+            textTransform: 'capitalize',
+            fontFamily: 'ApercuMedium',
+            fontSize: 24,
+            lineHeight: 29,
             color: '#fff'
         }
     }
