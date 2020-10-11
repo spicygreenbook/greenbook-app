@@ -28,6 +28,8 @@ const allStyles = {
     },
     footer: function(config) {
         return {
+            zIndex: 2,
+            elevation: 2,
             backgroundColor: theme.green_bg
         }
     },

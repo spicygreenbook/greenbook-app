@@ -6,6 +6,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage";
 import RichText from "../components/RichText"; 
 import { getStyles, Theme, getDataAsync, GridWidth, displayDate } from '../utils';
 import { Entypo } from '@expo/vector-icons'; 
+import Search from "../components/Search";
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -118,6 +119,9 @@ function Page(props) {
                             Black Owned{"\n"}
                             Businesses
                         </Text>
+                        <View style={{marginTop: 40, flexDirection: 'row', justifyContent: dimensions.window.width < 900 ? 'flex-start': 'center'}}>
+                            <Search />
+                        </View>
                     </View>
                 </ImageBackground>
             </View>

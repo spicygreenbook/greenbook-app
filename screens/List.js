@@ -6,6 +6,7 @@ import { RichText } from "../components/RichText";
 import { getStyles, Theme, getData } from '../utils';
 import ListItem from "../components/ListItem";
 import Map from "../components/Map";
+import Search from "../components/Search";
 
 const searchKeysConfig = [
     {key: 'name', multiplier: 10},
@@ -168,30 +169,14 @@ const sortSearchRank = (a, b) => {
 
 function Page(props) {
 
-    const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
+    const [{ view, isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header3, section, content', {isWeb}));
     console.log('page props', props)
 
+    let qs = searchConfig;
 
     let debug = false;
-    //console.log('list', listings)
-    let qs = {};
-    let get_width = 1000;
-    if (typeof window !== "undefined") {
-        debug = window.location.host.indexOf('localhost') > -1
-        get_width = window.innerWidth;
-        let params = (window.location.search || "")
-            .substr(1)
-            .split("&")
-            .forEach((pair) => {
-                var spl = pair.split("=");
-                if (spl[0] && spl[1]) {
-                    qs[decodeURIComponent(spl[0])] = decodeURIComponent(spl[1]);
-                }
-            });
-    }
     const filter = (row) => {
-        //console.log('exec filter on row', processedSearchTerms.words[0]);
         var go = true;
         if (processedSearchTerms.words.length) {
             row._searchRank = searchRank(processedSearchTerms, row)
@@ -216,41 +201,30 @@ function Page(props) {
     };
 
     const [ pageLoading, setPageLoading ] = useState(!props.listings);
-    const [ listings, setLitsings ] = useState(props.listings || {});
-    const [ results, setResults ] = useState(props.listings || {});
-
-    const [location, setLocation] = useState(qs.near || '');
-    const [query, setQuery] = useState(qs.q || '');
-    const [geoLocation, setGeoLocation] = useState();
-    const [gettingGeo, setGettingGeo] = useState(true);
-    const [pushInterval, setPushInterval] = useState(1);
+    const [ listings, setLitsings ] = useState(props.listings);
+    const [ results, setResults ] = useState(props.listings || []);
+    const [ location, setLocation ] = useState(qs.near || '');
+    const [ query, setQuery ] = useState(qs.q || '');
+    const [ geoLocation, setGeoLocation ] = useState();
+    const [ gettingGeo, setGettingGeo ] = useState(true);
+    const [ pushInterval, setPushInterval ] = useState(1);
+    const fixSearch = (words) => {
+        return (words || '').replace(/\+/, ' ').replace(/[^A-Za-z0-9 ]/gi, '');
+    }
+    const [search, setSearch] = useState(fixSearch(query));
+    const [processedSearchTerms, setProcessedSearchTerms] = useState(searchSeries(fixSearch(query)));
+    const [filteredList, setFilteredList] = useState();
 
     if (!props.listings) {
         useEffect(() => {
             getData({type: 'listing'}).then(_data => {
                 setLitsings(_data)
-                setPageLoading(false);
             }).catch(err => {
                 console.error(err);
             });
         }, [])
     }
 
-    useEffect(() => {
-        //results
-    }, [listings])
-
-    const fixSearch = (words) => {
-        return (words || '').replace(/\+/, ' ').replace(/[^A-Za-z0-9 ]/gi, '');
-    }
-    const [search, setSearch] = useState(fixSearch(query));
-    const [processedSearchTerms, setProcessedSearchTerms] = useState(searchSeries(fixSearch(query)));
-
-    const [width, setWidth] = useState(get_width);
-    //console.log('filter set list', processedSearchTerms);
-    const [filteredList, setFilteredList] = useState([]);
-
-    let timer;
     useEffect(
         () => {
             setSearch(fixSearch(query.q));
@@ -268,31 +242,22 @@ function Page(props) {
         },
         [ pushInterval ]
     );
+
     useEffect(
         () => {
-            //console.log('filter set list', processedSearchTerms);
-            setFilteredList(listings.filter(filter).sort(sortDistance).sort(sortSearchRank));
-            setPageLoading(false);
+            console.log('gettingGeo', gettingGeo, 'listings', listings)
+            if (!gettingGeo && listings) {
+                console.log('listings is', listings)
+                setFilteredList(listings.filter(filter).sort(sortDistance).sort(sortSearchRank));
+                setPageLoading(false);
+            }
         },
-        [ listings, geoLocation, processedSearchTerms ]
+        [ listings, gettingGeo, geoLocation, processedSearchTerms ]
     );
-
-    if (typeof window !== 'undefined') {
-        useEffect(
-            () => {
-                function handleResize() {
-                  setWidth(window.innerWidth)
-                }
-                window.addEventListener('resize', handleResize);
-                return () => window.removeEventListener('resize', handleResize);
-            },
-            [ ]
-        );
-    }
 
     return (
         <React.Fragment>
-        { pageLoading ?
+        { pageLoading || !filteredList ?
             <View style={{marginTop: 200, marginBottom: 200}}>
                 <ActivityIndicator size="large" />
             </View>
@@ -300,20 +265,21 @@ function Page(props) {
             <React.Fragment>
                 <View style={{paddingTop: 120}} />
                 <View style={{flexDirection: 'row', borderTopWidth: 2, borderColor: Theme.green}}>
-                    <View style={dimensions.window.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green} : {}}>
-                        <View style={{padding: 20}}>
-                            <Text style={styles.text_header3}>
+                    <View style={dimensions.window.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: 'calc(100vh - 234px)'} : {minHeight: 'calc(100vh - 234px)'}}>
+                        <View style={{padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+                            <Text style={[styles.text_header3, {marginBottom: 20}]}>
                                 {filteredList.length === 1 ? '1 Match' : filteredList.length + ' Matches'}
                             </Text>
+                            <Search mode="results" />
                         </View>
                         <View>
-                            {filteredList.map(listing => <ListItem listing={listing} />)}
+                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
                         </View>
                     </View>
                     {dimensions.window.width >= 800 &&
                         <View style={{flex: 1, position: 'relative'}}>
                             {!gettingGeo && 
-                                <View style={{position: 'fixed', top: 122, right: 0, width: 'calc(50% - 1px)', height: 'calc(100vh - 120px)'}}>
+                                <View style={{position: 'fixed', zIndex: 1, top: 122, right: 0, width: 'calc(50% - 1px)', height: 'calc(100vh - 120px)'}}>
                                     <Map list={filteredList} mode="d" near={geoLocation} />
                                 </View>
                             }

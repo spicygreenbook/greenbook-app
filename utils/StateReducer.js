@@ -29,6 +29,11 @@ export const StateReducer = (state, action) => {
         ...state,
         menuOpen: action.value
       };
+    case 'searchConfig':
+      return {
+        ...state,
+        searchConfig: action.value
+      };
       
     default:
       return state;
@@ -41,10 +46,28 @@ export const InitialState = (props) => {
   let get_vew = '/';
   let theme = 'light';
 
+  let searchConfig = {
+    q: '',
+    near: ''
+  }
+  if (isWeb && typeof window !== "undefined") {
+      let params = (window.location.search || "")
+          .substr(1)
+          .split("&")
+          .forEach((pair) => {
+              var spl = pair.split("=");
+              if (spl[0] && spl[1]) {
+                  searchConfig[decodeURIComponent(spl[0])] = decodeURIComponent(spl[1]);
+              }
+          });
+  }
+
   if (isWeb && typeof window !== 'undefined') {
       url = window.location.href;
       if (window.location.pathname.length > 1) {
-          get_vew = window.location.pathname.split('?')[0]
+        if (window.location.pathname.split('?')[0]) {
+          get_vew = window.location.pathname.split('?')[0];
+        }
       }
   }
 
@@ -60,6 +83,7 @@ export const InitialState = (props) => {
     theme: theme,
     url: url,
     fontsReady: false,
+    searchConfig: searchConfig,
     dimensions: {
         window: Dimensions.get("window"),
         screen: Dimensions.get("screen")

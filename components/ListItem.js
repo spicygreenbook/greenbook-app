@@ -16,9 +16,10 @@ export default function ListItem(props) {
 
     return (
         <Link href={'/biz/' + listing.uid}>
-            <View style={{borderBottomWidth:2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                    <ResponsiveImage style={{maxWidth: '100%', width: 800, resizeMode: 'contain', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url }} />
+            <View style={{borderBottomWidth:props.last ? 0 : 2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    {/*<ResponsiveImage style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url}} />*/}
+                    <Image style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url + '&w=400' }} />
                 </View>
                 <View style={{flex: 3, paddingLeft: 20}}>
                     <Text style={styles.text_header4}>{listing.name}</Text>

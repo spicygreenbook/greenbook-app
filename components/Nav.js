@@ -14,9 +14,8 @@ export default function(props) {
     return (
         <View style={[styles.nav, props.isScrolled ? {backgroundColor: props.theme == 'light' ? '#fff' : '#000'} : {backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'}]}>
             <View style={{padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: props.theme == 'light' ? Theme.green : '#fff'}}>
-                <TouchableOpacity style={{width: '100%', height: 80}} onPress={() => { 
-                    dispatch({type: 'setView', view: "/"})
-                }}>
+                <Link href="/" fill>
+                    <View style={{height: '100%'}}>
                     {props.theme == 'light' ? 
                         <Image
                             style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
@@ -30,7 +29,8 @@ export default function(props) {
                             source={isWeb ? {uri: '/images/logo_nav_dark.png'} : require('../public/images/logo_nav_dark.png')}
                         />
                     }
-                </TouchableOpacity>
+                    </View>
+                </Link>
             </View>
             <View style={{padding: 20, flex: dimensions.window.width < 900 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end'}}>
                 {dimensions.window.width < 900 ? (

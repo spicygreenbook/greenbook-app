@@ -134,9 +134,10 @@ function Main(props) {
                     }
                   }} scrollEventThrottle={16}>
                     {renderContent(props)}
+                    {!isWeb && <Footer theme={theme} />}
                   </ScrollView>
                  )}
-             <Footer theme={theme} />
+              {isWeb && <Footer theme={theme} />}
             </React.Fragment>
           )}
       </View>

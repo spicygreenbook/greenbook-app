@@ -37,9 +37,10 @@ export function Link(props) {
 
     if (props.children) {
         if (isWeb) {
+            let more = props.fill ? {height: '100%'} : {}
             return !external ? 
                 <NextLink href={props.href || ''}>
-                    <a href={props.href || ''} onClick={handleURL} style={{...props.style, textDecoration: 'none'}}>
+                    <a href={props.href || ''} onClick={handleURL} style={{...props.style, textDecoration: 'none', ...more}}>
                         {props.children}
                     </a>
                 </NextLink>
@@ -68,7 +69,11 @@ export function Link(props) {
 
 export function Click(url, config) {
     const [{ view, isWeb }, dispatch] = useStateValue();
-    dispatch({type: 'setView', view: url || ''})
+    if (isWeb) {
+        window.location = url;
+    } else {
+        dispatch({type: 'setView', view: url || ''})
+    }
     return
 }
 
