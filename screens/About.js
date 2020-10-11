@@ -35,7 +35,7 @@ function Page(props) {
             </View>
         : (
             <React.Fragment>
-                  <View style={[styles.section, {backgroundColor: Theme.green_bg, paddingTop: 180}]}>
+                <View style={[styles.section, {backgroundColor: Theme.green_bg, paddingTop: 180}]}>
                     <View style={[styles.content, {flexDirection: 'column', alignItems: 'center'}]}>
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>

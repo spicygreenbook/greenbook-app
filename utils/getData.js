@@ -108,6 +108,10 @@ async function getContent(config) {
     }
 
     var url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D`;
+    if (config.type && config.uid) {
+        url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(my.${config.type}.uid%2C+%22${config.uid}%22)%5D%5D`
+    }
+
     let data = await fetch(url);
     let parsed_data = await data.json();
 
@@ -123,15 +127,16 @@ async function getContent(config) {
                     content[key] = getPrismicValue(doc.data.home_page[key]);
                 }
             })
-        } else if (config.type === 'content' && config.uid && doc.uid === config.uid) {
+        } else if (config.uid && doc.uid === config.uid) {
             content.uid = doc.uid;
-            Object.keys(doc.data.content).forEach(key => {
-                if (doc.data.content[key].type === 'Group') {
-                    content[key] = getPrismicGroupAdvanced(doc.data.content[key]);
+            console.log('doc', doc)
+            Object.keys(doc.data[config.type]).forEach(key => {
+                if (doc.data[config.type][key].type === 'Group') {
+                    content[key] = getPrismicGroupAdvanced(doc.data[config.type][key]);
                 } else {
-                    content[key] = getPrismicValue(doc.data.content[key]);
+                    content[key] = getPrismicValue(doc.data[config.type][key]);
                 }
-                content['_' + key] = doc.data.content[key];
+                content['_' + key] = doc.data[config.type][key];
             })
         }
     })

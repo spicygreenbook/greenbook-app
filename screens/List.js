@@ -3,9 +3,9 @@ import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
-import Head from "next/head";
 import { getStyles, Theme, getData } from '../utils';
 import ListItem from "../components/ListItem";
+import Map from "../components/Map";
 
 const searchKeysConfig = [
     {key: 'name', multiplier: 10},
@@ -215,7 +215,7 @@ function Page(props) {
         return go;
     };
 
-    const [ pageLoading, setPageLoading ] = useState(true);
+    const [ pageLoading, setPageLoading ] = useState(!props.listings);
     const [ listings, setLitsings ] = useState(props.listings || {});
     const [ results, setResults ] = useState(props.listings || {});
 
@@ -227,11 +227,12 @@ function Page(props) {
 
     if (!props.listings) {
         useEffect(() => {
-            setContent(getData({type: 'listing'}).then(_data => {
+            getData({type: 'listing'}).then(_data => {
                 setLitsings(_data)
+                setPageLoading(false);
             }).catch(err => {
                 console.error(err);
-            }));
+            });
         }, [])
     }
 
@@ -297,12 +298,6 @@ function Page(props) {
             </View>
         : (
             <React.Fragment>
-                <Head>
-                    <title>Browse and Search Our List - Spicy Green Book</title>
-                    <meta name="description" content="Browse or search for black-owned businesses in your area." key="description" />
-                    <meta property="og:title" content={"Browse and Search Our List - Spicy Green Book"} key="title" />
-                    <meta property="og:url" content={"https://spicygreenbook.com/search"} key="og:url" />
-                </Head>
                 <View style={{paddingTop: 120}} />
                 <View style={{flexDirection: 'row', borderTopWidth: 2, borderColor: Theme.green}}>
                     <View style={dimensions.window.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green} : {}}>
@@ -316,8 +311,12 @@ function Page(props) {
                         </View>
                     </View>
                     {dimensions.window.width >= 800 &&
-                        <View style={{flex: 1}}>
-                            <Text>Right</Text>
+                        <View style={{flex: 1, position: 'relative'}}>
+                            {!gettingGeo && 
+                                <View style={{position: 'fixed', top: 122, right: 0, width: 'calc(50% - 1px)', height: 'calc(100vh - 120px)'}}>
+                                    <Map list={filteredList} mode="d" near={geoLocation} />
+                                </View>
+                            }
                         </View>
                     }
                 </View>

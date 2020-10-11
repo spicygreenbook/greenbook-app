@@ -141,6 +141,14 @@ const allStyles = {
             color: '#006233'
         }
     },
+    text_link: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: config.windowWidth < 900 ? 15 : 32,
+            lineHeight: config.windowWidth < 900 ? 20 : 42,
+            color: '#006233'
+        }
+    },
     text_quote: function(config) {
         return {
             fontFamily: 'ApercuLight',
@@ -209,9 +217,12 @@ export function getStyles(key, config) {
 export const Theme = theme;
 
 export const sizeConfig = (config) => {
-
     if (!config.containerWidth){ config.containerWidth = Dimensions.get('window').width };
+}
 
+export const responsiveImageWidthCDN = (config) => {
+    if (!config.containerWidth){ config.containerWidth = Dimensions.get('window').width };
+    return Math.ceil(config.containerWidth/100) * 100
 }
 
 export const GridWidth = (config) => {

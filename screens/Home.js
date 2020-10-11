@@ -22,11 +22,11 @@ function Page(props) {
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer', {isWeb}));
 
-    const [ loadingPress, setLoadingPress ] = useState(!!props.press);
+    const [ loadingPress, setLoadingPress ] = useState(!props.press);
     const [ errorPress, setErrorPress ] = useState('');
     const [ press, setPress ] = useState(props.press || []);
 
-    const [ loadingUpdates, setLoadingUpdates ] = useState(!!props.updates);
+    const [ loadingUpdates, setLoadingUpdates ] = useState(!props.updates);
     const [ errorUpdates, setErrorUpdates ] = useState('');
     const [ updates, setUpdates ] = useState(props.updates || []);
 
@@ -34,7 +34,7 @@ function Page(props) {
     const [ errorInstagram, setErrorInstagram ] = useState('');
     const [ instagram, setInstagram ] = useState([]);
 
-    const [ loadingListings, setLoadingListings ] = useState(!!props.listings);
+    const [ loadingListings, setLoadingListings ] = useState(!props.listings);
     const [ errorListings, setErrorListings ] = useState('');
     const [ Listings, setListings ] = useState(props.listings || []);
 
@@ -52,6 +52,8 @@ function Page(props) {
                 setLoadingPress(false);
                 setErrorPress('Failed to load latest press updates.');
             })
+        } else {
+            console.log('press static is', props.press)
         }
 
         if (!props.updates) {

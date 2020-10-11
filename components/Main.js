@@ -7,7 +7,9 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Home from '../screens/Home';
 import About from '../screens/About';
+import NotFound from '../screens/NotFound';
 import List from '../screens/List';
+import Listing from '../screens/Listing';
 import Menu from '../components/Menu';
 import {useStateValue} from "../components/State";
 import { useFonts } from 'expo-font';
@@ -103,7 +105,9 @@ function Main(props) {
       return (
           view === '/about' ? <About {...props} />
           : view === '/search' ? <List {...props} />
-          : <Home {...props} />
+          : view.indexOf('/biz') === 0 ? <Listing {...props} />
+          : view === '/' ? <Home {...props} />
+          : <NotFound {...props} />
       )
   }
 
