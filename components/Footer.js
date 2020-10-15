@@ -36,7 +36,7 @@ export default function(props) {
                         <Link href="https://www.instagram.com/spicygreenbook/" style={{flex: 1, marginLeft: 10}}>
                             <FontAwesome name="instagram" size={32} color="#fff" />
                         </Link>
-                        <Link href="https://twitter.com/Spicy_GreenBook" style={{flex: 1, marginLeft: 10}}>
+                        <Link href="https://twitter.com/spicygreenbook" style={{flex: 1, marginLeft: 10}}>
                             <FontAwesome name="twitter" size={32} color="#fff" />
                         </Link>
                         <Link href="https://www.linkedin.com/company/spicy-green-book/" style={{flex: 1, marginLeft: 10}}>
