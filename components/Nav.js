@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 //import {TouchableOpacity} from 'react-native-gesture-handler';
 import { getStyles, Theme } from '../utils';
@@ -9,7 +9,9 @@ import { Link, Click } from '../components/Link';
 export default function(props) {
 
     const [{ view, isWeb, theme, dimensions, menuOpen }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('nav, text_nav', {isWeb, theme}));
+    const styles = StyleSheet.create(getStyles('nav, text_nav, text_nav_sub', {isWeb, theme}));
+
+    const [ active, setActive ] = useState('');
 
     return (
         <View style={[styles.nav, props.isScrolled ? {backgroundColor: props.theme == 'light' ? '#fff' : '#000'} : {backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'}]}>
@@ -53,11 +55,31 @@ export default function(props) {
                         <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
                                 <Link href="/about"><Text style={styles.text_nav}>About</Text></Link>
-                                <AntDesign name="down" size={22} color={props.theme === 'light' ? Theme.green : '#fff'} style={{marginLeft: 10}} />
+                                <AntDesign name="down" size={22} color={props.theme === 'light' ? Theme.green : '#fff'} style={{cursor: 'pointer', marginLeft: 10}} onClick={e => {
+                                    setActive(active === 'about' ? '' : 'about');
+                                }}/>
+                            </View>
+                            <View style={{position: 'absolute', top: 60, right: 0, backgroundColor: '#fff', minWidth: 160, padding: 20,
+                                opacity:active === 'about' ? 1 : 0, display:active === 'about' ? '' : 'none'}}>
+                                <View style={{flex: 1, flexDirection: 'row', paddingBottom: 10}}>
+                                    <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row', paddingBottom: 10}}>
+                                    <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row', paddingBottom: 10}}>
+                                    <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row', paddingBottom: 10}}>
+                                    <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                    <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>
+                                </View>
                             </View>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
-                            <Link href="/join"><Text style={styles.text_nav}>Join</Text></Link>
+                            <Link href="/add"><Text style={styles.text_nav}>Join</Text></Link>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/donate"><Text style={styles.text_nav}>Donate</Text></Link>

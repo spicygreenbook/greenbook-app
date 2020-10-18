@@ -81,7 +81,16 @@ const allStyles = {
         return {
             fontFamily: 'ApercuMedium',
             fontSize: 12,
+            textTransform: 'uppercase',
             color: config.theme === 'light' ? theme.green : '#fff'
+        }
+    },
+    text_nav_sub: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: 12,
+            textTransform: 'uppercase',
+            color: theme.green
         }
     },
     text_footer: function(config) {
@@ -180,6 +189,27 @@ const allStyles = {
         }
     },
     button_white_text: function(config) {
+        return {
+            textTransform: 'uppercase',
+            fontFamily: 'ApercuMedium',
+            fontSize: 12,
+            lineHeight: 15,
+            color: '#fff'
+        }
+    },
+    button_green: function(config) {
+        return {
+            borderWidth: 1,
+            borderColor: theme.green,
+            backgroundColor: theme.green_bg,
+            alignItems: 'center',
+            height: 60,
+            paddingLeft: 30,
+            paddingRight: 30,
+            flexDirection: 'row'
+        }
+    },
+    button_green_text: function(config) {
         return {
             textTransform: 'uppercase',
             fontFamily: 'ApercuMedium',

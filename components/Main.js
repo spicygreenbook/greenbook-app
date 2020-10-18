@@ -7,6 +7,14 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Home from '../screens/Home';
 import About from '../screens/About';
+import AddListing from '../screens/AddListing';
+import Volunteer from '../screens/Volunteer';
+import Contact from '../screens/Contact';
+import Process from '../screens/Process';
+import Updates from '../screens/Updates';
+import Press from '../screens/Press';
+import Team from '../screens/Team';
+import Donate from '../screens/Donate';
 import NotFound from '../screens/NotFound';
 import List from '../screens/List';
 import Listing from '../screens/Listing';
@@ -104,6 +112,14 @@ function Main(props) {
   function renderContent(props) {
       return (
           view === '/about' ? <About {...props} />
+          : view === '/updates' ? <Updates {...props} />
+          : view === '/press' ? <Press {...props} />
+          : view === '/team' ? <Team {...props} />
+          : view === '/process' ? <Process {...props} />
+          : view === '/contact' ? <Contact {...props} />
+          : view === '/add' ? <AddListing {...props} />
+          : view === '/volunteer' ? <Volunteer {...props} />
+          : view === '/donate' ? <Donate {...props} />
           : view === '/search' ? <List {...props} />
           : view.indexOf('/biz') === 0 ? <Listing {...props} />
           : view === '/' ? <Home {...props} />

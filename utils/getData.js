@@ -221,6 +221,27 @@ async function getData(config) {
                     }
                     content['_' + key] = doc.data[config.type][key];
                 })
+
+                if (content.attribution || content.photos_credit_name) {
+                    if (!content.attribution) { content.attribution = []; }
+                    let attribution = (content.photos_credit_name ? [{
+                        attribution_name: content.photos_credit_name.join('') || '',
+                        attribution_type: 'Photography',
+                        attribution_instagram: content.photos_credit_instagram || '',
+                        attribution_link: content.photos_credit_link || ''
+                    }] : []);
+                    //console.log('more attr', content.attribution[0])
+                    if (content.attribution.length && content.attribution.length) {
+                        attribution = attribution.concat(content.attribution);
+                    } else if (!attribution.length && content.attribution.length){
+                        attribution = content.attribution
+                    }
+                    attribution = attribution.filter(item => {
+                        return item && item.attribution_name && item.attribution_name.trim()
+                    })
+                    content.attribution = attribution;
+                }
+
                 return content;
             })
         }

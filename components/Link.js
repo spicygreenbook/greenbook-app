@@ -18,7 +18,7 @@ export function Link(props) {
     if (props.button) {
         const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
         return isWeb ? <NextLink href={props.href || ''}>
-            <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
+            <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
                 <View style={styles[props.button]}>
                     <Text style={styles[props.button + '_text']}>{props.title}</Text>
                 </View>
