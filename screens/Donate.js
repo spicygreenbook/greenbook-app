@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
+import Stripe from "../components/Stripe";
 
 
 function Page(props) {
@@ -44,6 +45,7 @@ function Page(props) {
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
+                    {isWeb && <Stripe form="donate" />}
                 </View>
             </React.Fragment>
         )}

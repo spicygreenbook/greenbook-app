@@ -1,0 +1,50 @@
+.stripe {
+    max-width: 460px;
+}
+.stripe input {
+    background: #fff;
+    color: #828282;
+}
+.stripe input::placeholder {
+    color: #aab7c4;
+}
+.stripe label {
+    display: block;
+    margin: 8px 0;
+}
+.subLabel {
+    font-size: 10px;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+.formRow {
+    margin: 20px 0;
+}
+
+.amount_box {
+    display:inline-block;
+    vertical-align: middle;
+    padding: 12px;
+    margin: 0 10px 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #828282;
+    font-weight: bold;
+}
+.amount_selected {
+    background-color: #B56230;
+    color: #fff;
+}
+
+.card_element {
+    background-color: #fff;
+    padding: 12px 20px;
+    border-radius: 5px;
+}
+
+.button {
+
+}
+button.button[sending="1"] {
+    opacity: 0.75;
+}
