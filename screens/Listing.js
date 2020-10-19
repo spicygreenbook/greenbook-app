@@ -6,6 +6,7 @@ import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
 import Map from "../components/Map";
 import { FontAwesome } from '@expo/vector-icons';
+import Attribution from "../components/Attribution";
 
 function Page(props) {
 
@@ -15,6 +16,8 @@ function Page(props) {
 
     const [ pageLoading, setPageLoading ] = useState(!props.content);
     const [ content, setContent ] = useState(props.content);
+    const [ galleryOpen, setGalleryOpen ] = useState(false);
+
     console.log('view is', view)
     if (!props.content) {
         useEffect(() => {
@@ -39,7 +42,12 @@ function Page(props) {
         : (
             <React.Fragment>
                 <View style={{paddingTop: 120}} />
-                <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
+                <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}} onClick={e => {
+                    dispatch({type: 'lightboxConfig', value: {
+                        images: content.images
+                    }})
+                    dispatch({type: 'lightbox', value: true})
+                }}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <Image source={{uri: content.images[0].image.url + '&w=1200'}} style={{width: '100%', height: 600}} resizeMode="cover" />
                     </View>
@@ -58,8 +66,8 @@ function Page(props) {
                             <Text style={[styles.text_header2, {color: '#fff', textTransform: 'none', paddingBottom: 20}]}>{content.name}</Text>
                             {content.address && <Text style={[styles.text_body, {color: '#fff', paddingBottom:20}]}>{content.address}</Text>}
                             {content.hours && content.hours.length &&
-                                content.hours.map(line => (
-                                    <Text style={[styles.text_body, {color: '#fff', fontSize: 18}]}>{line}</Text>
+                                content.hours.map((line, l) => (
+                                    <Text key={'hoursline' + l} style={[styles.text_body, {color: '#fff', fontSize: 18}]}>{line}</Text>
                                 ))
                             }
                         </View>
@@ -130,8 +138,9 @@ function Page(props) {
                     </View>
                 </View>
                 <View style={[styles.section]}>
-                    <View style={[styles.content, styles.text_body, {fontSize: 18}]}>
+                    <View style={[styles.content]}>
                         <RichText render={content._bio} isWeb={isWeb} />
+                        {!!(content.attribution && content.attribution.length) && <Attribution attribution={content.attribution} />}
                     </View>
                 </View>
             </React.Fragment>

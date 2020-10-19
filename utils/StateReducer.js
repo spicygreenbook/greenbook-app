@@ -34,6 +34,16 @@ export const StateReducer = (state, action) => {
         ...state,
         searchConfig: action.value
       };
+    case 'lightbox':
+      return {
+        ...state,
+        lightbox: action.value
+      };
+    case 'lightboxConfig':
+      return {
+        ...state,
+        lightboxConfig: action.value
+      };
       
     default:
       return state;

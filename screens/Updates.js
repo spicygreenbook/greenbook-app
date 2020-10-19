@@ -3,6 +3,7 @@ import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
+import Attribution from "../components/Attribution"; 
 import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
 
 
@@ -90,45 +91,7 @@ function Page(props) {
                                                 </Link>
                                             }
 
-                                            {!!(item.attribution && item.attribution.length) && <View style={{marginTop: 20}}>
-                                                    {item.attribution.map((attribution, a) => (
-                                                        <View key={'attr' + a}>
-                                                            <Text>
-                                                                {attribution.attribution_type === 'Photography' ? (
-                                                                    <span>Thank you to professional photographer {attribution.attribution_name} for donating your time and talent providing the photos on this update.</span>
-                                                                ) : attribution.attribution_type === 'Videography' ? (
-                                                                    <span>Thank you to professional videographer {attribution.attribution_name} for donating your time and talent providing the video on this update.</span>
-                                                                ) : attribution.attribution_type === 'Design' ? (
-                                                                    <span>Thank you to professional designer {attribution.attribution_name} for donating your time and talent providing the design on this update.</span>
-                                                                ) : (
-                                                                    <span>Thank you to volunteer {attribution.attribution_name} for donating your time and talent on this update.</span>
-                                                                )}
-                                                            </Text>
-                                                            {attribution.attribution_link && 
-                                                                <Link href={attribution.attribution_link}>
-                                                                    {attribution.attribution_link.replace(
-                                                                                "https://",
-                                                                                ""
-                                                                            )
-                                                                            .replace(
-                                                                                "http://",
-                                                                                ""
-                                                                            )
-                                                                            .replace(
-                                                                                "www.",
-                                                                                ""
-                                                                            ).split('/')[0]}
-                                                                </Link>
-                                                            }
-                                                            {attribution.attribution_instagram && 
-                                                                <Link href={'https://instagram.com/' + (attribution.attribution_instagram.indexOf('@') > -1 ? attribution.attribution_instagram.slice(1) : attribution.attribution_instagram)}>
-                                                                    <Icons type="instagram" color="#B56230" style={{display: 'inline-block', width: 16, height: 16, verticalAlign: 'middle', marginRight: 5}} />
-                                                                    {attribution.attribution_instagram}
-                                                                </Link>
-                                                            }
-                                                        </View>
-                                                    ))}
-                                            </View>}
+                                            {!!(item.attribution && item.attribution.length) && <Attribution attribution={item.attribution} />}
                                         </View>
                                     </View>
                                 )}

@@ -19,6 +19,7 @@ import NotFound from '../screens/NotFound';
 import List from '../screens/List';
 import Listing from '../screens/Listing';
 import Menu from '../components/Menu';
+import ImageGallery from '../components/ImageGallery';
 import {useStateValue} from "../components/State";
 import { useFonts } from 'expo-font';
 import { getStyles, getImage } from '../utils';
@@ -27,7 +28,7 @@ import { Dimensions } from 'react-native';
 
 function Main(props) {
 
-  const [{ view, isWeb, theme, menuOpen }, dispatch] = useStateValue();
+  const [{ view, isWeb, theme, menuOpen, lightbox, lightboxConfig }, dispatch] = useStateValue();
   const [ isScrolled, setIsScrolled ] = useState(false);
 
   const styles = StyleSheet.create(getStyles('body', {isWeb}));
@@ -129,11 +130,13 @@ function Main(props) {
 
   return (
       <View>
-          {menuOpen ? (
+          {lightbox && lightboxConfig.images ? (
+            <ImageGallery images={lightboxConfig.images} />
+          ) : menuOpen ? (
             <Menu />
           ) : (
             <React.Fragment>
-              <Nav isScrolled={isScrolled} theme={theme} />
+              {!lightbox && <Nav isScrolled={isScrolled} theme={theme} />}
               
               { isWeb ? (
                   <View style={styles.body}>

@@ -240,6 +240,7 @@ async function getData(config) {
                         return item && item.attribution_name && item.attribution_name.trim()
                     })
                     content.attribution = attribution;
+                    console.log('updated attr')
                 }
 
                 return content;
