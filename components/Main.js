@@ -129,9 +129,9 @@ function Main(props) {
   }
 
   return (
-      <View>
+      <View style={isWeb ? {minHeight: '100%'}: {height: '100%'}}>
           {lightbox && lightboxConfig.images ? (
-            <ImageGallery images={lightboxConfig.images} />
+            <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
           ) : menuOpen ? (
             <Menu />
           ) : (
@@ -144,8 +144,6 @@ function Main(props) {
                   </View>
                  ) : (
                   <ScrollView style={styles.body} onScroll={(e) => {
-                    console.log(e);
-                    console.log(e.nativeEvent.contentOffset.y)
                     if (!isScrolled && e.nativeEvent.contentOffset.y > 0) {
                       setIsScrolled(true);
                     } else if (isScrolled && e.nativeEvent.contentOffset.y < 1) {

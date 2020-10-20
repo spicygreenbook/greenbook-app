@@ -14,17 +14,15 @@ function Attribution(props) {
     return (<View style={{marginTop: 20}}>
             {props.attribution.map((attribution, a) => (
                 <View key={'attr' + a}>
-                    <Text>
-                        {attribution.attribution_type === 'Photography' ? (
-                            <span>Thank you to professional photographer {attribution.attribution_name} for donating your time and talent providing the photos on this update.</span>
-                        ) : attribution.attribution_type === 'Videography' ? (
-                            <span>Thank you to professional videographer {attribution.attribution_name} for donating your time and talent providing the video on this update.</span>
-                        ) : attribution.attribution_type === 'Design' ? (
-                            <span>Thank you to professional designer {attribution.attribution_name} for donating your time and talent providing the design on this update.</span>
-                        ) : (
-                            <span>Thank you to volunteer {attribution.attribution_name} for donating your time and talent on this update.</span>
-                        )}
-                    </Text>
+                    {attribution.attribution_type === 'Photography' ? (
+                        <Text>Thank you to professional photographer {attribution.attribution_name} for donating your time and talent providing the photos for this business.</Text>
+                    ) : attribution.attribution_type === 'Videography' ? (
+                        <Text>Thank you to professional videographer {attribution.attribution_name} for donating your time and talent providing the video for this business.</Text>
+                    ) : attribution.attribution_type === 'Design' ? (
+                        <Text>Thank you to professional designer {attribution.attribution_name} for donating your time and talent providing the design for this business.</Text>
+                    ) : (
+                        <Text>Thank you to volunteer {attribution.attribution_name} for donating your time and talent for this business.</Text>
+                    )}
                     {attribution.attribution_link && 
                         <Link href={attribution.attribution_link}>
                             {attribution.attribution_link.replace(
