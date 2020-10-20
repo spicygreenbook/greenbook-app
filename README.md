@@ -2,6 +2,8 @@
 Code base for the android, ios, and responseive web apps for [spicygreenbook.com](https://spicygreenbook.com) which is a directory of local black-owned businesses that users can find to support
 
 # WE NEED YOUR HELP!
+Our current website is at [spicygreenbook.com](https://spicygreenbook.com) and our [new design is here](https://www.figma.com/file/7FrZMsARS2MdTWsG7SjCnN/SGB?node-id=238%3A393). This new version is deployed at [https://greenbook-app.vercel.app/](https://greenbook-app.vercel.app/). There are instructions below on how to get the development environment working. Here are the known areas we need help with:
+
 - Fix/implement the navigation stack handler for ios/android. We are not using any native navigation functions
 - Implement a webview for the forms on the add listing, contact us, and stripe donation forms to work on mobile apps
 - Enhance the image gallery for listings. It works, however, we want it to be AWESOME
