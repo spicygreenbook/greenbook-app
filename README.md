@@ -1,6 +1,13 @@
 # greenbook-app
 Code base for the android, ios, and responseive web apps for [spicygreenbook.com](https://spicygreenbook.com) which is a directory of local black-owned businesses that users can find to support
 
+# WE NEED YOUR HELP!
+- Fix/implement the navigation stack handler for ios/android. We are not using any native navigation functions
+- Implement a webview for the forms on the add listing, contact us, and stripe donation forms to work on mobile apps
+- Enhance the image gallery for listings. It works, however, we want it to be AWESOME
+- Look at [our design](https://www.figma.com/file/7FrZMsARS2MdTWsG7SjCnN/SGB?node-id=238%3A393) and use it to fix any design issues and/or implement missing areas
+- Join [our slack](https://spicy-green-book.slack.com) and let us know what you can do and we'll let you know how you can help!
+
 ## Want to report a bug or issue with the website?
 Use the [issues](https://github.com/spicygreenbook/greenbook-app/issues) section on this page to let us know!
 
