@@ -14,7 +14,7 @@ export default function(props) {
     return (
         <View style={styles.footer}>
             <View style={{flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2}}>
-                <View style={{flex:1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
+                <View style={[dimensions.window.width < 600 ? {} : {flexDirection: 'row'}, {flex:1, width: 1024, maxWidth: '100%'}]}>
                     <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingTop: 40, paddingBottom:40, paddingRight: 40}}>
                         <View style={{flex: 1}}>
                             <Link href="/search"><Text style={styles.text_footer}>Browse</Text></Link>

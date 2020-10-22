@@ -21,7 +21,7 @@ export default function ListItem(props) {
                     {/*<ResponsiveImage style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url}} />*/}
                     <Image style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url + '&w=400' }} />
                 </View>
-                <View style={{flex: 3, paddingLeft: 20}}>
+                <View style={{flex: 2, paddingLeft: 20}}>
                     <Text style={styles.text_header4}>{listing.name}</Text>
                     <Text style={[styles.text_body2,{paddingTop: 10, paddingBottom:20}]}>{listing.description}</Text>
                     <View style={{width: 46, borderColor: Theme.green, borderBottomWidth: 2}} />

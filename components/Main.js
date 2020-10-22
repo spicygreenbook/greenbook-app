@@ -129,7 +129,7 @@ function Main(props) {
   }
 
   return (
-      <View style={isWeb ? {minHeight: '100%'}: {height: '100%'}}>
+      <View style={isWeb ? {height: '100vh', flex: 1}: {height: '100%', flex: 1, height: '100vh'}}>
           {lightbox && lightboxConfig.images ? (
             <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
           ) : menuOpen ? (
