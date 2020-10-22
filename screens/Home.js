@@ -291,20 +291,50 @@ function Page(props) {
                             How can I help?
                         </Text>
                     </View>
-                    <View style={{flexDirection: dimensions.window.width < 800 ? 'column' : 'row'}}>
+                    <View style={dimensions.window.width < 800 ? {} : {flexDirection: 'row'}}>
                         <View style={{flex: dimensions.window.width < 800 ? 1 : 3, borderRightWidth: dimensions.window.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.window.width < 800 ? '100%' : 'auto'}}>
                             <Link href="/add">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <View style={{flex: 1}}>
-                                        <Image source={require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
+                                    <View style={{flex: 1, width: 72, height: 45}}>
+                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
                                     </View>
-                                    <View style={{flex: 3}}>
-                                        <Text>Add a listing</Text>
+                                    <View style={{flex: 3, paddingLeft: 20}}>
+                                        <Text style={styles.text_body}>Add a listing</Text>
+                                    </View>
+                                </View>
+                            </Link>
+                            <Link href="/volunteer">
+                                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+                                    <View style={{flex: 1, width: 72, height: 45}}>
+                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
+                                    </View>
+                                    <View style={{flex: 3, paddingLeft: 20}}>
+                                        <Text style={styles.text_body}>Volunteer</Text>
+                                    </View>
+                                </View>
+                            </Link>
+                            <Link href="/donate">
+                                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+                                    <View style={{flex: 1, width: 72, height: 45}}>
+                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
+                                    </View>
+                                    <View style={{flex: 3, paddingLeft: 20}}>
+                                        <Text style={styles.text_body}>Donate</Text>
+                                    </View>
+                                </View>
+                            </Link>
+                            <Link href="/contact">
+                                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+                                    <View style={{flex: 1, width: 72, height: 45}}>
+                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
+                                    </View>
+                                    <View style={{flex: 3, paddingLeft: 20}}>
+                                        <Text style={styles.text_body}>Contact</Text>
                                     </View>
                                 </View>
                             </Link>
                         </View>
-                        <View style={{flex: dimensions.window.width < 800 ? 1 : 4, paddingLeft: 40, paddingTop: 50}}>
+                        {dimensions.window.width >= 800 && <View style={{flex: dimensions.window.width < 800 ? 1 : 4, paddingLeft: dimensions.window.width < 800 ? 0 : 40, paddingTop: dimensions.window.width < 800 ? 100 : 50}}>
                             <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
                             <Text style={[styles.text_quote]}>
                                 It is certain, in any case, that ignorance,
@@ -314,7 +344,7 @@ function Page(props) {
                             <Text style={[styles.text_quote]}>
                                 - James Baldwin
                             </Text>
-                        </View>
+                        </View>}
                     </View>
                 </View>
             </View>
