@@ -12,7 +12,6 @@ function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header2, text_body, text_body2, section, content, text_link', {isWeb}));
-    console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(!props.content);
     const [ content, setContent ] = useState(props.content);
