@@ -14,6 +14,7 @@ export function ResponsiveImage(props) {
             source: { uri: uri }
         }
     }
+    console.log('set', set)
 
     return (
         <View onLayout={(event) => {
@@ -25,8 +26,8 @@ export function ResponsiveImage(props) {
             setWidth(w);
             //console.log('set height', w, props.style.aspectRatio)
             setHeight(w * (props.style.aspectRatio || 0.72));
-            if (props.cdn && props.source) {
-                setURI(props.source.uri + '&w=' + responsiveImageWidthCDN({containerWidth: w}));
+            if (props.cdn && props.source && props.source.uri && props.source.uri.indexOf('prismic-io.s3.amazonaws.com/spicygreenbook') > -1) {
+                setURI(props.source.uri + '?w=' + responsiveImageWidthCDN({containerWidth: w}));
             }
         }}>
             <Image

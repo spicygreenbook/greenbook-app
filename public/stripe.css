@@ -1,9 +1,14 @@
 .stripe {
-    max-width: 460px;
+    max-width: 6000px;
+    font-family: ApercuMedium;
+    font-size: 28px;
 }
 .stripe input {
     background: #fff;
     color: #828282;
+    border: 1px solid black;
+    font-size: 28px;
+    padding: 8px;
 }
 .stripe input::placeholder {
     color: #aab7c4;
@@ -47,4 +52,9 @@
 }
 button.button[sending="1"] {
     opacity: 0.75;
+}
+@media all and (max-width: 600px) {
+    .stripe {
+        font-size: 18px
+    }
 }

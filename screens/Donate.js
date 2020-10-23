@@ -45,7 +45,9 @@ function Page(props) {
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
-                    {isWeb && <Stripe form="donate" />}
+                    {isWeb && <View style={styles.content}>
+                        <Stripe form="donate" />
+                    </View>}
                 </View>
             </React.Fragment>
         )}
