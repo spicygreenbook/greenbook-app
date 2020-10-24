@@ -36,6 +36,7 @@ async function handler(req, res) {
     return docClient.get({TableName: tableName, Key: {query: query}}, async (err, data) => {
         if (err) {
             error = 'Error connecting to backend cache service, please try again';
+            handleFinal();
         } else {
             console.log('data', data)
             if (data && data.Item && data.Item.coords) {

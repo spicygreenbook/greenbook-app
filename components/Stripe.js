@@ -7,13 +7,11 @@ import {
     useElements,
 } from "@stripe/react-stripe-js";
 
-let pk =
-    "pk_test_51GvEQwLe7hUMH3W59ROr76MUKnm9Bowt8lZ4QMnGLaALu41kXuF1qX47mtjSLfwfVwuiBnP4PuI36ReryayJE02C008ouVbLzs";
+let pk = "pk_test_51GvEQwLe7hUMH3W59ROr76MUKnm9Bowt8lZ4QMnGLaALu41kXuF1qX47mtjSLfwfVwuiBnP4PuI36ReryayJE02C008ouVbLzs";
 
 if (typeof window !== "undefined") {
     if (window && window.location && window.location.host.indexOf("greenbook") > -1) {
-        pk =
-            "pk_live_51GvEQwLe7hUMH3W5kV9rWA1fDMDLPDVI0j8wtanT09j2hoWTGb5z48VJ8M3Kuu8Rc5P3yP3Rjldad9MQwohN96td00LjNcA16c";
+        pk = "pk_live_51GvEQwLe7hUMH3W5kV9rWA1fDMDLPDVI0j8wtanT09j2hoWTGb5z48VJ8M3Kuu8Rc5P3yP3Rjldad9MQwohN96td00LjNcA16c";
     }
 }
 
