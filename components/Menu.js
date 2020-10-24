@@ -5,11 +5,13 @@ import { getStyles, Theme } from '../utils';
 import {useStateValue} from "../components/State";
 import { Link, Click } from '../components/Link';
 import { EvilIcons } from '@expo/vector-icons'; 
+import { useRouter } from 'next/router'
 
 export default function(props) {
 
     const [{ view, isWeb, theme, dimensions, menuOpen }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_menu', {isWeb, theme}));
+    const router = useRouter();
 
     const menu = [{
         title: 'Browse',
@@ -43,6 +45,7 @@ export default function(props) {
                         <TouchableOpacity onPress={e => {
                             dispatch({type: 'menuOpen', value: false})
                             dispatch({type: 'setView', view: item.href || ''})
+                            router.push(item.href)
                         }}>
                             <Text style={styles.text_menu}>{item.title}</Text>
                         </TouchableOpacity>
