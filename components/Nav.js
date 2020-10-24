@@ -41,7 +41,6 @@ export default function(props) {
         } else {
             ColorOut()
         }
-        console.log('animation effect hook')
     }, [props.isScrolled])
 
     console.log('theme', props.theme, 'scrolled', props.isScrolled, 'view', view)
