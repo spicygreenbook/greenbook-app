@@ -19,8 +19,9 @@ export default function(props) {
         // Will change fadeAnim value to 1 in 5 seconds
         Animated.timing(fadeAnim, {
             easing: Easing.bounce,
-            toValue: 0,
+            toValue: 1,
             duration: 500,
+            useNativeDriver: true
         }).start();
     };
 
@@ -28,8 +29,9 @@ export default function(props) {
         // Will change fadeAnim value to 0 in 5 seconds
         Animated.timing(fadeAnim, {
             easing: Easing.ease,
-            toValue: 1,
+            toValue: 0,
             duration: 500,
+            useNativeDriver: true
         }).start();
     };
 
@@ -42,21 +44,23 @@ export default function(props) {
         console.log('animation effect hook')
     }, [props.isScrolled])
 
-    let bg_dark = fadeAnim.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['#000', 'transparent']
-    });
-
     return (
-        <Animated.View
-        style={[styles.fadingContainer,
-          styles.nav,
+        <View
+        style={[styles.nav,
           {
             borderBottomWidth: props.theme === 'light' ? 2 : 0,
             borderColor: Theme.green,
-            backgroundColor: props.theme == 'light' ? '#fff' : bg_dark
+            backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'
             }
         ]}>
+            {props.theme === 'dark' && <Animated.View 
+                style={[
+                    {position: 'absolute',
+                    left: 0, top: 0, bottom: 0, right:0,
+                    backgroundColor: '#000',
+                    opacity: fadeAnim}
+                ]}
+            />}
             <View style={{padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: props.theme == 'light' ? Theme.green : '#fff'}}>
                 <Link href="/" fill>
                     <View style={{height: '100%'}}>
@@ -132,7 +136,7 @@ export default function(props) {
                     </React.Fragment>
                 )}
             </View>
-        </Animated.View>
+        </View>
     )
 
 }
