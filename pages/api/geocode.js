@@ -35,6 +35,7 @@ async function handler(req, res) {
     // first try to get the cached results from DynamoDB on AWS
     return docClient.get({TableName: tableName, Key: {query: query}}, async (err, data) => {
         if (err) {
+            console.error(err);
             error = 'Error connecting to backend cache service, please try again';
             handleFinal();
         } else {
