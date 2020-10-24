@@ -17,27 +17,27 @@ export default function Search(props) {
         const small = dimensions.window.width < 900 || props.mode === 'results';
 
         return (
-            <View style={{flex: 1, borderWidth: props.mode === 'results' ? 1 : 0, borderColor: Theme.green, backgroundColor: '#fff', borderRadius: 40, maxWidth: 840, paddingLeft: 40, paddingRight: 20, paddingTop: 6, paddingBottom: 6}}>
+            <View style={{borderWidth: props.mode === 'results' ? 1 : 0, borderColor: Theme.green, backgroundColor: '#fff', borderRadius: 40, maxWidth: 840, paddingLeft: 40, paddingRight: 20, paddingTop: 6, paddingBottom: 6}}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                    <View style={{flex: 1, width: small ? 100 : 200}}>
+                    <View style={{width: small ? 100 : 200}}>
                         {!small && 
                             <View>
-                                <Text style={[styles.text_body, {fontSize: 16, color: '#000', fontWeight: 'bold'}]}>Cuisine</Text>
+                                <Text style={[styles.text_body, {fontSize: 16, color: '#000', fontWeight: 'bold'}]}>Find</Text>
                             </View>
                         }
                         <View>
-                            <TextInput name="q" value={query} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Cuisine' : "BBQ, Mexican, Seafood, etc."} onChangeText={text => setQuery(text)} />
+                            <TextInput name="q" value={query} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} onChangeText={text => setQuery(text)} />
                         </View>
                     </View>
                     <View style={{width:1, borderRightWidth: 1, height: 48, borderColor: 'rgba(0, 0, 0, 0.5)', marginLeft: 20, marginRight: 20}} />
-                    <View style={{flex: 1, width: small ? 100 : 440}}>
+                    <View style={{width: small ? 100 : 440}}>
                         {!small && 
                             <View>
-                                <Text style={[styles.text_body, {fontSize: 16, color: '#000', fontWeight: 'bold'}]}>Location</Text>
+                                <Text style={[styles.text_body, {fontSize: 16, color: '#000', fontWeight: 'bold'}]}>Near</Text>
                             </View>
                         }
                         <View>
-                            <TextInput name="near" value={near} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Location' : "Address, city, zip, state or neighborhood"} onChangeText={text => setNear(text)} />
+                            <TextInput name="near" value={near} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"} onChangeText={text => setNear(text)} />
                         </View>
                     </View>
                     <View>
@@ -64,7 +64,7 @@ export default function Search(props) {
                             }
                         }}>
                             {small ? (
-                                <View style={{backgroundColor: Theme.green_bg, borderRadius: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 10}}>
+                                <View style={{backgroundColor: Theme.green_bg, borderRadius: 40, padding: 10}}>
                                     <FontAwesome name="search" size={24} color="#fff" />
                                 </View>
                             ) : (
