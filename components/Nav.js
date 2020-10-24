@@ -44,11 +44,13 @@ export default function(props) {
         console.log('animation effect hook')
     }, [props.isScrolled])
 
+    console.log('theme', props.theme, 'scrolled', props.isScrolled, 'view', view)
+
     return (
         <View
         style={[styles.nav,
           {
-            borderBottomWidth: props.theme === 'light' ? 2 : 0,
+            borderBottomWidth: props.theme === 'light' && (props.isScrolled || (view.indexOf('/biz') === 0 && props.isScrolled)) ? 2 : 0,
             borderColor: Theme.green,
             backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'
             }

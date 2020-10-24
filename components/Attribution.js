@@ -25,29 +25,33 @@ function Attribution(props) {
                         <Text style={styles.text_body2}>Thank you to volunteer {attribution.attribution_name} for donating your time and talent for this business.</Text>
                     )}
                     {attribution.attribution_link && 
-                        <Link href={attribution.attribution_link}>
-                            <Text style={styles.text_body2}>
-                                {attribution.attribution_link.replace(
-                                            "https://",
-                                            ""
-                                        )
-                                        .replace(
-                                            "http://",
-                                            ""
-                                        )
-                                        .replace(
-                                            "www.",
-                                            ""
-                                        ).split('/')[0]}
-                            </Text>
-                        </Link>
+                        <View style={{marginTop: 10}}>
+                            <Link href={attribution.attribution_link}>
+                                <Text style={styles.text_body2}>
+                                    {attribution.attribution_link.replace(
+                                                "https://",
+                                                ""
+                                            )
+                                            .replace(
+                                                "http://",
+                                                ""
+                                            )
+                                            .replace(
+                                                "www.",
+                                                ""
+                                            ).split('/')[0]}
+                                </Text>
+                            </Link>
+                        </View>
                     }
                     {attribution.attribution_instagram && 
                         <Link href={'https://instagram.com/' + (attribution.attribution_instagram.indexOf('@') > -1 ? attribution.attribution_instagram.slice(1) : attribution.attribution_instagram)}>
-                            <FontAwesome name="instagram" size={16} color="#B56230" style={{display: 'inline-block', width: 16, height: 16, verticalAlign: 'middle', marginRight: 5}} />
-                            <Text style={styles.text_body2}>
-                                {attribution.attribution_instagram}
-                            </Text>
+                            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+                                <FontAwesome name="instagram" size={16} color="#B56230" style={{marginRight: 10}} />
+                                <Text style={styles.text_body2}>
+                                    {attribution.attribution_instagram}
+                                </Text>
+                            </View>
                         </Link>
                     }
                 </View>

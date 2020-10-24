@@ -136,8 +136,7 @@ function Main(props) {
             <Menu />
           ) : (
             <React.Fragment>
-              {!lightbox && <Nav isScrolled={isScrolled} theme={theme} />}
-              
+              {!lightbox && isWeb && <Nav isScrolled={isScrolled} theme={theme} />}{/* want nav on top for semantic html i guess*/}
               { isWeb ? (
                   <View style={styles.body}>
                     {renderContent(props)}
@@ -155,6 +154,8 @@ function Main(props) {
                   </ScrollView>
                  )}
               {isWeb && <Footer theme={theme} />}
+              {!lightbox && !isWeb && <Nav isScrolled={isScrolled} theme={theme} />}{/* makes it clickable to be last render on android*/}
+
             </React.Fragment>
           )}
       </View>

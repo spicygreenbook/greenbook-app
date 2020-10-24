@@ -19,7 +19,7 @@ export default function(props) {
         href: '/about'
     }, {
         title: 'Join',
-        href: '/join'
+        href: '/add'
     }, {
         title: 'Donate',
         href: '/donate'
@@ -29,8 +29,8 @@ export default function(props) {
     }];
 
     return (
-        <View style={{flexDirection: 'column', position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, height: '100vh', zIndex: 10, backgroundColor: Theme.green_bg}}>
-            <View style={{position: 'absolute', left: 10, top: 10, zIndex: 10}}>
+        <View style={{flexDirection: 'column', position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, height: '100%', zIndex: 10, backgroundColor: Theme.green_bg}}>
+            <View style={{position: 'absolute', left: 10, top: isWeb ? 10 : 60, zIndex: 10}}>
                 <TouchableOpacity onPress={(e) => {
                     dispatch({type: 'menuOpen', value: false})
                 }}>
@@ -40,9 +40,12 @@ export default function(props) {
             {menu.map((item, i) => (
                 <View style={{flex: 1, flexDirection: 'row'}}>
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', borderColor: '#fff', borderBottomWidth: 2}}>
-                        <Link href={item.href}>
+                        <TouchableOpacity onPress={e => {
+                            dispatch({type: 'menuOpen', value: false})
+                            dispatch({type: 'setView', view: item.href || ''})
+                        }}>
                             <Text style={styles.text_menu}>{item.title}</Text>
-                        </Link>
+                        </TouchableOpacity>
                     </View>
                 </View>
             ))}
