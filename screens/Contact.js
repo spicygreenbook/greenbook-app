@@ -15,22 +15,19 @@ function Page(props) {
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
 
-
-    if (isWeb) {
-        useEffect(() => {
-            setTimeout(() => {
-                (function(h,b,s,n,i,p,e,t) {
-                    let check = document.getElementById('honeybook-form');
-                    if (check){ check.parentNode.removeChild(check); }
-                    h._HB_ = h._HB_ || {};h._HB_.pid = i;;;;
-                    t=b.createElement(s);t.type="text/javascript";t.async=!0;t.src=n;
-                    t.id = 'honeybook-form';
-                    e=b.getElementsByTagName(s)[0];e.parentNode.insertBefore(t,e);
-                    console.log("EXECUTED HONEYBOOK CODE")
-                })(window,document,"script","https://widget.honeybook.com/assets_users_production/websiteplacements/placement-controller.min.js?cachebust=" + new Date().getTime(),"5f0282b0a1f62a61eedd0881");
-            }, 1000)
-        }, [content, pageLoading])
-    }
+    useEffect(() => {
+        if (isWeb) {
+            (function(h,b,s,n,i,p,e,t) {
+                let check = document.getElementById('honeybook-form');
+                if (check){ check.parentNode.removeChild(check); }
+                h._HB_ = h._HB_ || {};h._HB_.pid = i;;;;
+                t=b.createElement(s);t.type="text/javascript";t.async=!0;t.src=n;
+                t.id = 'honeybook-form';
+                e=b.getElementsByTagName(s)[0];e.parentNode.insertBefore(t,e);
+                console.log("EXECUTED HONEYBOOK CODE")
+            })(window,document,"script","https://widget.honeybook.com/assets_users_production/websiteplacements/placement-controller.min.js","5f0282b0a1f62a61eedd0881");
+        }
+    }, [content, pageLoading])
 
     if (!props.content) {
         useEffect(() => {

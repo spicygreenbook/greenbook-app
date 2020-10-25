@@ -53,25 +53,25 @@ function Page(props) {
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>
-                            <Image source={{uri: content.images[0].image.url + '&w=1200'}} style={{width: '100%', height: dimensions.window.width < 600 ? 300 : dimensions.window.width < 900 ? 400 : 600}} resizeMode="cover" />
+                            <Image source={{uri: content.images[0].image.url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 300 : dimensions.width < 900 ? 400 : 600}} resizeMode="cover" />
                         </TouchableOpacity>
                     </View>
                     <View style={{flex: 1}}>
                         <View style={{flex: 1, borderBottomWidth: 2, borderColor: '#fff'}}>
                             <TouchableOpacity onPress={e => clickImage(1)}>
-                                <Image source={{uri: content.images[1].image.url + '&w=600'}} style={{width: '100%', height: dimensions.window.width < 600 ? 150 : dimensions.window.width < 900 ? 200 : 300}} resizeMode="cover" />
+                                <Image source={{uri: content.images[1].image.url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                             </TouchableOpacity>
                         </View>
                         <View style={{flex: 1}}>
                             <TouchableOpacity onPress={e => clickImage(2)}>
-                                <Image source={{uri: content.images[2].image.url + '&w=600'}} style={{width: '100%', height: dimensions.window.width < 600 ? 150 : dimensions.window.width < 900 ? 200 : 300}} resizeMode="cover" />
+                                <Image source={{uri: content.images[2].image.url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <View style={[dimensions.window.width < 600 ? {} : {flexDirection: 'row'}, {backgroundColor: Theme.green_bg, borderTopWidth: 2, borderColor: '#fff'}]}>
-                    <View style={[dimensions.window.width < 600 ? {} : {flex:2}, {borderRightWidth: 2, borderColor: '#fff', alignItems: 'flex-end'}]}>
-                        <View style={{padding: 20, paddingTop: 40, paddingBottom: dimensions.window.width < 600 ? 0 : 40, width: 795, maxWidth: '100%', marginLeft: 10}}>
+                <View style={[dimensions.width < 600 ? {} : {flexDirection: 'row'}, {backgroundColor: Theme.green_bg, borderTopWidth: 2, borderColor: '#fff'}]}>
+                    <View style={[dimensions.width < 600 ? {} : {flex:2}, {borderRightWidth: 2, borderColor: '#fff', alignItems: 'flex-end'}]}>
+                        <View style={{padding: 20, paddingTop: 40, paddingBottom: dimensions.width < 600 ? 0 : 40, width: 795, maxWidth: '100%', marginLeft: 10}}>
                             <Text style={[styles.text_header2, {color: '#fff', textTransform: 'none', paddingBottom: 20}]}>{content.name}</Text>
                             {content.address && <Text style={[styles.text_body, {color: '#fff', paddingBottom:20}]}>{content.address}</Text>}
                             {content.hours && content.hours.length &&
@@ -81,7 +81,7 @@ function Page(props) {
                             }
                         </View>
                     </View>
-                    <View style={[dimensions.window.width < 600 ? {} : {flex:1}, {alignItems: 'flex-start', justifyContent: 'center'}]}>
+                    <View style={[dimensions.width < 600 ? {} : {flex:1}, {alignItems: 'flex-start', justifyContent: 'center'}]}>
                         <View style={{padding: 20}}>
                             {content.phone_number &&
                                 <Link href={'tel:' + content.phone_number}>

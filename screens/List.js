@@ -264,8 +264,8 @@ function Page(props) {
         : (
             <React.Fragment>
                 <View style={{paddingTop: 120}} />
-                <View style={[dimensions.window.width >= 800 ? {flexDirection: 'row'} : {}]}>
-                    <View style={dimensions.window.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: isWeb ? 'calc(100vh - 234px)' : 0} : {}}>
+                <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}]}>
+                    <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: isWeb ? 'calc(100vh - 234px)' : 0} : {}}>
                         <View style={{padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                                 {filteredList.length === 1 ? '1 Match' : filteredList.length + ' Matches'}
@@ -276,7 +276,7 @@ function Page(props) {
                             {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
                         </View>
                     </View>
-                    {dimensions.window.width >= 800 &&
+                    {dimensions.width >= 800 &&
                         <View style={{flex: 1, position: 'relative'}}>
                             {!gettingGeo && 
                                 <View style={[{position: 'fixed', zIndex: 1, top: 122, right: 0}, isWeb ? {width: 'calc(50% - 1px)', height: 'calc(100vh - 120px)'} : {}]}>

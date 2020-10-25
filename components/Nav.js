@@ -12,8 +12,29 @@ export default function(props) {
     const styles = StyleSheet.create(getStyles('nav, text_nav, text_nav_sub', {isWeb, theme}));
 
     const [ active, setActive ] = useState('');
+    const [ isScrolled, setIsScrolled ] = useState(false);
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    function scrollEventListener() {
+        if (window && document) {
+            let y = document.body.scrollTop || document.documentElement.scrollTop;
+            if (!isScrolled && y > 0) {
+                setIsScrolled(true);
+            } else if (isScrolled && y < 1) {
+                setIsScrolled(false);
+            }
+        }
+    }
+
+    if (isWeb) {
+        useEffect(() => {
+            window.addEventListener('scroll', scrollEventListener, false)
+            return () => {
+                window.removeEventListener('scroll', scrollEventListener, false)
+            }
+        })
+    }
 
     const ColorIn = () => {
         // Will change fadeAnim value to 1 in 5 seconds
@@ -43,8 +64,6 @@ export default function(props) {
         }
     }, [props.isScrolled])
 
-    console.log('theme', props.theme, 'scrolled', props.isScrolled, 'view', view)
-
     return (
         <View
         style={[styles.nav,
@@ -67,13 +86,13 @@ export default function(props) {
                     <View style={{height: '100%'}}>
                     {props.theme == 'light' ? 
                         <Image
-                            style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
+                            style={{width: dimensions.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
                             alt="Spicy Green Book"
                             source={isWeb ? {uri: '/images/logo_nav_light.png'} : require('../public/images/logo_nav_light.png')}
                         />
                         :
                         <Image
-                            style={{width: dimensions.window.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
+                            style={{width: dimensions.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain'}}
                             alt="Spicy Green Book"
                             source={isWeb ? {uri: '/images/logo_nav_dark.png'} : require('../public/images/logo_nav_dark.png')}
                         />
@@ -81,8 +100,8 @@ export default function(props) {
                     </View>
                 </Link>
             </View>
-            <View style={{padding: 20, flex: dimensions.window.width < 900 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end'}}>
-                {dimensions.window.width < 900 ? (
+            <View style={{padding: 20, flex: dimensions.width < 900 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end'}}>
+                {dimensions.width < 900 ? (
                     <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                         <View style={{width: 40}}>
                             <TouchableOpacity onPress={() => {
@@ -95,7 +114,7 @@ export default function(props) {
                     </View>
                 ) : (
                     <React.Fragment>
-                        <View style={{flex: Math.floor(dimensions.window.width/800)}} />
+                        <View style={{flex: Math.floor(dimensions.width/800)}} />
                         <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>
                         </View>

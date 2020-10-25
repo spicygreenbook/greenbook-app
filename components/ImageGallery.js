@@ -45,12 +45,12 @@ export default function(props) {
 
     let config = {
         top: {
-            height: dimensions.window.height * 0.8,
-            width: dimensions.window.width
+            height: dimensions.height * 0.8,
+            width: dimensions.width
         },
         bottom: {
-            height: dimensions.window.height * 0.2,
-            width: dimensions.window.height * 0.2
+            height: dimensions.height * 0.2,
+            width: dimensions.height * 0.2
         }
     }
     console.log('images', images)

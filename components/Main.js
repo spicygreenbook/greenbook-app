@@ -28,20 +28,21 @@ import { Dimensions } from 'react-native';
 
 function Main(props) {
 
-  const [{ view, isWeb, theme, menuOpen, lightbox, lightboxConfig }, dispatch] = useStateValue();
+  const [{ view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig }, dispatch] = useStateValue();
   const [ isScrolled, setIsScrolled ] = useState(false);
 
   const styles = StyleSheet.create(getStyles('body', {isWeb}));
 
   const onChangeScreenSize = ({ set_window, set_screen }) => {
     const get_window = Dimensions.get("window");
-    const get_screen = Dimensions.get("screen");
     let set_to = {
-      window: get_window,
-      screen: get_screen
+      width: get_window.width,
+      height: get_window.height
     }
     console.log('setting to', set_to)
-    dispatch({type: 'setDimensions', value: set_to})
+    if (isWeb && get_window.width !== dimensions.width) {
+      dispatch({type: 'setDimensions', value: set_to})
+    }
   };
 
   const [ fontsReady, fontsError ] = useFonts({

@@ -95,8 +95,8 @@ export const InitialState = (props) => {
     fontsReady: false,
     searchConfig: searchConfig,
     dimensions: {
-        window: Dimensions.get("window"),
-        screen: Dimensions.get("screen")
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("screen").height
     }
   };
   

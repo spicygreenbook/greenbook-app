@@ -14,21 +14,21 @@ export default function(props) {
     return (
         <View style={styles.footer}>
             <View style={{flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2}}>
-                <View style={[dimensions.window.width < 700 ? {} : {flexDirection: 'row'}, {flex:1, width: 1024, maxWidth: '100%'}]}>
-                    <View style={{flex: 3, justifyContent: dimensions.window.width < 700 ? 'space-around' : 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: dimensions.window.width < 700 ? 0 : 2, paddingTop: 40, paddingBottom:40, paddingRight: dimensions.window.width < 700 ? 0 : 40, paddingLeft: dimensions.window.width < 700 ? 0 : dimensions.window.width < 1080 ? 20 : 0}}>
-                        <View style={dimensions.window.width < 700 ? {} : {flex:1}}>
+                <View style={[dimensions.width < 700 ? {} : {flexDirection: 'row'}, {flex:1, width: 1024, maxWidth: '100%'}]}>
+                    <View style={{flex: 3, justifyContent: dimensions.width < 700 ? 'space-around' : 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: dimensions.width < 700 ? 0 : 2, paddingTop: 40, paddingBottom:40, paddingRight: dimensions.width < 700 ? 0 : 40, paddingLeft: dimensions.width < 700 ? 0 : dimensions.width < 1080 ? 20 : 0}}>
+                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
                             <Link href="/search"><Text style={styles.text_footer}>Browse</Text></Link>
                         </View>
-                        <View style={dimensions.window.width < 700 ? {} : {flex:1}}>
+                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
                             <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
                         </View>
-                        <View style={dimensions.window.width < 700 ? {} : {flex:1}}>
+                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
                             <Link href="/add"><Text style={styles.text_footer}>Join</Text></Link>
                         </View>
-                        <View style={dimensions.window.width < 700 ? {} : {flex:1}}>
+                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
                             <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
                         </View>
-                        <View style={dimensions.window.width < 700 ? {} : {flex:1}}>
+                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
                             <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
                         </View>
                     </View>

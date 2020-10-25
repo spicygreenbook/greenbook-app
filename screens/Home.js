@@ -119,7 +119,7 @@ function Page(props) {
                             Black Owned{"\n"}
                             Businesses
                         </Text>
-                        <View style={{marginTop: 40, flexDirection: 'row', justifyContent: dimensions.window.width < 900 ? 'flex-start': 'center'}}>
+                        <View style={{marginTop: 40, flexDirection: 'row', justifyContent: dimensions.width < 900 ? 'flex-start': 'center'}}>
                             <Search />
                         </View>
                     </View>
@@ -147,15 +147,15 @@ function Page(props) {
             </View>
             <View style={styles.section}>
                 <View style={styles.content}>
-                    <View style={dimensions.window.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
-                        <View style={dimensions.window.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
+                    <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
                             <ResponsiveImage
                                 style={{width: 804, resizeMode: 'contain', aspectRatio: 1.37245}}
                                 alt="Spicy Green Book"
                                 source={isWeb ? {uri: '/images/home_green_book.png'} : require('../public/images/home_green_book.png')}
                             />
                         </View>
-                        <View style={dimensions.window.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
+                        <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
                             <Text accessibilityRole="header" aria-level="2" style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
                             <Text style={styles.text_body}>
                                 Inspired by Victor Green, Spicy Green Book is a team of volunteers committed to help compile a directory of black owned businesses.
@@ -189,7 +189,7 @@ function Page(props) {
                             viewabilityConfig={viewableItemsChangedConfigListing}
                             renderItem={({ item, index, separators }) => (
                                 <View>
-                                    <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.window.width, height: 700}}>
+                                    <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}}>
                                     </ImageBackground>
                                     <View style={{
                                         position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
@@ -291,8 +291,8 @@ function Page(props) {
                             How can I help?
                         </Text>
                     </View>
-                    <View style={dimensions.window.width < 800 ? {} : {flexDirection: 'row'}}>
-                        <View style={{flex: dimensions.window.width < 800 ? 1 : 3, borderRightWidth: dimensions.window.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.window.width < 800 ? '100%' : 'auto'}}>
+                    <View style={dimensions.width < 800 ? {} : {flexDirection: 'row'}}>
+                        <View style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
                             <Link href="/add">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View style={{flex: 1, width: 72, height: 45}}>
@@ -334,7 +334,7 @@ function Page(props) {
                                 </View>
                             </Link>
                         </View>
-                        {dimensions.window.width >= 800 && <View style={{flex: dimensions.window.width < 800 ? 1 : 4, paddingLeft: dimensions.window.width < 800 ? 0 : 40, paddingTop: dimensions.window.width < 800 ? 100 : 50}}>
+                        {dimensions.width >= 800 && <View style={{flex: dimensions.width < 800 ? 1 : 4, paddingLeft: dimensions.width < 800 ? 0 : 40, paddingTop: dimensions.width < 800 ? 100 : 50}}>
                             <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
                             <Text style={[styles.text_quote]}>
                                 It is certain, in any case, that ignorance,
