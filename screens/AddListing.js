@@ -15,16 +15,21 @@ function Page(props) {
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
 
+
     if (isWeb) {
         useEffect(() => {
             (function(h,b,s,n,i,p,e,t) {
-                h._HB_ = h._HB_ || {};h._HB_.pid = i;;;;
+                let check = document.getElementById('honeybook-form');
+                if (check){ check.parentNode.removeChild(check); }
+                h._HB_ = {};h._HB_.pid = i;;;; // dan modified this line to make the forms actually load
                 t=b.createElement(s);t.type="text/javascript";t.async=!0;t.src=n;
+                t.id = 'honeybook-form';
                 e=b.getElementsByTagName(s)[0];e.parentNode.insertBefore(t,e);
+                console.log("EXECUTED HONEYBOOK CODE")
             })(window,document,"script","https://widget.honeybook.com/assets_users_production/websiteplacements/placement-controller.min.js","5f0282b0a1f62a61eedd0881");
-
-        }, [])
+        }, [pageLoading])
     }
+
 
     if (!props.content) {
         useEffect(() => {
@@ -54,12 +59,14 @@ function Page(props) {
                 <View style={[styles.section]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
-                        {isWeb && <View>
-                            <div class="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
-                            <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
-                        </View>}
                     </View>
                 </View>
+                {isWeb && <View style={[styles.section]}>
+                    <View style={styles.content}>
+                        <div class="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
+                        <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
+                    </View>
+                </View>}
             </React.Fragment>
         )}
         </React.Fragment>
