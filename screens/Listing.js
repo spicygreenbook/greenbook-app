@@ -74,7 +74,11 @@ function Page(props) {
                     <View style={[dimensions.width < 600 ? {} : {flex:2}, {borderRightWidth: 2, borderColor: '#fff', alignItems: 'flex-end'}]}>
                         <View style={{padding: 20, paddingTop: 40, paddingBottom: dimensions.width < 600 ? 0 : 40, width: 795, maxWidth: '100%', marginLeft: 10}}>
                             <Text style={[styles.text_header2, {color: '#fff', textTransform: 'none', paddingBottom: 20}]}>{content.name}</Text>
-                            {content.address && <Text style={[styles.text_body, {color: '#fff', paddingBottom:20}]}>{content.address}</Text>}
+                            {content.address && 
+                                <Link href={`https://www.google.com/maps/dir//${content.address.join(' ').split(/\s/g).join('+')}`} target="_blank">
+                                    <Text style={[styles.text_body, {color: '#fff', paddingBottom:20}]}>{content.address}</Text>
+                                </Link>
+                            }
                             {content.hours && content.hours.length &&
                                 content.hours.map((line, l) => (
                                     <Text key={'hoursline' + l} style={[styles.text_body, {color: '#fff', fontSize: 18}]}>{line}</Text>
