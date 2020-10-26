@@ -24,7 +24,7 @@ function Attribution(props) {
                     ) : (
                         <Text style={styles.text_body2}>Thank you to volunteer {attribution.attribution_name} for donating your time and talent for this business.</Text>
                     )}
-                    {attribution.attribution_link && 
+                    {!!attribution.attribution_link && 
                         <View style={{marginTop: 10}}>
                             <Link href={attribution.attribution_link}>
                                 <Text style={styles.text_body2}>
@@ -44,7 +44,7 @@ function Attribution(props) {
                             </Link>
                         </View>
                     }
-                    {attribution.attribution_instagram && 
+                    {!!attribution.attribution_instagram && 
                         <Link href={'https://instagram.com/' + (attribution.attribution_instagram.indexOf('@') > -1 ? attribution.attribution_instagram.slice(1) : attribution.attribution_instagram)}>
                             <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
                                 <FontAwesome name="instagram" size={16} color="#B56230" style={{marginRight: 10}} />

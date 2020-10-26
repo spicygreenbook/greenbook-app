@@ -52,7 +52,7 @@ export default function Map({
 							}
 						} else {
 							var infoWindowMarkup = `
-							<a href="/biz/${row._slug}" style="color:#000;text-decoration:none">
+							<a href="/biz/${row.uid}" style="color:#000;text-decoration:none">
 							<img src="${row.primary_image.url}" width="${
 								row.primary_image.width
 							}" height="${
