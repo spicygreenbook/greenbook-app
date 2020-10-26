@@ -7,6 +7,7 @@ import { getStyles, Theme, getContent } from '../utils';
 import Map from "../components/Map";
 import { FontAwesome } from '@expo/vector-icons';
 import Attribution from "../components/Attribution";
+import { WebView } from 'react-native-webview';
 
 function Page(props) {
 
@@ -146,6 +147,22 @@ function Page(props) {
                         </View>
                     </View>
                 </View>
+                {content.youtube_video && <View style={[styles.section, {paddingBottom: 0}]}>
+                    <View style={[styles.content, isWeb ? {} : {height: 300}]}>
+                        {isWeb ? (
+                            <div
+                            dangerouslySetInnerHTML={{
+                              __html: content.youtube_video.html}} />
+                        ) : (
+                            <WebView
+                                    style={ styles.WebViewContainer }
+                                    javaScriptEnabled={true}
+                                    domStorageEnabled={true}
+                                    source={{uri: 'https://www.youtube.com/embed/' + (content.youtube_video.embed_url.split(/youtu.be\/|youtube.com\//)[1] || '') }}
+                            />
+                        )}
+                    </View>
+                </View>}
                 <View style={[styles.section]}>
                     <View style={[styles.content]}>
                         <RichText render={content._bio} isWeb={isWeb} />

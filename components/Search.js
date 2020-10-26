@@ -51,7 +51,9 @@ export default function Search(props) {
                         <View>
                             <TextInput ref={queryRef} key="searchQuery" name="q" value={query} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} onChangeText={text => setQuery(text)} onFocus={e => {
                                 setTimeout(() => {
-                                    queryRef.current.focus()
+                                    if (queryRef && queryRef.current) {
+                                        queryRef.current.focus()
+                                    }
                                 }, 200)
                             }}/>
                         </View>

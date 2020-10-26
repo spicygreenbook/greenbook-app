@@ -14,7 +14,7 @@ function Attribution(props) {
 
     return (<View style={{marginTop: 20}}>
             {props.attribution.map((attribution, a) => (
-                <View key={'attr' + a}>
+                <View key={'attr' + a} style={[a > 0 ? {marginTop: 40} : {}]}>
                     {attribution.attribution_type === 'Photography' ? (
                         <Text style={styles.text_body2}>Thank you to professional photographer {attribution.attribution_name} for donating your time and talent providing the photos for this business.</Text>
                     ) : attribution.attribution_type === 'Videography' ? (
