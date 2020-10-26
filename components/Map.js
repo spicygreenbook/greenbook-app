@@ -59,7 +59,9 @@ export default function Map({
 								row.primary_image.height
 							}" style="max-width:100%;height:auto" />
 							<div style="font-size:18px; margin:8px 0"><b>${row.name}</b></div>
-							${row.cuisines.join(", ")}
+							${row.cuisines.map(cuisine => {
+								return cuisine.cuisine
+							}).join(", ")}
 							</a>
 							`;
 						}
