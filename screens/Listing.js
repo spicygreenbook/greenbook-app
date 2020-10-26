@@ -54,7 +54,7 @@ function Page(props) {
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>
-                            <Image source={{uri: content.images[0].image.url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 300 : dimensions.width < 900 ? 400 : 600}} resizeMode="cover" />
+                            <Image source={{uri: content.images[0].image.url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602}} resizeMode="cover" />
                         </TouchableOpacity>
                     </View>
                     <View style={{flex: 1}}>
