@@ -264,7 +264,7 @@ function Page(props) {
         : (
             <React.Fragment>
                 <View style={{paddingTop: 120}} />
-                <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}]}>
+                <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, {borderTopWidth: 2, borderColor: Theme.green}]}>
                     <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: isWeb ? 'calc(100vh - 234px)' : 0} : {}}>
                         <View style={{padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
