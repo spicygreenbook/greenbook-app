@@ -73,10 +73,7 @@ export default function(props) {
                 onViewableItemsChanged={viewableItemsChangedImage}
                 viewabilityConfig={viewableItemsChangedConfigImage}
                 renderItem={({ item, index, separators }) => (
-                    <View>
-                        <ImageBackground source={{uri: item.url + '&w=' + responsiveImageWidthCDN({containerWidth: config.top.width})}} style={{width: config.top.width, height: config.top.height}}>
-                        </ImageBackground>
-                    </View>
+                    <ImageBackground source={{uri: item.url + '&w=' + responsiveImageWidthCDN({containerWidth: config.top.width})}} style={{flex:1, width: config.top.width, height: '100%'}} resizeMode={'contain'} />
                 )}
                 keyExtractor={(item, index) => 'image' + index}
             />
