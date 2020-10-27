@@ -14,6 +14,11 @@ export function ResponsiveImage(props) {
             source: { uri: uri }
         }
     }
+    let  { aspectRatio } = props.style;
+    if (props.style.width && props.style.height && !aspectRatio) {
+        aspectRatio = props.style.width / props.style.height;
+        console.log('calc aspectRatio iresponsive image', aspectRatio)
+    }
     console.log('set', set)
 
     return (

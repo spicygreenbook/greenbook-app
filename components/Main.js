@@ -132,7 +132,16 @@ function Main(props) {
   return (
       <View style={isWeb ? {minHeight: '100vh', flex: 1}: {flex: 1}}>
           {lightbox && lightboxConfig.images ? (
-            <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
+            <React.Fragment>
+              <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
+              {isWeb && <style
+                dangerouslySetInnerHTML={{
+                  __html: `#chat-widget-container {
+                    z-index: 5 !important;
+                    display: none !important
+                  }`
+              }} />}
+            </React.Fragment>
           ) : menuOpen ? (
             <Menu />
           ) : (

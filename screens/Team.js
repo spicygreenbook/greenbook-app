@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, I
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
+import { ResponsiveImage } from "../components/ResponsiveImage"; 
 
 
 function Page(props) {
@@ -77,8 +78,8 @@ function Page(props) {
                                 ItemSeparatorComponent={highlighted => <View style={{paddingTop: 80}}></View>}
                                 renderItem={({ item, index, separators }) => (
                                     <View style={{flexDirection: 'row'}} key={'update' + index}>
-                                        <View style={{flex: 1, flexDirection: 'row'}}>
-                                            <Image style={{width: '100%', aspectRatio: 1}} source={{uri: item.image.url + '&w=600'}} />
+                                        <View style={{flex: 1, height: 400}}>
+                                            <ResponsiveImage style={{width: item.image.width, height: item.image.height, aspectRatio: 1}} source={{uri: item.image.url + '&w=600'}} />
                                         </View>
                                         <View style={{flex: 3, paddingLeft: 20}}>
                                             <Text style={styles.text_header3}>{item.title}</Text>
