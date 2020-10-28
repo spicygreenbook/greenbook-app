@@ -12,18 +12,27 @@ export function Link(props) {
     const handleURL = (e) => {
         if (!external) {
             dispatch({type: 'setView', view: props.href || ''})
+        } else {
+            Linking.openURL(props.href || '')
         }
     }
 
     if (props.button) {
         const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
-        return isWeb ? <NextLink href={props.href || ''}>
+        return isWeb && !external ? <NextLink href={props.href || ''}>
             <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
                 <View style={styles[props.button]}>
                     <Text style={styles[props.button + '_text']}>{props.title}</Text>
                 </View>
             </View>
         </NextLink>
+        : isWeb && external ? <a href={props.href || ''} target="_blank" style={{textDecoration: 'none'}}>
+            <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
+                <View style={styles[props.button]}>
+                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                </View>
+            </View>
+        </a>
         : 
         <TouchableOpacity onPress={handleURL}>
             <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
