@@ -17,17 +17,32 @@ export default function(props) {
         title: 'Browse',
         href: '/search'
     }, {
-        title: 'About',
-        href: '/about'
+        title: 'Donate',
+        href: '/donate'
     }, {
         title: 'Join',
         href: '/add'
     }, {
-        title: 'Donate',
-        href: '/donate'
-    }, {
         title: 'Volunteer',
         href: '/volunteer'
+    }, {
+        title: 'About',
+        href: '/about'
+    }, {
+        title: 'Updates',
+        href: '/updates'
+    }, {
+        title: 'Team',
+        href: '/team'
+    }, {
+        title: 'Process',
+        href: '/process'
+    }, {
+        title: 'Press',
+        href: '/press'
+    }, {
+        title: 'Contact',
+        href: '/contact'
     }];
 
     return (
