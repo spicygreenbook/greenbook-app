@@ -12,6 +12,11 @@ export function Link(props) {
     const handleURL = (e) => {
         if (!external) {
             dispatch({type: 'setView', view: props.href || ''})
+        }
+    }
+    const handleURLFully = (e) => {
+        if (!external) {
+            dispatch({type: 'setView', view: props.href || ''})
         } else {
             Linking.openURL(props.href || '')
         }
@@ -49,11 +54,11 @@ export function Link(props) {
             let more = props.fill ? {height: '100%'} : {}
             return !external ? 
                 <NextLink href={props.href || ''}>
-                    <a href={props.href || ''} onClick={handleURL} style={{...props.style, textDecoration: 'none', ...more}}>
+                    <a href={props.href || ''} onClick={handleURLFully} style={{...props.style, textDecoration: 'none', ...more}}>
                         {props.children}
                     </a>
                 </NextLink>
-            : <a href={props.href || ''} onClick={handleURL} style={{textDecoration: 'none'}} target="_blank">
+            : <a href={props.href || ''} style={{textDecoration: 'none'}} target="_blank">
                 {props.children}
             </a>
         } else {

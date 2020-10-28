@@ -114,11 +114,11 @@ export default function(props) {
                     </View>
                 ) : (
                     <React.Fragment>
-                        <View style={{flex: Math.floor(dimensions.width/800)}} />
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                        <View style={{flex: Math.floor(dimensions.width/400)}} />
+                        <View style={{paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                        <View style={{paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
                                 <Link href="/about"><Text style={styles.text_nav}>About</Text></Link>
                                 <AntDesign name="down" size={22} color={props.theme === 'light' ? Theme.green : '#fff'} style={{cursor: 'pointer', marginLeft: 10}} onClick={e => {
@@ -144,13 +144,13 @@ export default function(props) {
                                 </View>
                             </View>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                        <View style={{paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/add"><Text style={styles.text_nav}>Join</Text></Link>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                        <View style={{paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/donate"><Text style={styles.text_nav}>Donate</Text></Link>
                         </View>
-                        <View style={{flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
+                        <View style={{paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end'}}>
                             <Link href="/volunteer"><Text style={styles.text_nav}>Volunteer</Text></Link>
                         </View>
                     </React.Fragment>
