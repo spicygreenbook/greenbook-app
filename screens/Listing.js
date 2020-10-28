@@ -148,6 +148,16 @@ function Page(props) {
                                     </View>
                                 </Link>
                             }
+                            {content.cuisines && content.cuisines.length && <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10}}>
+                                <View style={{marginRight: 10}}>
+                                    <FontAwesome name="tags" size={24} color="#fff" />
+                                </View>
+                                <View>
+                                    <Text style={[styles.text_body, {color: '#fff', fontSize: 18}]}>
+                                        {content.cuisines.map(cuisine => cuisine.cuisine).filter(cuisine => cuisine).join(', ')}
+                                    </Text>
+                                </View>
+                            </View>}
                         </View>
                     </View>
                 </View>

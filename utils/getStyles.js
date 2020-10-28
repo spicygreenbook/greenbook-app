@@ -152,6 +152,13 @@ const allStyles = {
             color: '#006233'
         }
     },
+    text_body3: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: 16,
+            //color: '#006233'
+        }
+    },
     text_link: function(config) {
         return {
             fontFamily: 'ApercuMedium',
