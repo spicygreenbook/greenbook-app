@@ -83,6 +83,7 @@ export default function Search(props) {
                             )}
                         </TouchableOpacity>
                     </View>
+                    {isWeb && <div style={{width: 0, height: 0, overflow: 'hidden'}}><input type="submit" /></div>}
                 </View>
             </View>
         );
@@ -90,10 +91,8 @@ export default function Search(props) {
 
     return (
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            {isWeb ? (
-                <form method="GET" action="/search" onSubmit={submitSearch}><SearchForm mode={props.mode} small={small} /></form>
-            ) : <SearchForm mode={props.mode} small={small} />
-            }
+            {isWeb ? <form method="GET" action="/search"><SearchForm mode={props.mode} small={small} /></form>
+            : <SearchForm mode={props.mode} small={small} />}
         </View>
     )
 

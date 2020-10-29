@@ -12,6 +12,9 @@ const searchKeysConfig = [
     {key: 'name', multiplier: 10},
     {key: 'address', multiplier: 1},
     {key: 'cuisines', multiplier: 4},
+    {key: 'search_terms', multiplier: 4, processMap: (line) => {
+        return line.term
+    }},
     {key: 'description', multiplier: 2},
     {key: 'bio', multiplier: 2},
     {key: 'instagram', multiplier: 10},
@@ -35,11 +38,15 @@ const fuzzySearch = (string, srch) => {
         )
     );
 };
-const wordSearch = (needle, haystack, multiplier) => {
+const wordSearch = (needle, haystack, multiplier, processMap, debug) => {
     if (typeof haystack === 'string') {
         haystack = haystack.split(' ')
     }
-    let ar = ((haystack || []).join(' ') || '').toLowerCase().replace(/[^A-Za-z0-9\ ]/gi, '').split(/[^A-Za-z0-9]/).filter(w => (w || w == 0) ? true: false);
+    if (!processMap){ processMap = line => line; }
+    let ar = ((haystack || []).map(processMap).join(' ') || '').toLowerCase().replace(/[^A-Za-z0-9\ ]/gi, '').split(/[^A-Za-z0-9]/).filter(w => (w || w == 0) ? true: false);
+    if (debug) {
+        console.log('ar', ar)
+    }
     let score = 0;
     let matches = 0;
     let exact_matches = 0;
@@ -107,12 +114,13 @@ const searchSeries = (needle) => {
 const searchRank = (processedSearchTerms, row) => {
     let searchRank = 0;
 
-    //console.log('terms', processedSearchTerms, 'row', row)
-
     processedSearchTerms.words.forEach(searchNeedle => {
         searchKeysConfig.forEach(searchConfig => {
             if (row[searchConfig.key]) {
-                searchRank += wordSearch(searchNeedle, row[searchConfig.key], searchConfig.multiplier).score;
+                if (searchConfig.key === 'search_terms') {
+                    console.log('row', row[searchConfig.key]);
+                }
+                searchRank += wordSearch(searchNeedle, row[searchConfig.key], searchConfig.multiplier, searchConfig.processMap).score;
             }
         })
     })
