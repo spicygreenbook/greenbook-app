@@ -42,7 +42,7 @@ function Page(props) {
                 </View>
                 <View style={[styles.section]}>
                     <View style={styles.content}>
-                        <RichText render={content._body} isWeb={isWeb} />
+                        <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'}/>
 
                         <Link style={{marginTop: 20}} button={'button_green'} href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer Form" />
 

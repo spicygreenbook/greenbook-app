@@ -5,6 +5,7 @@ import { getStyles, Theme } from '../utils';
 import { View, Text, StyleSheet, Image} from 'react-native';
 import { ResponsiveImage } from '../components/ResponsiveImage';
 import { Link } from "../components/Link"; 
+import { Entypo } from '@expo/vector-icons'; 
 
 function renderHTML(markup, spans) {
     let parts = {0: ''};
@@ -53,24 +54,27 @@ export function RichText(props) {
     let content = props.render;
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header3, text_header4, text_body, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header3, text_header4, text_body, text_body2, section, content', {isWeb}));
+
+    let body_style = props.markupStyle === 'fancy' ? styles.text_body2 : styles.text_body;
+    let bullet_header = props.markupStyle === 'fancy' ? ['heading3'] : [];
+    function header(part, key, ar) {
+        let h_level = part.type.replace('heading', '') * 1;
+        let aria_level = h_level <= 2 ? 2 : h_level <= 3 ? 3 : 4;
+        let text_style = h_level <= 2 ? styles.text_header3 : styles.text_header4;
+        return bullet_header.indexOf(part.type) > -1 ? (
+            <View key={key} style={{position: 'relative', marginBottom: 10}}>
+                <Text accessibilityRole="header" aria-level={aria_level} style={[text_style, {marginTop: 40}]}>- {' '}{' '}{part.text}</Text>
+                <View style={{position: 'absolute', left: 20, bottom: -4, width: 30, borderColor: Theme.green, borderBottomWidth: 2}} />
+            </View>
+        ) : (<Text key={key} accessibilityRole="header" aria-level={aria_level} style={[text_style, {marginTop: 40}]}>{part.text}</Text>)
+    }
 
     function part(part, key, ar) {
 
-        if (part.type === 'heading1') {
-            return (<Text key={key} accessibilityRole="header" aria-level="2" style={[styles.text_header3, {marginTop: 40}]}>{part.text}</Text>)
-        } else if (part.type === 'heading2') {
-            return (<Text key={key} accessibilityRole="header" aria-level="2" style={[styles.text_header3, {marginTop: 40}]}>{part.text}</Text>)
-        } else if (part.type === 'heading3') {
-            return (<Text key={key} accessibilityRole="header" aria-level="3" style={[styles.text_header4, {marginTop: 40}]}>{part.text}</Text>)
-        } else if (part.type === 'heading4') {
-            return (<Text key={key} accessibilityRole="header" aria-level="4" style={[styles.text_header4, {marginTop: 40}]}>{part.text}</Text>)
-        } else if (part.type === 'heading5') {
-            return (<Text key={key} accessibilityRole="header" aria-level="4" style={[styles.text_header4, {marginTop: 40}]}>{part.text}</Text>)
-        } else if (part.type === 'heading6') {
-            return (<Text key={key} accessibilityRole="header" aria-level="4" style={[styles.text_header4, {marginTop: 40}]}>{part.text}</Text>)
+        if (part.type.indexOf('heading') > -1) {
+            return header(part, key, ar)
         } else if (part.type === 'image') {
-            console.log('part', part)
             return (<ResponsiveImage 
                 cdn
                 key={key}
@@ -78,16 +82,16 @@ export function RichText(props) {
                 alt={part.alt || ''}
                 source={{uri:part.url}} />)
         } else if (part.type === 'paragraph') {
-            return (<Text key={key} style={[styles.text_body, {marginTop: 10, marginBottom: 10}]}>
+            return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
                 {renderHTML(part.text, part.spans)}
             </Text>)
         } else if (part.type === 'list-item') {
-            return (<Text key={key} style={[styles.text_body, {marginTop: 10, marginBottom: 10}]}>
-                <Text style={[styles.text_body]}>• </Text>
+            return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
+                {props.bullet === 'check' ? <Entypo name="check" size={24} color={Theme.green} style={{marginRight: 8}}/> : <Text style={[body_style]}>• </Text>}
                 {renderHTML(part.text, part.spans)}
             </Text>)
         } else if(part.text) {
-            return (<Text key={key} style={styles.text_body}>{part.text}</Text>)
+            return (<Text key={key} style={body_style}>{part.text}</Text>)
         } else {
             console.log('unhandled p[art', part);
             return <Text key={key} />

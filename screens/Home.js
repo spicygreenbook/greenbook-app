@@ -162,9 +162,7 @@ function Page(props) {
                                  
                                 Our mission is to establish a space to help people who seek to create change within their communities.
                             </Text>
-                            <Link href="/about" style={{marginTop: 40}}>
-                                <Text>Learn More</Text>
-                            </Link>
+                            <Link href="/about" style={{marginTop: 40}} button={'button_green'} title="Learn More" />
                         </View>
                     </View>
                 </View>

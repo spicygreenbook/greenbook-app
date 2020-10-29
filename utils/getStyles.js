@@ -139,17 +139,17 @@ const allStyles = {
     text_body: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: config.windowWidth < 900 ? 18 : 28,
-            lineHeight: config.windowWidth < 900 ? 22 : 36,
-            color: '#006233'
+            fontSize: config.windowWidth < 900 ? 20 : 28,
+            lineHeight: config.windowWidth < 900 ? 28 : 32,
+            color: '#000'
         }
     },
     text_body2: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: config.windowWidth < 900 ? 15 : 32,
-            lineHeight: config.windowWidth < 900 ? 20 : 42,
-            color: '#006233'
+            fontSize: config.windowWidth < 900 ? 14 : 22,
+            lineHeight: config.windowWidth < 900 ? 18 : 28,
+            color: '#000'
         }
     },
     text_body3: function(config) {

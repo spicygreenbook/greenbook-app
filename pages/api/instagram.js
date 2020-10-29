@@ -25,6 +25,7 @@ async function handler(req, res) {
             res.statusCode = 500;
             return res.json({error: error});
         } else {
+            res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Cache-Control', 'public, s-maxage=3600, maxage=3600, stale-while-revalidate');
             res.statusCode = 200;
             return res.json(response);
