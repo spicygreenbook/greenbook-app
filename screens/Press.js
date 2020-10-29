@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, I
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
-
+import { ResponsiveImage } from "../components/ResponsiveImage"
 
 function Page(props) {
 
@@ -80,7 +80,7 @@ function Page(props) {
                                         <Text style={styles.text_header4}>{item.title}</Text>
                                         <Text>{item.date}</Text>
                                         {item.image && item.image.url && 
-                                            <Image style={{maxWidth: '100%', width: item.image.width, height: item.image.height}} source={{uri: item.image.url + '&w=1200'}} />
+                                            <ResponsiveImage style={{maxWidth: '100%', width: item.image.width, height: item.image.height}} source={{uri: item.image.url + '&w=1200'}} />
                                         }
                                         {!!item.link &&
                                             <Link href={item.link}>
