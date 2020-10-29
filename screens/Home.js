@@ -243,13 +243,24 @@ function Page(props) {
                         <FlatList
                             horizontal={true}
                             data={updates}
-                            renderItem={({ item, index, separators }) => (
-                                <View style={{ margin: 10}} key={'update' + index}>
-                                    <Image source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
-                                    <Text style={styles.text_header4}>{item.title}</Text>
-                                    <Text>{item.date}</Text>
+                            renderItem={({ item, index, separators }) => {
+                                function Item() {
+                                    return <React.Fragment>
+                                        <View>
+                                            <Image source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
+                                        </View>
+                                        <View>
+                                            <Text style={styles.text_header4}>{item.title}</Text>
+                                        </View>
+                                        <View>
+                                            <Text>{item.date}</Text>
+                                        </View>
+                                    </React.Fragment>
+                                }
+                                return <View style={{ margin: 10, maxWidth: 300}} key={'update' + index}>
+                                    {item.link ? (<Link href={item.link}><Item /></Link>) : <Item />}
                                 </View>
-                            )}
+                            }}
                             keyExtractor={(item, index) => 'update' + index}
                         />
                     )}
