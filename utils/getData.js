@@ -206,7 +206,7 @@ async function getData(config) {
     } else if (config.type === 'press') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.press.date%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'instagram') {
-        url = `https://spicygreenbook.com/api/instagram`
+        url = typeof window !== 'undefined' && window.location && window.location.host.indexOf('localhost') > -1 ? `http://localhost:3000/api/instagram` : `https://spicygreenbook.com/api/instagram`
     }
     if (url) {
         let data = await fetch(url);
