@@ -7,6 +7,7 @@ import RichText from "../components/RichText";
 import { getStyles, Theme, getDataAsync, GridWidth, displayDate } from '../utils';
 import { Entypo } from '@expo/vector-icons'; 
 import Search from "../components/Search";
+import SGBMap from "../components/SGBMap";
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -230,7 +231,18 @@ function Page(props) {
                 )}
             </View>
 
-            <View style={[styles.section, {flex:1}]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0}]}>
+                <View style={[styles.content, {flex:1}]}>
+                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
+                        WHERE WE'RE AT
+                    </Text>
+
+                    <SGBMap style={{marginTop: -80}} />
+
+                </View>
+            </View>
+
+            <View style={[styles.section, {flex:1, paddingTop: 0}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES

@@ -56,7 +56,7 @@ function Page(props) {
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>
                 </View>
-                <View style={[styles.section]}>
+                <View style={[styles.section, {paddingBottom: 0}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
