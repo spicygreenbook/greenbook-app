@@ -180,7 +180,7 @@ function Page(props) {
                             showsHorizontalScrollIndicator={false}
                             data={Listings.sort((a,b) => {
                                     return a.time - b.time
-                                }).slice(0,10)
+                                }).filter(item => item.images && item.images[0] && item.images[0].image).slice(0,10)
                             }
                             ref={(ref) => { newListingRef = ref; }}
                             onViewableItemsChanged={viewableItemsChangedListing}
@@ -242,7 +242,7 @@ function Page(props) {
                     ) : (
                         <FlatList
                             horizontal={true}
-                            data={updates}
+                            data={updates.filter(item => item.image)}
                             renderItem={({ item, index, separators }) => {
                                 function Item() {
                                     return <React.Fragment>

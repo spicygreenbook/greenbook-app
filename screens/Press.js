@@ -47,6 +47,10 @@ function Page(props) {
         }
     }, [])
 
+    let numColumns = dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 3
+
+    let hasBody = content.body && content.body.join('');
+
     return (
         <React.Fragment>
         { pageLoading ?
@@ -60,11 +64,11 @@ function Page(props) {
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>
                 </View>
-                <View style={[styles.section]}>
+                {!!hasBody && <View style={[styles.section]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
-                </View>
+                </View>}
                 <View style={[styles.section]}>
                     <View style={styles.content}>
                         {loadingPress ? (
@@ -73,18 +77,34 @@ function Page(props) {
                             <Text>{errorPress}</Text>
                         ) : (
                             <FlatList
+                                key={'cols' + numColumns}
                                 data={press}
-                                ItemSeparatorComponent={highlighted => <View style={{paddingTop: 80}}></View>}
+                                numColumns={numColumns}
                                 renderItem={({ item, index, separators }) => (
-                                    <View key={'press' + index}>
-                                        <Text style={styles.text_header4}>{item.title}</Text>
-                                        <Text>{item.date}</Text>
+                                    <View key={'press' + index} style={{flex: 1/numColumns, margin: 10, borderTopWidth: 2, borderColor: Theme.green,
+                                        shadowColor: "#000",
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 3,
+                                        },
+                                        shadowOpacity: 0.27,
+                                        shadowRadius: 4.65,
+
+                                        elevation: 6,
+                                    }}
+                                    >
+                                        <View style={{padding: 20}}>
+                                            <Text style={[styles.text_header4]}>{item.title}</Text>
+                                            <Text>{item.date}</Text>
+                                        </View>
                                         {item.image && item.image.url && 
                                             <ResponsiveImage style={{maxWidth: '100%', width: item.image.width, height: item.image.height}} source={{uri: item.image.url + '&w=1200'}} />
                                         }
                                         {!!item.link &&
                                             <Link href={item.link}>
-                                                {item.action_text}
+                                                <View>
+                                                    <Text style={[styles.text_header4, {padding: 20}]}>{item.action_text} &gt;</Text>
+                                                </View>
                                             </Link>
                                         }
                                     </View>
