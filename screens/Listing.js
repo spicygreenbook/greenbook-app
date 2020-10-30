@@ -40,7 +40,19 @@ function Page(props) {
         dispatch({type: 'lightbox', value: true})
     }
 
-    console.log('render')
+    let primaryImages = content ? content.images.map(_image => {
+        let image = _image.image;
+        console.log('image', image)
+        image.ratio = image.height / image.width;
+        let ratioScore = Math.round(Math.abs(0.56 - image.ratio) * 1.3);
+        image.imageScore = ratioScore
+        return image
+    }).sort((a, b) => {
+        return a.imageScore - b.imageScore
+    }) : []
+    primaryImages.forEach((image, i) => {
+        console.log('i', i, 'score', image.imageScore, 'ratio', image.ratio, 'widthxh', image.width, image.height)
+    })
 
     return (
         <React.Fragment>
@@ -54,18 +66,18 @@ function Page(props) {
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>
-                            <Image source={{uri: content.images[0].image.url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602}} resizeMode="cover" />
+                            <Image source={{uri: primaryImages[0].url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602}} resizeMode="cover" />
                         </TouchableOpacity>
                     </View>
                     <View style={{flex: 1}}>
                         <View style={{flex: 1, borderBottomWidth: 2, borderColor: '#fff'}}>
                             <TouchableOpacity onPress={e => clickImage(1)}>
-                                <Image source={{uri: content.images[1].image.url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
+                                <Image source={{uri: primaryImages[1].url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                             </TouchableOpacity>
                         </View>
                         <View style={{flex: 1}}>
                             <TouchableOpacity onPress={e => clickImage(2)}>
-                                <Image source={{uri: content.images[2].image.url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
+                                <Image source={{uri: primaryImages[2].url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                             </TouchableOpacity>
                         </View>
                     </View>
