@@ -8,6 +8,26 @@ import ListItem from "../components/ListItem";
 import Map from "../components/Map";
 import Search from "../components/Search";
 
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 const searchKeysConfig = [
     {key: 'name', multiplier: 10},
     {key: 'address', multiplier: 1},
@@ -256,7 +276,11 @@ function Page(props) {
             console.log('gettingGeo', gettingGeo, 'listings', listings)
             if (!gettingGeo && listings) {
                 console.log('listings is', listings)
-                setFilteredList(listings.filter(filter).sort(sortDistance).sort(sortSearchRank));
+                let _listings = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+                if (!query && !location) {
+                    shuffle(_listings); // randomize output
+                }
+                setFilteredList(_listings);
                 setPageLoading(false);
             }
         },
