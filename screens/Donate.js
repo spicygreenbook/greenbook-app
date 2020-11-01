@@ -41,9 +41,11 @@ function Page(props) {
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>
                 </View>
-                <View style={[styles.section]}>
+
+                <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
+                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.com/donate'} button={'button_green'} title="Go To Donation Form" />}
                     </View>
                     {isWeb && <View style={styles.content}>
                         <Stripe form="donate" />

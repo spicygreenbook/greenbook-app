@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
-
+import { WebView } from 'react-native-webview';
 
 function Page(props) {
 
@@ -56,17 +56,18 @@ function Page(props) {
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>
                 </View>
-                <View style={[styles.section, {paddingBottom: 0}]}>
+                <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
+                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.com/add'} button={'button_green'} title="Go To Add Listing Form" />}
                     </View>
                 </View>
-                {isWeb && <View style={[styles.section]}>
+                {isWeb && (<View style={[styles.section]}>
                     <View style={styles.content}>
                         <div class="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
                         <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
                     </View>
-                </View>}
+                </View>)}
             </React.Fragment>
         )}
         </React.Fragment>

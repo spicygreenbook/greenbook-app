@@ -1,13 +1,13 @@
 import React from 'react';
-import { WebView } from 'react-native-webview';
 import { useStateValue } from "../components/State";
 import { getStyles, Theme } from '../utils';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, Linking} from 'react-native';
 import { ResponsiveImage } from '../components/ResponsiveImage';
 import { Link } from "../components/Link"; 
 import { Entypo } from '@expo/vector-icons'; 
 
-function renderHTML(markup, spans) {
+
+function renderHTML(markup, spans, isWeb, dispatch) {
     let parts = {0: ''};
     let segment = 0;
     let i = 0;
@@ -31,23 +31,27 @@ function renderHTML(markup, spans) {
         parts[segment] += '' + (markup[i] || '');
     }
 
-    return Object.keys(parts).map((part, i) => (
-
-        segment_map[i].type === 'hyperlink' ? 
-            <Link href={segment_map[i].data.value.url} key={'subpart' + i} style={
-                segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
-                :
-                {}
-            }>
-                <Text>{parts[part] || ''}</Text>
-            </Link>
-        : <Text key={'subpart' + i} style={
+    return Object.keys(parts).map((part, i) => {
+        console.log(parts[part]);
+        return segment_map[i].type === 'hyperlink' ? (<Text onPress={e => {
+            const url = (segment_map[i].data.value.url || '');
+            const external = url.slice(0,1) !== '/';
+            if (!external) {
+                dispatch({type: 'setView', view: url})
+            } else {
+                Linking.openURL(url)
+            }
+        }} style={
+                    segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {}
+                }>{parts[part] || ''}</Text>
+        ) : (<Text key={'subpart' + i} style={
             segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
             :
             {}
         }>
             {parts[part] || ''}
-        </Text>))
+        </Text>)
+    })
 }
 
 export function RichText(props) {
@@ -72,7 +76,7 @@ export function RichText(props) {
 
     function part(part, key, ar) {
 
-        if (part.type.indexOf('heading') > -1) {
+        if (part.type.indexOf('heading') > -1 && part.text) {
             return header(part, key, ar)
         } else if (part.type === 'image') {
             return (<ResponsiveImage 
@@ -83,18 +87,19 @@ export function RichText(props) {
                 source={{uri:part.url}} />)
         } else if (part.type === 'paragraph') {
             return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
-                {renderHTML(part.text, part.spans)}
+                {renderHTML(part.text, part.spans, isWeb, dispatch)}
             </Text>)
         } else if (part.type === 'list-item') {
             return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
                 {props.bullet === 'check' ? <Entypo name="check" size={24} color={Theme.green} style={{marginRight: 8}}/> : <Text style={[body_style]}>• </Text>}
-                {renderHTML(part.text, part.spans)}
+                {renderHTML(part.text, part.spans, isWeb, dispatch)}
             </Text>)
         } else if(part.text) {
             return (<Text key={key} style={body_style}>{part.text}</Text>)
         } else {
             console.log('unhandled p[art', part);
-            return <Text key={key} />
+            return (null);
+            //return <Text key={key} />
         }
         
     }
@@ -102,6 +107,6 @@ export function RichText(props) {
     if (content && Array.isArray(content.value)){
         use = content.value;
     }
-    return (<React.Fragment>{use && use.map(part)}</React.Fragment>)
+    return (<React.Fragment>{!!use && use.map(part)}</React.Fragment>)
 }
  

@@ -86,10 +86,7 @@ function Page(props) {
                                             <Text>{item.date}</Text>
                                             <RichText render={item._body} isWeb={isWeb} />
 
-                                            {!!item.action_text && <Link href={item.link}>
-                                                    {item.action_text}
-                                                </Link>
-                                            }
+                                            {!!item.action_text && !!item.link && <Link href={item.link} button={'button_green'} title={item.action_text} />}
 
                                             {!!(item.attribution && item.attribution.length) && <Attribution attribution={item.attribution} />}
                                         </View>

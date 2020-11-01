@@ -225,6 +225,17 @@ const allStyles = {
             color: '#fff'
         }
     },
+    button_link: function(config) {
+        return {}
+    },
+    button_link_text: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: 12,
+            lineHeight: 15,
+            color: Theme.green
+        }
+    },
     text_menu: function(config) {
         return {
             textTransform: 'capitalize',

@@ -25,11 +25,13 @@ export function Link(props) {
     if (props.button) {
         const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
         return isWeb && !external ? <NextLink href={props.href || ''}>
-            <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
-                <View style={styles[props.button]}>
-                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
+            <a href={props.href} style={{textDecoration: 'none'}}>
+                <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
+                    <View style={styles[props.button]}>
+                        <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                    </View>
                 </View>
-            </View>
+            </a>
         </NextLink>
         : isWeb && external ? <a href={props.href || ''} target="_blank" style={{textDecoration: 'none'}}>
             <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
@@ -39,17 +41,14 @@ export function Link(props) {
             </View>
         </a>
         : 
-        <TouchableOpacity onPress={handleURL}>
+        <TouchableOpacity onPress={handleURLFully}>
             <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
                 <View style={styles[props.button]}>
                     <Text style={styles[props.button + '_text']}>{props.title}</Text>
                 </View>
             </View>
         </TouchableOpacity>
-    }
-
-
-    if (props.children) {
+    } else if (props.children) {
         if (isWeb) {
             let more = props.fill ? {height: '100%'} : {}
             return !external ? 
@@ -62,21 +61,18 @@ export function Link(props) {
                 {props.children}
             </a>
         } else {
-            return !external ? 
-                <TouchableOpacity onPress={handleURL}>{props.children}</TouchableOpacity>
-                :
-                <TouchableOpacity onPress={() => Linking.openURL(props.href)}>{props.children}</TouchableOpacity>
+            return <View>{props.children}</View>
         }
     }
 
     return (
         isWeb ? <NextLink href={props.href || ''}>
-            <a href={props.href || ''} onClick={handleURL}>
+            <a href={props.href || ''} onClick={handleURLFully}>
                 {props.title}
             </a>
         </NextLink>
         : 
-        <Button title={props.title || 'asdf'} color={Theme.green} onPress={handleURL} {...props} />
+        <Button title={props.title || ''} color={Theme.green} onPress={handleURLFully} {...props} />
     )
 
 }
