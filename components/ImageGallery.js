@@ -8,8 +8,8 @@ import { responsiveImageWidthCDN } from '../utils';
 
 let currentIndexImage = 0;
 const viewableItemsChangedImage = ({ viewableItems, changed }) => {
-    console.log("Visible items are", viewableItems);
-    console.log("Changed in this iteration", changed);
+    //console.log("Visible items are", viewableItems);
+    //console.log("Changed in this iteration", changed);
     currentIndexImage = viewableItems && viewableItems[0] && viewableItems[0].index;
 }
 const viewableItemsChangedConfigImage = {

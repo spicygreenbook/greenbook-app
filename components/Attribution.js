@@ -8,7 +8,6 @@ import { FontAwesome } from '@expo/vector-icons';
 
 function Attribution(props) {
 
-    console.log('attr props', props)
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_body2', {isWeb}));
 

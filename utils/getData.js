@@ -129,7 +129,7 @@ async function getContent(config) {
             })
         } else if (config.uid && doc.uid === config.uid) {
             content.uid = doc.uid;
-            console.log('doc', doc)
+            //console.log('doc', doc)
             Object.keys(doc.data[config.type]).forEach(key => {
                 if (doc.data[config.type][key].type === 'Group') {
                     content[key] = getPrismicGroupAdvanced(doc.data[config.type][key]);
@@ -157,9 +157,9 @@ async function getContent(config) {
                     return item && item.attribution_name && item.attribution_name.trim()
                 })
                 content.attribution = attribution;
-                console.log('updated attr')
+                //console.log('updated attr')
             } else {
-                console.log('didnt even touch attribution');
+                //console.log('didnt even touch attribution');
             }
         }
     })

@@ -11,8 +11,8 @@ import SGBMap from "../components/SGBMap";
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
-    console.log("Visible items are", viewableItems);
-    console.log("Changed in this iteration", changed);
+    //console.log("Visible items are", viewableItems);
+    //console.log("Changed in this iteration", changed);
     currentIndexListing = viewableItems && viewableItems[0] && viewableItems[0].index;
 }
 const viewableItemsChangedConfigListing = {

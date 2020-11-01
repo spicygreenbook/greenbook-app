@@ -199,7 +199,7 @@ function Page(props) {
 
     const [{ view, isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header3, section, content', {isWeb}));
-    console.log('page props', props)
+    //console.log('page props', props)
 
     let qs = searchConfig;
 

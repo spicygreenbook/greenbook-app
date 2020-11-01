@@ -46,7 +46,7 @@ export default function(props) {
     }];
 
     return (
-        <View style={{flexDirection: 'column', position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, height: '100%', zIndex: 10, backgroundColor: Theme.green_bg}}>
+        <View style={{flexDirection: 'column', position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, height: '100%', zIndex: 10, paddingTop: isWeb ? 0 : 40, backgroundColor: Theme.green_bg}}>
             <View style={{position: 'absolute', left: 10, top: isWeb ? 10 : 60, zIndex: 10}}>
                 <TouchableOpacity onPress={(e) => {
                     dispatch({type: 'menuOpen', value: false})
@@ -55,12 +55,15 @@ export default function(props) {
                 </TouchableOpacity>
             </View>
             {menu.map((item, i) => (
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View key={'nav' + i} style={{flex: 1, flexDirection: 'row'}}>
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', borderColor: '#fff', borderBottomWidth: 2}}>
                         <TouchableOpacity onPress={e => {
+                            console.log('item', item)
                             dispatch({type: 'menuOpen', value: false})
                             dispatch({type: 'setView', view: item.href || ''})
-                            router.push(item.href)
+                            if (isWeb) {
+                                router.push(item.href)
+                            }
                         }}>
                             <Text style={styles.text_menu}>{item.title}</Text>
                         </TouchableOpacity>
