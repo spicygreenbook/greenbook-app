@@ -3,12 +3,20 @@
     "name": "Spicy Green Book",
     "slug": "spicygreenbook",
     "version": "0.2.1",
-    "icon": "./public/images/apple-touch-icon.png",
+    "icon": "./public/icon.png",
     "splash": {
-    "orientation": "portrait",
-      "image": "./public/images/iOS/LaunchImage.launchimage/LaunchImage.png",
+      "orientation": "portrait",
+      "image": "./public/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#000"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.spicygreenbook.app"
+    },
+    "android": {
+      "package": "com.spicygreenbook.app",
+      "versionCode": 1
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -16,11 +24,8 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "web": {
-      "favicon": "./public/images/apple-touch-icon.png"
+      "favicon": "./public/apple-touch-icon.png"
     }
   }
 }
