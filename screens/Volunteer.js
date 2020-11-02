@@ -40,14 +40,14 @@ function Page(props) {
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>
                 </View>
-                <View style={[styles.section, {paddingBottom: 0}]}>
+                <View style={[styles.section, {paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'}/>
                     </View>
                 </View>
                 <View style={[styles.section]}>
                     <View style={styles.content}>
-                        <View style={[{flex: 1, backgroundColor: '#000', width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
+                        <View style={[{flex: 1, backgroundColor: '#000', width: '100%', flexDirection: dimensions.width < 900 ? 'column': 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
                             <View style={{flex: 3, padding: 20}}>
                                 <Text style={[styles.text_header4, {color: '#fff'}]}>
                                     The biggest impact we can all have is by getting as many people as possible to patron a business that we have listed.
