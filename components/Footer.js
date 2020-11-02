@@ -12,7 +12,7 @@ export default function(props) {
     const styles = StyleSheet.create(getStyles('content, footer, text_footer, text_header3', {isWeb, theme}));
 
     return (
-        <View style={styles.footer}>
+        <View className="footer" style={styles.footer}>
             <View style={{flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2}}>
                 <View style={[dimensions.width < 700 ? {} : {flexDirection: 'row'}, {flex:1, width: 1024, maxWidth: '100%'}]}>
                     <View style={{flex: 3, justifyContent: dimensions.width < 700 ? 'space-around' : 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: dimensions.width < 700 ? 0 : 2, paddingTop: 40, paddingBottom:40, paddingRight: dimensions.width < 700 ? 0 : 40, paddingLeft: dimensions.width < 700 ? 0 : dimensions.width < 1080 ? 20 : 0}}>
@@ -56,7 +56,7 @@ export default function(props) {
                     </View>
                 </View>
                 {isWeb && <div style={{marginBottom: 40}}>
-                    <div style={{marginTop: 20}}>
+                    <div style={{marginTop: 20, marginBottom: 20}}>
                         <a href="https://vercel.com/?utm_source=spicygreenbook" style={{color: 'inherit', textDecoration: 'none'}} target="_blank">
                             <span style={{display:'inline-block', verticalAlign: 'middle', lineHeight: '50%', fontFamily: 'ApercuMedium', color: '#fff'}}>Powered By</span>
                             {' '}

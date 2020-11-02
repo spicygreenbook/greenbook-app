@@ -32,7 +32,7 @@ function renderHTML(markup, spans, isWeb, dispatch) {
     }
 
     return Object.keys(parts).map((part, i) => {
-        console.log(parts[part]);
+        //console.log(parts[part]);
         return segment_map[i].type === 'hyperlink' ? (<Text onPress={e => {
             const url = (segment_map[i].data.value.url || '');
             const external = url.slice(0,1) !== '/';
@@ -58,18 +58,18 @@ export function RichText(props) {
     let content = props.render;
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header3, text_header4, text_body, text_body2, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header3, text_header4, text_header6, text_body, text_body2, section, content', {isWeb}));
 
     let body_style = props.markupStyle === 'fancy' ? styles.text_body2 : styles.text_body;
     let bullet_header = props.markupStyle === 'fancy' ? ['heading3'] : [];
     function header(part, key, ar) {
         let h_level = part.type.replace('heading', '') * 1;
-        let aria_level = h_level <= 2 ? 2 : h_level <= 3 ? 3 : 4;
-        let text_style = h_level <= 2 ? styles.text_header3 : styles.text_header4;
+        let aria_level = h_level <= 2 ? 2 : h_level <= 3 ? 3 : h_level >= 6 ? 6 : 4;
+        let text_style = h_level <= 3 ? styles.text_header3 : h_level >= 6 ? styles.text_header6 : styles.text_header4;
         return bullet_header.indexOf(part.type) > -1 ? (
             <View key={key} style={{position: 'relative', marginBottom: 10}}>
                 <Text accessibilityRole="header" aria-level={aria_level} style={[text_style, {marginTop: 40}]}>- {' '}{' '}{part.text}</Text>
-                <View style={{position: 'absolute', left: 20, bottom: -4, width: 30, borderColor: Theme.green, borderBottomWidth: 2}} />
+                <View style={{position: 'absolute', left: 26, bottom: dimensions.width < 900 ? -10 : 0, width: 30, borderColor: Theme.green, borderBottomWidth: 2}} />
             </View>
         ) : (<Text key={key} accessibilityRole="header" aria-level={aria_level} style={[text_style, {marginTop: 40}]}>{part.text}</Text>)
     }

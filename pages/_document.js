@@ -17,6 +17,7 @@ export default class MyDocument extends Document {
             <link rel="preconnect" href="https://www.google-analytics.com" />
             <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
             <link rel="manifest" href="site.webmanifest" />
+            <link href="/site.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />

@@ -80,7 +80,7 @@ const allStyles = {
     text_nav: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: 12,
+            fontSize: 18,
             textTransform: 'uppercase',
             color: config.theme === 'light' ? theme.green : '#fff'
         }
@@ -88,7 +88,7 @@ const allStyles = {
     text_nav_sub: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: 12,
+            fontSize: 16,
             textTransform: 'uppercase',
             color: theme.green
         }
@@ -96,14 +96,15 @@ const allStyles = {
     text_footer: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: 12,
+            fontSize: config.windowWidth < 600 ? 12 : 18,
+            textTransform: 'uppercase',
             color: '#fff'
         }
     },
     text_header: function(config) {
         return {
             fontFamily: 'KnockoutBold',
-            fontSize: config.windowWidth < 900 ? 22 : 75,
+            fontSize: config.windowWidth < 900 ? 45 : 75,
             lineHeight: config.windowWidth < 900 ? 26 : 90,
             textTransform: 'uppercase',
             color: '#006233'
@@ -121,7 +122,7 @@ const allStyles = {
     text_header3: function(config) {
         return {
             fontFamily: 'KnockoutFeatherWeight',
-            fontSize: config.windowWidth < 900 ? 22 : 55,
+            fontSize: config.windowWidth < 900 ? 38 : 45,
             lineHeight: config.windowWidth < 900 ? 26 : 66,
             textTransform: 'uppercase',
             color: '#006233'
@@ -136,20 +137,28 @@ const allStyles = {
             color: '#006233'
         }
     },
+    text_header6: function(config) {
+        return {
+            fontFamily: 'ApercuMedium',
+            fontSize: config.windowWidth < 900 ? 20 : 24,
+            lineHeight: config.windowWidth < 900 ? 28 : 32,
+            color: '#000'
+        }
+    },
     text_body: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: config.windowWidth < 900 ? 20 : 28,
+            fontSize: config.windowWidth < 900 ? 20 : 24,
             lineHeight: config.windowWidth < 900 ? 28 : 32,
-            color: '#000'
+            color: '#606060'
         }
     },
     text_body2: function(config) {
         return {
             fontFamily: 'ApercuMedium',
-            fontSize: config.windowWidth < 900 ? 14 : 22,
-            lineHeight: config.windowWidth < 900 ? 18 : 28,
-            color: '#000'
+            fontSize: config.windowWidth < 900 ? 16 : 22,
+            lineHeight: config.windowWidth < 900 ? 20 : 28,
+            color: '#606060'
         }
     },
     text_body3: function(config) {
@@ -199,7 +208,7 @@ const allStyles = {
         return {
             textTransform: 'uppercase',
             fontFamily: 'ApercuMedium',
-            fontSize: 12,
+            fontSize: 16,
             lineHeight: 15,
             color: '#fff'
         }
@@ -220,7 +229,7 @@ const allStyles = {
         return {
             textTransform: 'uppercase',
             fontFamily: 'ApercuMedium',
-            fontSize: 12,
+            fontSize: 16,
             lineHeight: 15,
             color: '#fff'
         }

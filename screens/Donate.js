@@ -42,7 +42,7 @@ function Page(props) {
                     </View>
                 </View>
 
-                <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
+                <View style={[styles.section]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                         {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.com/donate'} button={'button_green'} title="Go To Donation Form" />}

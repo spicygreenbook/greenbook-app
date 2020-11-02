@@ -158,7 +158,7 @@ function Page(props) {
                         </View>
                         <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
                             <Text accessibilityRole="header" aria-level="2" style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
-                            <Text style={styles.text_body}>
+                            <Text style={[styles.text_body, {color: '#000'}]}>
                                 Inspired by Victor Green, Spicy Green Book is a team of volunteers committed to help compile a directory of black owned businesses.
                                  
                                 Our mission is to establish a space to help people who seek to create change within their communities.
@@ -313,7 +313,7 @@ function Page(props) {
                         </Text>
                     </View>
                     <View style={dimensions.width < 800 ? {} : {flexDirection: 'row'}}>
-                        <View style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
+                        <View className="homeLinks" style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
                             <Link href="/add">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View style={{flex: 1, width: 72, height: 45}}>

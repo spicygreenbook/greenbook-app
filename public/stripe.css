@@ -37,7 +37,7 @@
     font-weight: bold;
 }
 .amount_selected {
-    background-color: #B56230;
+    background-color: #006633;
     color: #fff;
 }
 
@@ -48,6 +48,13 @@
 }
 
 .button {
+    border: none;
+    background-color: #006633;
+    color: #fff;
+    font-family: ApercuMedium;
+    font-size: 16px;
+    padding: 20px 30px;
+    text-transform: uppercase;
 
 }
 button.button[sending="1"] {

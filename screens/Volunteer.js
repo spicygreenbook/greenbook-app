@@ -9,7 +9,7 @@ import { getStyles, Theme, getContent } from '../utils';
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, text_header4, section, content', {isWeb}));
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -40,12 +40,25 @@ function Page(props) {
                         <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
                     </View>
                 </View>
-                <View style={[styles.section]}>
+                <View style={[styles.section, {paddingBottom: 0}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'}/>
-
-                        <Link style={{marginTop: 20}} button={'button_green'} href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer Form" />
-
+                    </View>
+                </View>
+                <View style={[styles.section]}>
+                    <View style={styles.content}>
+                        <View style={[{flex: 1, backgroundColor: '#000', width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
+                            <View style={{flex: 3, padding: 20}}>
+                                <Text style={[styles.text_header4, {color: '#fff'}]}>
+                                    The biggest impact we can all have is by getting as many people as possible to patron a business that we have listed.
+                                </Text>
+                            </View>
+                            <View style={{flex: 1, padding: 20, justifyContent: 'flex-end'}}>
+                                <View style={{flex: 1}}>
+                                    <Link button={'button_green'} href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer Form" />
+                                </View>
+                            </View>
+                        </View>
                     </View>
                 </View>
             </React.Fragment>
