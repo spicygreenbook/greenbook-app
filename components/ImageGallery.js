@@ -63,7 +63,7 @@ export default function(props) {
         }, 10)
     }, [])
 
-    return <View style={{position: 'absolute', left: 0, top:0, bottom:0, right:0, backgroundColor: Theme.green, zIndex: 6}}>
+    return <View style={{position: 'absolute', left: 0, top:0, bottom:0, right:0, backgroundColor: '#000', zIndex: 6}}>
         <View style={{position: 'absolute', top: 0, left: 0, right:0, height: '80%'}}>
             <FlatList
                 horizontal

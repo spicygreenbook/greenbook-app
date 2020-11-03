@@ -61,7 +61,7 @@ export function Link(props) {
                 {props.children}
             </a>
         } else {
-            return <View>{props.children}</View>
+            return <TouchableOpacity onPress={handleURLFully}><View>{props.children}</View></TouchableOpacity>
         }
     }
 

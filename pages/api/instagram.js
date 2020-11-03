@@ -84,8 +84,9 @@ async function handler(req, res) {
                     });
 
                 } else {
-                    error = 'Invalid json from instagram sadly';
-                    return handleFinal();
+                    return handleFinal(JSON.parse(data.Item.value));
+                    //error = 'Invalid json from instagram sadly';
+                    //return handleFinal();
                 }
             }
         }
