@@ -91,7 +91,7 @@ const getPrismicValue = (ref, key) => {
     return '';
 }
 
-async function getContent(config) {
+export async function getContent(config) {
     if (!config){ config = {}; }
     if (config.ref_id) {
         console.log('using custom master ref', config.ref_id)
@@ -178,7 +178,7 @@ async function getContent(config) {
     }
 }
 
-async function getData(config) {
+export async function getData(config) {
     if (!config){ config = {}; }
     if (!config.limit) {config.limit = 100}
     if (config.ref_id) {
@@ -275,18 +275,17 @@ async function getData(config) {
     return rows
 }
 
-async function getAllData(config) {
+export async function getAllData(config) {
     let types = ['listing', 'updates', 'press', 'staff', 'instagram'];
     let ret = {};
     types.forEach(type => {
         /*ret[type] = async getData({
             type: type
         })*/
-
     })
 }
 
-const getDataAsync = (config) => {
+export const getDataAsync = (config) => {
     return new Promise(async (resolve, reject) => {
         try {
             let ret = await getData(config);
@@ -295,12 +294,4 @@ const getDataAsync = (config) => {
             reject(e);
         }
     })
-}
-
-
-module.exports = {
-    getDataAsync: getDataAsync,
-    getData: getData,
-    getAllData: getAllData,
-    getContent: getContent,
 }
