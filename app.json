@@ -2,7 +2,7 @@
   "expo": {
     "name": "Spicy Green Book",
     "slug": "spicygreenbook",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "icon": "./public/icon.png",
     "splash": {
       "orientation": "portrait",
