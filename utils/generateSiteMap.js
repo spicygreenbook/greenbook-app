@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-async function generateSiteMap(data) {
+async function generateSiteMap(listings) {
 
     let paths = []
     try {
@@ -37,7 +37,7 @@ async function generateSiteMap(data) {
 </url>
 `;
     })
-    data.listings.forEach(item => {
+    listings.forEach(item => {
         urls += `
 <url>
     <loc>https://spicygreenbook.com/biz/${item._slug}</loc>
