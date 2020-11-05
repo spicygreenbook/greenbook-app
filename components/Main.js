@@ -10,6 +10,7 @@ import About from '../screens/About';
 import AddListing from '../screens/AddListing';
 import Volunteer from '../screens/Volunteer';
 import Contact from '../screens/Contact';
+import Privacy from '../screens/Privacy';
 import Process from '../screens/Process';
 import Updates from '../screens/Updates';
 import Press from '../screens/Press';
@@ -115,6 +116,7 @@ function Main(props) {
       return (
           view === '/about' ? <About {...props} />
           : view === '/updates' ? <Updates {...props} />
+          : view === '/privacy' ? <Privacy {...props} />
           : view === '/press' ? <Press {...props} />
           : view === '/team' ? <Team {...props} />
           : view === '/process' ? <Process {...props} />

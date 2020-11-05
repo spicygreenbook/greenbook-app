@@ -105,7 +105,7 @@ const allStyles = {
         return {
             fontFamily: 'KnockoutBold',
             fontSize: config.windowWidth < 900 ? 45 : 75,
-            lineHeight: config.windowWidth < 900 ? 26 : 90,
+            lineHeight: config.windowWidth < 900 ? 46 : 90,
             textTransform: 'uppercase',
             color: '#006233'
         }
@@ -123,7 +123,7 @@ const allStyles = {
         return {
             fontFamily: 'KnockoutFeatherWeight',
             fontSize: config.windowWidth < 900 ? 38 : 45,
-            lineHeight: config.windowWidth < 900 ? 26 : 66,
+            lineHeight: config.windowWidth < 900 ? 38 : 66,
             textTransform: 'uppercase',
             color: '#006233'
         }

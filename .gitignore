@@ -23,3 +23,5 @@ yarn-error.log*
 .env*
 
 .next
+public/sitemap.xml
+.expo-shared
