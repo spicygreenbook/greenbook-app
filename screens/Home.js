@@ -117,7 +117,7 @@ function Page(props) {
                     <View style={[styles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={styles.text_hero}>
                             Support{"\n"}
-                            Black Owned{"\n"}
+                            Black-Owned{"\n"}
                             Businesses
                         </Text>
                         <View style={{marginTop: 40, flexDirection: 'row', justifyContent: dimensions.width < 900 ? 'flex-start': 'center'}}>
