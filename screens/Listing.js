@@ -40,7 +40,7 @@ function Page(props) {
         dispatch({type: 'lightbox', value: true})
     }
 
-    let primaryImages = content ? content.images.map(_image => {
+    let primaryImages = content ? content.images.filter(_image => _image.image).map(_image => {
         let image = _image.image;
         console.log('image', image)
         image.ratio = image.height / image.width;

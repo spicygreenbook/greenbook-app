@@ -6,6 +6,9 @@ import { useStateValue } from "../components/State";
 import { AntDesign } from '@expo/vector-icons'; 
 import { Link, Click } from '../components/Link';
 
+let menuIsClicked;
+let menuIsClickedTimer;
+
 export default function(props) {
 
     const [{ view, isWeb, theme, dimensions, menuOpen }, dispatch] = useStateValue();
@@ -26,12 +29,24 @@ export default function(props) {
             }
         }
     }
+    function clickEventListener() {
+        if (window && document) {
+            setTimeout(() => {
+                if (!menuIsClicked) {
+                    console.log('menu is clicked 3 ', menuIsClicked)
+                    //setActive('');
+                }
+            }, 100)
+        }
+    }
 
     if (isWeb) {
         useEffect(() => {
             window.addEventListener('scroll', scrollEventListener, false)
+            window.addEventListener('click', clickEventListener, false);
             return () => {
                 window.removeEventListener('scroll', scrollEventListener, false)
+                window.removeEventListener('click', clickEventListener, false);
             }
         })
     }
@@ -127,7 +142,17 @@ export default function(props) {
                                 }}/>
                             </View>
                             <View style={{position: 'absolute', top: 60, right: 0, backgroundColor: '#fff', minWidth: 160, padding: 20,
-                                opacity:active === 'about' ? 1 : 0, display:active === 'about' ? '' : 'none'}}>
+                                opacity:active === 'about' ? 1 : 0, display:active === 'about' ? '' : 'none'}} onPress={e => {
+                                    if (isWeb) {
+                                        clearTimeout(menuIsClickedTimer);
+                                        menuIsClicked = true;
+                                        console.log('menu is clicked 1 ', menuIsClicked)
+                                        menuIsClickedTimer = setTimeout(() => {
+                                            menuIsClicked = false;
+                                            console.log('menu is clicked 2 ', menuIsClicked)
+                                        }, 500)
+                                    }
+                                }}>
                                 <View style={{flex: 1, flexDirection: 'row', paddingBottom: 10}}>
                                     <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>
                                 </View>
