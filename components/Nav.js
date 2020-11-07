@@ -34,7 +34,7 @@ export default function(props) {
             setTimeout(() => {
                 if (!menuIsClicked) {
                     console.log('menu is clicked 3 ', menuIsClicked)
-                    //setActive('');
+                    setActive('');
                 }
             }, 100)
         }
@@ -139,6 +139,13 @@ export default function(props) {
                                 <Link href="/about"><Text style={styles.text_nav}>About</Text></Link>
                                 <AntDesign name="down" size={22} color={props.theme === 'light' ? Theme.green : '#fff'} style={{cursor: 'pointer', marginLeft: 10}} onClick={e => {
                                     setActive(active === 'about' ? '' : 'about');
+                                    if (isWeb) {
+                                        clearTimeout(menuIsClickedTimer);
+                                        menuIsClicked = true;
+                                        menuIsClickedTimer = setTimeout(() => {
+                                            menuIsClicked = false;
+                                        }, 500)
+                                    }
                                 }}/>
                             </View>
                             <View style={{position: 'absolute', top: 60, right: 0, backgroundColor: '#fff', minWidth: 160, padding: 20,
@@ -146,10 +153,8 @@ export default function(props) {
                                     if (isWeb) {
                                         clearTimeout(menuIsClickedTimer);
                                         menuIsClicked = true;
-                                        console.log('menu is clicked 1 ', menuIsClicked)
                                         menuIsClickedTimer = setTimeout(() => {
                                             menuIsClicked = false;
-                                            console.log('menu is clicked 2 ', menuIsClicked)
                                         }, 500)
                                     }
                                 }}>
