@@ -23,8 +23,6 @@ export default function (props) {
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     //const styles = StyleSheet.create(getStyles('text_body', {isWeb}));
 
-    console.log('lightbox props', props)
-    console.log('lightbox props', images.map(image => image.image))
 
     let imageRefTop;
     let imageRefBottom;
@@ -53,7 +51,6 @@ export default function (props) {
             width: dimensions.height * 0.2
         }
     }
-    console.log('images', images)
 
     useEffect(() => {
         setTimeout(() => {
