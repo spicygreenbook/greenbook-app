@@ -117,7 +117,7 @@ function Page(props) {
                     <View style={[styles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={styles.text_hero}>
                             Support{"\n"}
-                            Black Owned{"\n"}
+                            Black-Owned{"\n"}
                             Businesses
                         </Text>
                         <View style={{marginTop: 40, flexDirection: 'row', justifyContent: dimensions.width < 900 ? 'flex-start': 'center'}}>
@@ -134,7 +134,10 @@ function Page(props) {
                         <Text>{errorPress}</Text>
                     ) : (
                         <React.Fragment>
-                            {press.filter(pressRow => pressRow.press_site_logo_white).map((pressRow, p) => 
+                            {press.filter(pressRow => pressRow.press_site_logo_white).sort((a, b) => {
+                                if (a.name.indexOf('ABC') > -1) { return -1; }
+                                return 0;
+                            }).map((pressRow, p) => 
                                 (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
                                     <Link href={pressRow.link}>
                                         <Image source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
@@ -159,9 +162,10 @@ function Page(props) {
                         <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
                             <Text accessibilityRole="header" aria-level="2" style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
                             <Text style={[styles.text_body, {color: '#000'}]}>
-                                Inspired by Victor Green, Spicy Green Book is a team of volunteers committed to help compile a directory of black owned businesses.
-                                 
-                                Our mission is to establish a space to help people who seek to create change within their communities.
+                                Inspired by Victor Green, Spicy Green Book is a team of committed volunteers compiling a directory of 
+                                Black owned businesses and performing marketing services for these businesses free of charge. 
+                                We are establishing a space for people who seek to create change, and creating a platform for 
+                                them to invest in Black business owners in their communities.
                             </Text>
                             <Link href="/about" style={{marginTop: 40}} button={'button_green'} title="Learn More" />
                         </View>

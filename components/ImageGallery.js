@@ -5,6 +5,7 @@ import { Animated, View, Text, Image, StyleSheet, FlatList, ImageBackground, Tou
 import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { responsiveImageWidthCDN } from '../utils';
+import { BlurView } from 'expo-blur';
 
 let currentIndexImage = 0;
 const viewableItemsChangedImage = ({ viewableItems, changed }) => {
@@ -23,8 +24,6 @@ export default function (props) {
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     //const styles = StyleSheet.create(getStyles('text_body', {isWeb}));
 
-    console.log('lightbox props', props)
-    console.log('lightbox props', images.map(image => image.image))
 
     let imageRefTop;
     let imageRefBottom;
@@ -53,7 +52,6 @@ export default function (props) {
             width: dimensions.height * 0.2
         }
     }
-    console.log('images', images)
 
     useEffect(() => {
         setTimeout(() => {
@@ -73,7 +71,15 @@ export default function (props) {
                 onViewableItemsChanged={viewableItemsChangedImage}
                 viewabilityConfig={viewableItemsChangedConfigImage}
                 renderItem={({ item, index, separators }) => (
-                    <ImageBackground source={{ uri: item.url + '&w=' + responsiveImageWidthCDN({ containerWidth: config.top.width }) }} style={{ flex: 1, width: config.top.width, height: '100%' }} resizeMode={'contain'} />
+                    <View style={{position: 'relative'}}>
+                        {isWeb && <React.Fragment>
+                                <ImageBackground source={{ uri: item.url + '&w=' + responsiveImageWidthCDN({ containerWidth: config.top.width }) }} style={StyleSheet.absoluteFill} resizeMode={'cover'} />
+                                <BlurView intensity={100} style={StyleSheet.absoluteFill}>
+                                </BlurView>
+                            </React.Fragment>
+                        }
+                        <ImageBackground source={{ uri: item.url + '&w=' + responsiveImageWidthCDN({ containerWidth: config.top.width }) }} style={{ flex: 1, width: config.top.width, height: '100%' }} resizeMode={'contain'} />
+                    </View>
                 )}
                 keyExtractor={(item, index) => 'image' + index}
             />

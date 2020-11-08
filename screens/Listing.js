@@ -35,7 +35,7 @@ function Page(props) {
     function clickImage(index) {
         dispatch({type: 'lightboxConfig', value: {
             index: index || 0,
-            images: content.images.map(image => image.image)
+            images: content.images.filter(image => image.image).map(image => image.image)
         }})
         dispatch({type: 'lightbox', value: true})
     }

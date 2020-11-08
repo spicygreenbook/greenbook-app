@@ -157,10 +157,8 @@ export default function (props) {
                                     if (isWeb) {
                                         clearTimeout(menuIsClickedTimer);
                                         menuIsClicked = true;
-                                        console.log('menu is clicked 1 ', menuIsClicked)
                                         menuIsClickedTimer = setTimeout(() => {
                                             menuIsClicked = false;
-                                            console.log('menu is clicked 2 ', menuIsClicked)
                                         }, 500)
                                     }
                                 }}>
