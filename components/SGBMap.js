@@ -296,7 +296,7 @@ function SGBMap(props) {
 
     return (
         <View style={[{flex: 1, width: '100%', position: 'relative'}, props.style || {}]}>
-            {!!curState && <ScrollView style={{position: 'absolute', left: dimensions.width > 400 ? ((dimensions.width - 400) * 0.5) : '4%', top: '40%', width: 400, height: 200, maxWidth: '92%', backgroundColor: Theme.green, borderWidth: 2, borderColor: '#fff', padding: 20}}>
+            {!!curState && <ScrollView style={{position: 'absolute', left: dimensions.width > 400 ? ((dimensions.width - 420) * 0.5) : '4%', top: '40%', width: 400, height: 200, maxWidth: '92%', backgroundColor: Theme.green, borderWidth: 2, borderColor: '#fff', padding: 20}}>
                 <Text style={[styles.text_body, {color: '#fff', textTransform: 'capitalize'}]}>
                     {statesObj[statesObjRev[curState._state]]} ({curState._count})
                 </Text>
