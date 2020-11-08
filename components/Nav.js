@@ -81,7 +81,7 @@ export default function(props) {
 
     return (
         <View
-        className="nav"
+        nativeID="nav"
         style={[styles.nav,
           {
             borderBottomWidth: props.theme === 'light' && (props.isScrolled || (view.indexOf('/biz') === 0 && props.isScrolled)) ? 2 : 0,
