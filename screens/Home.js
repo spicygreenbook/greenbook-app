@@ -183,7 +183,15 @@ function Page(props) {
                         <FlatList
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            data={Listings.sort((a,b) => {
+                            data={Listings.sort((a, b) => {
+                                    if (a.updated < b.updated) {
+                                        return 1;
+                                    }
+                                    if (a.updated > b.updated) {
+                                        return -1;
+                                    }
+                                    return 0;
+                                }).slice(0,10).sort((a,b) => {
                                     return a.time - b.time
                                 }).filter(item => item.images && item.images[0] && item.images[0].image).slice(0,10)
                             }
@@ -241,7 +249,7 @@ function Page(props) {
                         WHERE WE'RE AT
                     </Text>
 
-                    <SGBMap style={{marginTop: -80}} />
+                    <SGBMap style={{marginTop: -80}} listings={Listings} loadingListings={loadingListings} />
 
                 </View>
             </View>
@@ -317,7 +325,7 @@ function Page(props) {
                         </Text>
                     </View>
                     <View style={dimensions.width < 800 ? {} : {flexDirection: 'row'}}>
-                        <View className="homeLinks" style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
+                        <View nativeID="homeLinks" style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
                             <Link href="/add">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View style={{flex: 1, width: 72, height: 45}}>
