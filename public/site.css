@@ -1,3 +1,7 @@
-.nav a:hover, .nav a:hover > div, .footer a:hover, .footer a:hover > div, .homeLinks a:hover, .homeLinks a:hover > div {
+#nav a:hover, #nav a:hover > div, #footer a:hover, #footer a:hover > div, #homeLinks a:hover, #homeLinks a:hover > div {
     text-decoration: underline;
+}
+
+#mapStates path:hover {
+    opacity: 0.75;
 }
