@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 import { useStateValue } from "../components/State";
+import { Link } from "../components/Link";
 import { getStyles, Theme } from '../utils';
 
 let states = [
@@ -300,7 +301,7 @@ function SGBMap(props) {
                     {statesObj[statesObjRev[curState._state]]} ({curState._count})
                 </Text>
                 {Object.keys(curState).filter(key => {return key.indexOf('_') !== 0}).map(state => {
-                    return <Text style={[styles.text_body, {color: '#fff', textTransform: 'capitalize'}]}>{curState[state]._name}</Text>
+                    return <Link href={`/search?q=&near=${curState[state]._name}, ${statesObjRev[curState._state].toUpperCase()}`}><Text style={[styles.text_body, {color: '#fff', fontSize: 16, textTransform: 'capitalize'}]}>{curState[state]._name}</Text></Link>
                 })}
             </ScrollView>}
             <Svg viewBox="0 0 679.37 521.8" height={dimensions.width * 0.76806} width={'100%'} style={{width: '100%'}}>
