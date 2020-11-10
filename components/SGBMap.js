@@ -184,6 +184,7 @@ let statesObjRev = {};
 Object.keys(_states).forEach(abbr => {
     statesObj[abbr.toLowerCase()] = _states[abbr].toLowerCase();
     statesObjRev[_states[abbr].toLowerCase().replace(/[^a-z]/g, '')] = abbr.toLowerCase();
+    statesObjRev[_states[abbr].toLowerCase()] = abbr.toLowerCase();
 })
 //https://stackoverflow.com/questions/5097875/help-parsing-string-city-state-zip-with-javascript
 function parseAddress(address) {
@@ -241,7 +242,6 @@ function parseAddress(address) {
         if (parts[0] && parts[1]) {
             returned.city = parts[0].trim();
             returned.state = statesObj[parts[1].trim().toLowerCase()];
-            console.log('no number parts', parts, parts[1].trim(), returned)
         }
     }
 
@@ -276,11 +276,22 @@ function SGBMap(props) {
                         parsed: parsed
                     })
                 } else if(parsed.state && parsed.city){
-                    let _state = statesObj[parsed.state.toLowerCase().replace(/[^a-z]/g, '')];
-                    if (!_state && statesObjRev[parsed.state.toLowerCase().replace(/[^a-z]/g, '')]) {
-                        _state = statesObj[statesObjRev[parsed.state.toLowerCase()]]
+
+
+                    let _parsed_state = parsed.state.toLowerCase().replace(/[^a-z]/g, '');
+                    let _state = statesObj[_parsed_state];
+                    if (!_state && statesObjRev[_parsed_state]) {
+                        _state = statesObj[statesObjRev[_parsed_state]]
                     }
                     let _city = parsed.city.toLowerCase();
+                    if (_state) {
+                        _state = _state.replace(/[^a-z]/g, '');
+                    }
+
+                if (listing.uid === 'blondery') {
+                    console.log('blodery', parsed, _city, _state)
+                }
+
                     if (_city && _state) {
                         if (!listingsByState[_state]) {
                             listingsByState[_state] = {
@@ -301,10 +312,10 @@ function SGBMap(props) {
                         listingsByState[_state][_city]._count++;
                         listingsByState[_state][_city]._listings.push(listing)
                     } else {
-                        //console.log("missing city and state mapped on", listing.id)
+                        console.log("missing city and state mapped on", listing.id, listing.uid, parsed)
                     }
                 } else {
-                    //console.log("missing city and state on", listing.id)
+                    console.log("missing city and state on", listing.id, listing.uid, parsed)
                 }
             }
         })
