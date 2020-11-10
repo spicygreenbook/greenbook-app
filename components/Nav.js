@@ -87,12 +87,12 @@ export default function (props) {
 
     return (
         <View
-            className="nav"
-            style={[styles.nav,
+          nativeID="nav"
+          style={[styles.nav,
             {
-                borderBottomWidth: props.theme === 'light' && (props.isScrolled || (view.indexOf('/biz') === 0 && props.isScrolled)) ? 2 : 0,
-                borderColor: Theme.green,
-                backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'
+              borderBottomWidth: props.theme === 'light' && (props.isScrolled || (view.indexOf('/biz') === 0 && props.isScrolled)) ? 2 : 0,
+              borderColor: Theme.green,
+              backgroundColor: props.theme == 'light' ? '#fff' : 'transparent'
             }
             ]}>
             {props.theme === 'dark' && <Animated.View

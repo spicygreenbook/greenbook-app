@@ -42,15 +42,7 @@ export async function getStaticProps(context) {
 
     return {
         props: {
-            listings: listings.sort((a, b) => {
-                if (a.updated < b.updated) {
-                    return 1;
-                }
-                if (a.updated > b.updated) {
-                    return -1;
-                }
-                return 0;
-            }).slice(0,10),
+            listings: listings,
             press: press,
             updates: updates
         },
