@@ -191,39 +191,57 @@ function parseAddress(address) {
     if (typeof address !== "string") throw "Address is not a string.";
     // Trim the address.
     address = address.trim().replace(/  /g, ' ').replace(/  /g, ' ').replace(/  /g, ' ').split("\n");
-    if (!address[1]) { address[1] = address[0]; }
-    // Make an object to contain the data.
+    var has_numbers = !!address[0].replace(/[^0-9]/g, '');
     var returned = {};
-    // Find the comma.
-    var comma = address[1].indexOf(',');
-    // Pull out the city.
-    returned.city = address[1].slice(0, comma);
-    // Get everything after the city.
-    var after = address[1].substring(comma + 2); // The string after the comma, +2 so that we skip the comma and the space.
-    // Find the space.
-    var space = after.lastIndexOf(' ');
-    // Pull out the state.
-    returned.state = after.slice(0, space);
-    if (returned.state.indexOf(',')) {
-        var spl = returned.state.split(', ');
-        returned.state = spl[1];
-        returned.city = spl[0];
-    }
-    // Pull out the zip code.
-    returned.zip = after.substring(space + 1);
 
-    if (returned.city && !returned.state) {
-        // likely missing comma 
-        var cityPart = '';
-        returned.city.split(' ').forEach(part => {
-            if (statesObj[part.toLowerCase()] || statesObjRev[part.toLowerCase().replace(/[^a-z]/g, '')]) {
-                returned.state = part;
-            } else {
-                cityPart += part + ' '
+    if (has_numbers) {
+        if (!address[1]) { address[1] = address[0]; }
+        // Make an object to contain the data.
+        // Find the comma.
+        var comma = address[1].indexOf(',');
+        // Pull out the city.
+        returned.city = address[1].slice(0, comma);
+        // Get everything after the city.
+        var after = address[1].substring(comma + 2); // The string after the comma, +2 so that we skip the comma and the space.
+        // Find the space.
+        var space = after.lastIndexOf(' ');
+        // Pull out the state.
+        returned.state = after.slice(0, space);
+        if (returned.state.indexOf(',')) {
+            var spl = returned.state.split(', ');
+            returned.state = spl[1];
+            returned.city = spl[0];
+        }
+        // Pull out the zip code.
+        returned.zip = after.substring(space + 1);
+
+        if (returned.state && returned.state.indexOf('ON ') === 0) {
+            returned.state = 'ON'; // fixed for candada, will need to figure this out
+        }
+        if (returned.city && !returned.state) {
+            // likely missing comma 
+            var cityPart = '';
+            returned.city.split(' ').forEach(part => {
+                if (statesObj[part.toLowerCase()] || statesObjRev[part.toLowerCase().replace(/[^a-z]/g, '')]) {
+                    returned.state = part;
+                } else {
+                    cityPart += part + ' '
+                }
+            });
+            if (returned.state) {
+                returned.city = cityPart.trim();
             }
-        });
-        if (returned.state) {
-            returned.city = cityPart.trim();
+        }
+        if (!returned.city && returned.state && returned.zip) {
+            returned.city = address[1].split(', ')[0].trim();
+        }
+    } else {
+        //assume city, state
+        var parts = address[0].split(',');
+        if (parts[0] && parts[1]) {
+            returned.city = parts[0].trim();
+            returned.state = statesObj[parts[1].trim().toLowerCase()];
+            console.log('no number parts', parts, parts[1].trim(), returned)
         }
     }
 
@@ -248,7 +266,8 @@ function SGBMap(props) {
             if (listing.address) {
                 let addr = listing.address.join("\n").trim();
                 let parsed = parseAddress(addr);
-                if (addr && (!parsed.city || !parsed.state || !parsed.zip || (!statesObj[parsed.state.toLowerCase()] && !statesObjRev[parsed.state.toLowerCase().replace(/[^a-z]/g, '')]))) {
+                if (addr && (!parsed.city || !parsed.state || (!statesObj[parsed.state.toLowerCase()] && !statesObjRev[parsed.state.toLowerCase().replace(/[^a-z]/g, '')]))) {
+                    console.log('addr', addr, 'parsed', parsed)
                     problem_list.push({
                         id: listing.id,
                         name: listing.name.join(''),
