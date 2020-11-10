@@ -21,7 +21,7 @@ export default function(props) {
         href: '/donate'
     }, {
         title: 'Add Request',
-        href: '/add'
+        href: '/add-request'
     }, {
         title: 'Volunteer',
         href: '/volunteer'

@@ -326,7 +326,7 @@ function Page(props) {
                     </View>
                     <View style={dimensions.width < 800 ? {} : {flexDirection: 'row'}}>
                         <View nativeID="homeLinks" style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
-                            <Link href="/add">
+                            <Link href="/add-request">
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View style={{flex: 1, width: 72, height: 45}}>
                                         <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />

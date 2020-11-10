@@ -50,7 +50,7 @@ async function getListings() {
             return content;
         })
     }
-    console.log('rows', rows)
+    //console.log('rows', rows)
     return rows
 }
 
@@ -62,6 +62,15 @@ async function handle () {
 
 module.exports = withExpo(withFonts(withImages({
   projectRoot: __dirname,
-  generaiteSiteMap: handle()
+  generaiteSiteMap: handle(),
+  async redirects() {
+    return [
+      {
+        source: '/add',
+        destination: '/add-request',
+        permanent: true,
+      },
+    ]
+  },
 })));
 

@@ -121,7 +121,7 @@ function Main(props) {
           : view === '/team' ? <Team {...props} />
           : view === '/process' ? <Process {...props} />
           : view === '/contact' ? <Contact {...props} />
-          : view === '/add' ? <AddListing {...props} />
+          : view === '/add-request' ? <AddListing {...props} />
           : view === '/volunteer' ? <Volunteer {...props} />
           : view === '/donate' ? <Donate {...props} />
           : view === '/search' ? <List {...props} />
