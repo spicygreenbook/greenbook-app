@@ -137,9 +137,6 @@ const searchRank = (processedSearchTerms, row) => {
     processedSearchTerms.words.forEach(searchNeedle => {
         searchKeysConfig.forEach(searchConfig => {
             if (row[searchConfig.key]) {
-                if (searchConfig.key === 'search_terms') {
-                    console.log('row', row[searchConfig.key]);
-                }
                 searchRank += wordSearch(searchNeedle, row[searchConfig.key], searchConfig.multiplier, searchConfig.processMap).score;
             }
         })
@@ -273,9 +270,9 @@ function Page(props) {
 
     useEffect(
         () => {
-            console.log('gettingGeo', gettingGeo, 'listings', listings)
+            //console.log('gettingGeo', gettingGeo, 'listings', listings)
             if (!gettingGeo && listings) {
-                console.log('listings is', listings)
+                //console.log('listings is', listings)
                 let _listings = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
                 if (!query && !location) {
                     shuffle(_listings); // randomize output

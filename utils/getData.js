@@ -209,9 +209,18 @@ export async function getData(config) {
         url = typeof window !== 'undefined' && window.location && window.location.host.indexOf('localhost') > -1 ? `http://localhost:3000/api/instagram` : `https://spicygreenbook.com/api/instagram`
     }
     if (url) {
-        let data = await fetch(url);
+        let data;
+        try {
+            data = await fetch(url);
+        } catch(e) {
+            console.log('failed to fetch', url)
+        }
         if (config.type === 'instagram') {
-            rows = await data.json();
+            try {
+                rows = await data.json();
+            } catch(e) {
+                console.log('failed to parse instagram');
+            }
         } else {
             let parsed_data = [];
             let getLoop = async (nextInfo) => {
@@ -263,12 +272,23 @@ export async function getData(config) {
                         return item && item.attribution_name && item.attribution_name.trim()
                     })
                     content.attribution = attribution;
-                    console.log('updated attr')
+                    //console.log('updated attr')
                 } else {
-                    console.log('didnt even touch attribution');
+                    //console.log('didnt even touch attribution');
                 }
 
                 return content;
+            }).filter(row => {
+                if (config.type === 'listing') {
+                    if (row.primary_image && row.primary_image.url && row.images && row.images.length) {
+                        return true;
+                    } else {
+                        console.log('filtered out row', row.id, row.uid)
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
             })
         }
     }
