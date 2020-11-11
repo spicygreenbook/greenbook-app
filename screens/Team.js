@@ -3,7 +3,7 @@ import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
-import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
+import { getStyles, Theme, getContent, getData } from '../utils';
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 
 
@@ -34,7 +34,7 @@ function Page(props) {
 
     useEffect( () => {
         if (!props.staff) {
-            getDataAsync({
+            getData({
                 type: 'staff'
             }).then(staff => {
                 console.log('staff izz', staff)

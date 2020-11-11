@@ -3,7 +3,7 @@ import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
-import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
+import { getStyles, Theme, getContent, getData } from '../utils';
 import { ResponsiveImage } from "../components/ResponsiveImage"
 
 function Page(props) {
@@ -33,7 +33,7 @@ function Page(props) {
 
     useEffect( () => {
         if (!props.press) {
-            getDataAsync({
+            getData({
                 type: 'press'
             }).then(press => {
                 console.log('press izz', press)

@@ -4,10 +4,11 @@ import { StyleSheet, View, ScrollView, FlatList, Text, Button, SGBButton, Image,
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import RichText from "../components/RichText"; 
-import { getStyles, Theme, getDataAsync, GridWidth, displayDate } from '../utils';
+import { getStyles, Theme, getData, GridWidth } from '../utils';
 import { Entypo } from '@expo/vector-icons'; 
 import Search from "../components/Search";
 import SGBMap from "../components/SGBMap";
+import { getInstagram } from '../utils/getData';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -33,7 +34,6 @@ function Page(props) {
     const [ updates, setUpdates ] = useState(props.updates || []);
 
     const [ loadingInstagram, setLoadingInstagram ] = useState(true);
-    const [ errorInstagram, setErrorInstagram ] = useState('');
     const [ instagram, setInstagram ] = useState([]);
 
     const [ loadingListings, setLoadingListings ] = useState(!props.listings);
@@ -43,7 +43,7 @@ function Page(props) {
     useEffect( () => {
 
         if (!props.press) {
-            getDataAsync({
+            getData({
                 type: 'press'
             }).then(press => {
                 console.log('press izz', press)
@@ -59,7 +59,7 @@ function Page(props) {
         }
 
         if (!props.updates) {
-            getDataAsync({
+            getData({
                 type: 'updates'
             }).then(updates => {
                 console.log('updates izz', updates)
@@ -72,20 +72,13 @@ function Page(props) {
             })
         }
 
-        getDataAsync({
-            type: 'instagram'
-        }).then(instagram => {
-            console.log('instagram izz', instagram)
+        getInstagram().then(instagram => {
             setLoadingInstagram(false);
             setInstagram(instagram)
-        }).catch(err => {
-            console.error(err);
-            setLoadingInstagram(false);
-            setErrorInstagram('Failed to load latest instagram.');
-        })
+        });
 
         if (!props.listings) {
-            getDataAsync({
+            getData({
                 type: 'listing'
             }).then(listings => {
                 console.log('Listings izz', listings)
