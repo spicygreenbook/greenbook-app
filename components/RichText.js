@@ -42,7 +42,7 @@ function renderHTML(markup, spans, isWeb, dispatch) {
                 Linking.openURL(url)
             }
         }} style={
-                    segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {}
+                    segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {color: Theme.green}
                 }>{parts[part] || ''}</Text>
         ) : (<Text key={'subpart' + i} style={
             segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
