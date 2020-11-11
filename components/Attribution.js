@@ -3,7 +3,7 @@ import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
-import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
+import { getStyles, Theme, getContent, getData } from '../utils';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 function Attribution(props) {

@@ -178,6 +178,23 @@ export async function getContent(config) {
     }
 }
 
+const isLocalWeb = () => (
+    typeof window !== 'undefined' && window.location && window.location.host.indexOf('localhost') > -1
+);
+
+export async function getInstagram() {
+    const url = isLocalWeb() ? 'http://localhost:3000/api/instagram' : 'https://spicygreenbook.com/api/instagram';
+    try {
+        const result = await fetch(url);
+        const data = await result.json();
+        if (data.error) throw data;
+        return data;
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+}
+
 export async function getData(config) {
     if (!config){ config = {}; }
     if (!config.limit) {config.limit = 100}
@@ -205,8 +222,6 @@ export async function getData(config) {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.staff.order%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'press') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.press.date%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
-    } else if (config.type === 'instagram') {
-        url = typeof window !== 'undefined' && window.location && window.location.host.indexOf('localhost') > -1 ? `http://localhost:3000/api/instagram` : `https://spicygreenbook.com/api/instagram`
     }
     if (url) {
         let data;
@@ -215,14 +230,7 @@ export async function getData(config) {
         } catch(e) {
             console.log('failed to fetch', url)
         }
-        if (config.type === 'instagram') {
-            try {
-                rows = await data.json();
-            } catch(e) {
-                console.log('failed to parse instagram');
-            }
-        } else {
-            let parsed_data = [];
+        let parsed_data = [];
             let getLoop = async (nextInfo) => {
                 nextInfo.results.map((doc, i) => {
                     parsed_data.push(doc);
@@ -290,28 +298,16 @@ export async function getData(config) {
                     return true;
                 }
             })
-        }
     }
     return rows
 }
 
 export async function getAllData(config) {
-    let types = ['listing', 'updates', 'press', 'staff', 'instagram'];
+    let types = ['listing', 'updates', 'press', 'staff'];
     let ret = {};
     types.forEach(type => {
         /*ret[type] = async getData({
             type: type
         })*/
-    })
-}
-
-export const getDataAsync = (config) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let ret = await getData(config);
-            resolve(ret);
-        } catch(e) {
-            reject(e);
-        }
     })
 }

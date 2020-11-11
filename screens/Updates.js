@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, I
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
 import Attribution from "../components/Attribution"; 
-import { getStyles, Theme, getContent, getData, getDataAsync } from '../utils';
+import { getStyles, Theme, getContent, getData } from '../utils';
 
 
 function Page(props) {
@@ -34,7 +34,7 @@ function Page(props) {
 
     useEffect( () => {
         if (!props.updates) {
-            getDataAsync({
+            getData({
                 type: 'updates'
             }).then(updates => {
                 console.log('updates izz', updates)
