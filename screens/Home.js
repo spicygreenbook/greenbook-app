@@ -34,7 +34,6 @@ function Page(props) {
     const [ updates, setUpdates ] = useState(props.updates || []);
 
     const [ loadingInstagram, setLoadingInstagram ] = useState(true);
-    const [ errorInstagram, setErrorInstagram ] = useState('');
     const [ instagram, setInstagram ] = useState([]);
 
     const [ loadingListings, setLoadingListings ] = useState(!props.listings);
