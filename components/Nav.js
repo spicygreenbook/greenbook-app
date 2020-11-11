@@ -110,13 +110,13 @@ export default function (props) {
                     <View style={{ height: '100%' }}>
                         {props.theme == 'light' ?
                             <Image
-                                style={{ width: dimensions.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
+                                style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
                                 alt="Spicy Green Book"
                                 source={isWeb ? { uri: '/images/logo_nav_light.png' } : require('../public/images/logo_nav_light.png')}
                             />
                             :
                             <Image
-                                style={{ width: dimensions.width < 900 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
+                                style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
                                 alt="Spicy Green Book"
                                 source={isWeb ? { uri: '/images/logo_nav_dark.png' } : require('../public/images/logo_nav_dark.png')}
                             />
@@ -124,8 +124,8 @@ export default function (props) {
                     </View>
                 </Link>
             </View>
-            <View style={{ padding: 20, flex: dimensions.width < 900 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end' }}>
-                {dimensions.width < 900 ? (
+            <View style={{ padding: 20, flex: dimensions.width < 1100 ? 1 : 3, alignContent: 'center', flexDirection: 'row', justifyContent: 'flex-end' }}>
+                {dimensions.width < 1100 ? (
                     <View style={{ flex: 1, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                         <View style={{ width: 40 }}>
                             <TouchableOpacity onPress={() => {
