@@ -32,14 +32,18 @@ function renderHTML(markup, spans, isWeb, dispatch) {
     }
 
     return Object.keys(parts).map((part, i) => {
-        //console.log(parts[part]);
-        return segment_map[i].type === 'hyperlink' ? (<Text onPress={e => {
-            const url = (segment_map[i].data.value.url || '');
+        console.log(parts[part], segment_map[i]);
+        return segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} onPress={e => {
+            let url = (segment_map[i].data.value.url || '');
+            if (segment_map[i].data.value && segment_map[i].data.value.file) {
+                url = segment_map[i].data.value.file.url
+            }
+            console.log('link to', url)
             const external = url.slice(0,1) !== '/';
             if (!external) {
                 dispatch({type: 'setView', view: url})
             } else {
-                Linking.openURL(url)
+                isWeb ? window.open(url, '_blank') : Linking.openURL(url)
             }
         }} style={
                     segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {color: Theme.green}

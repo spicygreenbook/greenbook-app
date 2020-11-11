@@ -69,7 +69,7 @@ function Page(props) {
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
                 </View>}
-                <View style={[styles.section]}>
+                <View style={[styles.section, {paddingTop: 0}]}>
                     <View style={styles.content}>
                         {loadingPress ? (
                             <ActivityIndicator color={Theme.green} size="large" />

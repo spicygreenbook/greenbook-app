@@ -17,9 +17,9 @@ export function ResponsiveImage(props) {
     let  { aspectRatio } = props.style;
     if (props.style.width && props.style.height && !aspectRatio) {
         aspectRatio = props.style.width / props.style.height;
-        console.log('calc aspectRatio iresponsive image', aspectRatio)
+        //console.log('calc aspectRatio iresponsive image', aspectRatio)
     }
-    console.log('set', set)
+    //console.log('set', set)
 
     return (
         <View onLayout={(event) => {
