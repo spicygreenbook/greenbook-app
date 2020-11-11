@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import "../public/stripe.css"
 import {
     CardElement,
     useStripe,
@@ -96,7 +97,7 @@ const CheckoutForm = (props) => {
                 }
                 setSending(0);
             });
-            
+
     };
 
 
@@ -303,8 +304,8 @@ const CheckoutForm = (props) => {
                     </div>
                     <div className="form-row">
                         <button id="card-button" disabled={!stripe && !sending} className={'button'} sending={sending}>
-                            {sending ? 
-                                (<span>Processing Donation...</span>) : 
+                            {sending ?
+                                (<span>Processing Donation...</span>) :
                                 (<span>Donate ${format(fields.amount)}</span>)
                             }
                         </button>
