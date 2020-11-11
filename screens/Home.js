@@ -135,7 +135,7 @@ function Page(props) {
                     ) : (
                         <React.Fragment>
                             {press.filter(pressRow => pressRow.press_site_logo_white).sort((a, b) => {
-                                if (a.name.indexOf('ABC') > -1) { return -1; }
+                                if (a.name && a.name.indexOf('ABC') > -1) { return -1; }
                                 return 0;
                             }).map((pressRow, p) => 
                                 (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
