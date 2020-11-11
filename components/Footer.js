@@ -35,22 +35,22 @@ export default function(props) {
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40, paddingBottom: 40}}>
                         <View>
                             <Link href="https://www.instagram.com/spicygreenbook/">
-                                <FontAwesome name="instagram" size={32} color="#fff" />
+                                <FontAwesome name="instagram" size={28} color="#fff" />
                             </Link>
                         </View>
                         <View>
                             <Link href="https://twitter.com/spicygreenbook">
-                                <FontAwesome name="twitter" size={32} color="#fff" />
+                                <FontAwesome name="twitter" size={28} color="#fff" />
                             </Link>
                         </View>
                         <View>
                             <Link href="https://www.linkedin.com/company/spicy-green-book/">
-                                <FontAwesome name="linkedin" size={32} color="#fff" />
+                                <FontAwesome name="linkedin" size={28} color="#fff" />
                             </Link>
                             </View>
                         <View>
                             <Link href="https://www.facebook.com/SpicyGreenBook/">
-                                <FontAwesome name="facebook" size={32} color="#fff" />
+                                <FontAwesome name="facebook" size={28} color="#fff" />
                             </Link>
                         </View>
                     </View>
