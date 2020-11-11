@@ -90,7 +90,7 @@ export default function Search(props) {
     }
 
     return (
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{justifyContent: 'center', alignItems: 'center', maxWidth: '100%'}}>
             {isWeb ? <form method="GET" action="/search"><SearchForm mode={props.mode} small={small} /></form>
             : <SearchForm mode={props.mode} small={small} />}
         </View>
