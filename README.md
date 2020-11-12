@@ -6,6 +6,9 @@ Find an [issue](https://github.com/spicygreenbook/greenbook-app/issues) and comm
 
 Join [our slack](https://spicy-green-book.slack.com) and let us know what you can do and we'll let you know how you can help!
 
+# PULL REQUEST
+If you clone this repo and realize you do not have permission to push directly to this repo (check out this article)[https://jarv.is/notes/how-to-pull-request-fork-github/] to learn how to fork and make a pull request
+
 ## Want to report a bug or issue with the website?
 Use the [issues](https://github.com/spicygreenbook/greenbook-app/issues) section on this page to let us know!
 
