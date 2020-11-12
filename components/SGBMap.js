@@ -335,9 +335,11 @@ function SGBMap(props) {
                         </Text>
                     </View>
                     <View>
-                        <EvilIcons name="close" size={48} color="#fff" style={{cursor: 'pointer'}} onPress={e => {
+                        <TouchableOpacity onPress={e => {
                             setCurState('');
-                        }}/>
+                        }}>
+                            <EvilIcons name="close" size={48} color="#fff" style={{cursor: 'pointer'}}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View>
@@ -359,14 +361,16 @@ function SGBMap(props) {
                     }
 
                     return state.d.map((d, i) => (
-                        <Path key={state.id + i} d={d} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'} onPress={e => {
+                        <G  onPress={e => {
                             if (mappedState) {
                                 console.log('mapped state', mappedState)
                                 setCurState(mappedState);
                             } else {
                                 setCurState('');
                             }
-                        }}/>
+                        }}>
+                            <Path key={state.id + i} d={d} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'}/>
+                        </G>
                     ))
                 })}
               </G>

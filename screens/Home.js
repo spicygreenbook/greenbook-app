@@ -313,64 +313,15 @@ function Page(props) {
             <View style={[styles.section, {flex:1}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <View>
-                        <Text style={[styles.text_header3, {marginBottom: 20}]}>
-                            How can I help?
+                        <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
+                        <Text style={[styles.text_quote]}>
+                            It is certain, in any case, that ignorance,
+                            allied with power, is the most ferocious enemy
+                            justice can have.
                         </Text>
-                    </View>
-                    <View style={dimensions.width < 800 ? {} : {flexDirection: 'row'}}>
-                        <View nativeID="homeLinks" style={{flex: dimensions.width < 800 ? 1 : 3, borderRightWidth: dimensions.width < 800 ? 0 : 2, borderColor: Theme.green, width: dimensions.width < 800 ? '100%' : 'auto'}}>
-                            <Link href="/add-request">
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <View style={{flex: 1, width: 72, height: 45}}>
-                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
-                                    </View>
-                                    <View style={{flex: 3, paddingLeft: 20}}>
-                                        <Text style={styles.text_body}>Add a listing</Text>
-                                    </View>
-                                </View>
-                            </Link>
-                            <Link href="/volunteer">
-                                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
-                                    <View style={{flex: 1, width: 72, height: 45}}>
-                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
-                                    </View>
-                                    <View style={{flex: 3, paddingLeft: 20}}>
-                                        <Text style={styles.text_body}>Volunteer</Text>
-                                    </View>
-                                </View>
-                            </Link>
-                            <Link href="/donate">
-                                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
-                                    <View style={{flex: 1, width: 72, height: 45}}>
-                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
-                                    </View>
-                                    <View style={{flex: 3, paddingLeft: 20}}>
-                                        <Text style={styles.text_body}>Donate</Text>
-                                    </View>
-                                </View>
-                            </Link>
-                            <Link href="/contact">
-                                <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
-                                    <View style={{flex: 1, width: 72, height: 45}}>
-                                        <Image source={isWeb ? {uri:'/images/green_arrow.png'} : require('../public/images/green_arrow.png')} style={{width: 72, height: 45, resizeMode: 'contain'}} />
-                                    </View>
-                                    <View style={{flex: 3, paddingLeft: 20}}>
-                                        <Text style={styles.text_body}>Contact</Text>
-                                    </View>
-                                </View>
-                            </Link>
-                        </View>
-                        {dimensions.width >= 800 && <View style={{flex: dimensions.width < 800 ? 1 : 4, paddingLeft: dimensions.width < 800 ? 0 : 40, paddingTop: dimensions.width < 800 ? 100 : 50}}>
-                            <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
-                            <Text style={[styles.text_quote]}>
-                                It is certain, in any case, that ignorance,
-                                allied with power, is the most ferocious enemy
-                                justice can have.
-                            </Text>
-                            <Text style={[styles.text_quote]}>
-                                - James Baldwin
-                            </Text>
-                        </View>}
+                        <Text style={[styles.text_quote]}>
+                            - James Baldwin
+                        </Text>
                     </View>
                 </View>
             </View>

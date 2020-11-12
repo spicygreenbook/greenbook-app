@@ -189,8 +189,8 @@ const allStyles = {
     return {
       fontFamily: "ApercuLight",
       fontStyle: "italic",
-      fontSize: config.windowWidth < 900 ? 55 : 28,
-      lineHeight: config.windowWidth < 900 ? 65 : 36,
+      fontSize: 28,
+      lineHeight: 45,
       color: "#006233",
     };
   },
