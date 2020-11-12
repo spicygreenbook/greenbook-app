@@ -43,7 +43,7 @@ function App(props) {
 export async function getStaticProps(context) {
     let content = await getContent({type: 'content', uid: 'staff', ref_id: context.preview || ''});
     let staff = await getData({type: 'staff'})
-    console.log('content', content)
+    //console.log('content', content, 'staff', staff)
     return {
         props: {
             content: content && content.content || {},
