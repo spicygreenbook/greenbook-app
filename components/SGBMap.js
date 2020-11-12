@@ -4,6 +4,7 @@ import Svg, { G, Path } from 'react-native-svg';
 import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { getStyles, Theme } from '../utils';
+import { EvilIcons } from '@expo/vector-icons';
 
 let states = [
 {
@@ -326,13 +327,24 @@ function SGBMap(props) {
 
     return (
         <View style={[{flex: 1, width: '100%', position: 'relative'}, props.style || {}]}>
-            {!!curState && <ScrollView style={{position: 'absolute', left: dimensions.width > 400 ? ((dimensions.width - 420) * 0.5) : '4%', top: '40%', width: 400, height: 200, maxWidth: '92%', backgroundColor: Theme.green, borderWidth: 2, borderColor: '#fff', padding: 20}}>
-                <Text style={[styles.text_body, {color: '#fff', textTransform: 'capitalize'}]}>
-                    {statesObj[statesObjRev[curState._state]]} ({curState._count})
-                </Text>
-                {Object.keys(curState).filter(key => {return key.indexOf('_') !== 0}).map((state, s) => {
-                    return <Link key={'link' + s } href={`/search?q=&near=${curState[state]._name}, ${statesObjRev[curState._state].toUpperCase()}`}><Text style={[styles.text_body, {color: '#fff', fontSize: 16, textTransform: 'capitalize'}]}>{curState[state]._name}</Text></Link>
-                })}
+            {!!curState && <ScrollView style={{position: 'absolute', left: dimensions.width > 400 ? (((dimensions.width > 1024 ? 1024 : dimensions.width) - 420) * 0.5) : '4%', top: '40%', width: 400, height: 200, maxWidth: '92%', backgroundColor: Theme.green, borderWidth: 2, borderColor: '#fff', padding: 20}}>
+                <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems: 'flex-start'}}>
+                    <View>
+                        <Text style={[styles.text_body, {color: '#fff', textTransform: 'capitalize', marginTop: 6}]}>
+                            {statesObj[statesObjRev[curState._state]]} ({curState._count})
+                        </Text>
+                    </View>
+                    <View>
+                        <EvilIcons name="close" size={48} color="#fff" style={{cursor: 'pointer'}} onPress={e => {
+                            setCurState('');
+                        }}/>
+                    </View>
+                </View>
+                <View>
+                    {Object.keys(curState).filter(key => {return key.indexOf('_') !== 0}).map((state, s) => {
+                        return <Link key={'link' + s } href={`/search?q=&near=${curState[state]._name}, ${statesObjRev[curState._state].toUpperCase()}`}><Text style={[styles.text_body, {color: '#fff', fontSize: 16, textTransform: 'capitalize'}]}>{curState[state]._name}</Text></Link>
+                    })}
+                </View>
             </ScrollView>}
             <Svg viewBox="0 0 679.37 521.8" height={dimensions.width * 0.76806} width={'100%'} style={{width: '100%'}}>
               <G nativeID="mapStates" fill="#000">
