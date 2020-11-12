@@ -31,23 +31,35 @@ function renderHTML(markup, spans, isWeb, dispatch) {
         parts[segment] += '' + (markup[i] || '');
     }
 
-    return Object.keys(parts).map((part, i) => {
-        console.log(parts[part], segment_map[i]);
-        return segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} onPress={e => {
-            let url = (segment_map[i].data.value.url || '');
+    // special logic if a link is on it's own line it should be a button, otherwise it should look like a regular hyperlink within a paragraph of text
+    return Object.keys(parts).map((part, i, partsAr) => {
+        console.log(parts[part], segment_map[i], 'parts length', partsAr, 'segments', segment_map[i].start);
+        let button = false;
+        if (partsAr.length <= 2 && segment_map[i].start === 0) {
+            button = true;
+        }
+        let url = '';
+        if (segment_map[i].type === 'hyperlink') {
+            url = (segment_map[i].data.value.url || '');
             if (segment_map[i].data.value && segment_map[i].data.value.file) {
                 url = segment_map[i].data.value.file.url
             }
+        }
+
+        return segment_map[i].type === 'hyperlink' && button ? (
+            <Link href={url} button={'button_green'} title={parts[part] || ''} />
+        ) : segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} onPress={e => {
             console.log('link to', url)
             const external = url.slice(0,1) !== '/';
+
             if (!external) {
                 dispatch({type: 'setView', view: url})
             } else {
                 isWeb ? window.open(url, '_blank') : Linking.openURL(url)
             }
-        }} style={
-                    segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {color: Theme.green}
-                }>{parts[part] || ''}</Text>
+            }} style={
+                segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {color: Theme.green}
+            }>{parts[part] || ''}</Text>
         ) : (<Text key={'subpart' + i} style={
             segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
             :

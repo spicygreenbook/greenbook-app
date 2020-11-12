@@ -330,8 +330,8 @@ function SGBMap(props) {
                 <Text style={[styles.text_body, {color: '#fff', textTransform: 'capitalize'}]}>
                     {statesObj[statesObjRev[curState._state]]} ({curState._count})
                 </Text>
-                {Object.keys(curState).filter(key => {return key.indexOf('_') !== 0}).map(state => {
-                    return <Link href={`/search?q=&near=${curState[state]._name}, ${statesObjRev[curState._state].toUpperCase()}`}><Text style={[styles.text_body, {color: '#fff', fontSize: 16, textTransform: 'capitalize'}]}>{curState[state]._name}</Text></Link>
+                {Object.keys(curState).filter(key => {return key.indexOf('_') !== 0}).map((state, s) => {
+                    return <Link key={'link' + s } href={`/search?q=&near=${curState[state]._name}, ${statesObjRev[curState._state].toUpperCase()}`}><Text style={[styles.text_body, {color: '#fff', fontSize: 16, textTransform: 'capitalize'}]}>{curState[state]._name}</Text></Link>
                 })}
             </ScrollView>}
             <Svg viewBox="0 0 679.37 521.8" height={dimensions.width * 0.76806} width={'100%'} style={{width: '100%'}}>
@@ -349,6 +349,7 @@ function SGBMap(props) {
                     return state.d.map((d, i) => (
                         <Path key={state.id + i} d={d} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'} onPress={e => {
                             if (mappedState) {
+                                console.log('mapped state', mappedState)
                                 setCurState(mappedState);
                             } else {
                                 setCurState('');
@@ -360,7 +361,7 @@ function SGBMap(props) {
               <G nativeID="mapOutlines">
                 {states.map((state,s) => {
                     return state.d.map((d, i) => (
-                        <Path key={state.id + i} d={d} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} stroke="#efefef" strokeWidth="0.5px" fill="none" />
+                        <Path key={state.id + i + 'outline'} d={d} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} stroke="#efefef" strokeWidth="0.5px" fill="none" />
                     ))
                 })}
               </G>
