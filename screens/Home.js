@@ -9,6 +9,7 @@ import { Entypo } from '@expo/vector-icons';
 import Search from "../components/Search";
 import SGBMap from "../components/SGBMap";
 import { getInstagram } from '../utils/getData';
+import { Fontisto } from '@expo/vector-icons'; 
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -313,8 +314,8 @@ function Page(props) {
             <View style={[styles.section, {flex:1}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <View>
-                        <Text style={[styles.text_body, {fontSize: 212}]}>“</Text>
-                        <Text style={[styles.text_quote]}>
+                        <Fontisto name="quote-left" size={64} color={Theme.green} />
+                        <Text style={[styles.text_quote, {marginTop: 20}]}>
                             It is certain, in any case, that ignorance,
                             allied with power, is the most ferocious enemy
                             justice can have.
