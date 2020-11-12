@@ -154,7 +154,7 @@ function Page(props) {
                             />
                         </View>
                         <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
-                            <Text accessibilityRole="header" aria-level="2" style={[styles.text_header, {marginBottom: 30}]}>ABOUT SGB</Text>
+                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>ABOUT SGB</Text>
                             <Text style={[styles.text_body, {color: '#000'}]}>
                                 Inspired by Victor Green, Spicy Green Book is a team of committed volunteers compiling a directory of 
                                 Black owned businesses and performing marketing services for these businesses free of charge. 
