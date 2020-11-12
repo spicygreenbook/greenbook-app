@@ -5,12 +5,18 @@ import { Link } from "../components/Link";
 import { RichText } from "../components/RichText"; 
 import Attribution from "../components/Attribution"; 
 import { getStyles, Theme, getContent, getData } from '../utils';
+import { ResponsiveImage } from "../components/ResponsiveImage";
 
 
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header4, section, content', {isWeb}));
+    const styles = StyleSheet.create(
+      getStyles(
+        "text_header2, text_header4, text_header5, section, content",
+        { isWeb }
+      )
+    );
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -48,59 +54,135 @@ function Page(props) {
         }
     }, [])
 
+    let numColumns =
+          dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 3;
+
+    let hasBody = content.body && content.body.join("");
+
     return (
-        <React.Fragment>
-        { pageLoading ?
-            <View style={{marginTop: 200, marginBottom: 200}}>
-                <ActivityIndicator color={Theme.green} size="large" />
+      <React.Fragment>
+        {pageLoading ? (
+          <View style={{ marginTop: 200, marginBottom: 200 }}>
+            <ActivityIndicator color={Theme.green} size="large" />
+          </View>
+        ) : (
+          <React.Fragment>
+            <View
+              style={[
+                styles.section,
+                { backgroundColor: Theme.green_bg, paddingTop: 180 },
+              ]}
+            >
+              <View
+                style={[
+                  styles.content,
+                  { flexDirection: "column", alignItems: "center" },
+                ]}
+              >
+                <Text
+                  accessibilityRole="header"
+                  aria-level="2"
+                  style={[styles.text_header2, { color: "#fff" }]}
+                >
+                  {content.page_title}
+                </Text>
+              </View>
             </View>
-        : (
-            <React.Fragment>
-                <View style={[styles.section, {backgroundColor: Theme.green_bg, paddingTop: 180}]}>
-                    <View style={[styles.content, {flexDirection: 'column', alignItems: 'center'}]}>
-                        <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
-                    </View>
-                </View>
-                <View style={[styles.section]}>
-                    <View style={styles.content}>
-                        <RichText render={content._body} isWeb={isWeb} />
-                    </View>
-                </View>
-                <View style={[styles.section]}>
-                    <View style={styles.content}>
-                        {loadingUpdates ? (
-                            <ActivityIndicator color={Theme.green} size="large" />
-                        ) : errorUpdates ? (
-                            <Text>{errorUpdates}</Text>
-                        ) : (
-                            <FlatList
-                                data={updates}
-                                ItemSeparatorComponent={highlighted => <View style={{paddingTop: 80}}></View>}
-                                renderItem={({ item, index, separators }) => (
-                                    <View style={{flexDirection: 'row'}} key={'update' + index}>
-                                        <View style={{flex: 1, flexDirection: 'row'}}>
-                                            <Image style={{width: '100%', aspectRatio: 1}} source={{uri: item.image.url + '&w=600'}} />
-                                        </View>
-                                        <View style={{flex: 3, paddingLeft: 20}}>
-                                            <Text style={styles.text_header4}>{item.title}</Text>
-                                            <Text>{item.date}</Text>
-                                            <RichText render={item._body} isWeb={isWeb} />
+            {!!hasBody && <View style={[styles.section]}>
+              <View style={styles.content}>
+                <RichText render={content._body} isWeb={isWeb} />
+              </View>
+            </View>}
+            <View style={[styles.section]} nativeID="updatesLinks">
+              <View style={styles.content}>
+                {loadingUpdates ? (
+                  <ActivityIndicator color={Theme.green} size="large" />
+                ) : errorUpdates ? (
+                  <Text>{errorUpdates}</Text>
+                ) : (
+                  <FlatList
+                    key={"cols" + numColumns}
+                    data={updates}
+                    numColumns={numColumns}
+                    ItemSeparatorComponent={(highlighted) => (
+                      <View style={{ paddingTop: 80 }}></View>
+                    )}
+                    renderItem={({ item, index, separators }) => (
+                      <View
+                        style={{ flexDirection: "row" }}
+                        key={"update" + index}
+                        style={{
+                          flex: 1 / numColumns,
+                          // justifyContent: "space-between",
+                          margin: 10,
+                          borderTopWidth: 2,
+                          borderColor: Theme.green,
+                          shadowColor: "#000",
+                          shadowOffset: {
+                            width: 0,
+                            height: 3,
+                          },
+                          shadowOpacity: 0.27,
+                          shadowRadius: 4.65,
 
-                                            {!!item.action_text && !!item.link && <Link href={item.link} button={'button_green'} title={item.action_text} />}
-
-                                            {!!(item.attribution && item.attribution.length) && <Attribution attribution={item.attribution} />}
-                                        </View>
-                                    </View>
-                                )}
-                                keyExtractor={(item, index) => 'update' + index}
-                            />
+                          elevation: 6,
+                        }}
+                      >
+                        {item.image && item.image.url && (
+                          <ResponsiveImage
+                            style={{
+                              maxWidth: "100%",
+                              width: item.image.width,
+                              height: item.image.height,
+                            }}
+                            source={{ uri: item.image.url + "&w=600" }}
+                          />
                         )}
-                    </View>
-                </View>
-            </React.Fragment>
+
+                        <View
+                          style={{
+                            flex: 1,
+                            padding: 20,
+                          }}
+                        >
+                          <View>
+                            <Text>{item.date}</Text>
+                            <Text style={styles.text_header5}>
+                              {item.title}
+                            </Text>
+                          </View>
+
+                          <View>
+                            <RichText render={item._body} isWeb={isWeb} />
+                          </View>
+
+                          {!!item.action_text && !!item.link && (
+                            <View style={{ marginTop: "auto" }}>
+                              <Link href={item.link}>
+                                <View>
+                                  <Text style={[styles.text_header4]}>
+                                    {item.action_text} &gt;
+                                  </Text>
+                                </View>
+                              </Link>
+                            </View>
+                          )}
+
+                          {!!(item.attribution && item.attribution.length) && (
+                            <Attribution attribution={item.attribution} />
+                          )}
+                        </View>
+                      </View>
+                    )}
+                    keyExtractor={(item, index) => "update" + index}
+                  />
+                )}
+              </View>
+            </View>
+          </React.Fragment>
         )}
-        </React.Fragment>
-    )
+      </React.Fragment>
+    );
 }
 
 const styles = StyleSheet.create({
