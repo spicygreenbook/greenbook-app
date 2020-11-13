@@ -180,7 +180,7 @@ export default function (props) {
                                 </View>
                             </View>
                             <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
-                                <Link href="/add-request"><Text style={styles.text_nav}>Add Listing</Text></Link>
+                                <Link href="/add"><Text style={styles.text_nav}>Add Listing</Text></Link>
                             </View>
                             <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                                 <Link href="/donate"><Text style={styles.text_nav}>Donate</Text></Link>
