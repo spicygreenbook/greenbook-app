@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, SafeAreaView } from 'react-native';
+import { View, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Theme } from '../utils';
@@ -25,7 +25,9 @@ const CustomHeader = ({ navigation, backgroundColor, dark = false }) => {
         borderColor: Theme.green,
         // backgroundColor: backgroundColor && backgroundColor
       }}>
-        <Image style={{ width: 90, height: 90, resizeMode: 'contain', marginBottom: 5 }} alt="Spicy Green Book" source={LightNav} />
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <Image style={{ width: 110, height: 110, resizeMode: 'contain' }} alt="Spicy Green Book" source={LightNav} />
+        </TouchableOpacity>
         {/* <Text style={{ fontWeight: '800', fontSize: 16, color: Theme.green }}>{route.name}</Text> */}
         <MaterialCommunityIcons color={dark ? Theme.green : 'white'} name="menu" size={34} onPress={() => navigation.openDrawer()} />
       </View>
