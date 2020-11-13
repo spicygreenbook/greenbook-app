@@ -12,7 +12,7 @@ export const HomeView = () => (
 const Stack = createStackNavigator();
 
 const HomeStack = ({ navigation }) => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
+  <Stack.Navigator>
     <Stack.Screen name="Home" component={() => <HomeView navigation={navigation} />} />
   </Stack.Navigator>
 )

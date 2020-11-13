@@ -11,7 +11,6 @@ export const Profile = () => <View><Text>Profile</Text></View>
 export const Volunteer = () => <View><Text>Volunteer</Text></View>
 
 const BottomTabNavigator = () => {
-  
   return (
     <BottomTab.Navigator
       activeColor='white'
