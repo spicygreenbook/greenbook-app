@@ -1,33 +1,30 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { Text, View, ScrollView} from "react-native";
+import { Text, View } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons, FontAwesome5, Octicons } from '@expo/vector-icons'
 import { Theme } from '../utils';
-
-import Home from '../screens/Home'
+import HomeStackNavigator from './HomeStackNavigator';
 
 const BottomTab = createMaterialBottomTabNavigator();
 
-const HomeView = () => <ScrollView>
-  <Home />
-</ScrollView>
+export const Profile = () => <View><Text>Profile</Text></View>
+export const Volunteer = () => <View><Text>Volunteer</Text></View>
 
-const Profile = () => <View><Text>Profile</Text></View>
-
-const BottomTabNavigator = (props) => {
- 
-return (
+const BottomTabNavigator = () => {
+  
+  return (
     <BottomTab.Navigator
       activeColor='white'
       barStyle={{ backgroundColor: Theme.green, height: 100, paddingTop: 20 }}
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeView}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <MaterialCommunityIcons color={color} name="home" size={22} />
         }}
       />
+
       <BottomTab.Screen
         name="Browse"
         component={Profile}
@@ -35,6 +32,7 @@ return (
           tabBarIcon: ({ color }) => <MaterialIcons color={color} name="search" size={22} />
         }}
       />
+
       <BottomTab.Screen
         name="Join"
         component={Profile}
@@ -43,14 +41,15 @@ return (
         }}
       />
 
-    <BottomTab.Screen
+      <BottomTab.Screen
         name="Volunteer"
-        component={Profile}
+        component={Volunteer}
         options={{
           tabBarIcon: ({ color }) => <FontAwesome5 color={color} name="hands-helping" size={22} />
         }}
-      />    
+      />   
     </BottomTab.Navigator>
   )
 }
+
 export default BottomTabNavigator;
