@@ -9,7 +9,11 @@ import { getStyles, Theme, getContent } from '../utils';
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header4, section, content', {isWeb}));
+    const styles = StyleSheet.create(
+      getStyles("text_header2, text_header3, section, content", {
+        isWeb,
+      })
+    );
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -62,7 +66,7 @@ function Page(props) {
                 </View>
                 {isWeb && <View style={[styles.section]}>
                     <View style={styles.content}>
-                        <Text style={styles.text_header4}>Contact Form</Text>
+                        <Text style={styles.text_header3}>Contact Form</Text>
                         <div className="hb-p-5f0282b0a1f62a61eedd0881-2" style={{display: 'inline-block', maxWidth: '100%', minWidth: 600, boxSizing: 'border-box'}}/>
                         <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
                     </View>
