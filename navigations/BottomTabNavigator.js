@@ -1,8 +1,8 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Text, View } from "react-native";
-import { MaterialCommunityIcons, MaterialIcons, FontAwesome5, Octicons } from '@expo/vector-icons'
+import { Icon } from "native-base";
+import { StyleSheet } from "react-native";
 import { Theme } from '../utils';
 import HomeStackNavigator from './HomeStackNavigator';
 import BrowseStackNavigator from './BrowseStackNavigator';
@@ -44,7 +44,7 @@ const BottomTabNavigator = () => {
         name="Home"
         component={HomeStackNavigator}
         options={{
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons color={color} name="home" size={22} />
+          tabBarIcon: ({ color }) => <Icon style={styles.default} name="home" size={22} />
         }}
       />
 
@@ -52,7 +52,7 @@ const BottomTabNavigator = () => {
         name="Browse"
         component={BrowseStackNavigator}
         options={{
-          tabBarIcon: ({ color }) => <MaterialIcons color={color} name="search" size={22} />
+          tabBarIcon: ({ color }) => <Icon type="MaterialIcons" style={styles.default} name="search" size={22} />
         }}
       />
 
@@ -60,7 +60,7 @@ const BottomTabNavigator = () => {
         name="Join"
         component={JoinStack}
         options={{
-          tabBarIcon: ({ color }) => <Octicons color={color} name="request-changes" size={22} />
+          tabBarIcon: ({ color }) => <Icon type="Octicons" style={styles.default} name="request-changes" size={22} />
         }}
       />
 
@@ -68,11 +68,18 @@ const BottomTabNavigator = () => {
         name="Volunteer"
         component={VolunteerStack}
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome5 color={color} name="hands-helping" size={22} />
+          tabBarIcon: ({ color }) => <Icon type="FontAwesome5" style={styles.default} name="hands-helping" size={22} />
         }}
       />   
     </BottomTab.Navigator>
   )
-}
+};
+
+const styles = StyleSheet.create({
+  default: {
+    color: '#ffffff',
+    fontSize: 22
+  }
+});
 
 export default BottomTabNavigator;

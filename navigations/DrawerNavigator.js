@@ -1,8 +1,8 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";;
-import { View, Text } from 'react-native';
 import { Theme } from '../utils';
 import { WithScrollView } from './helper';
+import CustomDrawer from './CustomDrawer';
 import CustomHeader from './CustomHeader';
 import BottomTabNavigator from './BottomTabNavigator';
 import Donate from '../screens/Donate';
@@ -15,14 +15,9 @@ import Contact from '../screens/Contact';
 
 const Drawer = createDrawerNavigator();
 
-const Search = () => (
-  <View>
-    <Text>Home</Text>
-  </View>
-)
-
 const DrawerNavigator = () => (
   <Drawer.Navigator
+    drawerContent={CustomDrawer}
     drawerPosition="right" 
     drawerStyle={{ 
       backgroundColor: Theme.green
@@ -32,7 +27,8 @@ const DrawerNavigator = () => (
       inactiveTintColor: 'white', 
       activeTintColor: 'black',
       activeBackgroundColor: 'white'
-    }} 
+    }}
+    
   >
     <Drawer.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
     <Drawer.Screen name="Donate" component={WithScrollView(Donate)}  />
