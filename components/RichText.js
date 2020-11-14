@@ -33,7 +33,7 @@ function renderHTML(markup, spans, isWeb, dispatch) {
 
     // special logic if a link is on it's own line it should be a button, otherwise it should look like a regular hyperlink within a paragraph of text
     return Object.keys(parts).map((part, i, partsAr) => {
-        console.log(parts[part], segment_map[i], 'parts length', partsAr, 'segments', segment_map[i].start);
+        //console.log(parts[part], segment_map[i], 'parts length', partsAr, 'segments', segment_map[i].start);
         let button = false;
         if (partsAr.length <= 2 && segment_map[i].start === 0) {
             button = true;
@@ -49,7 +49,7 @@ function renderHTML(markup, spans, isWeb, dispatch) {
         return segment_map[i].type === 'hyperlink' && button ? (
             <Link href={url} button={'button_green'} title={parts[part] || ''} />
         ) : segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} onPress={e => {
-            console.log('link to', url)
+            //console.log('link to', url)
             const external = url.slice(0,1) !== '/';
 
             if (!external) {
