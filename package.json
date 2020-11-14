@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.13",
     "@react-native-community/masked-view": "0.1.10",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.9.0",
@@ -12,6 +13,7 @@
     "next": "9.3.5",
     "next-fonts": "^1.4.0",
     "next-optimized-images": "^2.6.2",
+    "prismic-javascript": "^3.0.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
