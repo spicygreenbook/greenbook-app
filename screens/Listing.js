@@ -42,7 +42,7 @@ function Page(props) {
 
     let primaryImages = content ? content.images.filter(_image => _image.image).map(_image => {
         let image = _image.image;
-        console.log('image', image)
+        //console.log('image', image)
         image.ratio = image.height / image.width;
         let ratioScore = Math.round(Math.abs(0.56 - image.ratio) * 1.3);
         image.imageScore = ratioScore
@@ -50,9 +50,9 @@ function Page(props) {
     }).sort((a, b) => {
         return a.imageScore - b.imageScore
     }) : []
-    primaryImages.forEach((image, i) => {
+    /*primaryImages.forEach((image, i) => {
         console.log('i', i, 'score', image.imageScore, 'ratio', image.ratio, 'widthxh', image.width, image.height)
-    })
+    })*/
 
     return (
         <React.Fragment>
