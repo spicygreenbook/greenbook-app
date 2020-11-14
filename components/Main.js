@@ -46,28 +46,31 @@ function Main(props) {
     }
   };
 
-  const [ fontsReady, fontsError ] = useFonts({
-      'ApercuMedium': {
-          uri: require('../public/fonts/ApercuRegular.ttf'),
-          display: 'fallback',
-      },
-      'ApercuLight': {
-          uri: require('../public/fonts/ApercuLight.ttf'),
-          display: 'fallback',
-      },
-      'KnockoutBold': {
-          uri: require('../public/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf'),
-          display: 'fallback',
-      },
-      'KnockoutWelterWeight': {
-          uri: require('../public/fonts/Knockout_HTF50-Welterweight_Regular.otf'),
-          display: 'fallback',
-      },
-      'KnockoutFeatherWeight': {
-          uri: require('../public/fonts/Knockout_HTF48-Featherweight_Regular.otf'),
-          display: 'fallback',
-      }
-  });
+  let fontsReady = true;
+  if (!isWeb) {
+    const [ fontsReady, fontsError ] = useFonts({
+        'ApercuMedium': {
+            uri: require('../public/fonts/ApercuRegular.ttf'),
+            display: 'fallback',
+        },
+        'ApercuLight': {
+            uri: require('../public/fonts/ApercuLight.ttf'),
+            display: 'fallback',
+        },
+        'KnockoutBold': {
+            uri: require('../public/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf'),
+            display: 'fallback',
+        },
+        'KnockoutWelterWeight': {
+            uri: require('../public/fonts/Knockout_HTF50-Welterweight_Regular.otf'),
+            display: 'fallback',
+        },
+        'KnockoutFeatherWeight': {
+            uri: require('../public/fonts/Knockout_HTF48-Featherweight_Regular.otf'),
+            display: 'fallback',
+        }
+    });
+  }
 
   useEffect(() => {
     Dimensions.addEventListener("change", onChangeScreenSize);
@@ -108,7 +111,7 @@ function Main(props) {
     })
   }
 
-  if (!fontsReady) {
+  if (!fontsReady && !isWeb) {
     return ( <Text>Loading...</Text> )
   }
 

@@ -28,6 +28,10 @@ const CheckoutForm = (props) => {
     const stripe = useStripe();
     const elements = useElements();
 
+    if (typeof document === 'undefined') {
+        console.log('is not web do not continue');
+        return;
+    }
     console.log("state reset for some reason");
 
     const [success, setSuccess] = useState(false);
