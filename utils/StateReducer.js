@@ -9,11 +9,6 @@ export const StateReducer = (state, action) => {
         ...state,
         view: action.view
       };
-    case 'fontsReady':
-      return {
-        ...state,
-        fontsReady: action.value
-      };
     case 'setDimensions':
       return {
         ...state,
@@ -53,7 +48,7 @@ export const StateReducer = (state, action) => {
 export const InitialState = (props) => {
   const isWeb = Platform.OS === 'web';
   let url = '';
-  let get_vew = '/';
+  let get_view = '/';
   let theme = 'light';
 
   let searchConfig = {
@@ -73,26 +68,26 @@ export const InitialState = (props) => {
   }
 
   if (isWeb && typeof window !== 'undefined') {
-      url = window.location.href;
+      url = props.url ? props.url : window.location.href;
       if (window.location.pathname.length > 1) {
         if (window.location.pathname.split('?')[0]) {
-          get_vew = window.location.pathname.split('?')[0];
+          get_view = window.location.pathname.split('?')[0];
         }
       }
   }
+  if (props.url) { get_view = props.url; }
 
-  if (get_vew && get_vew.length > 1 && get_vew != '/' && get_vew != '') {
+  if (get_view && get_view.length > 1 && get_view != '/' && get_view != '') {
     theme = 'light'
   } else {
     theme = 'dark'
   }
-
+  console.log('state view', get_view)
   return {
-    view: get_vew,
+    view: get_view,
     isWeb: isWeb,
     theme: theme,
     url: url,
-    fontsReady: false,
     searchConfig: searchConfig,
     dimensions: {
         width: Dimensions.get("window").width,

@@ -73,7 +73,7 @@ export async function getStaticPaths() {
         paths: listings.map((biz) => {
             //console.log('piz', biz)
             return {
-                params: { name: biz.uid },
+                params: { name: biz.uid, url: '/' + biz.uid },
             };
         }),
         fallback: false,

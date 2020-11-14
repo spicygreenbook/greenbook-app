@@ -44,7 +44,8 @@ export async function getStaticProps(context) {
         props: {
             listings: listings,
             press: press,
-            updates: updates
+            updates: updates,
+            url: '/'
         },
     };
 }

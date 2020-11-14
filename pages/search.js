@@ -29,7 +29,7 @@ export async function getStaticProps(context) {
       type: 'listing'
     });
     return {
-        props: {listings: listings}
+        props: {listings: listings, url: '/search'}
     };
 }
 

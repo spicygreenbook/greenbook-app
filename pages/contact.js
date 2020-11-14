@@ -42,9 +42,9 @@ function App(props) {
 
 export async function getStaticProps(context) {
     let content = await getContent({type: 'content', uid: 'contact', ref_id: context.preview || ''});
-    console.log('content', content)
+
     return {
-        props: {content: content && content.content || {}}
+        props: {content: content && content.content || {}, url: '/contact'}
     };
 }
 
