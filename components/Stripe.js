@@ -30,7 +30,7 @@ const CheckoutForm = (props) => {
 
     if (typeof document === 'undefined') {
         console.log('is not web do not continue');
-        return;
+        return <span />;
     }
     console.log("state reset for some reason");
 
