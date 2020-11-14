@@ -152,7 +152,9 @@ export default function (props) {
                                 </View>
                                 <View style={{
                                     position: 'absolute', top: 60, right: 0, backgroundColor: '#fff', minWidth: 160, padding: 20,
-                                    opacity: active === 'about' ? 1 : 0, display: active === 'about' ? '' : 'none'
+                                    opacity: active === 'about' ? 1 : 0, display: active === 'about' ? '' : 'none',
+                                    shadowOpacity: 0.4,
+                                    shadowRadius: 10,
                                 }} onPress={e => {
                                     if (isWeb) {
                                         clearTimeout(menuIsClickedTimer);
