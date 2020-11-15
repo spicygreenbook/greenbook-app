@@ -47,7 +47,6 @@ function Page(props) {
             getData({
                 type: 'press'
             }).then(press => {
-                console.log('press izz', press)
                 setLoadingPress(false);
                 setPress(press)
             }).catch(err => {
@@ -63,7 +62,6 @@ function Page(props) {
             getData({
                 type: 'updates'
             }).then(updates => {
-                console.log('updates izz', updates)
                 setLoadingUpdates(false);
                 setUpdates(updates)
             }).catch(err => {
@@ -82,7 +80,6 @@ function Page(props) {
             getData({
                 type: 'listing'
             }).then(listings => {
-                console.log('Listings izz', listings)
                 setLoadingListings(false);
                 setListings(listings)
             }).catch(err => {

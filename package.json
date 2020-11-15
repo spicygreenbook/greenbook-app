@@ -1,16 +1,18 @@
 {
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.2",
+    "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@stripe/react-stripe-js": "^1.1.2",
-    "@stripe/stripe-js": "^1.9.0",
-    "aws-sdk": "^2.755.0",
-    "expo": "~38.0.0",
+    "@stripe/stripe-js": "^1.11.0",
+    "aws-sdk": "^2.792.0",
+    "expo": "^38.0.10",
     "expo-blur": "~8.1.2",
     "expo-font": "~8.2.1",
     "imagemin-optipng": "^8.0.0",
-    "isomorphic-unfetch": "^3.0.0",
+    "isomorphic-unfetch": "^3.1.0",
     "next": "9.3.5",
-    "next-fonts": "^1.4.0",
+    "next-fonts": "^1.5.1",
     "next-optimized-images": "^2.6.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
@@ -22,11 +24,11 @@
     "react-native-svg": "^12.1.0",
     "react-native-web": "0.11.7",
     "react-native-webview": "^9.4.0",
-    "stripe": "^8.96.0"
+    "stripe": "^8.121.0"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
-    "@expo/next-adapter": "^2.1.0"
+    "@expo/next-adapter": "^2.1.45"
   },
   "scripts": {
     "build": "next build",

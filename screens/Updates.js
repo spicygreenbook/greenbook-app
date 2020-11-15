@@ -43,7 +43,6 @@ function Page(props) {
             getData({
                 type: 'updates'
             }).then(updates => {
-                console.log('updates izz', updates)
                 setLoadingUpdates(false);
                 setUpdates(updates)
             }).catch(err => {

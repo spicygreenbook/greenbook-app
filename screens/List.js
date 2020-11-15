@@ -231,14 +231,14 @@ function Page(props) {
     const [ location, setLocation ] = useState(qs.near || '');
     const [ query, setQuery ] = useState(qs.q || '');
     const [ geoLocation, setGeoLocation ] = useState();
-    const [ gettingGeo, setGettingGeo ] = useState(true);
+    const [ gettingGeo, setGettingGeo ] = useState(!!(qs.near || '').trim());
     const [ pushInterval, setPushInterval ] = useState(1);
     const fixSearch = (words) => {
         return (words || '').replace(/\+/, ' ').replace(/[^A-Za-z0-9 ]/gi, '');
     }
     const [search, setSearch] = useState(fixSearch(query));
     const [processedSearchTerms, setProcessedSearchTerms] = useState(searchSeries(fixSearch(query)));
-    const [filteredList, setFilteredList] = useState();
+    const [filteredList, setFilteredList] = useState(props.listings ? listings.filter(filter).sort(sortDistance).sort(sortSearchRank) : null);
 
     if (!props.listings) {
         useEffect(() => {
@@ -283,6 +283,8 @@ function Page(props) {
         },
         [ listings, gettingGeo, geoLocation, processedSearchTerms ]
     );
+
+    console.log('pageLoading', pageLoading, '!filteredList', !filteredList)
 
     return (
         <React.Fragment>

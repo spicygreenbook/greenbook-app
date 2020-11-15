@@ -1,7 +1,7 @@
 import { Platform, Dimensions } from 'react-native';
 
 export const StateReducer = (state, action) => {
-  console.log('state', state, 'action', action)
+  //console.log('state', state, 'action', action)
   switch (action.type) {
     case 'setView':
       console.log('set view called', action)
