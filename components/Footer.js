@@ -74,9 +74,9 @@ export default function(props) {
                         </a>
                     </div>
                     <div style={{marginTop: 40}}>
-                        
+                        <a href="https://www.re-store.info/" target="_blank">
                             <img width="160" src="https://images.prismic.io/spicygreenbook/90c9280e-5f5f-4c96-9b22-40b5b28cb5d6_98997417-54959080-24e9-11eb-95a7-5e6da055dea7.png?auto=compress,format&w=400" alt="Restore LA" />
-                        
+                        </a>
                     </div>
                 </div>}
             </View>
