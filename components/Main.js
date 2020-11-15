@@ -31,6 +31,7 @@ function Main(props) {
 
   const [{ view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig }, dispatch] = useStateValue();
   const [ isScrolled, setIsScrolled ] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   useEffect(() => {
     console.log('dispatches')
@@ -110,11 +111,12 @@ function Main(props) {
 
   if (isWeb) {
     useEffect(() => {
+      setForceUpdate(forceUpdate + 1);
       window.addEventListener('scroll', scrollEventListener, false)
       return () => {
         window.removeEventListener('scroll', scrollEventListener, false)
       }
-    })
+    }, []);
   }
 
   if (!isWeb && !fontsReady) {
@@ -142,7 +144,7 @@ function Main(props) {
   }
 
   return (
-      <View style={isWeb ? {position: 'absolute', top: 0, right: 0, left: 0, bottom: 0, flex: 1}: {flex: 1}}>
+      <View key={forceUpdate} style={isWeb ? {position: 'absolute', top: 0, right: 0, left: 0, bottom: 0, flex: 1}: {flex: 1}}>
           {lightbox && lightboxConfig.images ? (
             <React.Fragment>
               <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
