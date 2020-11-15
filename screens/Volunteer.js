@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react-native';
 import { Link } from "../components/Link"; 
+import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
 
@@ -35,11 +36,7 @@ function Page(props) {
             </View>
         : (
             <React.Fragment>
-                <View style={[styles.section, {backgroundColor: Theme.green_bg, paddingTop: 180}]}>
-                    <View style={[styles.content, {flexDirection: 'column', alignItems: 'center'}]}>
-                        <Text accessibilityRole="header" aria-level="2" style={[styles.text_header2, {color: '#fff'}]}>{content.page_title}</Text>
-                    </View>
-                </View>
+                <PageTitle title={content.page_title} />
                 <View style={[styles.section, {paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'}/>
