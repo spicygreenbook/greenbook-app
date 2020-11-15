@@ -268,7 +268,7 @@ function SGBMap(props) {
                 let addr = listing.address.join("\n").trim();
                 let parsed = parseAddress(addr);
                 if (addr && (!parsed.city || !parsed.state || (!statesObj[parsed.state.toLowerCase()] && !statesObjRev[parsed.state.toLowerCase().replace(/[^a-z]/g, '')]))) {
-                    console.log('addr', addr, 'parsed', parsed)
+                    //console.log('addr', addr, 'parsed', parsed)
                     problem_list.push({
                         id: listing.id,
                         name: listing.name.join(''),
@@ -288,10 +288,6 @@ function SGBMap(props) {
                     if (_state) {
                         _state = _state.replace(/[^a-z]/g, '');
                     }
-
-                if (listing.uid === 'blondery') {
-                    console.log('blodery', parsed, _city, _state)
-                }
 
                     if (_city && _state) {
                         if (!listingsByState[_state]) {
@@ -313,10 +309,10 @@ function SGBMap(props) {
                         listingsByState[_state][_city]._count++;
                         listingsByState[_state][_city]._listings.push(listing)
                     } else {
-                        console.log("missing city and state mapped on", listing.id, listing.uid, parsed)
+                        //console.log("missing city and state mapped on", listing.id, listing.uid, parsed)
                     }
                 } else {
-                    console.log("missing city and state on", listing.id, listing.uid, parsed)
+                    //console.log("missing city and state on", listing.id, listing.uid, parsed)
                 }
             }
         })
@@ -348,7 +344,7 @@ function SGBMap(props) {
                     })}
                 </View>
             </ScrollView>}
-            <Svg viewBox="0 0 679.37 521.8" height={dimensions.width * 0.76806} width={'100%'} style={{width: '100%'}}>
+            <Svg viewBox="0 0 679.37 521.8" height={dimensions.width ? dimensions.width * 0.76806 : '100%'} width={'100%'} style={{width: '100%'}}>
               <G nativeID="mapStates" fill="#000">
                 {states.map((state,s) => {
 
@@ -361,9 +357,9 @@ function SGBMap(props) {
                     }
 
                     return state.d.map((d, i) => (
-                        <G  onPress={e => {
+                        <G key={state.id + i + 'fill'} onPress={e => {
                             if (mappedState) {
-                                console.log('mapped state', mappedState)
+                                //console.log('mapped state', mappedState)
                                 setCurState(mappedState);
                             } else {
                                 setCurState('');
