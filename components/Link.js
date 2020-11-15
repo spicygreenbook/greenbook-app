@@ -21,6 +21,7 @@ export function Link(props) {
             Linking.openURL(props.href || '')
         }
     }
+    let webProps = isWeb && props.download ? {download: props.download} : {};
 
     if (props.button) {
         const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
@@ -33,7 +34,7 @@ export function Link(props) {
                 </View>
             </a>
         </NextLink>
-        : isWeb && external ? <a href={props.href || ''} target="_blank" style={{textDecoration: 'none'}}>
+        : isWeb && external ? <a href={props.href || ''} target="_blank" style={{textDecoration: 'none'}} {...webProps}>
             <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
                 <View style={styles[props.button]}>
                     <Text style={styles[props.button + '_text']}>{props.title}</Text>
@@ -57,7 +58,7 @@ export function Link(props) {
                         {props.children}
                     </a>
                 </NextLink>
-            : <a href={props.href || ''} style={{textDecoration: 'none'}} target="_blank">
+            : <a href={props.href || ''} style={{textDecoration: 'none'}} target="_blank" {...webProps}>
                 {props.children}
             </a>
         } else {
@@ -67,7 +68,7 @@ export function Link(props) {
 
     return (
         isWeb ? <NextLink href={props.href || ''}>
-            <a href={props.href || ''} onClick={handleURLFully}>
+            <a href={props.href || ''} onClick={handleURLFully} {...webProps}>
                 {props.title}
             </a>
         </NextLink>
