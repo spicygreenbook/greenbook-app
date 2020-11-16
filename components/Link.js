@@ -45,7 +45,7 @@ export function Link(props) {
         <TouchableOpacity onPress={handleURLFully}>
             <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
                 <View style={styles[props.button]}>
-                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                    <Text style={styles[props.button + '_text']}>{props.title || ''}</Text>
                 </View>
             </View>
         </TouchableOpacity>

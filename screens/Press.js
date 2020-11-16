@@ -39,7 +39,7 @@ function Page(props) {
             }).then(press => {
                 console.log('press izz', press)
                 setLoadingPress(false);
-                setUpdates(press)
+                setPress(press)
             }).catch(err => {
                 console.error(err);
                 setLoadingPress(false);
@@ -106,7 +106,7 @@ function Page(props) {
                                         }
                                     </View>
                                 )}
-                                keyExtractor={(item, index) => 'update' + index}
+                                keyExtractor={(item, index) => 'press' + index}
                             />
                         )}
                     </View>
