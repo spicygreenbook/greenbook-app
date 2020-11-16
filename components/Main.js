@@ -26,6 +26,8 @@ import { getStyles, getImage } from '../utils';
 import { Dimensions, Platform } from 'react-native';
 import * as Font from 'expo-font';
 
+// Navigator
+import RootNavigator from '../navigations/RootNavigator';
 
 function Main(props) {
 
@@ -144,7 +146,7 @@ function Main(props) {
       )
   }
 
-  return (
+  return isWeb ? (
       <View key={forceUpdate} style={isWeb ? {position: 'absolute', top: 0, right: 0, left: 0, bottom: 0, flex: 1}: {flex: 1}}>
           {lightbox && lightboxConfig.images ? (
             <React.Fragment>
@@ -184,7 +186,7 @@ function Main(props) {
             </React.Fragment>
           )}
       </View>
-  );
+  ) : <RootNavigator />
 }
 
 
