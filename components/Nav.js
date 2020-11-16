@@ -85,6 +85,8 @@ export default function (props) {
         }
     }, [props.isScrolled])
 
+    console.log('view', view)
+
     return (
         <View
           nativeID="nav"

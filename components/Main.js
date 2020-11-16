@@ -35,12 +35,13 @@ function Main(props) {
   const [ isScrolled, setIsScrolled ] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
 
+
+/* debug purposes figureing out dispatches causing rerender  
   useEffect(() => {
     console.log('dispatches')
     console.log(view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig);
   }, [view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig]);
-
-  console.log('main render view is', view)
+*/
   const styles = StyleSheet.create(getStyles('body', {isWeb}));
 
   const onChangeScreenSize = ({ set_window, set_screen }) => {
@@ -95,8 +96,8 @@ function Main(props) {
     }
     if (theme !== _theme) {
       console.log('view has changed to', view);
-      console.log('theme', theme)
-      dispatch({type: 'setTheme', value: theme})
+      console.log('theme changed to', _theme)
+      dispatch({type: 'setTheme', value: _theme})
     }
   }, [view])
 
