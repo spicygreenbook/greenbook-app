@@ -48,8 +48,8 @@ export default function (props) {
             width: dimensions.width
         },
         bottom: {
-            height: dimensions.height * 0.2,
-            width: dimensions.height * 0.2
+            height: dimensions.height * 0.15,
+            width: dimensions.height * 0.15
         }
     }
 
@@ -61,8 +61,60 @@ export default function (props) {
         }, 10)
     }, [])
 
+    const styles = StyleSheet.create({
+        thumbnail: {
+            position: 'absolute',
+            display: 'block',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '33%',
+            backgroundColor: '#191919'
+        },
+
+        thumbnailImages: {
+            paddingLeft: '20px',
+            paddingRight: '20px',
+            paddingTop: '25px'
+        },
+
+        thumbnailBackground: {
+            width: config.bottom.width,
+            height: config.bottom.height,
+            marginTop: '20px',
+            boxShadow: 'black 7px 10px 10px 4px'
+
+        },
+
+        chevronLeft: {
+            backgroundColor: 'black',
+            width: '5rem',
+            height: '5rem',
+            borderRadius: '50%',
+            textAlign: 'center',
+            paddingTop: '0.9rem',
+            paddingRight: '0.3rem',
+            opacity: '.7'
+        },
+
+        chevronRight: {
+            backgroundColor: 'black',
+            width: '5rem',
+            height: '5rem',
+            borderRadius: '50%',
+            textAlign: 'center',
+            paddingTop: '0.9rem',
+            paddingLeft: '0.3rem',
+            opacity: '.7'
+        },
+
+
+
+
+    })
+
     return <View style={{ position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: '#000', zIndex: 6 }}>
-        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '80%' }}>
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '67%' }}>
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -71,12 +123,12 @@ export default function (props) {
                 onViewableItemsChanged={viewableItemsChangedImage}
                 viewabilityConfig={viewableItemsChangedConfigImage}
                 renderItem={({ item, index, separators }) => (
-                    <View style={{position: 'relative'}}>
+                    <View style={{ position: 'relative' }}>
                         {isWeb && <React.Fragment>
-                                <ImageBackground source={{ uri: item.url + '&w=' + responsiveImageWidthCDN({ containerWidth: config.top.width }) }} style={StyleSheet.absoluteFill} resizeMode={'cover'} />
-                                <BlurView intensity={100} style={StyleSheet.absoluteFill}>
-                                </BlurView>
-                            </React.Fragment>
+                            <ImageBackground source={{ uri: item.url + '&w=' + responsiveImageWidthCDN({ containerWidth: config.top.width }) }} style={StyleSheet.absoluteFill} resizeMode={'cover'} />
+                            <BlurView intensity={100} style={StyleSheet.absoluteFill}>
+                            </BlurView>
+                        </React.Fragment>
                         }
                         <ImageBackground source={{ uri: item.url + '&w=' + responsiveImageWidthCDN({ containerWidth: config.top.width }) }} style={{ flex: 1, width: config.top.width, height: '100%' }} resizeMode={'contain'} />
                     </View>
@@ -84,8 +136,9 @@ export default function (props) {
                 keyExtractor={(item, index) => 'image' + index}
             />
         </View>
-        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '20%' }}>
+        <View style={styles.thumbnail}>
             <FlatList
+                // style={{ flexShrink: '0' }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={images}
@@ -93,27 +146,33 @@ export default function (props) {
                 onViewableItemsChanged={viewableItemsChangedImage}
                 viewabilityConfig={viewableItemsChangedConfigImage}
                 renderItem={({ item, index, separators }) => (
-                    <View>
+                    <View style={styles.thumbnailImages}>
                         <TouchableOpacity onPress={e => {
                             scrollToIndexImage({ animated: true, index: index }, images.length)
                         }}>
-                            <ImageBackground source={{ uri: item.url + '&w=400' }} style={{ width: config.bottom.width, height: config.bottom.height }}>
+                            <ImageBackground source={{ uri: item.url + '&w=400' }} style={styles.thumbnailBackground}>
                             </ImageBackground>
                         </TouchableOpacity>
                     </View>
                 )}
                 keyExtractor={(item, index) => 'image' + index}
             />
-            <View style={{ position: 'absolute', top: '50%', marginTop: -24, left: 10, right: 10, height: 0, flex: 1 }}>
-                <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                    <View style={{ width: 48, height: 48 }}>
+            <View>
+                <View style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                    top: '-35rem',
+                    marginLeft: '1rem',
+                    marginRight: '1rem',
+                }}>
+                    <View style={{ width: 100, height: 100, alignItems: 'flex-end' }}>
                         <TouchableOpacity onPress={(e) => scrollToIndexImage({ animated: true, index: currentIndexImage - 1 }, images.length)}>
-                            <Entypo name="chevron-thin-left" size={48} color="#fff" />
+                            <Entypo name="chevron-thin-left" size={48} color="#fff" style={styles.chevronLeft} />
                         </TouchableOpacity>
                     </View>
-                    <View style={{ width: 48, height: 48, alignItems: 'flex-end' }}>
+                    <View style={{ width: 100, height: 100, alignItems: 'flex-end' }}>
                         <TouchableOpacity onPress={(e) => scrollToIndexImage({ animated: true, index: currentIndexImage + 1 }, images.length)}>
-                            <Entypo name="chevron-thin-right" size={48} color="#fff" />
+                            <Entypo name="chevron-thin-right" size={48} color="#fff" style={styles.chevronRight} />
                         </TouchableOpacity>
                     </View>
                 </View>
