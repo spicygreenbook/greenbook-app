@@ -304,7 +304,7 @@ function Page(props) {
                             <Search mode="results" />
                         </View>
                         <View>
-                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
+                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={props.navigation} />)}
                         </View>
                     </View>
                     {dimensions.width >= 800 &&

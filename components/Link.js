@@ -20,6 +20,10 @@ export function Link(props) {
         } else {
             Linking.openURL(props.href || '')
         }
+
+        if(!isWeb && props.to) {
+            props.navigation.navigate(props.to, { screen: props.routeName ? props.routeName : ''  });
+        }
     }
     let webProps = isWeb && props.download ? {download: props.download} : {};
 
