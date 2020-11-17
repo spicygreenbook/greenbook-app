@@ -61,50 +61,52 @@ function Page(props) {
         : (
             <React.Fragment>
                 <PageTitle title={content.page_title} />
-                <View style={[styles.section]}>
+                <View style={[styles.section, { paddingBottom: 48, paddingTop: 48 }]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
                 </View>
-                <View style={[styles.section]}>
-                    <View style={styles.content}>
+                <View style={[styles.section, { paddingTop: isWeb ? 48 : 0 }]}>
+                    <View style={[styles.content]}>
                         {loadingStaff ? (
                             <ActivityIndicator color={Theme.green} size="large" />
                         ) : errorStaff ? (
                             <Text>{errorStaff}</Text>
                         ) : (
-                            <FlatList
-                                data={staff}
-                                ItemSeparatorComponent={highlighted => <View style={{paddingTop: isWeb ? 120 : 80}}></View>}
-                                renderItem={({ item, index, separators }) => (
-                                    <TeamListSection key={ 'update' + index } item={item} reverse={index % 2 === 0 ? true : false } />
-                                    // // Body start here
-                                    // <View style={{
-                                    //     display: 'flex', 
-                                    //     flexDirection: 'row', 
-                                    // }} key={'update' + index}>
-                                    //     <View style={{flex: 1, height: 400 }}>
-                                    //         <ResponsiveImage style={{width: item.image.width, height: item.image.height, aspectRatio: 1}} source={{uri: item.image.url + '&w=800'}} />
-                                    //     </View>
+                            staff.map((item, index) => <TeamListSection key={ 'update' + index } item={item} reverse={index % 2 === 0 ? true : false } />)
+                            
+                            // <FlatList
+                            //     data={staff}
+                            //     ItemSeparatorComponent={highlighted => <View style={{paddingTop: isWeb ? 120 : 80}}></View>}
+                            //     renderItem={({ item, index, separators }) => (
+                            //         <TeamListSection sKey={ 'update' + index } item={item} reverse={index % 2 === 0 ? true : false } />
+                            //         // // Body start here
+                            //         // <View style={{
+                            //         //     display: 'flex', 
+                            //         //     flexDirection: 'row', 
+                            //         // }} key={'update' + index}>
+                            //         //     <View style={{flex: 1, height: 400 }}>
+                            //         //         <ResponsiveImage style={{width: item.image.width, height: item.image.height, aspectRatio: 1}} source={{uri: item.image.url + '&w=800'}} />
+                            //         //     </View>
 
-                                    //     <View style={{flex: 3, paddingLeft: 20}}>
+                            //         //     <View style={{flex: 3, paddingLeft: 20}}>
                                             
-                                    //         <Text style={styles.text_header3}>{item.title}</Text>
-                                    //         <Text style={styles.text_header4}>{item.name}</Text>
-                                    //         <RichText render={item._description} isWeb={isWeb} />
-                                    //         { staff.links && staff.links.length && staff.links[0].link && staff.links.map(link => (
-                                    //             <View>
-                                    //                 <Text><b>{link.link_name}</b>: {link.link_description}</Text>
-                                    //                 <Link href={link.link}>{link.link}</Link>
-                                    //             </View>
-                                    //           ))
-                                    //         }
-                                    //     </View>
+                            //         //         <Text style={styles.text_header3}>{item.title}</Text>
+                            //         //         <Text style={styles.text_header4}>{item.name}</Text>
+                            //         //         <RichText render={item._description} isWeb={isWeb} />
+                            //         //         { staff.links && staff.links.length && staff.links[0].link && staff.links.map(link => (
+                            //         //             <View>
+                            //         //                 <Text><b>{link.link_name}</b>: {link.link_description}</Text>
+                            //         //                 <Link href={link.link}>{link.link}</Link>
+                            //         //             </View>
+                            //         //           ))
+                            //         //         }
+                            //         //     </View>
 
-                                    // </View>
-                                )}
-                                keyExtractor={(item, index) => 'update' + index}
-                            />
+                            //         // </View>
+                            //     )}
+                            //     keyExtractor={(item, index) => 'update' + index}
+                            // />
                         )}
                     </View>
                 </View>
