@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { responsiveImageWidthCDN } from '../utils';
 import { BlurView } from 'expo-blur';
+import styled from 'styled-components';
 
 let currentIndexImage = 0;
 const viewableItemsChangedImage = ({ viewableItems, changed }) => {
@@ -44,12 +45,12 @@ export default function (props) {
 
     let config = {
         top: {
-            height: dimensions.height * 0.8,
+            height: dimensions.height * 0.70,
             width: dimensions.width
         },
         bottom: {
-            height: dimensions.height * 0.15,
-            width: dimensions.height * 0.15
+            height: dimensions.height * 0.2,
+            width: dimensions.height * 0.2
         }
     }
 
@@ -68,7 +69,7 @@ export default function (props) {
             bottom: 0,
             left: 0,
             right: 0,
-            height: '33%',
+            height: '30%',
             backgroundColor: '#191919'
         },
 
@@ -81,7 +82,8 @@ export default function (props) {
         thumbnailBackground: {
             width: config.bottom.width,
             height: config.bottom.height,
-            marginTop: '20px',
+            marginTop: '15px',
+            marginBottom: '40px',
             boxShadow: 'black 7px 10px 10px 4px'
 
         },
@@ -113,8 +115,19 @@ export default function (props) {
 
     })
 
+    const Hover = styled.div`
+        &:hover {
+            transform: scale(1.2);
+        }
+        
+        &:active {
+            opacity: .5;
+        }
+
+    `;
+
     return <View style={{ position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: '#000', zIndex: 6 }}>
-        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '67%' }}>
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '70%' }}>
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -138,7 +151,7 @@ export default function (props) {
         </View>
         <View style={styles.thumbnail}>
             <FlatList
-                // style={{ flexShrink: '0' }}
+                style={{ flexShrink: '0' }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={images}
@@ -150,14 +163,16 @@ export default function (props) {
                         <TouchableOpacity onPress={e => {
                             scrollToIndexImage({ animated: true, index: index }, images.length)
                         }}>
-                            <ImageBackground source={{ uri: item.url + '&w=400' }} style={styles.thumbnailBackground}>
-                            </ImageBackground>
+                            <Hover>
+                                <ImageBackground source={{ uri: item.url + '&w=400' }} style={styles.thumbnailBackground}>
+                                </ImageBackground>
+                            </Hover>
                         </TouchableOpacity>
                     </View>
                 )}
                 keyExtractor={(item, index) => 'image' + index}
             />
-            <View>
+            <View style={{ backgroundColor: '#191919', height: '0%' }}>
                 <View style={{
                     justifyContent: 'space-between',
                     flexDirection: 'row',
