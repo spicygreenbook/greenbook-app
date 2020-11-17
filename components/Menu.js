@@ -61,9 +61,6 @@ export default function(props) {
                             console.log('item', item)
                             dispatch({type: 'menuOpen', value: false})
                             dispatch({type: 'setView', view: item.href || ''})
-                            if (isWeb) {
-                                router.push(item.href)
-                            }
                         }}>
                             <Text style={styles.text_menu}>{item.title}</Text>
                         </TouchableOpacity>
