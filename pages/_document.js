@@ -10,22 +10,6 @@ class CustomDocument extends Document {
     return (
       <html>
         <Head>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </html>
-    );
-  }
-}
-
-class MyDocument extends Document {
-  render() {
-    return (
-      <html>
-        <Head>
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -36,11 +20,11 @@ class MyDocument extends Document {
             <link rel="preconnect" href="https://www.google-analytics.com" />
             <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0"/>
             <link rel="manifest" href="site.webmanifest" />
-            <link href="/site.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
           <NextScript />
+            <link href="/site.css" rel="stylesheet" />
 
           <script async src={`https://www.googletagmanager.com/gtag/js?id=UA-168538359-1`}/>
           <script
