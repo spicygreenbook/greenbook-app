@@ -14,7 +14,7 @@ function Page(props) {
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(
       getStyles(
-        "text_header2, text_header4, text_header5, section, content",
+        "text_header2, text_header4, text_header5, section, content, tagline",
         { isWeb }
       )
     );
@@ -68,7 +68,7 @@ function Page(props) {
         ) : (
           <React.Fragment>
             <PageTitle title={content.page_title} />
-            {!!hasBody && <View style={[styles.section]}>
+            {!!hasBody && <View style={[styles.tagline]}>
               <View style={styles.content}>
                 <RichText render={content._body} isWeb={isWeb} />
               </View>
