@@ -18,7 +18,7 @@ function Page(props) {
 
     if (!props.content) {
         useEffect(() => {
-            setContent(getContent({type: 'content', uid: 'about'}).then(_content => {
+            setContent(getContent({type: 'content', uid: 'our-process'}).then(_content => {
                 console.log('_content', _content)
                 setContent(_content.content)
                 setPageLoading(false);
