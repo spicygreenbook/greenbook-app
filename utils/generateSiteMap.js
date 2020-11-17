@@ -30,7 +30,7 @@ async function generateSiteMap(listings) {
     paths.sort().forEach(path => {
         urls += `
 <url>
-    <loc>https://spicygreenbook.com/${path}</loc>
+    <loc>https://spicygreenbook.org/${path}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>always</changefreq>
     <priority>1.0</priority>
@@ -40,7 +40,7 @@ async function generateSiteMap(listings) {
     listings.forEach(item => {
         urls += `
 <url>
-    <loc>https://spicygreenbook.com/biz/${item._slug}</loc>
+    <loc>https://spicygreenbook.org/biz/${item._slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>always</changefreq>
     <priority>1.0</priority>

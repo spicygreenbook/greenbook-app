@@ -184,7 +184,7 @@ const isLocalWeb = () => (
 );
 
 export async function getInstagram() {
-    const url = isLocalWeb() ? 'http://localhost:3000/api/instagram' : 'https://spicygreenbook.com/api/instagram';
+    const url = isLocalWeb() ? 'http://localhost:3000/api/instagram' : 'https://spicygreenbook.org/api/instagram';
     try {
         const result = await fetch(url);
         const data = await result.json();

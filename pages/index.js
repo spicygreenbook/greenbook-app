@@ -25,7 +25,7 @@ function App(props) {
               key="og:description"
             />
             <meta property="og:title" content={"Spicy Green Book"} key="title" />
-            <meta property="og:url" content={"https://spicygreenbook.com/"} key="og:url" />
+            <meta property="og:url" content={"https://spicygreenbook.org/"} key="og:url" />
         </Head>
         <Main {...props} />
       </StateProvider>

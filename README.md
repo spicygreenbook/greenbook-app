@@ -1,5 +1,5 @@
 # greenbook-app
-Code base for the android, ios, and responseive web apps for [spicygreenbook.com](https://spicygreenbook.com) which is a directory of local black-owned businesses that users can find to support
+Code base for the android, ios, and responseive web apps for [spicygreenbook.org](https://spicygreenbook.org) which is a directory of local black-owned businesses that users can find to support
 
 # HOW TO CONTRIBUTE
 Find an [issue](https://github.com/spicygreenbook/greenbook-app/issues) and comment that you are going to handle it so we don't get duplicate effort on the same issue. If you are unable to solve the issue, let us know in the comments so someone else can take it.

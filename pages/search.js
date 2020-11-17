@@ -17,7 +17,7 @@ function App(props) {
             <title>Browse and Search Our List - Spicy Green Book</title>
             <meta name="description" content="Browse or search for black-owned businesses in your area." key="description" />
             <meta property="og:title" content={"Browse and Search Our List - Spicy Green Book"} key="title" />
-            <meta property="og:url" content={"https://spicygreenbook.com/search"} key="og:url" />
+            <meta property="og:url" content={"https://spicygreenbook.org/search"} key="og:url" />
         </Head>
         <Main {...props} />
       </StateProvider>
