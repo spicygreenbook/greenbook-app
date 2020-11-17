@@ -3,11 +3,13 @@ import { useStateValue } from "../components/State";
 import { Text, StyleSheet, Button, View, TextInput, TouchableOpacity } from 'react-native';
 import { getStyles, Theme } from '../utils';
 import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'next/router';
 
 const Search = ({
   mode,
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
+  const router = useRouter();
 
   const [query, setQuery] = useState(searchConfig.q || '');
   const [near, setNear] = useState(searchConfig.near || '');
@@ -16,17 +18,6 @@ const Search = ({
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
 
   function submitSearch() {
-    if (isWeb) {
-      const { protocol, host, port } = window.location;
-      const searchUrl = new URL(`${protocol}${host}/search`);
-
-      if (query) searchUrl.searchParams.append('q', query);
-      if (near) searchUrl.searchParams.append('near', near);
-
-      window.location = searchUrl.toString();
-
-      return;
-    }
 
     dispatch({
       type: 'searchConfig', value: {
@@ -34,6 +25,23 @@ const Search = ({
         near: near
       }
     })
+
+    if (isWeb) {
+      const { protocol, host, port } = window.location;
+      let searchUrl = '/search';
+      if (query) {
+        if (searchUrl === '/search') { searchUrl += '?' } else { searchUrl += '&'; }
+        searchUrl += 'q=' + encodeURIComponent(query);
+      }
+      if (near){
+        if (searchUrl === '/search') { searchUrl += '?' } else { searchUrl += '&'; }
+        searchUrl += 'near=' + encodeURIComponent(near);
+      }
+        //console.log('going to', searchUrl)
+      router.push(searchUrl, searchUrl, {shallow: true});
+      return;
+    }
+
     dispatch({ type: 'setView', view: '/search' })
   }
 
