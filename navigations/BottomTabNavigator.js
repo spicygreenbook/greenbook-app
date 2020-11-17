@@ -57,7 +57,7 @@ const BottomTabNavigator = () => {
       />
 
       <BottomTab.Screen
-        name="Join"
+        name="Add Listing"
         component={JoinStack}
         options={{
           tabBarIcon: ({ color }) => <Icon type="Octicons" style={{ fontSize: 22, color }} name="request-changes" />
