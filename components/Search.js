@@ -10,7 +10,7 @@ const Search = ({
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
   const router = useRouter();
-
+  console.log('search config', searchConfig)
   const [query, setQuery] = useState(searchConfig.q || '');
   const [near, setNear] = useState(searchConfig.near || '');
 
@@ -38,7 +38,7 @@ const Search = ({
         searchUrl += 'near=' + encodeURIComponent(near);
       }
         //console.log('going to', searchUrl)
-      router.push(searchUrl, searchUrl, {shallow: true});
+      router.push(searchUrl);
       return;
     }
 

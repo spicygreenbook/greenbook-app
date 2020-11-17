@@ -270,6 +270,14 @@ function Page(props) {
 
     useEffect(
         () => {
+            setSearch(fixSearch(searchConfig.q));
+            setProcessedSearchTerms(searchSeries(fixSearch(searchConfig.q)));
+        },
+        [ searchConfig ]
+    );
+
+    useEffect(
+        () => {
             //console.log('gettingGeo', gettingGeo, 'listings', listings)
             if (!gettingGeo && listings) {
                 //console.log('listings is', listings)
@@ -295,7 +303,7 @@ function Page(props) {
         : (
             <React.Fragment>
                 <View style={{paddingTop: isWeb ? 120 : 0}} />
-                <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
+                <View key={'key' + location + query} style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                     <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: isWeb ? 'calc(100vh - 234px)' : 0} : {}}>
                         <View style={{padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
