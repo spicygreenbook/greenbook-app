@@ -158,7 +158,7 @@ function Page(props) {
                                 We are establishing a space for people who seek to create change, and creating a platform for 
                                 them to invest in Black business owners in their communities.
                             </Text>
-                            <Link href="/about" style={{marginTop: 40}} button={'button_green'} title="Learn More" />
+                            <Link href="/about" to="About" navigation={props.navigation} style={{marginTop: 40}} button={'button_green'} title="Learn More" />
                         </View>
                     </View>
                 </View>
@@ -209,7 +209,7 @@ function Page(props) {
                                             <Text accessibilityRole="header" aria-level="3" style={[styles.text_header2, {color: '#fff'}]}>
                                                 {item.name}
                                             </Text>
-                                            <Link button={'button_white'} title={'Learn More'} href={'/biz/' + item.uid} style={{marginTop: 40}}/>
+                                            <Link button={'button_white'} title={'Learn More'} href={'/biz/' + item.uid} to="Listing" navigation={props.navigation} style={{marginTop: 40}}/>
                                         </View>
                                     </View>
                                 </View>

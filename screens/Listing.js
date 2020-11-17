@@ -62,7 +62,7 @@ function Page(props) {
             </View>
         : (
             <React.Fragment>
-                <View style={{paddingTop: 120}} />
+                <View style={{paddingTop: isWeb ? 120 : 0 }} />
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>

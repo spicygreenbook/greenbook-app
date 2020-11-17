@@ -16,7 +16,7 @@ export default function ListItem(props) {
     //console.log('listing', listing);
 
     return (
-        <Link href={'/biz/' + listing.uid}>
+        <Link href={'/biz/' + listing.uid} to="Listing" navigation={props.navigation}>
             <View style={{borderBottomWidth:props.last ? 0 : 2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                     {/*<ResponsiveImage style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url}} />*/}

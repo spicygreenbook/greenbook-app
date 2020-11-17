@@ -191,7 +191,7 @@ export async function getInstagram() {
         if (data.error) throw data;
         return data;
     } catch (e) {
-        console.error(e);
+        // console.error(e);
         return [];
     }
 }
