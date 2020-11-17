@@ -140,7 +140,7 @@ function Page(props) {
                     }
                 </View>
             </View>
-            <View style={styles.section}>
+            <View style={[styles.section, { paddingTop: 80 }]}>
                 <View style={styles.content}>
                     <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
                         <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
@@ -234,7 +234,7 @@ function Page(props) {
                 )}
             </View>
 
-            <View style={[styles.section, {flex:1, paddingBottom: 0}]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: 80}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         WHERE WE'RE AT

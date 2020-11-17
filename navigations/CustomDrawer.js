@@ -13,7 +13,7 @@ const CustomDrawer = (props) => {
         </DrawerContentScrollView>
       </Content>
       <Footer style={{ backgroundColor: Theme.green }}> 
-        <FooterTab>
+        <FooterTab style={{ backgroundColor: Theme.green }}>
           <Button onPress={() => Linking.openURL("https://instagram.com/spicygreenbook")} >
             <Icon type="FontAwesome" style={styles.default} name="instagram" size={22} />
           </Button>

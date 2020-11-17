@@ -12,7 +12,7 @@ import TeamListSection from './TeamListSection';
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header3, text_header4, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, text_header3, text_header4, section, content, tagline', {isWeb}));
     console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -24,13 +24,13 @@ function Page(props) {
 
     if (!props.content) {
         useEffect(() => {
-            setContent(getContent({type: 'content', uid: 'staff'}).then(_content => {
+            getContent({type: 'content', uid: 'staff'}).then(_content => {
                 console.log('_content', _content)
                 setContent(_content.content)
                 setPageLoading(false);
             }).catch(err => {
                 console.error(err);
-            }));
+            });
         }, [])
     }
 
@@ -61,12 +61,12 @@ function Page(props) {
         : (
             <React.Fragment>
                 <PageTitle title={content.page_title} />
-                <View style={[styles.section, { paddingBottom: 48, paddingTop: 48 }]}>
+                <View style={styles.tagline}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
                 </View>
-                <View style={[styles.section, { paddingTop: isWeb ? 48 : 0 }]}>
+                <View style={styles.section}>
                     <View style={[styles.content]}>
                         {loadingStaff ? (
                             <ActivityIndicator color={Theme.green} size="large" />
