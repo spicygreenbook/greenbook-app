@@ -5,21 +5,24 @@ import { WithScrollView } from './helper';
 import Home from '../screens/Home'
 import CustomHeader from './CustomHeader';
 import Listing from '../screens/Listing';
-import { Container, Content, Header, List, ListItem, Text } from 'native-base';
+import { Container, Content, Header, List, ListItem, Text, Icon } from 'native-base';
 import { getStyles, Theme } from '../utils';
-import {useStateValue} from "../components/State";
+import { useStateValue } from "../components/State";
 
 const Stack = createStackNavigator();
 
-const State = (props) => {
+export const State = (props) => {
   const { cities, stateName } = props.route.params;
-  const [{ isWeb, T }] = useStateValue();
+  const [{ isWeb }] = useStateValue();
   const styles = StyleSheet.create(getStyles('text_header3, text_body', {isWeb}));
 
   return (
     <Container>
-      <Header style={{alignItems: 'center'}}>
-        <Text style={styles.text_header3}>{stateName}</Text>
+      <Header style={[{alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}]}>
+        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: 20, marginRight: 'auto', marginLeft: 10 }}>
+          <Icon type="FontAwesome5" name="arrow-left" style={{ fontSize: 24, color: Theme.green  }}/>
+        </TouchableOpacity>
+        <Text style={[styles.text_header3, { marginRight: 'auto', marginLeft: -30 }]}>{stateName}</Text>
       </Header>
       <Content>
         <List>
