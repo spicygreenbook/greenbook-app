@@ -240,7 +240,7 @@ function Page(props) {
                         WHERE WE'RE AT
                     </Text>
 
-                    <SGBMap style={{marginTop: -80}} listings={Listings} loadingListings={loadingListings} />
+                    <SGBMap style={{marginTop: -80}} listings={Listings} loadingListings={loadingListings} navigation={props.navigation} />
 
                 </View>
             </View>
