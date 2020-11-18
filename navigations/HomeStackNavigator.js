@@ -8,11 +8,12 @@ import Listing from '../screens/Listing';
 import { Container, Content, Header, List, ListItem, Text, Icon } from 'native-base';
 import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
+import { Link } from "../components/Link";
 
 const Stack = createStackNavigator();
 
 export const State = (props) => {
-  const { cities, stateName } = props.route.params;
+  const { cities, stateName, abbr } = props.route.params;
   const [{ isWeb }] = useStateValue();
   const styles = StyleSheet.create(getStyles('text_header3, text_body', {isWeb}));
 
@@ -27,11 +28,11 @@ export const State = (props) => {
       <Content>
         <List>
           {cities.map(city => (
-            <TouchableOpacity key={city} >
-              <ListItem button={true} onPress={() => alert(city)}>
+            <ListItem key={city} >
+              <Link href={`/search?q=&near=${city[0].toUpperCase() + city.substring(1)}, ${abbr}`} to="Browse" navigation={props.navigation} city={city} abbr={abbr}>
                 <Text style={[styles.text_body,{ color: Theme.green, fontSize: 18, fontWeight: '600', paddingTop: 10, paddingBottom: 10, textTransform: 'capitalize'}]}>{city}</Text>
-              </ListItem>
-            </TouchableOpacity>
+              </Link>
+            </ListItem>
             ))
           }
         </List>

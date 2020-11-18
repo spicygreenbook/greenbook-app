@@ -365,12 +365,13 @@ function SGBMap(props) {
 												cities: 
 													Object.keys(mappedState)
 													.filter(key => {return key.indexOf('_') !== 0})
-													.sort()
+													.sort(),
+												abbr: statesObjRev[mappedState._state].toUpperCase(),
 											 });
 											return;
 										}
 	
-										//console.log('mapped state', mappedState)
+										// console.log('mapped state', mappedState)
 										setCurState(mappedState);
 									} else {
 											setCurState('');

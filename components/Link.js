@@ -22,6 +22,10 @@ export function Link(props) {
         }
 
         if(!isWeb && props.to) {
+            if(props.abbr && props.city) {
+                dispatch({type: 'searchConfig', value: { q: "", near: `${props.city[0].toUpperCase() + props.city.substring(1)}, ${props.abbr}`}});
+            }
+ 
             props.navigation.navigate(props.to, { screen: props.routeName ? props.routeName : ''  });
         }
     }
