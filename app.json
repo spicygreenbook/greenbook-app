@@ -16,7 +16,8 @@
     },
     "android": {
       "package": "com.spicygreenbook.app",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions": ["ACCESS_FINE_LOCATION"]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
