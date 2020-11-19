@@ -197,7 +197,7 @@ function Page(props) {
     const [{ view, isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header3, section, content', {isWeb}));
     //console.log('page props', props)
-
+    
     let qs = searchConfig;
 
     let debug = false;
@@ -255,7 +255,7 @@ function Page(props) {
             setSearch(fixSearch(query.q));
             setProcessedSearchTerms(searchSeries(fixSearch(query)));
             if (location) {
-                fetch('/api/geocode?query=' + location).then(res => res.json()).then(json => {
+                fetch('https://spicygreenbook.org/api/geocode?query=' + location).then(res => res.json()).then(json => {
                     if (json.coords) {
                         setGeoLocation(json.coords);
                     }
@@ -309,10 +309,10 @@ function Page(props) {
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
                             </Text>
-                            <Search mode="results" />
+                            {!props.viewMode && <Search mode="results" /> }
                         </View>
                         <View>
-                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={props.navigation} />)}
+                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={props.navigation} viewMode={props.viewMode} />)}
                         </View>
                     </View>
                     {dimensions.width >= 800 &&
@@ -330,13 +330,5 @@ function Page(props) {
         </React.Fragment>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
 
 export default Page;

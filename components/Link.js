@@ -22,7 +22,12 @@ export function Link(props) {
         }
 
         if(!isWeb && props.to) {
-            props.navigation.navigate(props.to, { screen: props.routeName ? props.routeName : ''  });
+            // This for navigating to Searching using map in the home page
+            if(props.abbr && props.city) {
+                dispatch({type: 'searchConfig', value: { q: "", near: `${props.city}, ${props.abbr}`}});
+            }
+ 
+            props.navigation.navigate(props.to, { screen: props.routeName ? props.routeName : '', ...props.params });
         }
     }
     let webProps = isWeb && props.download ? {download: props.download} : {};
