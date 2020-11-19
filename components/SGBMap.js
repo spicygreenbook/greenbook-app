@@ -360,7 +360,7 @@ function SGBMap(props) {
 								<G key={state.id + 'fill'} onPress={e => {
 									if (mappedState) {
 										if(!isWeb) {
-											props.navigation.navigate('State', { 
+											props.navigation.navigate('StateListing', { 
 												stateName: state.id, 
 												cities: 
 													Object.keys(mappedState)

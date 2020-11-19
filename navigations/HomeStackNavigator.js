@@ -5,39 +5,59 @@ import { WithScrollView } from './helper';
 import Home from '../screens/Home'
 import CustomHeader from './CustomHeader';
 import Listing from '../screens/Listing';
+import CityListing from '../screens/List';
 import { Container, Content, Header, List, ListItem, Text, Icon } from 'native-base';
 import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
+import { useRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
-export const State = (props) => {
-  const { cities, stateName, abbr } = props.route.params;
+const CustomHeaderWrapper = ({navigation, children}) => {
+
+  const { params : { city, stateName }} = useRoute();
   const [{ isWeb }] = useStateValue();
   const styles = StyleSheet.create(getStyles('text_header3, text_body', {isWeb}));
 
   return (
     <Container>
       <Header style={[{alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}]}>
-        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: 20, marginRight: 'auto', marginLeft: 10 }}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home", {screen: stateName ? "CityListing" : "StateListing"})} style={{ width: 20, marginRight: 'auto', marginLeft: 10 }}>
           <Icon type="FontAwesome5" name="arrow-left" style={{ fontSize: 24, color: Theme.green  }}/>
         </TouchableOpacity>
-        <Text style={[styles.text_header3, { marginRight: 'auto', marginLeft: -30 }]}>{stateName}</Text>
+        <Text style={[styles.text_header3, { marginRight: 'auto', marginLeft: -30 }]}>{stateName || city}</Text>
       </Header>
       <Content>
-        <List>
-          {cities.map(city => (
-            <ListItem key={city} >
-              <Link href={`/search?q=&near=${city[0].toUpperCase() + city.substring(1)}, ${abbr}`} to="Browse" navigation={props.navigation} city={city} abbr={abbr}>
-                <Text style={[styles.text_body,{ color: Theme.green, fontSize: 18, fontWeight: '600', paddingTop: 10, paddingBottom: 10, textTransform: 'capitalize'}]}>{city}</Text>
-              </Link>
-            </ListItem>
-            ))
-          }
-        </List>
+        {children}
       </Content>
   </Container>
+  )
+}
+
+const State = (props) => {
+  
+  const { params : { cities, abbr }} = useRoute();
+  const [{ isWeb }] = useStateValue();
+  const styles = StyleSheet.create(getStyles('text_body', {isWeb}));
+
+  return (
+    <CustomHeaderWrapper {...props}>
+      <List>
+        {cities.map(city => {
+          const cityCapatalized = city[0].toUpperCase() + city.substring(1);
+
+          return (
+            <ListItem key={city} >
+              <Link href={`/search?q=&near=${cityCapatalized}, ${abbr}`} to="CityListing" navigation={props.navigation} city={cityCapatalized} abbr={abbr} params={{city}}>
+                <Text style={[styles.text_body,{ color: Theme.green, fontSize: 18, paddingTop: 5, paddingBottom: 5, textTransform: 'capitalize'}]}>{city}</Text>
+              </Link> 
+            </ListItem>
+            ) 
+          })
+        }
+      </List>
+    </CustomHeaderWrapper>
   )
 }
 
@@ -47,17 +67,16 @@ const HomeStack = (props) => (
       header: () => <CustomHeader dark {...props} />
     }} />
 
-    <Stack.Screen name="Listing" component={WithScrollView(Listing)} options={{
-      headerShown: false,
-    }} />
-
-    <Stack.Screen name="State" component={State} options={(state) => {
-      return ({
+    <Stack.Screen name="Listing" component={WithScrollView(Listing)} options={{ headerShown: false }} />
+    <Stack.Screen name="StateListing" component={State} options={{headerShown: false}} />
+    <Stack.Screen name="CityListing" component={WithScrollView(() => 
+      <CustomHeaderWrapper {...props}>
+        <CityListing {...props} viewMode="Home" />
+      </CustomHeaderWrapper>)} options={{
         headerShown: false,
-        title: state.route.params.stateName
-    })
-  }
-  } />
+      }} 
+     />
+
   </Stack.Navigator>
 )
 
