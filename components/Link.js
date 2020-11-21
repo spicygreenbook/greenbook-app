@@ -34,30 +34,21 @@ export function Link(props) {
 
     if (props.button) {
         const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
-        return isWeb && !external ? <NextLink href={props.href || ''}>
-            <a href={props.href} style={{textDecoration: 'none'}}>
-                <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
-                    <View style={styles[props.button]}>
-                        <Text style={styles[props.button + '_text']}>{props.title}</Text>
+        return isWeb
+            ? <a href={props.href} target={external ? '_blank' : ''} style={{textDecoration: 'none'}}>
+                    <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
+                        <View style={styles[props.button]}>
+                            <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                        </View>
                     </View>
-                </View>
-            </a>
-        </NextLink>
-        : isWeb && external ? <a href={props.href || ''} target="_blank" style={{textDecoration: 'none'}} {...webProps}>
-            <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
-                <View style={styles[props.button]}>
-                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
-                </View>
-            </View>
-        </a>
-        : 
-        <TouchableOpacity onPress={handleURLFully}>
-            <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
-                <View style={styles[props.button]}>
-                    <Text style={styles[props.button + '_text']}>{props.title || ''}</Text>
-                </View>
-            </View>
-        </TouchableOpacity>
+                </a>
+            : <TouchableOpacity onPress={handleURLFully}>
+                    <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
+                        <View style={styles[props.button]}>
+                            <Text style={styles[props.button + '_text']}>{props.title || ''}</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
     } else if (props.children) {
         let more = props.fill ? {height: '100%'} : {}
         
