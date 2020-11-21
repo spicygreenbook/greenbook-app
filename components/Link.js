@@ -59,20 +59,11 @@ export function Link(props) {
             </View>
         </TouchableOpacity>
     } else if (props.children) {
-        if (isWeb) {
-            let more = props.fill ? {height: '100%'} : {}
-            return !external ? 
-                <NextLink href={props.href || ''}>
-                    <a href={props.href || ''} onClick={handleURLFully} style={{...props.style, textDecoration: 'none', ...more}}>
-                        {props.children}
-                    </a>
-                </NextLink>
-            : <a href={props.href || ''} style={{textDecoration: 'none'}} target="_blank" {...webProps}>
-                {props.children}
-            </a>
-        } else {
-            return <TouchableOpacity onPress={handleURLFully}><View>{props.children}</View></TouchableOpacity>
-        }
+        let more = props.fill ? {height: '100%'} : {}
+        
+        return isWeb 
+            ? <a href={props.href || ''} target={external ? '_blank' : ''} {...webProps}  style={{...props.style, textDecoration: 'none', ...more}}>{props.children}</a>    
+            : <TouchableOpacity onPress={handleURLFully}><View>{props.children}</View></TouchableOpacity>
     }
 
     return (
