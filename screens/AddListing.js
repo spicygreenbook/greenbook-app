@@ -61,7 +61,7 @@ function Page(props) {
                 </View>
                 {isWeb && (<View style={[styles.section]}>
                     <View style={styles.content}>
-                        <div class="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
+                        <div className="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
                         <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
                     </View>
                 </View>)}
