@@ -18,7 +18,6 @@ function Page(props) {
         { isWeb }
       )
     );
-    //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
@@ -30,7 +29,6 @@ function Page(props) {
     if (!props.content) {
         useEffect(() => {
             getContent({type: 'content', uid: 'updates'}).then(_content => {
-                console.log('_content', _content)
                 setContent(_content.content)
                 setPageLoading(false);
             }).catch(err => {
@@ -93,7 +91,6 @@ function Page(props) {
                         key={"update" + index}
                         style={{
                           flex: 1 / numColumns,
-                          // justifyContent: "space-between",
                           margin: 10,
                           borderTopWidth: 2,
                           borderColor: Theme.green,

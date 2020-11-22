@@ -10,8 +10,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage"
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header4, section, content', {isWeb}));
-    //console.log('page props', props)
+    const styles = StyleSheet.create(getStyles('text_header2, text_header4, text_header5, section, content', {isWeb}));
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
@@ -23,7 +22,6 @@ function Page(props) {
     if (!props.content) {
         useEffect(() => {
             getContent({type: 'content', uid: 'press'}).then(_content => {
-                console.log('_content', _content)
                 setContent(_content.content)
                 setPageLoading(false);
             }).catch(err => {
@@ -37,7 +35,6 @@ function Page(props) {
             getData({
                 type: 'press'
             }).then(press => {
-                console.log('press izz', press)
                 setLoadingPress(false);
                 setPress(press)
             }).catch(err => {
@@ -66,7 +63,7 @@ function Page(props) {
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
                 </View>}
-                <View style={[styles.section, {paddingTop: 0}]}>
+                <View style={[styles.section]} nativeID="pressLinks">
                     <View style={styles.content}>
                         {loadingPress ? (
                             <ActivityIndicator color={Theme.green} size="large" />
@@ -78,7 +75,14 @@ function Page(props) {
                                 data={press}
                                 numColumns={numColumns}
                                 renderItem={({ item, index, separators }) => (
-                                    <View key={'press' + index} style={{flex: 1/numColumns, margin: 10, borderTopWidth: 2, borderColor: Theme.green,
+                                    <View
+                                    style={{ flexDirection: "row" }}
+                                    key={'press' + index}
+                                    style={{
+                                        flex: 1/numColumns,
+                                        margin: 10,
+                                        borderTopWidth: 2,
+                                        borderColor: Theme.green,
                                         shadowColor: "#000",
                                         shadowOffset: {
                                             width: 0,
@@ -90,20 +94,40 @@ function Page(props) {
                                         elevation: 6,
                                     }}
                                     >
-                                        <View style={{padding: 20}}>
-                                            <Text style={[styles.text_header4]}>{item.title}</Text>
-                                            <Text>{item.date}</Text>
+                                        {item.image && item.image.url && (
+                                        <ResponsiveImage style={{
+                                        maxWidth: '100%',
+                                        width: item.image.width,
+                                        height: item.image.height
+                                        }}
+                                        source={{uri: item.image.url + '&w=600'}} />
+                                        )}
+
+                                        <View
+                                            style={{
+                                                flex: 1,
+                                                padding: 20
+                                            }}
+                                        >
+                                            <View>
+                                                <Text>{item.date}</Text>
+                                                <Text style={styles.text_header5}>{item.title}</Text>
+                                            </View>
+                
+                                            {!!item.action_text && !!item.link && (
+                                                <View style={{ marginTop: "auto" }}>
+                                                <Link href={item.link}>
+                                                    <View>
+                                                        <Text style={[styles.text_header4]}>{item.action_text} &gt;</Text>
+                                                    </View>
+                                                </Link>
+                                            </View>
+                                            )}
+
+                                            {!!(item.attribution && item.attribution.length) && (
+                                                <Attribution attribution={item.attribution} />
+                                            )}
                                         </View>
-                                        {item.image && item.image.url && 
-                                            <ResponsiveImage style={{maxWidth: '100%', width: item.image.width, height: item.image.height}} source={{uri: item.image.url + '&w=1200'}} />
-                                        }
-                                        {!!item.link &&
-                                            <Link href={item.link}>
-                                                <View>
-                                                    <Text style={[styles.text_header4, {padding: 20}]}>{item.action_text} &gt;</Text>
-                                                </View>
-                                            </Link>
-                                        }
                                     </View>
                                 )}
                                 keyExtractor={(item, index) => 'press' + index}
