@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStateValue } from "../components/State";
 import { getStyles, Theme } from '../utils';
 import { Animated, View, Text, Image, StyleSheet, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
@@ -23,6 +23,7 @@ export default function (props) {
     const { images, firstIndex } = props;
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
+    const [selectedId, setSelectedId] = useState(null);
     //const styles = StyleSheet.create(getStyles('text_body', {isWeb}));
 
 
@@ -88,6 +89,16 @@ export default function (props) {
 
         },
 
+        thumbnailBackgroundClicked: {
+            width: config.bottom.width,
+            height: config.bottom.height,
+            marginTop: '15px',
+            marginBottom: '40px',
+            boxShadow: 'black 7px 10px 10px 4px',
+            opacity: '.5'
+
+        },
+
         chevronLeft: {
             backgroundColor: 'black',
             width: '5rem',
@@ -132,6 +143,7 @@ export default function (props) {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={images}
+                extraData={selectedId}
                 ref={(ref) => { imageRefTop = ref; }}
                 onViewableItemsChanged={viewableItemsChangedImage}
                 viewabilityConfig={viewableItemsChangedConfigImage}
@@ -162,9 +174,12 @@ export default function (props) {
                     <View style={styles.thumbnailImages}>
                         <TouchableOpacity onPress={e => {
                             scrollToIndexImage({ animated: true, index: index }, images.length)
+                            setSelectedId(index);
                         }}>
                             <Hover>
-                                <ImageBackground source={{ uri: item.url + '&w=400' }} style={styles.thumbnailBackground}>
+                                <ImageBackground source={{ uri: item.url + '&w=400' }} style={
+                                    index === selectedId ? styles.thumbnailBackgroundClicked : styles.thumbnailBackground
+                                }>
                                 </ImageBackground>
                             </Hover>
                         </TouchableOpacity>
