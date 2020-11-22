@@ -23,7 +23,7 @@ export default function(props) {
                             <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
                         </View>
                         <View style={dimensions.width < 700 ? {} : {flex:1}}>
-                            <Link href="/add"><Text style={styles.text_footer}>Join</Text></Link>
+                            <Link href="/add"><Text style={styles.text_footer}>Add Listing</Text></Link>
                         </View>
                         <View style={dimensions.width < 700 ? {} : {flex:1}}>
                             <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
