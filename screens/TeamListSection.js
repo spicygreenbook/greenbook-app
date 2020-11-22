@@ -11,7 +11,7 @@ const TeamListSection = ({ item, reverse }) => {
 
   return (
     <View style={[ isWeb && dimensions.width > 752 && { flexDirection: reverse ? 'row-reverse' : 'row' }, { marginBottom: 72 }]} >
-      <View style={[ isWeb ? { ...defaultStyles.imageContainerWeb, flexDirection: reverse ? 'row' : 'row-reverse', flex: 1, marginBottom: dimensions.width < 752 && 24} : defaultStyles.imageContainerMobile ]}>
+      <View style={[ isWeb ? { ...defaultStyles.imageContainerWeb, flexDirection: reverse ? 'row' : 'row-reverse', flex: 1, marginBottom: dimensions.width < 752 ? 24 : 0} : defaultStyles.imageContainerMobile ]}>
         { isWeb && <View style={{ width: 8, backgroundColor: Theme.green, height: 150, alignSelf: 'flex-start', position: 'relative', top: 110 }}/> }
         <Image style={{width: isWeb ? '100%' : 200, height: isWeb ? 500 : 200, aspectRatio: 1}} source={{ uri: item.image.url + '&w=800' }} />
       </View>

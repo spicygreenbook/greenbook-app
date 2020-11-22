@@ -48,7 +48,7 @@ function renderHTML(markup, spans, body_style, isWeb, dispatch) {
 
         console.log('partspart', parts[part]);
         return segment_map[i].type === 'hyperlink' && button ? (
-            <Link href={url} button={'button_green'} title={parts[part] || ''} />
+            <Link key={i} href={url} button={'button_green'} title={parts[part] || ''} />
         ) : segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} style={body_style} onPress={e => {
             //console.log('link to', url)
             const external = url.slice(0,1) !== '/';
