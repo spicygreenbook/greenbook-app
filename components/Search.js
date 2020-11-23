@@ -10,6 +10,7 @@ import { addRootClickHandler, removeRootClickHandler } from '../utils/rootClickH
 const Search = ({
   mode,
   includeUseLocationOption = false,
+  navigation
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
   const router = useRouter();
@@ -53,6 +54,7 @@ const Search = ({
       return;
     }
 
+    navigation.navigate('Browse', { screen: 'Home'})
     dispatch({ type: 'setView', view: '/search' })
   };
 
