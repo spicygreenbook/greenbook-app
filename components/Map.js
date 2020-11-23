@@ -41,7 +41,7 @@ export default function Map({
 					if (row.geocoordinates) {
 						if (single) {
 							var infoWindowMarkup = `
-							<div style="font-size:18px; margin:8px 0"><b>${row.name}</b></div>
+							<div style="font-size:18px; margin:8px 0"><b>${row.name[0]}</b></div>
 							`;
 							if (row.address) {
 								infoWindowMarkup += `
@@ -58,7 +58,7 @@ export default function Map({
 							}" height="${
 								row.primary_image.height
 							}" style="max-width:100%;height:auto" />
-							<div style="font-size:18px; margin:8px 0"><b>${row.name}</b></div>
+							<div style="font-size:18px; margin:8px 0"><b>${row.name[0]}</b></div>
 							${row.cuisines.map(cuisine => {
 								return cuisine.cuisine
 							}).join(", ")}
@@ -83,9 +83,10 @@ export default function Map({
 							var marker = new google.maps.Marker({
 								map: map,
 								position: row.geocoordinates,
-								title: row.name,
+								title: row.name[0],
 							});
 						}
+
 						//console.log('marker', marker)
 						google.maps.event.addListener(marker, "click", function () {
 							if (lastInfoWindow) {

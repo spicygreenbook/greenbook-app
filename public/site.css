@@ -1,4 +1,4 @@
-#nav a:hover, #nav a:hover > div, #footer a:hover, #homeLinks a:hover, #homeLinks a:hover > div, #updatesLinks a:hover > div > div {
+#nav a:hover, #nav a:hover > div, #footer a:hover, #homeLinks a:hover, #homeLinks a:hover > div, #updatesLinks a:hover > div > div, #pressLinks a:hover > div > div {
     text-decoration: underline;
 }
 

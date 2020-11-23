@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Image, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Link } from "../components/Link";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
@@ -55,14 +55,14 @@ function Page(props) {
     })*/
 
     return (
-        <React.Fragment>
+        <ScrollView>
         { pageLoading ?
             <View style={{marginTop: 200, marginBottom: 200}}>
                 <ActivityIndicator size="large" />
             </View>
         : (
             <React.Fragment>
-                <View style={{paddingTop: 120}} />
+                <View style={{paddingTop: isWeb ? 120 : 0 }} />
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>
@@ -197,7 +197,7 @@ function Page(props) {
                 </View>
             </React.Fragment>
         )}
-        </React.Fragment>
+        </ScrollView>
     )
 }
 

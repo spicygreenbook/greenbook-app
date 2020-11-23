@@ -110,8 +110,9 @@ function Main(props) {
 
   if (isWeb) {
     useEffect(() => {
-      setForceUpdate(forceUpdate + 1);
-      window.addEventListener('scroll', scrollEventListener, false)
+        setForceUpdate(forceUpdate + 1);
+        window.addEventListener('scroll', scrollEventListener, false)
+
       return () => {
         window.removeEventListener('scroll', scrollEventListener, false)
       }

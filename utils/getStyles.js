@@ -40,10 +40,17 @@ const allStyles = {
       marginTop: config.isWeb ? 0 : 40,
     };
   },
+  tagline: function (config) {
+    return {
+      ...this.section(config),
+      paddingTop: 48,
+      paddingBottom: 48,
+    };
+  },
   section: function (config) {
     return {
       padding: 20,
-      paddingTop: 80,
+      paddingTop: config.isWeb ? 48 : 0,
       paddingBottom: 80,
       alignContent: "center",
       alignItems: "center",

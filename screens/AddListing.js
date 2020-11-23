@@ -34,13 +34,13 @@ function Page(props) {
 
     if (!props.content) {
         useEffect(() => {
-            setContent(getContent({type: 'content', uid: 'add'}).then(_content => {
+            getContent({type: 'content', uid: 'add'}).then(_content => {
                 console.log('_content', _content)
                 setContent(_content.content)
                 setPageLoading(false);
             }).catch(err => {
                 console.error(err);
-            }));
+            });
         }, [])
     }
 
@@ -56,12 +56,12 @@ function Page(props) {
                 <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
-                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.com/add'} button={'button_green'} title="Go To Add Listing Form" />}
+                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/add'} button={'button_green'} title="Go To Add Listing Form" />}
                     </View>
                 </View>
                 {isWeb && (<View style={[styles.section]}>
                     <View style={styles.content}>
-                        <div class="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
+                        <div className="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
                         <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
                     </View>
                 </View>)}

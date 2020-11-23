@@ -1,11 +1,14 @@
 // @generated: @expo/next-adapter@2.1.0
 //export { default } from '@expo/next-adapter/document';
 
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-export default class MyDocument extends Document {
+import { getInitialProps } from '@expo/next-adapter/document';
+import Document, { Head, Main, NextScript } from 'next/document';
+import React from 'react';
+
+class CustomDocument extends Document {
   render() {
     return (
-      <Html>
+      <html>
         <Head>
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -17,11 +20,11 @@ export default class MyDocument extends Document {
             <link rel="preconnect" href="https://www.google-analytics.com" />
             <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0"/>
             <link rel="manifest" href="site.webmanifest" />
-            <link href="/site.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
           <NextScript />
+            <link href="/site.css" rel="stylesheet" />
 
           <script async src={`https://www.googletagmanager.com/gtag/js?id=UA-168538359-1`}/>
           <script
@@ -45,7 +48,15 @@ export default class MyDocument extends Document {
               })();
                 `}} />
         </body>
-      </Html>
+      </html>
     )
   }
 };
+
+CustomDocument.getInitialProps = async props => {
+  const result = await getInitialProps(props);
+  // Mutate result...
+  return result;
+};
+
+export default CustomDocument;

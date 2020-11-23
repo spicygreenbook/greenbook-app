@@ -4,13 +4,14 @@ import { RichText } from '../components/RichText'
 import { useStateValue } from "../components/State";
 import { getStyles, Theme } from '../utils';
 
-const TeamListSection = ({ item, reverse, key }) => {
-  const [{ isWeb }] = useStateValue();
+const TeamListSection = ({ item, reverse }) => {
+  const [{ isWeb, dimensions }] = useStateValue();
+  console.log(dimensions)
   const styles = StyleSheet.create(getStyles('text_header3, text_header4', { isWeb }));
 
   return (
-    <View  key={key} style={ isWeb && { flexDirection: reverse ? 'row-reverse' : 'row' } }>
-      <View style={ isWeb ? { ...defaultStyles.imageContainerWeb, flexDirection: reverse ? 'row' : 'row-reverse', flex: 1} : defaultStyles.imageContainerMobile }>
+    <View style={[ isWeb && dimensions.width > 752 && { flexDirection: reverse ? 'row-reverse' : 'row' }, { marginBottom: 72 }]} >
+      <View style={[ isWeb ? { ...defaultStyles.imageContainerWeb, flexDirection: reverse ? 'row' : 'row-reverse', flex: 1, marginBottom: dimensions.width < 752 ? 24 : 0} : defaultStyles.imageContainerMobile ]}>
         { isWeb && <View style={{ width: 8, backgroundColor: Theme.green, height: 150, alignSelf: 'flex-start', position: 'relative', top: 110 }}/> }
         <Image style={{width: isWeb ? '100%' : 200, height: isWeb ? 500 : 200, aspectRatio: 1}} source={{ uri: item.image.url + '&w=800' }} />
       </View>

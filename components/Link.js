@@ -20,50 +20,41 @@ export function Link(props) {
         } else {
             Linking.openURL(props.href || '')
         }
+
+        if(!isWeb && props.to) {
+            // This for navigating to Searching using map in the home page
+            if(props.abbr && props.city) {
+                dispatch({type: 'searchConfig', value: { q: "", near: `${props.city}, ${props.abbr}`}});
+            }
+ 
+            props.navigation.navigate(props.to, { screen: props.routeName ? props.routeName : '', ...props.params });
+        }
     }
     let webProps = isWeb && props.download ? {download: props.download} : {};
 
     if (props.button) {
         const styles = StyleSheet.create(getStyles(props.button + ', ' + props.button + '_text', {isWeb}));
-        return isWeb && !external ? <NextLink href={props.href || ''}>
-            <a href={props.href} style={{textDecoration: 'none'}}>
-                <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
-                    <View style={styles[props.button]}>
-                        <Text style={styles[props.button + '_text']}>{props.title}</Text>
+        return isWeb
+            ? <a href={props.href} target={external ? '_blank' : ''} style={{textDecoration: 'none'}}>
+                    <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
+                        <View style={styles[props.button]}>
+                            <Text style={styles[props.button + '_text']}>{props.title}</Text>
+                        </View>
                     </View>
-                </View>
-            </a>
-        </NextLink>
-        : isWeb && external ? <a href={props.href || ''} target="_blank" style={{textDecoration: 'none'}} {...webProps}>
-            <View style={[{flexDirection: 'row', cursor: 'pointer'}, props.style ? props.style : {}]}>
-                <View style={styles[props.button]}>
-                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
-                </View>
-            </View>
-        </a>
-        : 
-        <TouchableOpacity onPress={handleURLFully}>
-            <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
-                <View style={styles[props.button]}>
-                    <Text style={styles[props.button + '_text']}>{props.title}</Text>
-                </View>
-            </View>
-        </TouchableOpacity>
+                </a>
+            : <TouchableOpacity onPress={handleURLFully}>
+                    <View style={[{flexDirection: 'row'}, props.style ? props.style : {}]}>
+                        <View style={styles[props.button]}>
+                            <Text style={styles[props.button + '_text']}>{props.title || ''}</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
     } else if (props.children) {
-        if (isWeb) {
-            let more = props.fill ? {height: '100%'} : {}
-            return !external ? 
-                <NextLink href={props.href || ''}>
-                    <a href={props.href || ''} onClick={handleURLFully} style={{...props.style, textDecoration: 'none', ...more}}>
-                        {props.children}
-                    </a>
-                </NextLink>
-            : <a href={props.href || ''} style={{textDecoration: 'none'}} target="_blank" {...webProps}>
-                {props.children}
-            </a>
-        } else {
-            return <TouchableOpacity onPress={handleURLFully}><View>{props.children}</View></TouchableOpacity>
-        }
+        let more = props.fill ? {height: '100%'} : {}
+        
+        return isWeb 
+            ? <a href={props.href || ''} target={external ? '_blank' : ''} {...webProps}  style={{...props.style, textDecoration: 'none', ...more}}>{props.children}</a>    
+            : <TouchableOpacity onPress={handleURLFully}><View>{props.children}</View></TouchableOpacity>
     }
 
     return (

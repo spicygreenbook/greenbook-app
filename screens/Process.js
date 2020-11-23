@@ -18,13 +18,13 @@ function Page(props) {
 
     if (!props.content) {
         useEffect(() => {
-            setContent(getContent({type: 'content', uid: 'about'}).then(_content => {
+            getContent({type: 'content', uid: 'our-process'}).then(_content => {
                 console.log('_content', _content)
                 setContent(_content.content)
                 setPageLoading(false);
             }).catch(err => {
                 console.error(err);
-            }));
+            });
         }, [])
     }
 

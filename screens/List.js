@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, ScrollView} from 'react-native';
 import { Link } from "../components/Link"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getData } from '../utils';
@@ -197,7 +197,7 @@ function Page(props) {
     const [{ view, isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header3, section, content', {isWeb}));
     //console.log('page props', props)
-
+    
     let qs = searchConfig;
 
     let debug = false;
@@ -255,7 +255,7 @@ function Page(props) {
             setSearch(fixSearch(query.q));
             setProcessedSearchTerms(searchSeries(fixSearch(query)));
             if (location) {
-                fetch('/api/geocode?query=' + location).then(res => res.json()).then(json => {
+                fetch('https://spicygreenbook.org/api/geocode?query=' + location).then(res => res.json()).then(json => {
                     if (json.coords) {
                         setGeoLocation(json.coords);
                     }
@@ -266,6 +266,14 @@ function Page(props) {
             }
         },
         [ pushInterval ]
+    );
+
+    useEffect(
+        () => {
+            setSearch(fixSearch(searchConfig.q));
+            setProcessedSearchTerms(searchSeries(fixSearch(searchConfig.q)));
+        },
+        [ searchConfig ]
     );
 
     useEffect(
@@ -287,7 +295,7 @@ function Page(props) {
     console.log('pageLoading', pageLoading, '!filteredList', !filteredList)
 
     return (
-        <React.Fragment>
+        <ScrollView>
         { pageLoading || !filteredList ?
             <View style={{marginTop: 200, marginBottom: 200}}>
                 <ActivityIndicator size="large" />
@@ -295,16 +303,16 @@ function Page(props) {
         : (
             <React.Fragment>
                 <View style={{paddingTop: isWeb ? 120 : 0}} />
-                <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
+                <View key={'key' + location + query} style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                     <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: isWeb ? 'calc(100vh - 234px)' : 0} : {}}>
-                        <View style={{padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+                        <View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
                             </Text>
-                            <Search mode="results" />
+                            {!props.viewMode && <Search mode="results" /> }
                         </View>
                         <View>
-                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
+                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={props.navigation} viewMode={props.viewMode} />)}
                         </View>
                     </View>
                     {dimensions.width >= 800 &&
@@ -319,16 +327,8 @@ function Page(props) {
                 </View>
             </React.Fragment>
         )}
-        </React.Fragment>
+        </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
 
 export default Page;

@@ -39,7 +39,7 @@ function App(props) {
                 content={content.primary_image.url + '&w=1200'}
                 key="og:image"
             />
-            <meta property="og:url" content={"https://spicygreenbook.com/biz/" + content.uid } key="og:url" />
+            <meta property="og:url" content={"https://spicygreenbook.org/biz/" + content.uid } key="og:url" />
         </Head>
         <Main {...props} />
       </StateProvider>

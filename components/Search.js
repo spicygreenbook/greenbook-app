@@ -1,96 +1,203 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useStateValue } from "../components/State";
-import { Text, StyleSheet, Button, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, ActivityIndicator, View, TextInput, TouchableOpacity } from 'react-native';
 import { getStyles, Theme } from '../utils';
 import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'next/router';
+import getUserLocation from '../utils/getUserLocation';
+import { addRootClickHandler, removeRootClickHandler } from '../utils/rootClickHandler';
 
 const Search = ({
   mode,
+  includeUseLocationOption = false,
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
-
+  const router = useRouter();
+  console.log('search config', searchConfig)
   const [query, setQuery] = useState(searchConfig.q || '');
   const [near, setNear] = useState(searchConfig.near || '');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [loadingUserLocation, setLoadingUserLocation] = useState(false);
 
   const small = dimensions.width < 900 || mode === 'results';
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
 
-  function submitSearch() {
+  const onRootClick = useCallback((e) => {
+    setDropdownOpen(false);
+  });
+
+  const onCurrentLocationPress = async () => {
+    try {
+      setLoadingUserLocation(true);
+      const location = await getUserLocation();
+      submitSearch({ q: query, near: location.city });
+    } catch (reason) {
+      alert('Could not get location data');
+      setDropdownOpen(false);
+      setLoadingUserLocation(false);
+      console.error(reason);
+    }
+  };
+
+  useEffect(() => {
+    addRootClickHandler(onRootClick);
+    return () => removeRootClickHandler(onRootClick);
+  }, []);
+
+  const submitSearch = (query) => {
+    dispatch({ type: 'searchConfig', value: query });
+
     if (isWeb) {
-      const { protocol, host, port } = window.location;
-      const searchUrl = new URL(`${protocol}${host}/search`);
-
-      if (query) searchUrl.searchParams.append('q', query);
-      if (near) searchUrl.searchParams.append('near', near);
-
-      window.location = searchUrl.toString();
-
+      const url = `/search?${new URLSearchParams(query).toString()}`;
+      router.push(url);
       return;
     }
 
-    dispatch({
-      type: 'searchConfig', value: {
-        q: query,
-        near: near
-      }
-    })
     dispatch({ type: 'setView', view: '/search' })
-  }
+  };
+
+  const onSubmit = () => {
+    submitSearch({ q: query, near });
+  };
 
   const searchForm = (
-    <View style={{ borderWidth: mode === 'results' ? 1 : 0, borderColor: Theme.green, backgroundColor: '#fff', borderRadius: 40, maxWidth: 840, paddingLeft: 40, paddingRight: 20, paddingTop: 6, paddingBottom: 6 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ width: small ? 100 : 200 }}>
-          {!small &&
-            <View>
-              <Text style={[styles.text_body, { fontSize: 16, color: '#000', fontWeight: 'bold' }]}>Find</Text>
-            </View>
-          }
-          <View>
+    <View style={{
+      flexDirection: 'row',
+      justifyContent: 'center',
+      minHeight: includeUseLocationOption ? 140 : 0,
+    }}>
+      <View
+        onStartShouldSetResponder={() => true}
+        style={{ flex: 1, maxWidth: 840 }}>
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderWidth: mode === 'results' ? 1 : 0,
+          borderColor: Theme.green,
+          backgroundColor: '#fff',
+          borderRadius: 40,
+          paddingTop: 6,
+          paddingBottom: 6,
+        }}>
+          <View style={{
+            flex: 2,
+            marginLeft: 25,
+          }}>
+            {!small &&
+              <Text style={[styles.text_body, {
+                fontSize: 16,
+                color: '#000',
+                fontWeight: 'bold',
+              }]}>Find</Text>
+            }
             <TextInput key="searchQuery" name="q" value={query} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} onChangeText={text => setQuery(text)} />
           </View>
-        </View>
-        <View style={{ width: 1, borderRightWidth: 1, height: 48, borderColor: 'rgba(0, 0, 0, 0.5)', marginLeft: 20, marginRight: 20 }} />
-        <View style={{ width: small ? 100 : 440 }}>
-          {!small &&
-            <View>
-              <Text style={[styles.text_body, { fontSize: 16, color: '#000', fontWeight: 'bold' }]}>Near</Text>
+          <View style={{ width: 1, borderRightWidth: 1, height: 48, borderColor: 'rgba(0, 0, 0, 0.5)', marginLeft: 15, marginRight: 15 }} />
+          <View style={{
+            flex: 4,
+            marginRight: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+            <View style={{
+              flex: 1,
+            }}>
+              {!small &&
+                <Text style={[styles.text_body, { fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }]}>Near</Text>
+              }
+              <TextInput
+                style={{ flex: 1 }}
+                key="searchNear"
+                name="near"
+                value={near}
+                style={[styles.text_body, { width: '100%', height: 30, fontSize: 16 }]}
+                placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"}
+                onChangeText={text => setNear(text)}
+                onFocus={(e) => {
+                  if (isWeb) e.target.setAttribute('autocomplete', 'off');
+                  setDropdownOpen(true);
+                }} />
             </View>
-          }
-          <View>
-            <TextInput key="searchNear" name="near" value={near} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"} onChangeText={text => setNear(text)} />
+            <TouchableOpacity onPress={() => onSubmit()}>
+              {small ? (
+                <View style={{ backgroundColor: Theme.green_bg, borderRadius: 40, padding: 10 }}>
+                  <FontAwesome name="search" size={24} color="#fff" />
+                </View>
+              ) : (
+                  <View style={{ backgroundColor: '#E5E5E5', borderRadius: 40, height: 55, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingLeft: 20, paddingRight: 20 }}>
+                    <FontAwesome name="search" size={24} color="black" />
+                    <Text style={[styles.text_body, { fontSize: 16, color: '#000', marginLeft: 10 }]}>Search</Text>
+                  </View>
+                )}
+            </TouchableOpacity>
+            {isWeb && <div style={{ width: 0, height: 0, overflow: 'hidden' }}><input type="submit" /></div>}
           </View>
         </View>
-        <View>
-          <TouchableOpacity onPress={e => { submitSearch(query, near) }}>
-            {small ? (
-              <View style={{ backgroundColor: Theme.green_bg, borderRadius: 40, padding: 10 }}>
-                <FontAwesome name="search" size={24} color="#fff" />
+        {(includeUseLocationOption && dropdownOpen && !near) ? (
+          <View style={{
+            flexDirection: 'row',
+          }}>
+            {!small ? (
+              <>
+                <View style={{
+                  flex: 2,
+                  marginLeft: 15,
+                  marginRight: 15,
+                }} />
+              </>
+            ) : null}
+            <TouchableOpacity
+              onPress={() => onCurrentLocationPress()}
+              style={{
+                flex: 4,
+                marginLeft: 15,
+                marginRight: 15,
+              }}>
+              <View style={{
+                  zIndex: 10,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  padding: 15,
+                  marginTop: 5,
+                  backgroundColor: 'white',
+                  shadowOpacity: 0.4,
+                  shadowRadius: 10,
+                  cursor: 'pointer',
+                }} >
+                {loadingUserLocation ? (
+                  <ActivityIndicator
+                    style={{ marginRight: 10, }}
+                    color={Theme.green} />
+                ) : (
+                  <FontAwesome
+                    style={{ marginRight: 10, }}
+                    name="location-arrow"
+                    size={24}
+                    color={Theme.green} />
+                )}
+                <Text style={[styles.text_input, { flex: 1, color: Theme.green }]}>Current Location</Text>
               </View>
-            ) : (
-                <View style={{ backgroundColor: '#E5E5E5', borderRadius: 40, height: 55, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingLeft: 20, paddingRight: 20 }}>
-                  <FontAwesome name="search" size={24} color="black" />
-                  <Text style={[styles.text_body, { fontSize: 16, color: '#000', marginLeft: 10 }]}>Search</Text>
-                </View>
-              )}
-          </TouchableOpacity>
-        </View>
-        {isWeb && <div style={{ width: 0, height: 0, overflow: 'hidden' }}><input type="submit" /></div>}
+            </TouchableOpacity>
+          </View>
+        ) : null}
       </View>
-    </View>
+    </View> 
   );
 
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', maxWidth: '100%' }}>
-      {isWeb ? (
-        <form onSubmit={(e) => {
+    isWeb ? (
+      <form
+        style={{
+          width: '100%',
+        }}
+        onSubmit={(e) => {
           e.preventDefault();
-          submitSearch();
+          onSubmit();
         }}>
-          {searchForm}
-        </form>
-      ) : searchForm}
-    </View>
+        {searchForm}
+      </form>
+    ) : searchForm
   )
 };
 

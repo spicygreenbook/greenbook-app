@@ -7,7 +7,7 @@ import { Link } from "../components/Link";
 import { Entypo } from '@expo/vector-icons'; 
 
 
-function renderHTML(markup, spans, isWeb, dispatch) {
+function renderHTML(markup, spans, body_style, isWeb, dispatch) {
     let parts = {0: ''};
     let segment = 0;
     let i = 0;
@@ -46,9 +46,10 @@ function renderHTML(markup, spans, isWeb, dispatch) {
             }
         }
 
+        console.log('partspart', parts[part]);
         return segment_map[i].type === 'hyperlink' && button ? (
-            <Link href={url} button={'button_green'} title={parts[part] || ''} />
-        ) : segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} onPress={e => {
+            <Link key={i} href={url} button={'button_green'} title={parts[part] || ''} />
+        ) : segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} style={body_style} onPress={e => {
             //console.log('link to', url)
             const external = url.slice(0,1) !== '/';
 
@@ -57,14 +58,11 @@ function renderHTML(markup, spans, isWeb, dispatch) {
             } else {
                 isWeb ? window.open(url, '_blank') : Linking.openURL(url)
             }
-            }} style={
-                segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {color: Theme.green}
-            }>{parts[part] || ''}</Text>
-        ) : (<Text key={'subpart' + i} style={
-            segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
+            }} style={[body_style, segment_map[i].type === 'strong' ? {fontWeight: 'bold', color: Theme.green} : {color: Theme.green}]}>{parts[part] || ''}</Text>
+        ) : (<Text key={'subpart' + i} style={[body_style, segment_map[i].type === 'strong' ? {fontWeight: 'bold'}
             :
             {}
-        }>
+        ]}>
             {parts[part] || ''}
         </Text>)
     })
@@ -102,13 +100,13 @@ export function RichText(props) {
                 alt={part.alt || ''}
                 source={{uri:part.url}} />)
         } else if (part.type === 'paragraph') {
-            return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
-                {renderHTML(part.text, part.spans, isWeb, dispatch)}
-            </Text>)
+            return (<View key={key} style={{marginTop: 10, marginBottom: 10}}>
+                {renderHTML(part.text, part.spans, body_style, isWeb, dispatch)}
+            </View>)
         } else if (part.type === 'list-item') {
             return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
                 {props.bullet === 'check' ? <Entypo name="check" size={24} color={Theme.green} style={{marginRight: 8}}/> : <Text style={[body_style]}>• </Text>}
-                {renderHTML(part.text, part.spans, isWeb, dispatch)}
+                {renderHTML(part.text, part.spans, body_style, isWeb, dispatch)}
             </Text>)
         } else if(part.text) {
             return (<Text key={key} style={body_style}>{part.text}</Text>)
