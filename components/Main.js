@@ -20,24 +20,25 @@ import List from '../screens/List';
 import Listing from '../screens/Listing';
 import Menu from '../components/Menu';
 import ImageGallery from '../components/ImageGallery';
-import {useStateValue} from "../components/State";
+import { useStateValue } from "../components/State";
+import { useFonts } from 'expo-font';
 import { getStyles, getImage } from '../utils';
 import { Dimensions, Platform } from 'react-native';
 
 function Main(props) {
 
   const [{ view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig }, dispatch] = useStateValue();
-  const [ isScrolled, setIsScrolled ] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
 
 
-/* debug purposes figureing out dispatches causing rerender  
-  useEffect(() => {
-    console.log('dispatches')
-    console.log(view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig);
-  }, [view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig]);
-*/
-  const styles = StyleSheet.create(getStyles('body', {isWeb}));
+  /* debug purposes figureing out dispatches causing rerender  
+    useEffect(() => {
+      console.log('dispatches')
+      console.log(view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig);
+    }, [view, isWeb, theme, menuOpen, dimensions, lightbox, lightboxConfig]);
+  */
+  const styles = StyleSheet.create(getStyles('body', { isWeb }));
 
   const onChangeScreenSize = ({ set_window, set_screen }) => {
     const get_window = Dimensions.get("window");
@@ -47,9 +48,33 @@ function Main(props) {
     }
     console.log('setting to', set_to)
     if (isWeb && get_window.width !== dimensions.width) {
-      dispatch({type: 'setDimensions', value: set_to})
+      dispatch({ type: 'setDimensions', value: set_to })
     }
   };
+
+  let fonts = {
+    'ApercuMedium': {
+      uri: require('../public/fonts/ApercuRegular.ttf'),
+      display: 'swap',
+    },
+    'ApercuLight': {
+      uri: require('../public/fonts/ApercuLight.ttf'),
+      display: 'swap',
+    },
+    'KnockoutBold': {
+      uri: require('../public/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf'),
+      display: 'swap',
+    },
+    'KnockoutWelterWeight': {
+      uri: require('../public/fonts/Knockout_HTF50-Welterweight_Regular.otf'),
+      display: 'swap',
+    },
+    'KnockoutFeatherWeight': {
+      uri: require('../public/fonts/Knockout_HTF48-Featherweight_Regular.otf'),
+      display: 'swap',
+    }
+  };
+  const [fontsReady, fontsError] = useFonts(fonts);
 
   useEffect(() => {
     Dimensions.addEventListener("change", onChangeScreenSize);
@@ -68,18 +93,18 @@ function Main(props) {
     if (theme !== _theme) {
       console.log('view has changed to', view);
       console.log('theme changed to', _theme)
-      dispatch({type: 'setTheme', value: _theme})
+      dispatch({ type: 'setTheme', value: _theme })
     }
   }, [view])
 
   function scrollEventListener() {
     if (window && document) {
-        let y = document.body.scrollTop || document.documentElement.scrollTop;
-        if (!isScrolled && y > 0) {
-          setIsScrolled(true);
-        } else if (isScrolled && y < 1) {
-          setIsScrolled(false);
-        }
+      let y = document.body.scrollTop || document.documentElement.scrollTop;
+      if (!isScrolled && y > 0) {
+        setIsScrolled(true);
+      } else if (isScrolled && y < 1) {
+        setIsScrolled(false);
+      }
     }
   }
 
@@ -94,48 +119,53 @@ function Main(props) {
     }, []);
   }
 
+  if (!isWeb && !fontsReady) {
+    console.log('render loading first');
+    return (<Text>Loading...</Text>)
+  }
+
   function renderContent(props) {
-      return (
-          view === '/about' ? <About {...props} />
-          : view === '/updates' ? <Updates {...props} />
+    return (
+      view === '/about' ? <About {...props} />
+        : view === '/updates' ? <Updates {...props} />
           : view === '/privacy' ? <Privacy {...props} />
-          : view === '/press' ? <Press {...props} />
-          : view === '/team' ? <Team {...props} />
-          : view === '/process' ? <Process {...props} />
-          : view === '/contact' ? <Contact {...props} />
-          : view === '/add' ? <AddListing {...props} />
-          : view === '/volunteer' ? <Volunteer {...props} />
-          : view === '/donate' ? <Donate {...props} />
-          : view === '/search' ? <List {...props} />
-          : view.indexOf('/biz') === 0 ? <Listing {...props} />
-          : view === '/' ? <Home {...props} />
-          : <NotFound {...props} />
-      )
+            : view === '/press' ? <Press {...props} />
+              : view === '/team' ? <Team {...props} />
+                : view === '/process' ? <Process {...props} />
+                  : view === '/contact' ? <Contact {...props} />
+                    : view === '/add' ? <AddListing {...props} />
+                      : view === '/volunteer' ? <Volunteer {...props} />
+                        : view === '/donate' ? <Donate {...props} />
+                          : view === '/search' ? <List {...props} />
+                            : view.indexOf('/biz') === 0 ? <Listing {...props} />
+                              : view === '/' ? <Home {...props} />
+                                : <NotFound {...props} />
+    )
   }
 
   return (
-      <View key={forceUpdate} style={isWeb ? {position: 'absolute', top: 0, right: 0, left: 0, bottom: 0, flex: 1}: {flex: 1}}>
-          {lightbox && lightboxConfig.images ? (
-            <React.Fragment>
-              <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
-              {isWeb && <style
-                dangerouslySetInnerHTML={{
-                  __html: `#chat-widget-container {
+    <View key={forceUpdate} style={isWeb ? { position: 'absolute', top: 0, right: 0, left: 0, bottom: 0, flex: 1 } : { flex: 1 }}>
+      {lightbox && lightboxConfig.images ? (
+        <React.Fragment>
+          <ImageGallery images={lightboxConfig.images} firstIndex={lightboxConfig.index} />
+          {isWeb && <style
+            dangerouslySetInnerHTML={{
+              __html: `#chat-widget-container {
                     z-index: 5 !important;
                     display: none !important
                   }`
-              }} />}
-            </React.Fragment>
-          ) : menuOpen ? (
-            <Menu />
-          ) : (
+            }} />}
+        </React.Fragment>
+      ) : menuOpen ? (
+        <Menu />
+      ) : (
             <React.Fragment>
               {!lightbox && isWeb && <Nav isScrolled={isScrolled} theme={theme} />}{/* want nav on top for semantic html i guess*/}
               { isWeb ? (
-                  <View style={styles.body}>
-                    {renderContent(props)}
-                  </View>
-                 ) : (
+                <View style={styles.body}>
+                  {renderContent(props)}
+                </View>
+              ) : (
                   <ScrollView style={styles.body} onScroll={(e) => {
                     if (!isScrolled && e.nativeEvent.contentOffset.y > 0) {
                       setIsScrolled(true);
@@ -146,13 +176,13 @@ function Main(props) {
                     {renderContent(props)}
                     {!isWeb && <Footer theme={theme} />}
                   </ScrollView>
-                 )}
+                )}
               {isWeb && <Footer theme={theme} />}
               {!lightbox && !isWeb && <Nav isScrolled={isScrolled} theme={theme} />}{/* makes it clickable to be last render on android*/}
 
             </React.Fragment>
           )}
-      </View>
+    </View>
   )
 }
 

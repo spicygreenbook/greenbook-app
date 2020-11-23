@@ -14,7 +14,7 @@ async function getListings() {
     var masterRef_json = await masterRef.json();
     var master_ref;
     masterRef_json.refs.forEach(line => {
-        if(line.id === 'master') {
+        if (line.id === 'master') {
             master_ref = line.ref;
         }
     })
@@ -54,14 +54,14 @@ async function getListings() {
     return rows
 }
 
-async function handle () {
+async function handle() {
     let listings = await getListings();
     let sitemap = await generateSiteMap(listings);
     return {}
 }
 
 module.exports = withExpo(withFonts(withImages({
-  projectRoot: __dirname,
-  generaiteSiteMap: handle()
+    projectRoot: __dirname,
+    generaiteSiteMap: handle()
 })));
 
