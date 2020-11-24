@@ -15,44 +15,29 @@ export default function(props) {
         <View nativeID="footer" style={styles.footer}>
             <View style={{flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2}}>
                 <View style={[dimensions.width < 700 ? {} : {flexDirection: 'row'}, {flex:1, width: 1024, maxWidth: '100%'}]}>
-                    <View style={{flex: 3, justifyContent: dimensions.width < 700 ? 'space-around' : 'flex-start', flexDirection: 'row', borderColor: '#fff', textAlign: "center", borderRightWidth: dimensions.width < 700 ? 0 : 2, paddingTop: 40, paddingBottom:40, paddingRight: dimensions.width < 700 ? 0 : 40, paddingLeft: dimensions.width < 700 ? 0 : dimensions.width < 1080 ? 20 : 0}}>
-                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
-                            <Link href="/search"><Text style={styles.text_footer}>Browse</Text></Link>
-                        </View>
-                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
-                            <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
-                        </View>
-                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
-                            <Link href="/add"><Text style={styles.text_footer}>Add Listing</Text></Link>
-                        </View>
-                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
-                            <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
-                        </View>
-                        <View style={dimensions.width < 700 ? {} : {flex:1}}>
-                            <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
-                        </View>
+                    <View style={{flex: 3, justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', borderColor: '#fff', borderRightWidth: dimensions.width < 700 ? 0 : 2, paddingTop: 40, paddingBottom:40, paddingRight: dimensions.width < 700 ? 0 : 40, paddingLeft: dimensions.width < 700 ? 0 : dimensions.width < 1080 ? 20 : 0}}>
+                        <Link href="/search"><Text style={styles.text_footer}>Browse</Text></Link>
+                        <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
+                        <Link href="/add"><Text style={styles.text_footer}>Add Listing</Text></Link>
+                        <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
+                        <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40, paddingBottom: 40}}>
-                        <View>
-                            <Link href="https://www.instagram.com/spicygreenbook/">
-                                <FontAwesome name="instagram" size={32} color="#fff" />
-                            </Link>
-                        </View>
-                        <View>
-                            <Link href="https://twitter.com/spicygreenbook">
-                                <FontAwesome name="twitter" size={32} color="#fff" />
-                            </Link>
-                        </View>
-                        <View>
-                            <Link href="https://www.linkedin.com/company/spicy-green-book/">
-                                <FontAwesome name="linkedin" size={32} color="#fff" />
-                            </Link>
-                            </View>
-                        <View>
-                            <Link href="https://www.facebook.com/SpicyGreenBook/">
-                                <FontAwesome name="facebook" size={32} color="#fff" />
-                            </Link>
-                        </View>
+                        <Link href="https://www.instagram.com/spicygreenbook/">
+                            <FontAwesome name="instagram" size={32} color="#fff" />
+                        </Link>
+                
+                        <Link href="https://twitter.com/spicygreenbook">
+                            <FontAwesome name="twitter" size={32} color="#fff" />
+                        </Link>
+
+                        <Link href="https://www.linkedin.com/company/spicy-green-book/">
+                            <FontAwesome name="linkedin" size={32} color="#fff" />
+                        </Link>
+                
+                        <Link href="https://www.facebook.com/SpicyGreenBook/">
+                            <FontAwesome name="facebook" size={32} color="#fff" />
+                        </Link>
                     </View>
                 </View>
                 <View style={{marginTop: 40}}>
