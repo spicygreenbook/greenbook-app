@@ -1,20 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList} from 'react-native';
 import { Link } from "../components/Link"; 
 import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
-import { getStyles, Theme, getContent } from '../utils';
+import { getStyles, Theme, getContent, getData } from '../utils';
 
 
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header4, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, text_header3, text_header4, section, content', {isWeb}));
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
+
+    const [ loadingRoles, setLoadingRoles ] = useState(!props.roles);
+    const [ errorRoles, setErrorRoles ] = useState('');
+    const [ roles, setRoles ] = useState(props.roles || []);
 
     if (!props.content) {
         useEffect(() => {
@@ -27,10 +31,26 @@ function Page(props) {
             });
         }, [])
     }
+    useEffect( () => {
+        if (!props.roles) {
+            getData({
+                type: 'roles'
+            }).then(_roles => {
+                setLoadingRoles(false);
+                setRoles(_roles)
+            }).catch(err => {
+                console.error(err);
+                setLoadingRoles(false);
+                setErrorRoles('Failed to load roles.');
+            })
+        }
+    }, [])
+
+    let numColumns = dimensions.width < 800 ? 1 : 2
 
     return (
         <React.Fragment>
-        { pageLoading ?
+        { pageLoading || loadingRoles ?
             <View style={{marginTop: 200, marginBottom: 200}}>
                 <ActivityIndicator color={Theme.green} size="large" />
             </View>
@@ -40,6 +60,30 @@ function Page(props) {
                 <View style={[styles.section, {paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'}/>
+                    </View>
+                </View>
+                <View style={[styles.section]}>
+                    <View style={styles.content}>
+                        <FlatList
+                            key={'cols' + numColumns}
+                            data={roles}
+                            numColumns={numColumns}
+                            renderItem={({ item, index, separators }) => (
+                                <View
+                                style={{ flexDirection: "row" }}
+                                key={'press' + index}
+                                style={{
+                                    flex: 1/numColumns,
+                                    margin: 10,
+                                }}
+                                >
+                                    <Text accessibilityRole="header" aria-level={3} style={[styles.text_header3, {marginTop: 40}]}>- {' '}{' '}{item.title}</Text>
+                                    <Text style={[styles.text_body, {marginTop: 10, fontStyle: 'italic'}]}>{item.location}</Text>
+                                    <RichText render={item._description} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'}/>
+                                </View>
+                            )}
+                            keyExtractor={(item, index) => 'press' + index}
+                        />
                     </View>
                 </View>
                 <View style={[styles.section]}>

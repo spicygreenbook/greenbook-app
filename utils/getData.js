@@ -297,6 +297,8 @@ export async function getData(config) {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.staff.order%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'press') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.press.date%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
+    } else if (config.type === 'roles') {
+        url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.roles.order%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     }
     if (url) {
         let data;
