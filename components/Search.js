@@ -113,7 +113,7 @@ const Search = ({
                 key="searchNear"
                 name="near"
                 value={near}
-                style={[styles.text_body, { width: '100%', height: 30, fontSize: 16 }]}
+                style={[styles.text_body, { height: 30, fontSize: 16 }]}
                 placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"}
                 onChangeText={text => setNear(text)}
                 onFocus={(e) => {

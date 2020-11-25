@@ -165,7 +165,7 @@ const allStyles = {
     return {
       fontFamily: "ApercuMedium",
       fontSize: config.windowWidth < 900 ? 20 : 24,
-      lineHeight: config.windowWidth < 900 ? 28 : 32,
+      lineHeight: config.windowWidth < 900 ? 20 : 32,
       color: "#606060",
     };
   },
