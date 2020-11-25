@@ -10,6 +10,7 @@ import { addRootClickHandler, removeRootClickHandler } from '../utils/rootClickH
 const Search = ({
   mode,
   includeUseLocationOption = false,
+  navigation
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
   const router = useRouter();
@@ -53,6 +54,7 @@ const Search = ({
       return;
     }
 
+    navigation.navigate('Browse', { screen: 'Home'})
     dispatch({ type: 'setView', view: '/search' })
   };
 
@@ -111,7 +113,7 @@ const Search = ({
                 key="searchNear"
                 name="near"
                 value={near}
-                style={[styles.text_body, { width: '100%', height: 30, fontSize: 16 }]}
+                style={[styles.text_body, { height: 30, fontSize: 16 }]}
                 placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"}
                 onChangeText={text => setNear(text)}
                 onFocus={(e) => {

@@ -114,7 +114,7 @@ function Page(props) {
                                 Businesses
                             </Text>
                             <View style={{ marginTop: 40 }}>
-                                <Search includeUseLocationOption />
+                                <Search includeUseLocationOption navigation={props.navigation} />
                             </View>
                         </View>
                     </ImageBackground>

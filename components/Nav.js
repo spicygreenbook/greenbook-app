@@ -139,21 +139,19 @@ export default function (props) {
                         </View>
                     </View>
                 ) : (
-                        <React.Fragment>
-                            <View style={{ flex: Math.floor(dimensions.width / 400) }} />
-                            <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
-                                <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>
-                            </View>
-                            <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
+
+                            <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>                            
+                            <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                    <Link href="/about"><Text style={styles.text_nav}>About</Text></Link>
+                                    <Link href="/about"><Text style={[styles.text_nav, localStyle.anchor]}>About</Text></Link>
                                     <AntDesign name="down" size={22} color={props.theme === 'light' ? Theme.green : '#fff'} style={{ cursor: 'pointer', marginLeft: 10 }} onClick={e => {
                                         setActive(active === 'about' ? '' : 'about');
                                         dropdownclicked = true
                                     }} />
                                 </View>
                                 <View style={{
-                                    position: 'absolute', top: 60, right: 0, backgroundColor: '#fff', minWidth: 160, padding: 20,
+                                    position: 'absolute', minHeight: 175, justifyContent: 'space-between', top: 30, right: 0, backgroundColor: '#fff', minWidth: 160, padding: 20,
                                     opacity: active === 'about' ? 1 : 0, display: active === 'about' ? '' : 'none',
                                     shadowOpacity: 0.4,
                                     shadowRadius: 10,
@@ -165,38 +163,27 @@ export default function (props) {
                                             menuIsClicked = false;
                                         }, 500)
                                     }
-                                }}>
-                                    <View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-                                        <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-                                        <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-                                        <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-                                        <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                                        <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>
-                                    </View>
+                                }}>     
+                                    <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>    
+                                    <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
+                                    <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>       
+                                    <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>              
+                                    <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>                            
                                 </View>
                             </View>
-                            <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
-                                <Link href="/add"><Text style={styles.text_nav}>Add Listing</Text></Link>
-                            </View>
-                            <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
-                                <Link href="/donate"><Text style={styles.text_nav}>Donate</Text></Link>
-                            </View>
-                            <View style={{ paddingLeft: 80, justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
-                                <Link href="/volunteer"><Text style={styles.text_nav}>Volunteer</Text></Link>
-                            </View>
-                        </React.Fragment>
+    
+                            <Link style={localStyle.anchor} href="/add"><Text style={[styles.text_nav, localStyle.anchor]}>Add Listing</Text></Link>
+                            <Link style={localStyle.anchor} href="/donate"><Text style={[styles.text_nav, localStyle.anchor]}>Donate</Text></Link>
+                            <Link href="/volunteer"><Text style={[styles.text_nav, localStyle.anchor]}>Volunteer</Text></Link>
+                        </View>
                     )}
             </View>
         </View>
     )
-
 }
 
+const localStyle = StyleSheet.create({
+    anchor: {
+        paddingLeft: 80
+    }
+})

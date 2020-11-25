@@ -309,7 +309,7 @@ function Page(props) {
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
                             </Text>
-                            {!props.viewMode && <Search mode="results" /> }
+                            {!props.viewMode && <Search mode="results" navigation={props.navigation} /> }
                         </View>
                         <View>
                             {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={props.navigation} viewMode={props.viewMode} />)}
