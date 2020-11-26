@@ -211,7 +211,7 @@ function Page(props) {
                                                 <Text accessibilityRole="header" aria-level="3" style={[styles.text_header2, {color: '#fff'}]}>
                                                     {item.name}
                                                 </Text>
-                                                <Link button={'button_white'} title={'Learn More'} href={'/biz/' + item.uid} to="Listing" navigation={props.navigation} style={{marginTop: 40}}/>
+                                                <Link button={'button_white'} title={'Learn More'} href='/biz/[name]' as={'/biz/' + item.uid} to="Listing" navigation={props.navigation} style={{marginTop: 40}}/>
                                             </View>
                                         </View>
                                     </View>
