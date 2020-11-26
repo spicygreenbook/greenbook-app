@@ -196,7 +196,7 @@ function Page(props) {
 
     const [{ view, isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header3, section, content', {isWeb}));
-    //console.log('page props', props)
+    console.log('page props', props)
     
     let qs = searchConfig;
 
@@ -225,10 +225,15 @@ function Page(props) {
         return go;
     };
 
+    let staticCityState = '';
+    if (props.city && props.state) {
+        staticCityState = props.city + ', ' + props.state;
+    }
+
     const [ pageLoading, setPageLoading ] = useState(!props.listings);
     const [ listings, setLitsings ] = useState(props.listings);
     const [ results, setResults ] = useState(props.listings || []);
-    const [ location, setLocation ] = useState(qs.near || '');
+    const [ location, setLocation ] = useState(staticCityState || qs.near || '');
     const [ query, setQuery ] = useState(qs.q || '');
     const [ geoLocation, setGeoLocation ] = useState();
     const [ gettingGeo, setGettingGeo ] = useState(!!(qs.near || '').trim());
@@ -309,7 +314,7 @@ function Page(props) {
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
                             </Text>
-                            {!props.viewMode && <Search mode="results" navigation={props.navigation} /> }
+                            {!props.viewMode && <Search mode="results" navigation={props.navigation} city={props.city} state={props.state}/> }
                         </View>
                         <View>
                             {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={props.navigation} viewMode={props.viewMode} />)}

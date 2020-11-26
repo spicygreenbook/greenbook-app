@@ -8,6 +8,8 @@ import getUserLocation from '../utils/getUserLocation';
 import { addRootClickHandler, removeRootClickHandler } from '../utils/rootClickHandler';
 
 const Search = ({
+  city,
+  state,
   mode,
   includeUseLocationOption = false,
   navigation
@@ -15,8 +17,14 @@ const Search = ({
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
   const router = useRouter();
   console.log('search config', searchConfig)
+
+  let staticCityState = '';
+  if (city && state) {
+      staticCityState = city + ', ' + state;
+  }
+
   const [query, setQuery] = useState(searchConfig.q || '');
-  const [near, setNear] = useState(searchConfig.near || '');
+  const [near, setNear] = useState(staticCityState || searchConfig.near || '');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [loadingUserLocation, setLoadingUserLocation] = useState(false);
 

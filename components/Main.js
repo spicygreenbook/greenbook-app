@@ -105,7 +105,7 @@ function Main(props) {
                     : view === '/add' ? <AddListing {...props} />
                       : view === '/volunteer' ? <Volunteer {...props} />
                         : view === '/donate' ? <Donate {...props} />
-                          : view === '/search' ? <List {...props} />
+                          : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
                             : view.indexOf('/biz') === 0 ? <Listing {...props} />
                               : view === '/' ? <Home {...props} />
                                 : <NotFound {...props} />
