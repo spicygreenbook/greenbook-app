@@ -43,8 +43,6 @@ export default function ListItem(props) {
 
     return props.viewMode 
 			? content 
-			: <Link href={'/biz/' + listing.uid} to="Browse" routeName="Listing" navigation={props.navigation}>
-					{content}
-				</Link>
+			: <Link href='/biz/[name]' as={'/biz/' + listing.uid} to="Browse" routeName="Listing" navigation={props.navigation}>{content}</Link>
     
 }
