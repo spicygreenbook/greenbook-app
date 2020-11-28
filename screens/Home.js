@@ -5,6 +5,7 @@ import { Link } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import RichText from "../components/RichText"; 
 import { getStyles, Theme, getData, GridWidth } from '../utils';
+import { parseAddress } from '../utils/cityState';
 import { Entypo } from '@expo/vector-icons'; 
 import Search from "../components/Search";
 import SGBMap from "../components/SGBMap";
@@ -132,9 +133,9 @@ function Page(props) {
                                     return 0;
                                 }).map((pressRow, p) => 
                                     (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
-                                        <Link href={pressRow.link}>
+                                        <a href={pressRow.link}>
                                             <Image source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
-                                        </Link>
+                                        </a>
                                     </View>)
                                 )}
                             </React.Fragment>
@@ -191,31 +192,41 @@ function Page(props) {
                                 ref={(ref) => { newListingRef = ref; }}
                                 onViewableItemsChanged={viewableItemsChangedListing}
                                 viewabilityConfig={viewableItemsChangedConfigListing}
-                                renderItem={({ item, index, separators }) => (
-                                    <View>
-                                        <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}}>
-                                        </ImageBackground>
-                                        <View style={{
-                                            position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
-                                            flexDirection: 'column',
-                                            justifyContent: 'space-between'
-                                        }}>
-                                            <View style={{flex: 2}}>
-                                                <Text style={[styles.text_header3, {color: '#fff'}]}>
-                                                    NEW LISTING
-                                                </Text>
-                                            </View>
-                                            <View style={{flex: 1, height: 200}}>
-                                            </View>
-                                            <View style={{flex: 2}}>
-                                                <Text accessibilityRole="header" aria-level="3" style={[styles.text_header2, {color: '#fff'}]}>
-                                                    {item.name}
-                                                </Text>
-                                                <Link button={'button_white'} title={'Learn More'} href='/biz/[name]' as={'/biz/' + item.uid} to="Listing" navigation={props.navigation} style={{marginTop: 40}}/>
+                                renderItem={({ item, index, separators }) => {
+                                    const address = item.address && item.address[0];
+                                    const parsedAddress = address ? parseAddress(address) : null;
+
+                                    return (
+                                        <View>
+                                            <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}}>
+                                            </ImageBackground>
+                                            <View style={{
+                                                position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
+                                                flexDirection: 'column',
+                                                justifyContent: 'space-between'
+                                            }}>
+                                                <View style={{flex: 2}}>
+                                                    <Text style={[styles.text_header3, {color: '#fff'}]}>
+                                                        NEW LISTING
+                                                    </Text>
+                                                </View>
+                                                <View style={{flex: 1, height: 200}}>
+                                                </View>
+                                                <View style={{flex: 2}}>
+                                                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header2, {color: '#fff'}]}>
+                                                        {item.name}
+                                                    </Text>
+                                                    {parsedAddress ? (
+                                                        <Text style={[styles.text_header3, {color: '#fff'}]}>
+                                                            {parsedAddress.city}, {parsedAddress.state}
+                                                        </Text>
+                                                    ) : null}
+                                                    <Link button={'button_white'} title={'Learn More'} href='/biz/[name]' as={'/biz/' + item.uid} to="Listing" navigation={props.navigation} style={{marginTop: 40}}/>
+                                                </View>
                                             </View>
                                         </View>
-                                    </View>
-                                )}
+                                    );
+                                }}
                                 keyExtractor={(item, index) => 'listing' + index}
                             />
                             <View style={{position: 'absolute', top: '50%', marginTop: -100, left:10, right:10, height: 200, flex: 1}}>
