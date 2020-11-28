@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 const theme = {
     green: '#006233',
@@ -272,7 +272,7 @@ const allStyles = {
   },
 };
 
-export function getStyles(key, config) {
+export function getStyles(key, config = { isWeb: Platform.OS === 'web' }) {
     let ret = {};
 
     config.windowWidth = Dimensions.get('window').width;
