@@ -37,11 +37,10 @@ const CustomHeaderWrapper = ({ children }) => {
   )
 }
 
-const StateListingComponent = () => {
+const StateListingComponent = ({navigation}) => {
   
-  const { params : { cities, abbr }} = useRoute();
-  const navigation = useNavigation();
-  const [{ isWeb }] = useStateValue();
+  const { params : { cities, abbr, stateName }} = useRoute();
+  const [{ isWeb }, dispatch] = useStateValue();
   const styles = StyleSheet.create(getStyles('text_body', {isWeb}));
 
   return (
@@ -52,7 +51,12 @@ const StateListingComponent = () => {
 
           return (
             <ListItem key={city} >
-              <Link href={`/search?q=&near=${cityCapatalized}, ${abbr}`} to="CityListing" navigation={navigation} city={cityCapatalized} abbr={abbr} params={{city}}>
+              <Link 
+                href={`/search?q=&near=${cityCapatalized}, ${abbr}`} 
+                onPress={() => {
+                  dispatch({type: 'searchConfig', value: { q: "", near: `${cityCapatalized}, ${abbr}`}});
+                  navigation.navigate('CityListing', { city: cityCapatalized  })
+                }}>
                 <Text style={[styles.text_body,{ color: Theme.green, fontSize: 18, paddingTop: 5, paddingBottom: 5, textTransform: 'capitalize'}]}>{city}</Text>
               </Link> 
             </ListItem>
