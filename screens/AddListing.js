@@ -10,7 +10,7 @@ import { WebView } from 'react-native-webview';
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, button_green, button_green_text, section, content', {isWeb}));
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -56,7 +56,11 @@ function Page(props) {
                 <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
-                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/add'} button={'button_green'} title="Go To Add Listing Form" />}
+                        {!isWeb && <Link contain href={'https://spicygreenbook.org/add'}> 
+                            <View style={[styles.button_green, { marginTop: 40 }]} >    
+                                <Text style={[styles.button_green_text]}>Go To Add Listing Form</Text>
+                            </View>
+                        </Link>}
                     </View>
                 </View>
                 {isWeb && (<View style={[styles.section]}>

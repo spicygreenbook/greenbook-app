@@ -42,7 +42,9 @@ export default function ListItem(props) {
     )
 
     return props.viewMode 
-			? content 
-			: <Link href='/biz/[name]' as={'/biz/' + listing.uid} to="Browse" routeName="Listing" navigation={props.navigation}>{content}</Link>
-    
+        ? content 
+        : <Link href='/biz/[name]' as={'/biz/' + listing.uid} onPress={() => {
+            dispatch({type: 'setView', view: '/biz/' + listing.uid});
+            props.navigation.navigate('Listing')
+        }}>{content}</Link>
 }

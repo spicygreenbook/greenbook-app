@@ -41,7 +41,7 @@ export default function(props) {
                     </View>
                 </View>
                 <View style={{marginTop: 40}}>
-                    <Link href="https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf" target="_blank" download="SGBPressKit.pdf">
+                    <Link href="https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf">
                         <Text style={styles.text_footer}>Press Kit</Text>
                     </Link>
                 </View>

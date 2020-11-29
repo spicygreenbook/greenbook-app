@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, ScrollView, FlatList, Text, Button, SGBButton, Image, ImageBackground, ActivityIndicator, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, Text, Button, SGBButton, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking} from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import RichText from "../components/RichText"; 
@@ -12,6 +12,7 @@ import SGBMap from "../components/SGBMap";
 import { getInstagram } from '../utils/getData';
 import { handleRootClick } from '../utils/rootClickHandler';
 import { Fontisto } from '@expo/vector-icons'; 
+import { useRouter } from 'next/router';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -26,7 +27,6 @@ const viewableItemsChangedConfigListing = {
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('middle_all, text_hero, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer', {isWeb}));
 
     const [ loadingPress, setLoadingPress ] = useState(!props.press);
     const [ errorPress, setErrorPress ] = useState('');
@@ -42,6 +42,8 @@ function Page(props) {
     const [ loadingListings, setLoadingListings ] = useState(!props.listings);
     const [ errorListings, setErrorListings ] = useState('');
     const [ Listings, setListings ] = useState(props.listings || []);
+
+    const router = useRouter();
 
     useEffect( () => {
 
@@ -103,6 +105,16 @@ function Page(props) {
         }
     }
 
+    const handlePress = ({ href, navigate }) => {
+        
+        if(isWeb) {
+            router.push(href);
+        } else if (navigate) {
+            props.navigation.navigate(navigate);
+        }
+
+    }
+
     return (
         <TouchableOpacity activeOpacity={1} style={{ cursor: 'default' }} onPress={e => handleRootClick(e)}>
             <View>
@@ -133,9 +145,9 @@ function Page(props) {
                                     return 0;
                                 }).map((pressRow, p) => 
                                     (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
-                                        <a href={pressRow.link}>
+                                        <Link href={pressRow.link}>
                                             <Image source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
-                                        </a>
+                                        </Link>
                                     </View>)
                                 )}
                             </React.Fragment>
@@ -161,7 +173,11 @@ function Page(props) {
                                     We are establishing a space for people who seek to create change, and creating a platform for 
                                     them to invest in Black business owners in their communities.
                                 </Text>
-                                <Link href="/about" to="About" navigation={props.navigation} style={{marginTop: 40}} button={'button_green'} title="Learn More" />
+                                <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
+                                     <View style={[styles.button_green, { marginTop: 40 }]} >    
+                                        <Text style={[styles.button_green_text]}>Learn More</Text>
+                                     </View>
+                                </Link>
                             </View>
                         </View>
                     </View>
@@ -221,7 +237,17 @@ function Page(props) {
                                                             {parsedAddress.city}, {parsedAddress.state}
                                                         </Text>
                                                     ) : null}
-                                                    <Link button={'button_white'} title={'Learn More'} href='/biz/[name]' as={'/biz/' + item.uid} to="Listing" navigation={props.navigation} style={{marginTop: 40}}/>
+                                                    <Link href='/biz/[name]' as={`/biz/${item.uid}`}
+                                                    contain
+                                                    onPress={() => {
+                                                        dispatch({type: 'setView', view: '/biz/' + item.uid});
+                                                        props.navigation.navigate('Listing');
+                                                    }}>
+                                                        
+                                                    <View style={[styles.button_white, { marginTop: 40}]} >    
+                                                        <Text style={styles.button_white_text}>Learn More</Text>
+                                                     </View>
+                                                </Link>
                                                 </View>
                                             </View>
                                         </View>
@@ -297,7 +323,7 @@ function Page(props) {
 
                 <View style={[styles.section, {flex:1}]}>
                     <View style={[styles.content, {flex:1}]}>
-                        <Link href="https://instagram.com/spicygreenbook">
+                        <Link contain href='https://instagram.com/spicygreenbook'>
                             <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                                 FOLLOW @SPICYGREENBOOK
                             </Text>
@@ -354,5 +380,7 @@ function Page(props) {
         </TouchableOpacity>
     );
 }
+
+const styles = StyleSheet.create( getStyles('middle_all, text_hero, button_green, button_white, button_white_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer'));
 
 export default Page;
