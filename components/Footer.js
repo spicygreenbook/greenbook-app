@@ -23,25 +23,25 @@ export default function(props) {
                         <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40, paddingBottom: 40}}>
-                        <Link external href="https://www.instagram.com/spicygreenbook/">
+                        <Link href="https://www.instagram.com/spicygreenbook/">
                             <FontAwesome name="instagram" size={32} color="#fff" />
                         </Link>
                 
-                        <Link external href="https://twitter.com/spicygreenbook">
+                        <Link href="https://twitter.com/spicygreenbook">
                             <FontAwesome name="twitter" size={32} color="#fff" />
                         </Link>
 
-                        <Link external href="https://www.linkedin.com/company/spicy-green-book/">
+                        <Link href="https://www.linkedin.com/company/spicy-green-book/">
                             <FontAwesome name="linkedin" size={32} color="#fff" />
                         </Link>
                 
-                        <Link external href="https://www.facebook.com/SpicyGreenBook/">
+                        <Link href="https://www.facebook.com/SpicyGreenBook/">
                             <FontAwesome name="facebook" size={32} color="#fff" />
                         </Link>
                     </View>
                 </View>
                 <View style={{marginTop: 40}}>
-                    <Link external href="https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf">
+                    <Link href="https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf">
                         <Text style={styles.text_footer}>Press Kit</Text>
                     </Link>
                 </View>

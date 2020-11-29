@@ -56,7 +56,7 @@ function Page(props) {
                 <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
-                        {!isWeb && <Link external contain href={'https://spicygreenbook.org/add'}> 
+                        {!isWeb && <Link contain href={'https://spicygreenbook.org/add'}> 
                             <View style={[styles.button_green, { marginTop: 40 }]} >    
                                 <Text style={[styles.button_green_text]}>Go To Add Listing Form</Text>
                             </View>

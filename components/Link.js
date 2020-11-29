@@ -3,11 +3,12 @@ import { default as NextLink } from "next/link";
 import { useStateValue } from "../components/State";
 import { TouchableOpacity, Linking } from 'react-native';
 
-export const Link = ({href = '', as = '', external, children, ...props}) => {
+export const Link = ({href = '', as = '', children, ...props}) => {
     const [{ isWeb }] = useStateValue();
     let webProps = isWeb && props.download ? {download: props.download} : {};
     let more = props.fill ? {height: '100%'} : 
                props.contain ? isWeb ? { width: 'fit-content' } : { alignSelf: 'flex-start'} : {}
+    const external = href.slice(0,1) !== '/';
 
     const handlePress = () => {
         Linking.openURL(href);

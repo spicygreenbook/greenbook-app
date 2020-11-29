@@ -145,7 +145,7 @@ function Page(props) {
                                     return 0;
                                 }).map((pressRow, p) => 
                                     (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
-                                        <Link external href={pressRow.link}>
+                                        <Link href={pressRow.link}>
                                             <Image source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
                                         </Link>
                                     </View>)
@@ -312,7 +312,7 @@ function Page(props) {
                                         </React.Fragment>
                                     }
                                     return <View style={{ margin: 10, maxWidth: 300}} key={'update' + index}>
-                                        {item.link ? (<Link external href={item.link}><Item /></Link>) : <Item />}
+                                        {item.link ? (<Link href={item.link}><Item /></Link>) : <Item />}
                                     </View>
                                 }}
                                 keyExtractor={(item, index) => 'update' + index}
@@ -323,7 +323,7 @@ function Page(props) {
 
                 <View style={[styles.section, {flex:1}]}>
                     <View style={[styles.content, {flex:1}]}>
-                        <Link contain external href='https://instagram.com/spicygreenbook'>
+                        <Link contain href='https://instagram.com/spicygreenbook'>
                             <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                                 FOLLOW @SPICYGREENBOOK
                             </Text>
