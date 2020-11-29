@@ -10,7 +10,7 @@ import { getStyles, Theme, getContent, getData } from '../utils';
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header3, text_header4, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, text_header3, button_green, button_green_text, text_header4, section, content', {isWeb}));
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -96,7 +96,11 @@ function Page(props) {
                             </View>
                             <View style={{flex: 1, padding: 20, justifyContent: 'flex-end'}}>
                                 <View style={{flex: 1}}>
-                                    <Link button={'button_green'} href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer Form" />
+                                    <Link contain href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer Form">
+                                        <View style={[styles.button_green, { marginTop: 40}]} >    
+                                            <Text style={styles.button_green_text}>Volunteer Form</Text>
+                                        </View>
+                                    </Link>
                                 </View>
                             </View>
                         </View>
