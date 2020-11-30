@@ -259,7 +259,7 @@ function Page(props) {
         () => {
             setSearch(fixSearch(query.q));
             setProcessedSearchTerms(searchSeries(fixSearch(query)));
-            if (location) {
+            if (isWeb && location) {
                 fetch('/api/geocode?query=' + location).then(res => res.json()).then(json => {
                     if (json.coords) {
                         setGeoLocation(json.coords);
