@@ -17,7 +17,7 @@ export const Link = ({href = '', as = '', children, ...props}) => {
 
     return isWeb 
         ? <NextLink href={href} as={as} prefetch={false}>
-                <a target={external && '_blank'} {...webProps} style={{ textDecoration: 'none', ...more}}>
+                <a target={external ? '_blank' : ''} {...webProps} style={{ textDecoration: 'none', ...more}}>
                     {children}
                 </a>
            </NextLink>
