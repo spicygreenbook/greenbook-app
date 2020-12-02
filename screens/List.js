@@ -25,7 +25,8 @@ function Page({ listings, navigation, viewMode, city, state }) {
 
         if(searchConfig.near) { 
             try {
-                const res = await fetch('https://spicygreenfood.org/api/geocode?query=' + searchConfig.near);
+                // Must be full path for this to work on Native Platforms
+                const res = await fetch('https://spicygreenbook.org/api/geocode?query=' + searchConfig.near);
                 const geo = await res.json();
                 newListings = findListings(arr, geo.coords, toSearch);
             } catch (err) {
@@ -49,13 +50,12 @@ function Page({ listings, navigation, viewMode, city, state }) {
         }
     }, [])
     
-
     // Search
     useEffect(() => {
         if(data.length === 0) return;
        
         updateData(data);
-    }, [searchConfig])
+    }, [searchConfig]);
 
     return isLoading 
         ? <View style={{marginTop: 200, marginBottom: 200}}>
@@ -72,7 +72,7 @@ function Page({ listings, navigation, viewMode, city, state }) {
                             {!viewMode && <Search mode="results" navigation={navigation} city={city} state={state}/> }
                         </View>
                         <View>
-                            {filteredList.slice(0, 10).map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={navigation} viewMode={viewMode} />)}
+                            {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={navigation} viewMode={viewMode} />)}
                         </View>
                     </View>
                     {dimensions.width >= 800 &&
