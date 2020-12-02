@@ -39,6 +39,11 @@ export const StateReducer = (state, action) => {
         ...state,
         lightboxConfig: action.value
       };
+    case 'loading': 
+      return {
+        ...state,
+        isLoading: action.value
+      }
       
     default:
       return state;
@@ -92,7 +97,8 @@ export const InitialState = (props) => {
     dimensions: {
         width: Dimensions.get("window").width,
         height: Dimensions.get("screen").height
-    }
+    },
+    isLoading: true
   };
   
 
