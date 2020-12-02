@@ -38,6 +38,9 @@ export default function Map({
 
 			if (list.length) {
 				list.forEach((row) => {
+
+					if(!row.geocoordinates || !row.geocoordinates.lat) return row; // Only valid listing with geocoordinates
+
 					if (row.geocoordinates) {
 						if (single) {
 							var infoWindowMarkup = `

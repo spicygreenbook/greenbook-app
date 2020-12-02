@@ -16,7 +16,7 @@ const Search = ({
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
   const router = useRouter();
-  console.log('search config', searchConfig)
+  // console.log('search config', searchConfig)
 
   let staticCityState = '';
   if (city && state) {
@@ -54,6 +54,7 @@ const Search = ({
   }, []);
 
   const submitSearch = (query) => {
+    dispatch({ type: 'loading', value: true });
     dispatch({ type: 'searchConfig', value: query });
 
     if (isWeb) {
