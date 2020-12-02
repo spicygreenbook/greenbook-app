@@ -18,17 +18,17 @@ function Page({ listings, navigation, viewMode, city, state }) {
 
     const [pageLoading, setPageLoading] = useState(isWeb ? false : true); // In web listings are pre-fetch by nextjs
     const [data, setData] = useState(listings || []); // This data is for all platforms to search to. In native listings is null
-    const [filteredList, setFilteredList] = useState(listings);
+    const [filteredList, setFilteredList] = useState(listings || []);
     
     const updateData = async (arr) => {
         setPageLoading(true);
-        console.log('isWEB')
+
         let toSearch = searchSeries(fixSearch(searchConfig.q));
         let newListings = findListings(arr, false, toSearch);
 
         if(searchConfig.near) { 
             try {
-                const res = await fetch('https://spicygreenbook.org/api/geocode?query=' + searchConfig.near);
+                const res = await fetch('/api/geocode?query=' + searchConfig.near);
                 const geo = await res.json();
                 newListings = findListings(arr, geo.coords, toSearch);
             } catch (err) {
@@ -69,7 +69,7 @@ function Page({ listings, navigation, viewMode, city, state }) {
         : (
             <React.Fragment>
                 <View style={{paddingTop: isWeb ? 120 : 0}} />
-                <View key={'key' + '' + ''} style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
+                <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                     <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: isWeb ? 'calc(100vh - 234px)' : 0} : {}}>
                         <View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
                             <Text style={[styles.text_header3, {marginBottom: 20}]}>
