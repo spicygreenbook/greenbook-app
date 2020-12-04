@@ -20,7 +20,7 @@ import Listing from '../screens/Listing';
 import Menu from '../components/Menu';
 import ImageGallery from '../components/ImageGallery';
 import { useStateValue } from "../components/State";
-import { getStyles } from '../utils';
+import { getStyles, Theme } from '../utils';
 import { debounce} from 'lodash/fp';
 
 function Main(props) {
@@ -84,7 +84,7 @@ function Main(props) {
 
   return !isFrontEnd 
     ? <View style={{marginTop: 200, marginBottom: 200}}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator color={Theme.green} size="large" />
       </View>
     : <View style={isWeb ? { position: 'absolute', top: 0, right: 0, left: 0, bottom: 0, flex: 1 } : { flex: 1 }}>
         {lightbox && lightboxConfig.images ? (
