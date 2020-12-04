@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, ScrollView, FlatList, Text, Button, SGBButton, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking} from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
-import RichText from "../components/RichText"; 
 import { getStyles, Theme, getData, GridWidth } from '../utils';
 import { parseAddress } from '../utils/cityState';
 import { Entypo } from '@expo/vector-icons'; 
@@ -25,8 +24,7 @@ const viewableItemsChangedConfigListing = {
 
 function Page(props) {
 
-
-    const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
+    const [{ isWeb, dimensions }, dispatch] = useStateValue();
 
     const [ loadingPress, setLoadingPress ] = useState(!props.press);
     const [ errorPress, setErrorPress ] = useState('');
@@ -183,17 +181,7 @@ function Page(props) {
                             <FlatList
                                 horizontal
                                 showsHorizontalScrollIndicator={false}
-                                data={Listings.sort((a, b) => {
-                                        if (a.updated < b.updated) {
-                                            return 1;
-                                        }
-                                        if (a.updated > b.updated) {
-                                            return -1;
-                                        }
-                                        return 0;
-                                    }).slice(0,10).sort((a,b) => {
-                                        return a.time - b.time
-                                    }).filter(item => item.images && item.images[0] && item.images[0].image).slice(0,10)
+                                data={Listings.sort((a, b) => b.updated - a.updated).slice(0,10).sort((a, b) =>  a.time - b.time).filter(item => item.images && item.images[0] && item.images[0].image).slice(0,10)
                                 }
                                 ref={(ref) => { newListingRef = ref; }}
                                 onViewableItemsChanged={viewableItemsChangedListing}

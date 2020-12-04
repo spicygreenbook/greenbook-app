@@ -26,7 +26,8 @@ function Page({ listings, navigation, viewMode, city, state }) {
         if(searchConfig.near) { 
             try {
                 // Must be full path for this to work on Native Platforms
-                const res = await fetch('https://spicygreenbook.org/api/geocode?query=' + searchConfig.near);
+                const geoUrl = isWeb ? '/api/geocode?query=' : 'https://spicygreenbook.org/api/geocode?query=';
+                const res = await fetch(geoUrl + searchConfig.near);
                 const geo = await res.json();
                 newListings = findListings(arr, geo.coords, toSearch);
             } catch (err) {
