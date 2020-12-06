@@ -53,13 +53,18 @@ const Search = ({
     return () => removeRootClickHandler(onRootClick);
   }, []);
 
-  const submitSearch = (query) => {
+  const submitSearch = (q) => {
+
+    if(searchConfig.near === near && searchConfig.q === query) return;
+
     dispatch({ type: 'loading', value: true });
-    dispatch({ type: 'searchConfig', value: query });
+    dispatch({ type: 'searchConfig', value: q });
 
     if (isWeb) {
-      const url = `/search?${new URLSearchParams(query).toString()}`;
-      router.push(url);
+      if(router.route !== '/search') {
+        const url = `/search?${new URLSearchParams(q).toString()}`;
+        router.push(url);
+      }
       return;
     }
 

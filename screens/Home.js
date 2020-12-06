@@ -73,10 +73,11 @@ function Page(props) {
             })
         }
 
-        getInstagram().then(instagram => {
-            setLoadingInstagram(false);
-            setInstagram(instagram)
-        });
+        // Endpoint incorrect
+        // getInstagram().then(instagram => {
+        //     setLoadingInstagram(false);
+        //     setInstagram(instagram)
+        // });
 
         if (!props.listings) {
             getData({

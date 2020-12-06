@@ -55,6 +55,8 @@ export default function (props) {
     }
 
     useEffect(() => {
+        if(view !== '/') return;
+        
         const fn = debounce(200, scrollEventListener)
         window.addEventListener('scroll', fn, false)
 

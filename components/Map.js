@@ -16,6 +16,7 @@ export default function Map({
 	className,
 	onMountProps,
 }) {
+
 	const ref = useRef();
 	const [map, setMap] = useState();
 
@@ -113,7 +114,7 @@ export default function Map({
 				map,
 				"bounds_changed",
 				function (event) {
-					console.log("zoom", this.getZoom());
+					// console.log("zoom", this.getZoom());
 					if (this.getZoom() > 11 && this.initialZoom == true) {
 						this.setZoom(11);
 						this.initialZoom = false;
@@ -152,6 +153,8 @@ export default function Map({
 	return (
 		<div
 			style={{
+				height: '100%',
+				width: '100%',
 				height: mode === "d" ? `100vh` : "50vh",
 				margin: mode === "d" ? 0 : "20px 0",
 				borderRadius: mode === "d" ? 0 : 5,
