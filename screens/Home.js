@@ -126,14 +126,16 @@ function Page(props) {
 
                 {isWeb && 
                     <View style={{ flexDirection: dimensions.width > 624 ? 'row' : 'column', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
-                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { fontSize: 36}]}>DOWNLOAD OUR APP</Text>
-                        <Fontisto name="arrow-right-l" size={46} color={Theme.green} style={{ marginLeft: 32, marginRight: 32, display: dimensions.width > 624 ? 'flex' : 'none' }} />
-                        <TouchableOpacity style={{ height: 'fit-content' }} onPress={() => Linking.openURL('itms-apps://itunes.apple.com/us/app/apple-store/1538472288?mt=8')}> 
+                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { fontSize: 36, marginBottom: dimensions.width > 624 ? 0 : 10 }]}>DOWNLOAD OUR APP</Text>
+                        <View style={{ marginLeft: 32, marginRight: 32, display: dimensions.width > 624 ? 'flex' : 'none' }}>
+                            <Fontisto name="arrow-right-l" size={46} color={Theme.green}  />
+                        </View>
+                        <Link href="https://apps.apple.com/us/app/spicy-green-book/id1538472288">
                             <img id="download-app" style={{ height: 45 }} src={AppStoreIconBadge} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Linking.openURL('market://details?id=com.spicygreenbook.app')}> 
+                        </Link>
+                        <Link href="https://play.google.com/store/apps/details?id=com.spicygreenbook.app">
                             <img style={{ height: 66 }} src={GooglePlayIconBadge} />
-                        </TouchableOpacity>
+                        </Link>
                     </View>
                 }
 

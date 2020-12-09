@@ -48,6 +48,8 @@ async function generateSiteMap(listings) {
 `;
     })
 
+
+
     let template = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${urls}
 </urlset>`;
