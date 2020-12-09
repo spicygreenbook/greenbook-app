@@ -111,7 +111,7 @@ export default function (props) {
                         </View>
                     </View>
                 ) : (
-                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
+                        <View style={[{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}, view !== '/' && { maxWidth: 750, justifyContent: 'space-between' }]}>
                             <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>                            
                             <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -141,16 +141,20 @@ export default function (props) {
                             <Link href="/add"><Text style={[styles.text_nav]}>Add Listing</Text></Link>
                             <Link href="/donate"><Text style={[styles.text_nav]}>Donate</Text></Link>
                             <Link href="/volunteer"><Text style={[styles.text_nav]}>Volunteer</Text></Link>
-                            <TouchableOpacity onPress={() => {
+                            
+                            { view === '/' &&
+                                <TouchableOpacity onPress={() => {
                                     const ele = document.getElementById('download-app');
                                     ele.scrollIntoView({ block: "center" });
                                 }}>
-                                <View style={{ backgroundColor: '#fff', height: 42, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 5, borderRadius: 50 }}>
-                                    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#000', height: 12, borderRadius: 50, paddingHorizontal: 26, paddingTop: 18, paddingBottom: 16 }}>
-                                        <Text style={[styles.text_header3, {color: '#fff', fontSize: 22}]}>DOWNLOAD OUR APP</Text>
+                                    <View style={{ backgroundColor: '#fff', height: 40, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4, borderRadius: 50 }}>
+                                        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#000', height: 1, borderRadius: 50, paddingHorizontal: 18, paddingTop: 18, paddingBottom: 16 }}>
+                                            <Text style={[styles.text_header3, {color: '#fff', fontSize: 22}]}>DOWNLOAD OUR APP</Text>
+                                        </View>
                                     </View>
-                                </View>
-                            </TouchableOpacity>
+                                </TouchableOpacity>
+                            }
+
                         </View>
                     )}
             </View>
