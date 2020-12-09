@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, Text, View, Easing, Animated, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Easing, Animated, Image, TouchableOpacity, Linking } from 'react-native';
 import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
 import { AntDesign } from '@expo/vector-icons';
@@ -11,7 +11,7 @@ export default function (props) {
     const [{ view, isWeb, theme, dimensions }, dispatch] = useStateValue();
     const [active, setActive] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const styles = StyleSheet.create(getStyles('nav, text_nav, text_nav_sub', { isWeb, theme }));
+    const styles = StyleSheet.create(getStyles('nav, text_nav, text_nav_sub, text_header3', { isWeb, theme }));
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
     const ColorIn = () => {
@@ -111,11 +111,11 @@ export default function (props) {
                         </View>
                     </View>
                 ) : (
-                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
                             <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>                            
                             <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                    <Link href="/about"><Text style={[styles.text_nav, localStyle.anchor]}>About</Text></Link>
+                                    <Link href="/about"><Text style={[styles.text_nav]}>About</Text></Link>
                                     <AntDesign 
                                         name="down" 
                                         size={22} 
@@ -134,22 +134,26 @@ export default function (props) {
                                     <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
                                     <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>       
                                     <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>              
-                                    <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>                            
+                                    <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>                           
                                 </View>
                             </View>
     
-                            <Link style={localStyle.anchor} href="/add"><Text style={[styles.text_nav, localStyle.anchor]}>Add Listing</Text></Link>
-                            <Link style={localStyle.anchor} href="/donate"><Text style={[styles.text_nav, localStyle.anchor]}>Donate</Text></Link>
-                            <Link href="/volunteer"><Text style={[styles.text_nav, localStyle.anchor]}>Volunteer</Text></Link>
+                            <Link href="/add"><Text style={[styles.text_nav]}>Add Listing</Text></Link>
+                            <Link href="/donate"><Text style={[styles.text_nav]}>Donate</Text></Link>
+                            <Link href="/volunteer"><Text style={[styles.text_nav]}>Volunteer</Text></Link>
+                            <TouchableOpacity onPress={() => {
+                                    const ele = document.getElementById('download-app');
+                                    ele.scrollIntoView({ block: "center" });
+                                }}>
+                                <View style={{ backgroundColor: '#fff', height: 42, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 5, borderRadius: 50 }}>
+                                    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#000', height: 12, borderRadius: 50, paddingHorizontal: 26, paddingTop: 18, paddingBottom: 16 }}>
+                                        <Text style={[styles.text_header3, {color: '#fff', fontSize: 22}]}>DOWNLOAD OUR APP</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     )}
             </View>
         </View>
     )
 }
-
-const localStyle = StyleSheet.create({
-    anchor: {
-        paddingLeft: 80
-    }
-})

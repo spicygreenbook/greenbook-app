@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import { getStyles, Theme, getData, GridWidth } from '../utils';
@@ -11,6 +11,8 @@ import SGBMap from "../components/SGBMap";
 import { getInstagram } from '../utils/getData';
 import { handleRootClick } from '../utils/rootClickHandler';
 import { Fontisto } from '@expo/vector-icons'; 
+import AppStoreIconBadge from '../public/app-store.svg';
+import GooglePlayIconBadge from '../public/google-play.svg';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -121,6 +123,20 @@ function Page(props) {
                         </View>
                     </ImageBackground>
                 </View>
+
+                {isWeb && 
+                    <View style={{ flexDirection: dimensions.width > 624 ? 'row' : 'column', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { fontSize: 36}]}>DOWNLOAD OUR APP</Text>
+                        <Fontisto name="arrow-right-l" size={46} color={Theme.green} style={{ marginLeft: 32, marginRight: 32, display: dimensions.width > 624 ? 'flex' : 'none' }} />
+                        <TouchableOpacity style={{ height: 'fit-content' }} onPress={() => Linking.openURL('itms-apps://itunes.apple.com/us/app/apple-store/1538472288?mt=8')}> 
+                            <img id="download-app" style={{ height: 45 }} src={AppStoreIconBadge} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Linking.openURL('market://details?id=com.spicygreenbook.app')}> 
+                            <img style={{ height: 66 }} src={GooglePlayIconBadge} />
+                        </TouchableOpacity>
+                    </View>
+                }
+
                 <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 60, paddingBottom: 60}}>
                     <View style={{justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
                         {loadingPress ? (
