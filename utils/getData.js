@@ -183,8 +183,7 @@ const isLocalWeb = () => (
     typeof window !== 'undefined' && window.location && window.location.host.indexOf('localhost') > -1
 );
 
-export async function getInstagram() {
-    const url = isLocalWeb() ? 'http://localhost:3000/api/instagram' : 'https://spicygreenbook.org/api/instagram';
+async function getInstagramReal(url) {
     try {
         const result = await fetch(url);
         const data = await result.json();
@@ -194,6 +193,18 @@ export async function getInstagram() {
         // console.error(e);
         return [];
     }
+}
+
+export async function getInstagram() {
+    const url = isLocalWeb() ? '/api/instagram' : 'https://spicygreenbook.org/api/instagram';
+    try {
+        let instagram = await getInstagramReal(url);
+        return instagram;
+    } catch (e) {
+        let instagram = await getInstagramReal('https://spicygreenbook.org/api/instagram');
+        return instagram;
+    }
+
 }
 
 async function getCacheMeta(setData) {
