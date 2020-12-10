@@ -11,6 +11,7 @@ import SGBMap from "../components/SGBMap";
 import { getInstagram } from '../utils/getData';
 import { handleRootClick } from '../utils/rootClickHandler';
 import { Fontisto } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -107,214 +108,183 @@ function Page(props) {
         <TouchableOpacity activeOpacity={1} style={{ cursor: 'default' }} onPress={e => handleRootClick(e)}>
             <View>
                 {/* Begin Top About Us Bar */}
-                <View style={{ height: 250, backgroundColor: Theme.green_bg }}>
-                    <Text style={{ color: '#000000', fonstSize: 18 }}>SGB ddddddddddddddddddddddddddddd</Text>
+                <View style={{
+                    flexDirection: 'row', height: 300, backgroundColor: Theme.green_bg, alignItems: 'center',
+                    justifyContent: 'center', paddingTop: 120,
+                }}>
+
+                    <Text accessibilityRole="header" fontSize="1" aria-level="1" style={responsiveStyles.text_hero}>ABOUT US</Text>
                 </View>
-                {/* End Top About Us Bar */}
-
-
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'stretch',
+                        alignSelf: 'center'
+                    }}></View>
                 <View style={{ backgroundColor: Theme.green_bg }}>
 
                 </View>
+
+                {/* End Top About Us Bar */}
+
+                {/* Begin "We are gathering a growing list" Text box */}
+
+                {/* End "We are gathering a growing list" Text box */}
+
                 <View style={[styles.section, { paddingTop: 80 }]}>
                     <View style={styles.content}>
-                        <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <View style={dimensions.width < 700 ? { paddingLeft: 40, paddingRight: 40 } : { flex: 1, paddingLeft: 80, paddingRight: 80 }}>
-                                <ResponsiveImage
-                                    style={{ width: 804, resizeMode: 'contain', aspectRatio: 1.37245 }}
-                                    alt="Spicy Green Book"
-                                    source={isWeb ? { uri: '/images/home_green_book.png' } : require('../public/images/home_green_book.png')}
-                                />
+                        <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
+                            <View style={{ flex: 1 }}>
+
                             </View>
-                            <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 2, paddingLeft: 20 }}>
-                                <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>ABOUT SGB</Text>
+                            <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 5 }}>
+
                                 <Text style={[styles.text_body, { color: '#000' }]}>
-                                    Inspired by Victor Green, Spicy Green Book is a team of committed volunteers compiling a directory of
-                                    Black owned businesses and performing marketing services for these businesses free of charge.
-                                    We are establishing a space for people who seek to create change, and creating a platform for
-                                    them to invest in Black business owners in their communities.
+                                    <b>We are gathering a growing list of volunteers to help compile a directory of black owned businesses.  Our mission is to establish a space to help people who seek to create change within their communities.</b>{"\n"}{"\n"}
+                                    If you're interested in helping but feel that you don't fit any of the roles listed above, let us know! Website development and upkeep require many different skill sets so we're sure that you can help in some way.  Also feel free to send people our way who you feel may be able to help.{"\n"}{"\n"}
+                                    If you're looking to help grow our mission but can't give your time you can always dontate.  We also encourage you to help by being a patron of black-owned businesses!
                                     </Text>
                                 <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
-                                    <View style={[styles.button_green, { marginTop: 40 }]} >
-                                        <Text style={[styles.button_green_text]}>Learn More</Text>
-                                    </View>
+
                                 </Link>
                             </View>
                         </View>
                     </View>
                 </View>
 
-                <View style={{ backgroundColor: '#000', position: 'relative' }}>
-                    {loadingListings ? (
+                {/* Begin support for these businesses image ***/}
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', paddingRight: 100, fontSize: 24, flex: 2, backgroundColor: Theme.green_bg }} >
+
+                        <text style={{ alignSelf: 'flex-end', paddingTop: 40, color: '#ffffff', flex: 1 }}>
+                            Support for these businesses will:
+                        </text>
+                        <text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help decrease the wealth gap
+                        </text>
+                        <text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Create more job opportunities
+                        </text>
+                        <text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help prevent further injustices
+                        </text>
+                        <text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help implement needed reform
+                        </text>
+
+                        <text style={{ paddingLeft: 20, paddingRight: 10, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
+                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Ensure greater representation of
+                        </text>
+                        <text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
+                            people who will change outdated
+                        </text>
+                        <text style={{ paddingRight: 238, alignContent: 'flexStart', alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
+                            policies.
+                        </text>
+                    </View>
+
+                    {/* <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', paddingRight: 100, fontSize: 24, flex: 2, backgroundColor: Theme.green_bg }} > */}
+
+                    <View style={{ flex: 2, width: 1000, height: 500, backgroundColor: '#ffffff' }} >
+
+                    </View>
+                </View>
+            </View>
+            {/* End support for these businesses image */}
+
+            <View style={[styles.section, { flex: 1, paddingBottom: 0, paddingTop: 80 }]}>
+                <View style={[styles.content, { flex: 1 }]}>
+                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>
+                        WHERE WE'RE AT
+                            </Text>
+
+                    <SGBMap style={{ marginTop: -80 }} listings={Listings} loadingListings={loadingListings} navigation={props.navigation} />
+
+                </View>
+            </View>
+
+            <View style={[styles.section, { flex: 1, paddingTop: 0 }]}>
+                <View style={[styles.content, { flex: 1 }]}>
+                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>
+                        UPDATES
+                            </Text>
+                    {loadingUpdates ? (
                         <ActivityIndicator color={Theme.green} size="large" />
-                    ) : errorListings ? (
-                        <Text style={{ color: '#fff' }}>{errorListings}</Text>
+                    ) : errorUpdates ? (
+                        <Text>{errorUpdates}</Text>
                     ) : (
-                                <React.Fragment>
-                                    <FlatList
-                                        horizontal
-                                        showsHorizontalScrollIndicator={false}
-                                        data={Listings.sort((a, b) => b.updated - a.updated).slice(0, 10).sort((a, b) => a.time - b.time).filter(item => item.images && item.images[0] && item.images[0].image).slice(0, 10)
-                                        }
-                                        ref={(ref) => { newListingRef = ref; }}
-                                        onViewableItemsChanged={viewableItemsChangedListing}
-                                        viewabilityConfig={viewableItemsChangedConfigListing}
-                                        renderItem={({ item, index, separators }) => {
-                                            const address = item.address && item.address[0];
-                                            const parsedAddress = address ? parseAddress(address) : null;
-
-                                            return (
+                                <FlatList
+                                    horizontal={true}
+                                    data={updates.filter(item => item.image)}
+                                    renderItem={({ item, index, separators }) => {
+                                        function Item() {
+                                            return <React.Fragment>
                                                 <View>
-                                                    <ImageBackground source={{ uri: item.images[0].image.url }} style={{ width: dimensions.width, height: 700 }}>
-                                                    </ImageBackground>
-                                                    <View style={{
-                                                        position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
-                                                        flexDirection: 'column',
-                                                        justifyContent: 'space-between'
-                                                    }}>
-                                                        <View style={{ flex: 2 }}>
-                                                            <Text style={[styles.text_header3, { color: '#fff' }]}>
-                                                                NEW LISTING
-                                                        </Text>
-                                                        </View>
-                                                        <View style={{ flex: 1, height: 200 }}>
-                                                        </View>
-                                                        <View style={{ flex: 2 }}>
-                                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header2, { color: '#fff' }]}>
-                                                                {item.name}
-                                                            </Text>
-                                                            {parsedAddress ? (
-                                                                <Text style={[styles.text_header3, { color: '#fff' }]}>
-                                                                    {parsedAddress.city}, {parsedAddress.state}
-                                                                </Text>
-                                                            ) : null}
-                                                            <Link href='/biz/[name]' as={`/biz/${item.uid}`}
-                                                                contain
-                                                                onPress={() => {
-                                                                    dispatch({ type: 'setView', view: '/biz/' + item.uid });
-                                                                    props.navigation.navigate('Listing');
-                                                                }}>
-
-                                                                <View style={[styles.button_white, { marginTop: 40 }]} >
-                                                                    <Text style={styles.button_white_text}>Learn More</Text>
-                                                                </View>
-                                                            </Link>
-                                                        </View>
-                                                    </View>
+                                                    <Image source={{ uri: item.image.url + '&w=600' }} style={{ width: 300, height: 300, resizeMode: 'cover' }} />
                                                 </View>
-                                            );
-                                        }}
-                                        keyExtractor={(item, index) => 'listing' + index}
-                                    />
-                                    <View style={{ position: 'absolute', top: '50%', marginTop: -100, left: 10, right: 10, height: 200, flex: 1 }}>
-                                        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                            <View style={{ flex: 1 }}>
-                                                <TouchableOpacity onPress={(e) => scrollToIndexListing({ animated: true, index: currentIndexListing - 1 }, 10)}>
-                                                    <Entypo name="chevron-thin-left" size={48} color="#fff" />
-                                                </TouchableOpacity>
-                                            </View>
-                                            <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                                <TouchableOpacity onPress={(e) => scrollToIndexListing({ animated: true, index: currentIndexListing + 1 }, 10)}>
-                                                    <Entypo name="chevron-thin-right" size={48} color="#fff" />
-                                                </TouchableOpacity>
-                                            </View>
+                                                <View>
+                                                    <Text style={styles.text_header4}>{item.title}</Text>
+                                                </View>
+                                                <View>
+                                                    <Text>{item.date}</Text>
+                                                </View>
+                                            </React.Fragment>
+                                        }
+                                        return <View style={{ margin: 10, maxWidth: 300 }} key={'update' + index}>
+                                            {item.link ? (<Link href={item.link}><Item /></Link>) : <Item />}
                                         </View>
-                                    </View>
-                                </React.Fragment>
+                                    }}
+                                    keyExtractor={(item, index) => 'update' + index}
+                                />
                             )}
                 </View>
+            </View>
 
-                <View style={[styles.section, { flex: 1, paddingBottom: 0, paddingTop: 80 }]}>
-                    <View style={[styles.content, { flex: 1 }]}>
+            <View style={[styles.section, { flex: 1 }]}>
+                <View style={[styles.content, { flex: 1 }]}>
+                    <Link contain href='https://instagram.com/spicygreenbook'>
                         <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>
-                            WHERE WE'RE AT
-                            </Text>
-
-                        <SGBMap style={{ marginTop: -80 }} listings={Listings} loadingListings={loadingListings} navigation={props.navigation} />
-
-                    </View>
-                </View>
-
-                <View style={[styles.section, { flex: 1, paddingTop: 0 }]}>
-                    <View style={[styles.content, { flex: 1 }]}>
-                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>
-                            UPDATES
-                            </Text>
-                        {loadingUpdates ? (
-                            <ActivityIndicator color={Theme.green} size="large" />
-                        ) : errorUpdates ? (
-                            <Text>{errorUpdates}</Text>
-                        ) : (
-                                    <FlatList
-                                        horizontal={true}
-                                        data={updates.filter(item => item.image)}
-                                        renderItem={({ item, index, separators }) => {
-                                            function Item() {
-                                                return <React.Fragment>
-                                                    <View>
-                                                        <Image source={{ uri: item.image.url + '&w=600' }} style={{ width: 300, height: 300, resizeMode: 'cover' }} />
-                                                    </View>
-                                                    <View>
-                                                        <Text style={styles.text_header4}>{item.title}</Text>
-                                                    </View>
-                                                    <View>
-                                                        <Text>{item.date}</Text>
-                                                    </View>
-                                                </React.Fragment>
-                                            }
-                                            return <View style={{ margin: 10, maxWidth: 300 }} key={'update' + index}>
-                                                {item.link ? (<Link href={item.link}><Item /></Link>) : <Item />}
-                                            </View>
-                                        }}
-                                        keyExtractor={(item, index) => 'update' + index}
-                                    />
-                                )}
-                    </View>
-                </View>
-
-                <View style={[styles.section, { flex: 1 }]}>
-                    <View style={[styles.content, { flex: 1 }]}>
-                        <Link contain href='https://instagram.com/spicygreenbook'>
-                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>
-                                FOLLOW @SPICYGREENBOOK
+                            FOLLOW @SPICYGREENBOOK
                                 </Text>
-                        </Link>
-                        {loadingUpdates ? (
-                            <ActivityIndicator color={Theme.green} size="large" />
-                        ) : errorUpdates ? (
-                            <Text>{errorUpdates}</Text>
-                        ) : (
-                                    <FlatList
-                                        horizontal={true}
-                                        data={instagram}
-                                        renderItem={({ item, index, separators }) => (
-                                            <View style={{ flex: 1, width: 180, margin: 10 }}>
-                                                <Image source={{ uri: item.thumbnail }} style={{ width: 180, height: 180, resizeMode: 'cover' }} />
-                                            </View>
-                                        )}
-                                        keyExtractor={(item, index) => 'instagram' + index}
-                                    />
-                                )}
+                    </Link>
+                    {loadingUpdates ? (
+                        <ActivityIndicator color={Theme.green} size="large" />
+                    ) : errorUpdates ? (
+                        <Text>{errorUpdates}</Text>
+                    ) : (
+                                <FlatList
+                                    horizontal={true}
+                                    data={instagram}
+                                    renderItem={({ item, index, separators }) => (
+                                        <View style={{ flex: 1, width: 180, margin: 10 }}>
+                                            <Image source={{ uri: item.thumbnail }} style={{ width: 180, height: 180, resizeMode: 'cover' }} />
+                                        </View>
+                                    )}
+                                    keyExtractor={(item, index) => 'instagram' + index}
+                                />
+                            )}
+                </View>
+            </View>
+
+            <View style={[styles.section, { flex: 1 }]}>
+                <View style={[styles.content, { flex: 1 }]}>
+                    <View>
+                        <Fontisto name="quote-left" size={64} color={Theme.green} />
+                        <Text style={[styles.text_quote, { marginTop: 20 }]}>
+                            It is certain, in any case, that ignorance,
+                            allied with power, is the most ferocious enemy
+                            justice can have.
+                                </Text>
+                        <Text style={[styles.text_quote]}>
+                            - James Baldwin
+                                </Text>
                     </View>
                 </View>
+            </View>
 
-                <View style={[styles.section, { flex: 1 }]}>
-                    <View style={[styles.content, { flex: 1 }]}>
-                        <View>
-                            <Fontisto name="quote-left" size={64} color={Theme.green} />
-                            <Text style={[styles.text_quote, { marginTop: 20 }]}>
-                                It is certain, in any case, that ignorance,
-                                allied with power, is the most ferocious enemy
-                                justice can have.
-                                </Text>
-                            <Text style={[styles.text_quote]}>
-                                - James Baldwin
-                                </Text>
-                        </View>
-                    </View>
-                </View>
-
-                {/*<View style={styles.footer}>
+            {/*<View style={styles.footer}>
                         <View style={{flexDirection: 'column', alignItems: 'center'}}>
                             <View style={{flex: 1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
                                 <View style={{flex: 1, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingRight: 40, paddingTop: 40, paddingBottom: 40}}>
@@ -327,8 +297,8 @@ function Page(props) {
                         </View>
                     </View>*/}
 
-            </View>
-        </TouchableOpacity>
+
+        </TouchableOpacity >
     );
 }
 
