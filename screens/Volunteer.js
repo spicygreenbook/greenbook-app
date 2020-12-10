@@ -39,7 +39,7 @@ function Page(props) {
     })
 
     const [roleState, setRoleState] = useState(state);
-    console.log("STATE OF ROLE:", roleState);
+    console.log("ROLES:", roles);
 
     if (!props.content) {
         useEffect(() => {
@@ -73,6 +73,7 @@ function Page(props) {
 
     const heading1 = content._body.value.slice(0, 1);
     const paragraph1 = content._body.value.slice(1, 2);
+    const photo = content._body.value.slice(2, 3);
 
     let newtext = content._body.value[1].text;
     newtext.replace('\n', '');
@@ -92,69 +93,86 @@ function Page(props) {
                 : (
                     <React.Fragment>
                         <PageTitle title={content.page_title} />
-                        <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
-                            <View style={[styles.content, { marginBottom: "-3rem" }]}>
+                        <View style={[styles.section, { paddingBottom: 0, paddingRight: "18rem", paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
+                            <View style={[styles.content, { marginBottom: "2rem" }]}>
                                 <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                                 <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                             </View>
                         </View>
-                        <View style={[styles.section, { paddingTop: 0 }]}>
-                            <View style={styles.content}>
-                                <FlatList
-                                    nativeID="flatLIST"
-                                    key={'cols' + numColumns}
-                                    data={roles}
-                                    extraData={selectedId}
-                                    numColumns={1}
-                                    renderItem={({ item, index, separators }) => (
-                                        <View
-                                            key={'press' + index}
-                                            style={{
-                                                flex: 1 / numColumns,
-                                                margin: 10,
-                                            }}
-                                        >
-                                            <TouchableOpacity onPress={(e) => {
-                                                let state = roleState;
-                                                state[index] = state[index] ? false : true;
-                                                setRoleState(state);
+                        <View nativeID="div1" style={[styles.section, { paddingTop: 0, alignItems: "flex-start", paddingStart: "18rem" }]}>
+                            <View nativeID="div2" style={styles.content}>
+                                <View nativeID="flexcontainer" style={{
+                                    display: "flex",
+                                    flexDirection: "row"
+                                }}>
+                                    <View style={{
+                                        flex: "2",
+                                        paddingRight: 50,
+                                    }}>
+                                        <FlatList
+                                            nativeID="flatLIST"
+                                            key={'cols' + numColumns}
+                                            data={roles}
+                                            extraData={selectedId}
+                                            numColumns={1}
+                                            renderItem={({ item, index, separators }) => (
+                                                <View
+                                                    key={'press' + index}
+                                                    style={{
+                                                        flex: 1 / numColumns,
+                                                        margin: 10,
+                                                    }}
+                                                >
+                                                    <TouchableOpacity onPress={(e) => {
+                                                        let state = roleState;
+                                                        state[index] = state[index] ? false : true;
+                                                        setRoleState(state);
 
-                                                console.log("INDEX CURRENTLY AT:", index)
-                                                if (selectedId) {
-                                                    setSelectedId(0);
-                                                }
-                                                setSelectedId(1)
+                                                        console.log("INDEX CURRENTLY AT:", index)
+                                                        if (selectedId) {
+                                                            setSelectedId(0);
+                                                        }
+                                                        setSelectedId(1)
 
-                                                // console.log("SET SELECTED INDEX TO:", selectedId)
+                                                        // console.log("SET SELECTED INDEX TO:", selectedId)
 
-
-                                            }}>
-                                                <Text accessibilityRole="header" aria-level={3} style={[styles.text_header3, { marginTop: 40 }]}>
-                                                    {roleState[index] ? '-' : '+'}{' '}{' '}{item.title}
-                                                </Text>
-                                            </TouchableOpacity>
-                                            <View style={{
-                                                display: "block",
-                                                marginBefore: "0.5em",
-                                                marginAfter: "0.5em",
-                                                overflow: "hidden",
-                                                borderStyle: "inset",
-                                                borderWidth: "1px",
-                                                width: "50%",
-                                                opacity: .5
-                                            }} />
-                                            <View
-                                                nativeID="hidden"
-                                                style={
-                                                    roleState[index] ? hiddenStyles.shown : hiddenStyles.hidden
-                                                }>
-                                                <Text style={[styles.text_body, { marginTop: 10, fontStyle: 'italic' }]}>{item.location}</Text>
-                                                <RichText render={item._description} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                            </View>
-                                        </View>
-                                    )}
-                                    keyExtractor={(item, index) => 'press' + index}
-                                />
+                                                    }}>
+                                                        <Text accessibilityRole="header" aria-level={3} style={[styles.text_header3, { marginTop: 40 }]}>
+                                                            {roleState[index] ? '-' : '+'}{' '}{' '}{item.title}
+                                                        </Text>
+                                                    </TouchableOpacity>
+                                                    <View style={{
+                                                        display: "block",
+                                                        marginBefore: "0.5em",
+                                                        marginAfter: "0.5em",
+                                                        overflow: "hidden",
+                                                        borderStyle: "inset",
+                                                        borderWidth: "1px",
+                                                        width: "100%",
+                                                        opacity: .5
+                                                    }} />
+                                                    <View
+                                                        nativeID="hidden"
+                                                        style={
+                                                            roleState[index] ? hiddenStyles.shown : hiddenStyles.hidden
+                                                        }>
+                                                        <Text style={[styles.text_body, { marginTop: 10, fontStyle: 'italic' }]}>{item.location}</Text>
+                                                        <RichText render={item._description} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                                    </View>
+                                                </View>
+                                            )}
+                                            keyExtractor={(item, index) => 'press' + index}
+                                        />
+                                    </View>
+                                    <View style={{
+                                        flex: 3,
+                                        paddingTop: 60,
+                                        justifyContent: "space-between",
+                                        transform: "translateX(150px)"
+                                    }}>
+                                        <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                    </View>
+                                </View>
                             </View>
                         </View>
                         <View style={[styles.section]}>
