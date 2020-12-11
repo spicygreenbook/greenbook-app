@@ -12,6 +12,8 @@ import Privacy from '../screens/Privacy';
 import Process from '../screens/Process';
 import Updates from '../screens/Updates';
 import Press from '../screens/Press';
+import Volunteers from '../screens/Volunteers';
+import Testimonials from '../screens/Testimonials';
 import Team from '../screens/Team';
 import Donate from '../screens/Donate';
 import NotFound from '../screens/NotFound';
@@ -69,17 +71,19 @@ function Main(props) {
         : view === '/updates' ? <Updates {...props} />
           : view === '/privacy' ? <Privacy {...props} />
             : view === '/press' ? <Press {...props} />
-              : view === '/team' ? <Team {...props} />
-                : view === '/process' ? <Process {...props} />
-                  : view === '/contact' ? <Contact {...props} />
-                    : view === '/add' ? <AddListing {...props} />
-                      : view === '/volunteer' ? <Volunteer {...props} />
-                        : view === '/donate' ? <Donate {...props} />
-                          : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
-                            : view.indexOf('/biz') === 0 ? <Listing {...props} />
-                              : view === '/' ? <Home {...props} />
-                                : <NotFound {...props} />
-    )
+              : view === '/testimonials' ? <Testimonials {...props} />
+                : view === '/volunteers' ? <Volunteers {...props} />
+                  : view === '/team' ? <Team {...props} />
+                    : view === '/process' ? <Process {...props} />
+                      : view === '/contact' ? <Contact {...props} />
+                        : view === '/add' ? <AddListing {...props} />
+                          : view === '/volunteer' ? <Volunteer {...props} />
+                            : view === '/donate' ? <Donate {...props} />
+                              : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
+                                : view.indexOf('/biz') === 0 ? <Listing {...props} />
+                                  : view === '/' ? <Home {...props} />
+                                    : <NotFound {...props} />
+      )
   }
 
   return !isFrontEnd 
