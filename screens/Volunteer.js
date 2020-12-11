@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useStateValue } from "../components/State";
 import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList } from 'react-native';
 import { Link } from "../components/Link";
@@ -67,8 +67,6 @@ function Page(props) {
         }
     }, [])
 
-
-
     let numColumns = dimensions.width < 800 ? 1 : 2
 
     const heading1 = content._body.value.slice(0, 1);
@@ -84,6 +82,9 @@ function Page(props) {
         console.log('CHANGED WENT THROUGH')
     }
 
+    const myRef = useRef(null);
+    const executeScroll = () => myRef.current.focus({ behavior: "smooth" })
+
     return (
         <React.Fragment>
             { pageLoading || loadingRoles ?
@@ -97,17 +98,33 @@ function Page(props) {
                             <View style={[styles.content, { marginBottom: "2rem" }]}>
                                 <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                                 <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                <View style={[styles.button_green_text, { width: "50%" }]}>
+                                    <Button
+                                        nativeID="button"
+                                        onPress={executeScroll}
+                                        title="Scroll to Volunteer Form"
+                                        color="green"
+                                        style={styles.button_green_text}
+                                    />
+                                </View>
                             </View>
                         </View>
                         <View nativeID="div1" style={[styles.section, { paddingTop: 0, alignItems: "flex-start", paddingStart: "18rem" }]}>
                             <View nativeID="div2" style={styles.content}>
                                 <View nativeID="flexcontainer" style={{
-                                    display: "flex",
-                                    flexDirection: "row"
+                                    display: "grid",
+                                    gridTemplateColumns: '50rem 20rem 20rem'
                                 }}>
                                     <View style={{
-                                        flex: "2",
-                                        paddingRight: 50,
+                                        paddingTop: 60,
+
+                                    }}>
+                                        <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                    </View>
+                                    <View style={{
+                                        paddingLeft: "2rem",
+                                        gridColumnStart: "2",
+                                        gridColumnEnd: "4"
                                     }}>
                                         <FlatList
                                             nativeID="flatLIST"
@@ -119,7 +136,7 @@ function Page(props) {
                                                 <View
                                                     key={'press' + index}
                                                     style={{
-                                                        flex: 1 / numColumns,
+                                                        flex: 1,
                                                         margin: 10,
                                                     }}
                                                 >
@@ -164,18 +181,10 @@ function Page(props) {
                                             keyExtractor={(item, index) => 'press' + index}
                                         />
                                     </View>
-                                    <View style={{
-                                        flex: 3,
-                                        paddingTop: 60,
-                                        justifyContent: "space-between",
-                                        transform: "translateX(150px)"
-                                    }}>
-                                        <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                    </View>
                                 </View>
                             </View>
                         </View>
-                        <View style={[styles.section]}>
+                        <View nativeID="formBelow" style={[styles.section]}>
                             <View style={styles.content}>
                                 <View style={[{ flex: 1, backgroundColor: '#000', width: '100%', flexDirection: dimensions.width < 900 ? 'column' : 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
                                     <View style={{ flex: 3, padding: 20 }}>
@@ -195,6 +204,7 @@ function Page(props) {
                                 </View>
                             </View>
                         </View>
+                        <View ref={myRef} />
                     </React.Fragment>
                 )}
         </React.Fragment>
