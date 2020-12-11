@@ -20,6 +20,10 @@ function Page(props) {
         },
         shown: {
             display: 'contents',
+        },
+        grid: {
+            display: "grid",
+            gridTemplateColumns: '50rem 20rem 20rem'
         }
     })
 
@@ -111,21 +115,11 @@ function Page(props) {
                         </View>
                         <View nativeID="div1" style={[styles.section, { paddingTop: 0, alignItems: "flex-start", paddingStart: "18rem" }]}>
                             <View nativeID="div2" style={styles.content}>
-                                <View nativeID="flexcontainer" style={{
-                                    display: "grid",
-                                    gridTemplateColumns: '50rem 20rem 20rem'
-                                }}>
-                                    <View style={{
-                                        paddingTop: 60,
-
-                                    }}>
+                                <View nativeID="flexcontainer" style={isWeb ? hiddenStyles.grid : null}>
+                                    <View style={isWeb ? { paddingTop: 60 } : null}>
                                         <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                                     </View>
-                                    <View style={{
-                                        paddingLeft: "2rem",
-                                        gridColumnStart: "2",
-                                        gridColumnEnd: "4"
-                                    }}>
+                                    <View style={isWeb ? { paddingLeft: "2rem", gridColumnStart: "2", gridColumnEnd: "4" } : null}>
                                         <FlatList
                                             nativeID="flatLIST"
                                             key={'cols' + numColumns}
