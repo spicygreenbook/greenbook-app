@@ -1,36 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
-import { WebView } from 'react-native-webview';
 
 function Page(props) {
 
-    const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, button_green, button_green_text, section, content', {isWeb}));
-    //console.log('page props', props)
+    const [{ isWeb, dimensions }] = useStateValue();
+    const styles = StyleSheet.create(getStyles('button_link_text, text_body, text_header2, button_green, button_green_text, section, content', {isWeb}));
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
-
-
-    if (isWeb) {
-        useEffect(() => {
-            (function(h,b,s,n,i,p,e,t) {
-                let check = document.getElementById('honeybook-form');
-                if (check){ check.parentNode.removeChild(check); }
-                h._HB_ = {};h._HB_.pid = i;;;; // dan modified this line to make the forms actually load
-                t=b.createElement(s);t.type="text/javascript";t.async=!0;t.src=n;
-                t.id = 'honeybook-form';
-                e=b.getElementsByTagName(s)[0];e.parentNode.insertBefore(t,e);
-                console.log("EXECUTED HONEYBOOK CODE")
-            })(window,document,"script","https://widget.honeybook.com/assets_users_production/websiteplacements/placement-controller.min.js","5f0282b0a1f62a61eedd0881");
-        }, [pageLoading])
-    }
-
 
     if (!props.content) {
         useEffect(() => {
@@ -44,6 +26,17 @@ function Page(props) {
         }, [])
     }
 
+    const CustomLink = ({ style, href, text, label, buttonStyle, textStyle }) => (
+        <View style={[{ flexDirection: dimensions.width > 1015 ? 'row' : 'column', justifyContent: 'flex-end', alignItems: 'center'} , {...style}]}>
+            <Text style={[styles.text_body, { fontSize: 18} , dimensions.width > 1015 ? { marginRight: 60 } : {marginRight: 0, marginBottom: 10} ]}>{text}</Text>
+            <Link href={href} contain>
+                <View style={[styles.button_green, {...buttonStyle}]} >    
+                    <Text style={[styles.button_green_text, {...textStyle}]}>{label}</Text>
+                </View>
+            </Link>
+        </View>
+    )
+
     return (
         <React.Fragment>
         { pageLoading ?
@@ -56,7 +49,7 @@ function Page(props) {
                 <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
-                        {!isWeb && <Link contain href={'https://spicygreenbook.org/add'}> 
+                        {!isWeb && <Link contain href={'https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa'}> 
                             <View style={[styles.button_green, { marginTop: 40 }]} >    
                                 <Text style={[styles.button_green_text]}>Go To Add Listing Form</Text>
                             </View>
@@ -65,8 +58,17 @@ function Page(props) {
                 </View>
                 {isWeb && (<View style={[styles.section]}>
                     <View style={styles.content}>
-                        <div className="hb-p-5f0282b0a1f62a61eedd0881-4"></div>
-                        <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+                            <Image
+                                style={{width: 350, height: 350, resizeMode: 'cover', display: dimensions.width < 1015 ? 'none' : 'flex' }}
+                                alt="Spicy Green Book"
+                                source='https://res.cloudinary.com/honeybook/image/upload/c_crop,f_auto,fl_lossy,h_1305,q_auto,w_2003,x_0,y_608/v1/companies/5f0282afa1f62a61eedd082a/cover/EETeaCo_MorganWhitneyPhotography-112_sh58eu'
+                            />
+                            <View style={{ flex: 1 }}>
+                                <CustomLink href="https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa" label="FILL OUT FORM" text="Are you ready? Let's fill out the request form!" />
+                                <CustomLink href="/donate" label="Donate" style={{ marginTop: 30 }} buttonStyle={{width: 173, borderWidth: 2, backgroundColor: '#fff', justifyContent: 'center'}} textStyle={{ color: Theme.green }} text="If you want to make a donation please click" />
+                            </View>
+                        </View>
                     </View>
                 </View>)}
             </React.Fragment>
@@ -74,13 +76,5 @@ function Page(props) {
         </React.Fragment>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
 
 export default Page;
