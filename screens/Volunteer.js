@@ -13,19 +13,46 @@ function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header2, text_header3, button_green, button_green_text, text_header4, section, content', { isWeb }));
-    const hiddenStyles = StyleSheet.create({
-        hidden: {
-            display: 'none',
+    let hiddenStyles;
+    if (isWeb) {
+        hiddenStyles = StyleSheet.create({
+            hidden: {
+                display: 'none',
 
-        },
-        shown: {
-            display: 'contents',
-        },
-        grid: {
-            display: "grid",
-            gridTemplateColumns: '50rem 20rem 20rem'
-        }
-    })
+            },
+            shown: {
+                display: 'contents',
+            },
+            grid: {
+                display: "grid",
+                gridTemplateColumns: '50rem 20rem 20rem'
+            },
+            web: {
+                paddingBottom: 0,
+                paddingRight: "18rem",
+                paddingTop: dimensions.width < 900 ? 40 : 80
+            }
+        })
+    }
+    else {
+        hiddenStyles = StyleSheet.create({
+            hidden: {
+                display: 'none',
+
+            },
+            shown: {
+                display: 'flex',
+            },
+            grid: {
+                display: "flex",
+            },
+            web: {
+                paddingBottom: 0,
+                paddingTop: dimensions.width < 900 ? 40 : 80
+            }
+        })
+    }
+
 
     const [pageLoading, setPageLoading] = useState(props.content ? false : true);
     const [content, setContent] = useState(props.content || {});
@@ -35,15 +62,6 @@ function Page(props) {
     const [loadingRoles, setLoadingRoles] = useState(!props.roles);
     const [errorRoles, setErrorRoles] = useState('');
     const [roles, setRoles] = useState(props.roles || []);
-
-
-    let state = {}
-    roles.forEach((role, index) => {
-        state[index] = false;
-    })
-
-    const [roleState, setRoleState] = useState(state);
-    console.log("ROLES:", roles);
 
     if (!props.content) {
         useEffect(() => {
@@ -71,23 +89,38 @@ function Page(props) {
         }
     }, [])
 
+    let state = {}
+    roles.forEach((role, index) => {
+        state[index] = false;
+    })
+
+    const [roleState, setRoleState] = useState({});
+    console.log("STATE OF THE ROLE:", roleState);
+    console.log("SELECTED ID: ", selectedId);
+
+
     let numColumns = dimensions.width < 800 ? 1 : 2
 
-    const heading1 = content._body.value.slice(0, 1);
-    const paragraph1 = content._body.value.slice(1, 2);
-    const photo = content._body.value.slice(2, 3);
+    if (isWeb) {
+        const heading1 = content._body.value.slice(0, 1);
+        const paragraph1 = content._body.value.slice(1, 2);
+        const photo = content._body.value.slice(2, 3);
 
-    let newtext = content._body.value[1].text;
-    newtext.replace('\n', '');
-    let n = newtext.indexOf("Maintaining");
-    if (n == 344) {
-        newtext = newtext.substring(0, n) + "\n\n" + newtext.substring(n, newtext.length);
-        paragraph1[0].text = newtext;
-        console.log('CHANGED WENT THROUGH')
+        let newtext = content._body.value[1].text;
+        newtext.replace('\n', '');
+        let n = newtext.indexOf("Maintaining");
+        if (n == 344) {
+            newtext = newtext.substring(0, n) + "\n\n" + newtext.substring(n, newtext.length);
+            paragraph1[0].text = newtext;
+            console.log('CHANGED WENT THROUGH')
+        }
     }
 
     const myRef = useRef(null);
-    const executeScroll = () => myRef.current.focus({ behavior: "smooth" })
+    const executeScroll = () => {
+        console.log("pressed")
+        myRef.current.focus({ behavior: "smooth" })
+    }
 
     return (
         <React.Fragment>
@@ -98,27 +131,43 @@ function Page(props) {
                 : (
                     <React.Fragment>
                         <PageTitle title={content.page_title} />
-                        <View style={[styles.section, { paddingBottom: 0, paddingRight: "18rem", paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
-                            <View style={[styles.content, { marginBottom: "2rem" }]}>
-                                <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                <View style={[styles.button_green_text, { width: "50%" }]}>
-                                    <Button
-                                        nativeID="button"
-                                        onPress={executeScroll}
-                                        title="Scroll to Volunteer Form"
-                                        color="green"
-                                        style={styles.button_green_text}
-                                    />
-                                </View>
+                        <View style={[styles.section, hiddenStyles.web]}>
+                            <View style={[styles.content, { marginBottom: "10%" }]}>
+                                {isWeb ?
+                                    <React.Fragment>
+                                        <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                        <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                        <View style={[styles.button_green_text, { width: "50%" }]}>
+                                            <Button
+                                                nativeID="button"
+                                                onPress={executeScroll}
+                                                title="Scroll to Volunteer Form"
+                                                color="green"
+                                                style={styles.button_green_text}
+                                            />
+                                        </View>
+                                    </React.Fragment>
+                                    :
+                                    <React.Fragment>
+                                        <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
+                                            <View style={styles.content}>
+                                                <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                            </View>
+                                        </View>
+                                    </React.Fragment>
+                                }
                             </View>
                         </View>
                         <View nativeID="div1" style={[styles.section, { paddingTop: 0, alignItems: "flex-start", paddingStart: "18rem" }]}>
                             <View nativeID="div2" style={styles.content}>
                                 <View nativeID="flexcontainer" style={isWeb ? hiddenStyles.grid : null}>
-                                    <View style={isWeb ? { paddingTop: 60 } : null}>
-                                        <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                    </View>
+                                    {isWeb ?
+                                        <View style={{ paddingTop: 60 }}>
+                                            <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                        </View>
+                                        :
+                                        <View />
+                                    }
                                     <View style={isWeb ? { paddingLeft: "2rem", gridColumnStart: "2", gridColumnEnd: "4" } : null}>
                                         <FlatList
                                             nativeID="flatLIST"
@@ -140,10 +189,14 @@ function Page(props) {
                                                         setRoleState(state);
 
                                                         console.log("INDEX CURRENTLY AT:", index)
-                                                        if (selectedId) {
+                                                        console.log("PREVIOUS ID:", selectedId);
+                                                        if (selectedId === 1) {
                                                             setSelectedId(0);
                                                         }
-                                                        setSelectedId(1)
+                                                        else {
+                                                            setSelectedId(1)
+                                                        }
+
 
                                                         // console.log("SET SELECTED INDEX TO:", selectedId)
 
