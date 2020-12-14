@@ -117,7 +117,7 @@ function Page(props) {
                                 Businesses
                             </Text>
                             <View style={{ marginTop: 40 }}>
-                                <Search includeUseLocationOption navigation={props.navigation} />
+                                <Search includeUseLocationOption />
                             </View>
                         </View>
                     </ImageBackground>
@@ -275,7 +275,7 @@ function Page(props) {
                             WHERE WE'RE AT
                         </Text>
 
-                        <SGBMap style={{marginTop: -80}} listings={Listings} loadingListings={loadingListings} navigation={props.navigation} />
+                        <SGBMap style={{marginTop: -80}} listings={Listings} loadingListings={loadingListings} />
 
                     </View>
                 </View>

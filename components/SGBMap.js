@@ -1,22 +1,20 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
-import Svg, { G, Path, Use } from 'react-native-svg';
+import Svg, { G, Path } from 'react-native-svg';
 import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { getStyles, Theme, states, getListingsByState, statesObj, statesObjRev } from '../utils';
 import { EvilIcons } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/native';
 
 function SGBMap(props) {
-
-    const [{ view, isWeb, theme, dimensions, searchConfig }, dispatch] = useStateValue();
+    const [{ isWeb, theme, dimensions }] = useStateValue();
     const { listings, loadingListings } = props;
     const [ curState, setCurState ] = useState('');
-
-    const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
-
     const listingsByState = getListingsByState(listings);
+		const navigation = !isWeb ? useNavigation() : null
 
+		const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
 
     return (
 			<View style={[{flex: 1, width: '100%', position: 'relative'}, props.style || {}]}>
@@ -57,7 +55,7 @@ function SGBMap(props) {
 								<G key={state.id + 'fill'} onPress={e => {
 									if (mappedState) {
 										if(!isWeb) {
-											props.navigation.navigate('StateListing', { 
+											navigation.navigate('StateListing', { 
 												stateName: state.id, 
 												cities: 
 													Object.keys(mappedState)

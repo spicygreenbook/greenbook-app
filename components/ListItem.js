@@ -5,6 +5,7 @@ import { getStyles, Theme, responsiveImageWidthCDN } from '../utils';
 import { ResponsiveImage } from "./ResponsiveImage"; 
 import { Link } from "./Link"; 
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ListItem(props) {
 
@@ -15,6 +16,8 @@ export default function ListItem(props) {
 
     //console.log('listing', listing);
 
+    const navigation = !isWeb ? useNavigation() : null
+    
     let content = (
         <View style={{borderBottomWidth:props.last ? 0 : 2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
             <View style={{flex: 1, flexDirection: 'row'}}>
@@ -45,6 +48,6 @@ export default function ListItem(props) {
         ? content 
         : <Link href='/biz/[name]' as={'/biz/' + listing.uid} onPress={() => {
             dispatch({type: 'setView', view: '/biz/' + listing.uid});
-            props.navigation.navigate('Listing')
+            navigation.navigate('Listing')
         }}>{content}</Link>
 }

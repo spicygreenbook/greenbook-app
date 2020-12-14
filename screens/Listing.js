@@ -8,6 +8,7 @@ import Map from "../components/Map";
 import { FontAwesome } from '@expo/vector-icons';
 import Attribution from "../components/Attribution";
 import { WebView } from 'react-native-webview';
+import { useNavigation } from '@react-navigation/native';
 
 function Page(props) {
 
@@ -17,6 +18,8 @@ function Page(props) {
     const [ pageLoading, setPageLoading ] = useState(!props.content);
     const [ content, setContent ] = useState(props.content);
     const [ galleryOpen, setGalleryOpen ] = useState(false);
+
+    const navigation = !isWeb ? useNavigation() : null;
 
     if (!props.content) {
         useEffect(() => {
@@ -33,9 +36,16 @@ function Page(props) {
     }
 
     function clickImage(index) {
+        const images = content.images.filter(image => image.image).map(image => image.image);
+
+        if(!isWeb) {    
+            navigation.navigate('ModalImages', { images, name: content.name });
+            return;
+        }
+
         dispatch({type: 'lightboxConfig', value: {
             index: index || 0,
-            images: content.images.filter(image => image.image).map(image => image.image)
+            images
         }})
         dispatch({type: 'lightbox', value: true})
     }

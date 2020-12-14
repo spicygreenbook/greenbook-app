@@ -8,7 +8,7 @@ import Search from "../components/Search";
 import { findListings, fixSearch, searchSeries } from '../utils/helper';
 import Spinner from '../components/Spinner';
 
-function Page({ listings, navigation, viewMode, city, state }) {
+function Page({ listings, viewMode, city, state }) {
 
     const [{ isWeb, dimensions, searchConfig, isLoading }, dispatch] = useStateValue();
 
@@ -71,7 +71,7 @@ function Page({ listings, navigation, viewMode, city, state }) {
             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
             </Text>
-            {!viewMode && <Search mode="results" navigation={navigation} city={city} state={state}/> }
+            {!viewMode && <Search mode="results" city={city} state={state}/> }
          </View>
     )
 
@@ -81,7 +81,7 @@ function Page({ listings, navigation, viewMode, city, state }) {
             data={filteredList}
             initialNumToRender={6}
             windowSize={3}
-            renderItem={({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} navigation={navigation} viewMode={viewMode} />)}
+            renderItem={({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} viewMode={viewMode} />)}
             keyExtractor={(_, index) => 'listing' + index}
             ListHeaderComponent={<HeaderList />}
         />
@@ -92,7 +92,7 @@ function Page({ listings, navigation, viewMode, city, state }) {
             <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                 <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: 'calc(100vh - 234px)'} : {}}>
                     <HeaderList />
-                    {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} navigation={navigation} viewMode={viewMode} />)}
+                    {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} viewMode={viewMode} />)}
                 </View>
                 {dimensions.width >= 800 &&
                     <View style={{flex: 1}}>  
