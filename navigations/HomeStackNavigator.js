@@ -13,7 +13,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
-const CustomHeaderWrapper = ({ children }) => {
+export const CustomHeaderWrapper = ({ children }) => {
 
   const route = useRoute();
   const navigation = useNavigation();
