@@ -100,11 +100,14 @@ function Page(props) {
 
 
     let numColumns = dimensions.width < 800 ? 1 : 2
+    let heading1;
+    let paragraph1;
+    let photo;
 
     if (isWeb) {
-        const heading1 = content._body.value.slice(0, 1);
-        const paragraph1 = content._body.value.slice(1, 2);
-        const photo = content._body.value.slice(2, 3);
+        heading1 = content._body.value.slice(0, 1);
+        paragraph1 = content._body.value.slice(1, 2);
+        photo = content._body.value.slice(2, 3);
 
         let newtext = content._body.value[1].text;
         newtext.replace('\n', '');
