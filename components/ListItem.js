@@ -1,25 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import {useStateValue} from "../components/State";
-import { getStyles, Theme, responsiveImageWidthCDN } from '../utils';
-import { ResponsiveImage } from "./ResponsiveImage"; 
+import { getStyles, Theme } from '../utils';
 import { Link } from "./Link"; 
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function ListItem(props) {
+export default function ListItem({ listing, last }) {
 
-    const [{ view, isWeb, theme, dimensions }, dispatch] = useStateValue();
+    const [{ isWeb, theme }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header4, text_body, text_body3', {isWeb, theme}));
-
-    let { listing } = props;
-
-    //console.log('listing', listing);
 
     const navigation = !isWeb ? useNavigation() : null
     
     let content = (
-        <View style={{borderBottomWidth:props.last ? 0 : 2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
+        <View style={{borderBottomWidth: last ? 0 : 2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
             <View style={{flex: 1, flexDirection: 'row'}}>
                 {/*<ResponsiveImage style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url}} />*/}
                 <Image style={{width: '100%', aspectRatio: 1}} cdn source={{uri: listing.primary_image.url + '&w=400' }} />
@@ -44,10 +39,11 @@ export default function ListItem(props) {
         </View>
     )
 
-    return props.viewMode 
-        ? content 
-        : <Link href='/biz/[name]' as={'/biz/' + listing.uid} onPress={() => {
+    return (
+        <Link href='/biz/[name]' as={'/biz/' + listing.uid} onPress={() => {
             dispatch({type: 'setView', view: '/biz/' + listing.uid});
-            navigation.navigate('Listing')
-        }}>{content}</Link>
-}
+            navigation.navigate('Browse', {screen: 'Listing'}) }}>
+            {content}
+        </Link>
+    ) 
+};

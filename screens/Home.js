@@ -233,17 +233,17 @@ function Page(props) {
                                                             {parsedAddress.city}, {parsedAddress.state}
                                                         </Text>
                                                     ) : null}
-                                                    <Link href='/biz/[name]' as={`/biz/${item.uid}`}
+                                                     <Link href='/biz/[name]' as={`/biz/${item.uid}`}
                                                     contain
                                                     onPress={() => {
                                                         dispatch({type: 'setView', view: '/biz/' + item.uid});
-                                                        props.navigation.navigate('Listing');
+                                                        props.navigation.navigate('Browse', {screen: 'Listing', home: true});
                                                     }}>
                                                         
-                                                    <View style={[styles.button_white, { marginTop: 40}]} >    
-                                                        <Text style={styles.button_white_text}>Learn More</Text>
-                                                     </View>
-                                                </Link>
+                                                        <View style={[styles.button_white, { marginTop: 40}]} >    
+                                                            <Text style={styles.button_white_text}>Learn More</Text>
+                                                        </View>
+                                                    </Link>
                                                 </View>
                                             </View>
                                         </View>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Link } from "../components/Link";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
@@ -9,6 +9,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Attribution from "../components/Attribution";
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
+import Spinner from '../components/Spinner';
 
 function Page(props) {
 
@@ -21,19 +22,19 @@ function Page(props) {
 
     const navigation = !isWeb ? useNavigation() : null;
 
-    if (!props.content) {
-        useEffect(() => {
-            getContent({
-                type: 'listing',
-                uid: view.split('/')[2]
-            }).then(_data => {
-                setContent(_data.content)
-                setPageLoading(false);
-            }).catch(err => {
-                console.error(err);
-            });
-        }, [])
-    }
+    useEffect(() => {
+        setPageLoading(true);
+        getContent({
+            type: 'listing',
+            uid: view.split('/')[2]
+        }).then(_data => {
+            setContent(_data.content)
+            setPageLoading(false);
+        }).catch(err => {
+            console.error(err);
+        });
+    }, [view])
+   
 
     function clickImage(index) {
         const images = content.images.filter(image => image.image).map(image => image.image);
@@ -67,9 +68,7 @@ function Page(props) {
     return (
         <ScrollView>
         { pageLoading ?
-            <View style={{marginTop: 200, marginBottom: 200}}>
-                <ActivityIndicator size="large" />
-            </View>
+            <Spinner />
         : (
             <React.Fragment>
                 <View style={{paddingTop: isWeb ? 120 : 0 }} />
@@ -210,13 +209,5 @@ function Page(props) {
         </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
 
 export default Page;

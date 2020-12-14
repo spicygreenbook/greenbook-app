@@ -9,7 +9,7 @@ import { findListings, fixSearch, searchSeries } from '../utils/helper';
 import Spinner from '../components/Spinner';
 
 function Page({ listings, viewMode, city, state }) {
-
+    
     const [{ isWeb, dimensions, searchConfig, isLoading }, dispatch] = useStateValue();
 
     let staticCityState = '';
@@ -47,22 +47,31 @@ function Page({ listings, viewMode, city, state }) {
         if(data.length === 0) {
             getData({type: 'listing'}).then(_data => {
                 setData(_data);
-                setFilteredList(_data);
-                dispatch({ type: 'loading', value: false });
+
+                if(!searchConfig.q && !searchConfig.near) {
+                    setFilteredList(_data);
+                    dispatch({ type: 'loading', value: false });
+                } 
             }).catch(err => {
                 console.error(err);
-            }); 
+            });
         }
 
         // Since listing has data in web
         if(isWeb) dispatch({ type: 'loading', value: false });
     }, [])
+
+    useEffect(() => {
+        if(data.length > 0 && (searchConfig.q || searchConfig.near)) {
+            updateData();
+        }
+    }, [data]);
     
     // Search
     useEffect(() => {
         if(!data.length) return;
         if(!searchConfig.q && !searchConfig.near) return;
-
+       
         updateData();
     }, [searchConfig]);
 
@@ -81,7 +90,7 @@ function Page({ listings, viewMode, city, state }) {
             data={filteredList}
             initialNumToRender={6}
             windowSize={3}
-            renderItem={({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} viewMode={viewMode} />)}
+            renderItem={({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} />)}
             keyExtractor={(_, index) => 'listing' + index}
             ListHeaderComponent={<HeaderList />}
         />
@@ -92,7 +101,7 @@ function Page({ listings, viewMode, city, state }) {
             <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                 <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: 'calc(100vh - 234px)'} : {}}>
                     <HeaderList />
-                    {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} viewMode={viewMode} />)}
+                    {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
                 </View>
                 {dimensions.width >= 800 &&
                     <View style={{flex: 1}}>  
