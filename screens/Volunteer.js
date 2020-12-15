@@ -24,18 +24,18 @@ function Page(props) {
                 display: 'contents',
             },
             grid: {
-                display: "grid",
+                display: dimensions.width < 1700 ? "flex" : "grid",
                 gridTemplateColumns: '50rem 20rem 20rem'
             },
             web: {
                 paddingBottom: 0,
-                paddingRight: "18rem",
+                paddingRight: dimensions.width < 1700 ? 0 : "18rem",
                 paddingTop: dimensions.width < 900 ? 40 : 80
             },
             div1: {
                 paddingTop: 0,
                 alignItems: "flex-start",
-                paddingStart: "18rem"
+                paddingStart: dimensions.width < 1700 ? 0 : "18rem"
             }
         })
     }
