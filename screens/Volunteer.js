@@ -31,6 +31,11 @@ function Page(props) {
                 paddingBottom: 0,
                 paddingRight: "18rem",
                 paddingTop: dimensions.width < 900 ? 40 : 80
+            },
+            div1: {
+                paddingTop: 0,
+                alignItems: "flex-start",
+                paddingStart: "18rem"
             }
         })
     }
@@ -49,6 +54,10 @@ function Page(props) {
             web: {
                 paddingBottom: 0,
                 paddingTop: dimensions.width < 900 ? 40 : 80
+            },
+            div1: {
+                paddingTop: 0,
+                alignItems: "flex-start",
             }
         })
     }
@@ -161,7 +170,7 @@ function Page(props) {
                                 }
                             </View>
                         </View>
-                        <View nativeID="div1" style={[styles.section, { paddingTop: 0, alignItems: "flex-start", paddingStart: "18rem" }]}>
+                        <View nativeID="div1" style={[styles.section, hiddenStyles.div1]}>
                             <View nativeID="div2" style={styles.content}>
                                 <View nativeID="flexcontainer" style={isWeb ? hiddenStyles.grid : null}>
                                     {isWeb ?
