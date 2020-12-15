@@ -37,6 +37,7 @@ function Page(props) {
     const [ updates, setUpdates ] = useState(props.updates || []);
 
     const [ loadingInstagram, setLoadingInstagram ] = useState(true);
+    const [ errorInstagram, setErrorInstagram ] = useState('');
     const [ instagram, setInstagram ] = useState([]);
 
     const [ loadingListings, setLoadingListings ] = useState(!props.listings);
@@ -78,7 +79,11 @@ function Page(props) {
         getInstagram().then(instagram => {
             setLoadingInstagram(false);
             setInstagram(instagram)
-        });
+        }).catch(err => {
+            console.error(err);
+            setLoadingInstagram(false);
+            setErrorInstagram('Failed to load latest instagram.');
+        })
 
         if (!props.listings) {
             getData({
@@ -284,7 +289,7 @@ function Page(props) {
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES
                     </Text>
-                    {loadingInstagram ? (
+                    {loadingUpdates ? (
                         <ActivityIndicator color={Theme.green} size="large" />
                     ) : errorUpdates ? (
                         <Text>{errorUpdates}</Text>
@@ -306,7 +311,7 @@ function Page(props) {
                                         </View>
                                     </React.Fragment>
                                 }
-                                return <View style={{ margin: 10, maxWidth: 300}} key={'update' + index}>
+                                return <View style={{ marginRight: 10, maxWidth: 300}} key={'update' + index}>
                                     {item.link ? (<Link href={item.link}><Item /></Link>) : <Item />}
                                 </View>
                             }}
@@ -323,10 +328,10 @@ function Page(props) {
                             FOLLOW @SPICYGREENBOOK
                         </Text>
                     </Link>
-                    {loadingUpdates ? (
+                    {loadingInstagram ? (
                         <ActivityIndicator color={Theme.green} size="large" />
-                    ) : errorUpdates ? (
-                        <Text>{errorUpdates}</Text>
+                    ) : errorInstagram ? (
+                        <Text>{errorInstagram}</Text>
                     ) : (
                         <FlatList
                             horizontal={true}
