@@ -39,10 +39,6 @@ const CheckoutForm = (props) => {
     const [useCustomAmount, setUseCustomAmount] = useState(false);
     const [fields, setFields] = useState({
         amount: 50,
-        //name: "Dan Yo",
-        //email: "pleaseshutup@gmail.com",
-        //address: "6051 Calle Cortez",
-        //zip: "92886",
     });
 
     const setValue = (key, value) => {
@@ -137,7 +133,7 @@ const CheckoutForm = (props) => {
 
     useEffect(() => {}, [fields, useCustomAmount]);
 
-    let amounts = [15, 25, 50, 100, 150, 200, 300, 500, 750, 1000];
+    let amounts = [15, 25, 50, 100, 150];
 
     console.log("render");
 
@@ -163,7 +159,6 @@ const CheckoutForm = (props) => {
                             type="text"
                             name="name"
                             id="card-name"
-                            placeholder="John Doe"
                             value={fields.name}
                             onChange={(e) => setValue("name", e.target.value)}
                             required
@@ -171,7 +166,7 @@ const CheckoutForm = (props) => {
                     </div>
                     <div className={'formRow'}>
                         <label htmlFor="card-address">Billing address</label>
-                        <div className="ib middle">
+                        <div className="w-66">
                             <div className={'subLabel'}>
                                 Street address
                             </div>
@@ -179,7 +174,6 @@ const CheckoutForm = (props) => {
                                 type="text"
                                 name="name"
                                 id="card-address"
-                                placeholder="123 Dover St."
                                 value={fields.address}
                                 onChange={(e) =>
                                     setValue("address", e.target.value)
@@ -187,13 +181,12 @@ const CheckoutForm = (props) => {
                                 required
                             />
                         </div>
-                        <div className="ib middle">
+                        <div className="w-33">
                             <div className={'subLabel'}>Zip code</div>
                             <input
                                 type="text"
                                 name="name"
                                 id="card-zip"
-                                placeholder="92561"
                                 pattern="^\s*\d{5}(-\d{4})?\s*$"
                                 size="5"
                                 value={fields.zip}
@@ -206,15 +199,11 @@ const CheckoutForm = (props) => {
                     </div>
                     <div className={'formRow'}>
                         <label htmlFor="card-email">Email Address</label>
-                        <div className={'subLabel'}>
-                            For an email receipt
-                        </div>
                         <input
                             type="email"
                             name="email"
                             id="card-email"
                             value={fields.email || ""}
-                            placeholder="my@email.com"
                             onChange={(e) => setValue("email", e.target.value)}
                             required
                         />
@@ -249,7 +238,7 @@ const CheckoutForm = (props) => {
                             }
                             onClick={(e) => {
                                 if (!useCustomAmount) {
-                                    setValue("amount", 20);
+                                    setValue("amount", "");
                                     setUseCustomAmount(true);
                                 } else {
                                     // do nothing its already custom
@@ -289,7 +278,7 @@ const CheckoutForm = (props) => {
                                             fontFamily:
                                                 '"noto sans", "Helvetica Neue", Helvetica, sans-serif',
                                             fontSmoothing: "antialiased",
-                                            fontSize: "16px",
+                                            fontSize: "20px",
                                             borderRadius: "5px",
                                             "::placeholder": {
                                                 color: "#aab7c4",

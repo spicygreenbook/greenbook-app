@@ -5,10 +5,11 @@
 }
 .stripe input {
     background: #fff;
-    color: #828282;
-    border: 1px solid black;
+    color: #474747;
+    border: none;
+    border-bottom: 1px solid #cccccc;
     box-sizing: border-box;
-    max-width: 100%;
+    width: 60%;
     font-size: 28px;
     padding: 8px;
 }
@@ -31,15 +32,14 @@
 .amount_box {
     display:inline-block;
     vertical-align: middle;
-    padding: 12px;
+    padding: 16px;
     margin: 0 10px 10px 0;
-    border-radius: 5px;
+    background-color: rgb(210, 208, 209);
     cursor: pointer;
-    border: 1px solid #828282;
     font-weight: bold;
 }
 .amount_selected {
-    background-color: #006633;
+    background-color: #DB3F5A;
     color: #fff;
 }
 
@@ -66,4 +66,31 @@ button.button[sending="1"] {
     .stripe {
         font-size: 18px
     }
+}
+
+
+
+
+.stripe form {
+    box-shadow: 0 0 30px 5px #cccccc;
+    padding: 2rem 10rem;
+}
+
+.w-33 {
+    width: 30%;
+    display: inline-block;
+    padding-left: 30px;
+}
+
+.w-66 {
+    width: 60%;
+    display: inline-block;
+}
+
+.w-66 > input {
+    width: 100%;
+}
+
+#card-button {
+    width: 100%;
 }
