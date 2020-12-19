@@ -102,6 +102,7 @@ button.button[sending="1"] {
 
     .stripe input {
         width: 100%;
+        font-size: 16px;
     }
 
     .stripe form {
