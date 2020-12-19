@@ -164,37 +164,39 @@ const CheckoutForm = (props) => {
                             required
                         />
                     </div>
-                    <div className={'formRow'}>
+                    <div className="formRow">
                         <label htmlFor="card-address">Billing address</label>
-                        <div className="w-66">
-                            <div className={'subLabel'}>
-                                Street address
+                        <div className="flex-row-address">
+                            <div className="flex-item-address">
+                                <div className={'subLabel'}>
+                                    Street address
+                                </div>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="card-address"
+                                    value={fields.address}
+                                    onChange={(e) =>
+                                        setValue("address", e.target.value)
+                                    }
+                                    required
+                                />
                             </div>
-                            <input
-                                type="text"
-                                name="name"
-                                id="card-address"
-                                value={fields.address}
-                                onChange={(e) =>
-                                    setValue("address", e.target.value)
-                                }
-                                required
-                            />
-                        </div>
-                        <div className="w-33">
-                            <div className={'subLabel'}>Zip code</div>
-                            <input
-                                type="text"
-                                name="name"
-                                id="card-zip"
-                                pattern="^\s*\d{5}(-\d{4})?\s*$"
-                                size="5"
-                                value={fields.zip}
-                                onChange={(e) =>
-                                    setValue("zip", e.target.value)
-                                }
-                                required
-                            />
+                            <div className="flex-item-zip">
+                                <div className={'subLabel'}>Zip code</div>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="card-zip"
+                                    pattern="^\s*\d{5}(-\d{4})?\s*$"
+                                    size="5"
+                                    value={fields.zip}
+                                    onChange={(e) =>
+                                        setValue("zip", e.target.value)
+                                    }
+                                    required
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className={'formRow'}>
@@ -208,58 +210,60 @@ const CheckoutForm = (props) => {
                             required
                         />
                     </div>
-                    <div className={'formRow'}>
+                    <div className="formRow">
                         <label htmlFor="card-amount">Donation Amount</label>
-                        {amounts.map((n) => (
+                        <div className="flex-row-amounts">
+                            {amounts.map((n) => (
+                                <span
+                                    key={n}
+                                    className={
+                                        'amount_box' +
+                                        " " +
+                                        (fields.amount === n
+                                            ? 'amount_selected'
+                                            : "")
+                                    }
+                                    onClick={(e) => {
+                                        setValue("amount", n);
+                                        setUseCustomAmount(false);
+                                    }}
+                                >
+                                    ${format(n)}
+                                </span>
+                            ))}
                             <span
-                                key={n}
                                 className={
                                     'amount_box' +
                                     " " +
-                                    (fields.amount === n
+                                    (useCustomAmount
                                         ? 'amount_selected'
                                         : "")
                                 }
                                 onClick={(e) => {
-                                    setValue("amount", n);
-                                    setUseCustomAmount(false);
+                                    if (!useCustomAmount) {
+                                        setValue("amount", "");
+                                        setUseCustomAmount(true);
+                                    } else {
+                                        // do nothing its already custom
+                                    }
                                 }}
                             >
-                                ${format(n)}
+                                Custom
                             </span>
-                        ))}
-                        <span
-                            className={
-                                'amount_box' +
-                                " " +
-                                (useCustomAmount
-                                    ? 'amount_selected'
-                                    : "")
-                            }
-                            onClick={(e) => {
-                                if (!useCustomAmount) {
-                                    setValue("amount", "");
-                                    setUseCustomAmount(true);
-                                } else {
-                                    // do nothing its already custom
-                                }
-                            }}
-                        >
-                            Custom
-                        </span>
-                        {useCustomAmount && (
-                            <div>
-                                <input
-                                    type="number"
-                                    name="custom-amount"
-                                    placeholder="Amount"
-                                    value={fields.amount || ""}
-                                    onChange={(e) =>
-                                        setValue("amount", num(e.target.value))
-                                    }
-                                />
-                            </div>
-                        )}
+                            {useCustomAmount && (
+                                <div>
+                                    <input
+                                        type="number"
+                                        name="custom-amount"
+                                        placeholder="Amount"
+                                        value={fields.amount || ""}
+                                        onChange={(e) =>
+                                            setValue("amount", num(e.target.value))
+                                        }
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div className={'formRow'}>
                         <label htmlFor="card-element">

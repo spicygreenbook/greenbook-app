@@ -3,6 +3,7 @@
     font-family: ApercuMedium;
     font-size: 28px;
 }
+
 .stripe input {
     background: #fff;
     color: #474747;
@@ -13,24 +14,28 @@
     font-size: 28px;
     padding: 8px;
 }
+
 .stripe input::placeholder {
     color: #aab7c4;
 }
+
 .stripe label {
     display: block;
     margin: 8px 0;
 }
+
 .subLabel {
     font-size: 10px;
     font-style: italic;
     margin-bottom: 8px;
 }
+
 .formRow {
     margin: 20px 0;
 }
 
 .amount_box {
-    display:inline-block;
+    display: inline-block;
     vertical-align: middle;
     padding: 16px;
     margin: 0 10px 10px 0;
@@ -38,6 +43,7 @@
     cursor: pointer;
     font-weight: bold;
 }
+
 .amount_selected {
     background-color: #DB3F5A;
     color: #fff;
@@ -62,35 +68,49 @@
 button.button[sending="1"] {
     opacity: 0.75;
 }
-@media all and (max-width: 600px) {
-    .stripe {
-        font-size: 18px
-    }
-}
-
-
-
 
 .stripe form {
     box-shadow: 0 0 30px 5px #cccccc;
     padding: 2rem 10rem;
+    margin-top: 3rem;
 }
 
-.w-33 {
-    width: 30%;
-    display: inline-block;
+.flex-row-address {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-item-zip {
     padding-left: 30px;
+    flex-grow: 4;
 }
 
-.w-66 {
-    width: 60%;
-    display: inline-block;
+.flex-item-address {
+    flex-grow: 2;
 }
 
-.w-66 > input {
+#card-button,
+#card-address,
+#card-zip {
     width: 100%;
 }
 
-#card-button {
-    width: 100%;
+@media all and (max-width: 600px) {
+    .stripe {
+        font-size: 18px
+    }
+
+    .stripe input {
+        width: 100%;
+    }
+
+    .stripe form {
+        padding: 2rem;
+    }
+
+    .flex-row-amounts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
