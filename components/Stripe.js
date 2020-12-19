@@ -29,10 +29,10 @@ const CheckoutForm = (props) => {
     const elements = useElements();
 
     if (typeof document === 'undefined') {
-        console.log('is not web do not continue');
+        // console.log('is not web do not continue');
         return <span />;
     }
-    console.log("state reset for some reason");
+    // console.log("state reset for some reason");
 
     const [success, setSuccess] = useState(false);
     const [sending, setSending] = useState(0);
@@ -45,11 +45,11 @@ const CheckoutForm = (props) => {
         let updateFields = { ...fields };
         updateFields[key] = value;
         setFields(updateFields);
-        console.log("fields are", fields);
+        // console.log("fields are", fields);
     };
 
     const sendApi = (token) => {
-        console.log("sending fields", { token: token, ...fields });
+        // console.log("sending fields", { token: token, ...fields });
 
         const card = elements.getElement(CardElement);
 
@@ -58,11 +58,11 @@ const CheckoutForm = (props) => {
             body: JSON.stringify({ token: token, ...fields }),
         })
             .then(function (res) {
-                console.log("response is", res);
+                // console.log("response is", res);
                 return res.json();
             })
             .then(async function (data) {
-                console.log("response is", data);
+                // console.log("response is", data);
 
                 if (data.error) {
                     document.getElementById("card-errors").textContent =
@@ -80,7 +80,7 @@ const CheckoutForm = (props) => {
                             }
                         );
                         if (result.error) {
-                            console.log(err);
+                            // console.log(err);
                             document.getElementById("card-errors").textContent =
                                 result.error.message;
                             return false;
@@ -88,7 +88,7 @@ const CheckoutForm = (props) => {
                             setSuccess(true);
                         }
                     } catch (err) {
-                        console.log(err);
+                        // console.log(err);
                         document.getElementById("card-errors").textContent =
                             err.message;
                         return false;
@@ -135,7 +135,7 @@ const CheckoutForm = (props) => {
 
     let amounts = [15, 25, 50, 100, 150];
 
-    console.log("render");
+    // console.log("render");
 
     return (
         <div className={'stripe'}>
