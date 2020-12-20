@@ -145,7 +145,7 @@ function Page(props) {
                         <PageTitle title={content.page_title} />
                         <View style={[styles.section, hiddenStyles.web]}>
                             <View style={[styles.content, { marginBottom: "10%" }]}>
-                                {isWeb ?
+                                {isWeb &&
                                     <React.Fragment>
                                         <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                                         <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
@@ -159,27 +159,25 @@ function Page(props) {
                                             />
                                         </View>
                                     </React.Fragment>
-                                    :
-                                    <React.Fragment>
-                                        <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
-                                            <View style={styles.content}>
-                                                <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                            </View>
-                                        </View>
-                                    </React.Fragment>
                                 }
+
+                                <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
+                                    <View style={styles.content}>
+                                        <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                    </View>
+                                </View>
                             </View>
                         </View>
                         <View nativeID="div1" style={[styles.section, hiddenStyles.div1]}>
                             <View nativeID="div2" style={styles.content}>
                                 <View nativeID="flexcontainer" style={isWeb ? hiddenStyles.grid : null}>
-                                    {isWeb ?
+                                    {/* {isWeb ?
                                         <View style={{ paddingTop: 60 }}>
                                             <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                                         </View>
                                         :
                                         <View />
-                                    }
+                                    } */}
                                     <View style={isWeb ? { paddingLeft: "2rem", gridColumnStart: "2", gridColumnEnd: "4" } : null}>
                                         <FlatList
                                             nativeID="flatLIST"
