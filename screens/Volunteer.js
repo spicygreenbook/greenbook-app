@@ -62,7 +62,6 @@ function Page(props) {
         })
     }
 
-
     const [pageLoading, setPageLoading] = useState(props.content ? false : true);
     const [content, setContent] = useState(props.content || {});
     const [bodyChanged, setBodyChanged] = useState(false);
@@ -107,13 +106,12 @@ function Page(props) {
     console.log("STATE OF THE ROLE:", roleState);
     console.log("SELECTED ID: ", selectedId);
 
-
     let numColumns = dimensions.width < 800 ? 1 : 2
     let heading1;
     let paragraph1;
     let photo;
 
-    if (isWeb) {
+    if (isWeb && content._body) {
         heading1 = content._body.value.slice(0, 1);
         paragraph1 = content._body.value.slice(1, 2);
         photo = content._body.value.slice(2, 3);
