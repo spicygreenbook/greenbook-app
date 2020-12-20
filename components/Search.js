@@ -6,16 +6,17 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'next/router';
 import getUserLocation from '../utils/getUserLocation';
 import { addRootClickHandler, removeRootClickHandler } from '../utils/rootClickHandler';
+import { useNavigation } from '@react-navigation/native';
 
 const Search = ({
   city,
   state,
   mode,
-  includeUseLocationOption = false,
-  navigation
+  includeUseLocationOption = false
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
   const router = useRouter();
+  const navigation = !isWeb ? useNavigation() : null
   // console.log('search config', searchConfig)
 
   let staticCityState = '';

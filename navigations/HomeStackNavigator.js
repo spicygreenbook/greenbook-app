@@ -3,8 +3,6 @@ import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from '../screens/Home'
 import CustomHeader from './CustomHeader';
-import Listing from '../screens/Listing';
-import CityListing from '../screens/List';
 import { Container, Content, Header, List, ListItem, Text, Icon } from 'native-base';
 import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
@@ -13,7 +11,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
-const CustomHeaderWrapper = ({ children }) => {
+export const CustomHeaderWrapper = ({ children }) => {
 
   const route = useRoute();
   const navigation = useNavigation();
@@ -47,15 +45,16 @@ const StateListingComponent = ({navigation}) => {
     <CustomHeaderWrapper>
       <List>
         {cities.map(city => {
-          const cityCapatalized = city[0].toUpperCase() + city.substring(1);
+          const cityCapatalized = city.split(' ').map((t) => t[0].toUpperCase() + t.substring(1)).join(' ');
 
           return (
             <ListItem key={city} >
-              <Link 
+              <Link
                 href={`/search?q=&near=${cityCapatalized}, ${abbr}`} 
                 onPress={() => {
+                  dispatch({ type: 'loading', value: true });
                   dispatch({type: 'searchConfig', value: { q: "", near: `${cityCapatalized}, ${abbr}`}});
-                  navigation.navigate('CityListing', { city: cityCapatalized  })
+                  navigation.navigate('Browse', { screen: 'Home' })
                 }}>
                 <Text style={[styles.text_body,{ color: Theme.green, fontSize: 18, paddingTop: 5, paddingBottom: 5, textTransform: 'capitalize'}]}>{city}</Text>
               </Link> 
@@ -67,12 +66,6 @@ const StateListingComponent = ({navigation}) => {
     </CustomHeaderWrapper>
   )
 }
-
-const CityListingComponent = (props) => (
-  <CustomHeaderWrapper>
-    <CityListing {...props} viewMode="Home" />
-  </CustomHeaderWrapper>
-)
 
 const HomeWithScrollToPreventRerender = (props) => (
   <ScrollView>
@@ -86,13 +79,7 @@ const HomeStack = (props) => (
       header: () => <CustomHeader dark {...props} />
     }} />
 
-    <Stack.Screen name="Listing" component={Listing} options={{ headerShown: false }} />
     <Stack.Screen name="StateListing" component={StateListingComponent} options={{headerShown: false}} />
-    <Stack.Screen name="CityListing" component={CityListingComponent} options={{
-        headerShown: false,
-      }} 
-     />
-
   </Stack.Navigator>
 )
 

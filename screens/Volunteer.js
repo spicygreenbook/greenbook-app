@@ -62,7 +62,6 @@ function Page(props) {
         })
     }
 
-
     const [pageLoading, setPageLoading] = useState(props.content ? false : true);
     const [content, setContent] = useState(props.content || {});
     const [bodyChanged, setBodyChanged] = useState(false);
@@ -107,13 +106,12 @@ function Page(props) {
     console.log("STATE OF THE ROLE:", roleState);
     console.log("SELECTED ID: ", selectedId);
 
-
     let numColumns = dimensions.width < 800 ? 1 : 2
     let heading1;
     let paragraph1;
     let photo;
 
-    if (isWeb) {
+    if (isWeb && content._body) {
         heading1 = content._body.value.slice(0, 1);
         paragraph1 = content._body.value.slice(1, 2);
         photo = content._body.value.slice(2, 3);
@@ -145,11 +143,11 @@ function Page(props) {
                         <PageTitle title={content.page_title} />
                         <View style={[styles.section, hiddenStyles.web]}>
                             <View style={[styles.content, { marginBottom: "10%" }]}>
-                                {isWeb ?
+                                {isWeb &&
                                     <React.Fragment>
                                         <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
                                         <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                        <View style={[styles.button_green_text, { width: "50%" }]}>
+                                        <View style={{ width: "50%" }}>
                                             <Button
                                                 nativeID="button"
                                                 onPress={executeScroll}
@@ -159,27 +157,18 @@ function Page(props) {
                                             />
                                         </View>
                                     </React.Fragment>
-                                    :
-                                    <React.Fragment>
-                                        <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
-                                            <View style={styles.content}>
-                                                <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                            </View>
-                                        </View>
-                                    </React.Fragment>
                                 }
+
+                                <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
+                                    <View style={styles.content}>
+                                        <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+                                    </View>
+                                </View>
                             </View>
                         </View>
                         <View nativeID="div1" style={[styles.section, hiddenStyles.div1]}>
                             <View nativeID="div2" style={styles.content}>
                                 <View nativeID="flexcontainer" style={isWeb ? hiddenStyles.grid : null}>
-                                    {isWeb ?
-                                        <View style={{ paddingTop: 60 }}>
-                                            <RichText render={photo} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                        </View>
-                                        :
-                                        <View />
-                                    }
                                     <View style={isWeb ? { paddingLeft: "2rem", gridColumnStart: "2", gridColumnEnd: "4" } : null}>
                                         <FlatList
                                             nativeID="flatLIST"
@@ -218,12 +207,12 @@ function Page(props) {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     <View style={{
-                                                        display: "block",
-                                                        marginBefore: "0.5em",
-                                                        marginAfter: "0.5em",
+                                                        display: Platform.OS === "web" ? "block" : 'flex',
+                                                        // marginBefore: "0.5em",
+                                                        // marginAfter: "0.5em",
                                                         overflow: "hidden",
-                                                        borderStyle: "inset",
-                                                        borderWidth: "1px",
+                                                        // borderStyle: "inset",
+                                                        borderWidth: 1,
                                                         width: "100%",
                                                         opacity: .5
                                                     }} />

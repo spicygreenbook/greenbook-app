@@ -32,8 +32,8 @@ const VolunteerStack = (props) => (
   </VolunteerStackNavigator.Navigator>
 )
 
+const BottomTabNavigator = ({ navigation }) => {
 
-const BottomTabNavigator = () => {
   return (
     <BottomTab.Navigator
       shifting={false}
@@ -54,6 +54,19 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ color }) => <Icon type="MaterialIcons" style={{ fontSize: 22, color }} name="search" />
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: () => {
+            if(!route.params) return;
+            
+            const { home } = route.params;
+            if(home) {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'Browse' }],
+              });
+            }
+          }
+        })}
       />
 
       <BottomTab.Screen
