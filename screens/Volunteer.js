@@ -7,60 +7,13 @@ import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent, getData } from '../utils';
 import styled from 'styled-components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ResponsiveImage } from "../components/ResponsiveImage"; 
 
 
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header2, text_header3, button_green, button_green_text, text_header4, section, content', { isWeb }));
-    let hiddenStyles;
-    if (isWeb) {
-        hiddenStyles = StyleSheet.create({
-            hidden: {
-                display: 'none',
-
-            },
-            shown: {
-                display: 'contents',
-            },
-            grid: {
-                display: dimensions.width < 1700 ? "flex" : "grid",
-                gridTemplateColumns: '50rem 20rem 20rem'
-            },
-            web: {
-                paddingBottom: 0,
-                paddingRight: dimensions.width < 1700 ? 0 : "18rem",
-                paddingTop: dimensions.width < 900 ? 40 : 80
-            },
-            div1: {
-                paddingTop: 0,
-                alignItems: "flex-start",
-                paddingStart: dimensions.width < 1700 ? 0 : "18rem"
-            }
-        })
-    }
-    else {
-        hiddenStyles = StyleSheet.create({
-            hidden: {
-                display: 'none',
-
-            },
-            shown: {
-                display: 'flex',
-            },
-            grid: {
-                display: "flex",
-            },
-            web: {
-                paddingBottom: 0,
-                paddingTop: dimensions.width < 900 ? 40 : 80
-            },
-            div1: {
-                paddingTop: 0,
-                alignItems: "flex-start",
-            }
-        })
-    }
 
     const [pageLoading, setPageLoading] = useState(props.content ? false : true);
     const [content, setContent] = useState(props.content || {});
@@ -107,24 +60,20 @@ function Page(props) {
     console.log("SELECTED ID: ", selectedId);
 
     let numColumns = dimensions.width < 800 ? 1 : 2
-    let heading1;
-    let paragraph1;
-    let photo;
-
+    let _photo = {value: []};
+    let _use_content = content._body;
     if (isWeb && content._body) {
-        heading1 = content._body.value.slice(0, 1);
-        paragraph1 = content._body.value.slice(1, 2);
-        photo = content._body.value.slice(2, 3);
-
-        let newtext = content._body.value[1].text;
-        newtext.replace('\n', '');
-        let n = newtext.indexOf("Maintaining");
-        if (n == 344) {
-            newtext = newtext.substring(0, n) + "\n\n" + newtext.substring(n, newtext.length);
-            paragraph1[0].text = newtext;
-            console.log('CHANGED WENT THROUGH')
+        _use_content = {
+            value: content._body.value.filter(part => {
+                console.log('part', part)
+                if (part.type === 'image') {
+                    _photo = {value: [part]};
+                }
+                return part && part.type !== 'image'
+            })
         }
     }
+    console.log('photo', _photo);
 
     const myRef = useRef(null);
     const executeScroll = () => {
@@ -140,36 +89,35 @@ function Page(props) {
                 </View>
                 : (
                     <React.Fragment>
-                        <PageTitle title={content.page_title} />
-                        <View style={[styles.section, hiddenStyles.web]}>
-                            <View style={[styles.content, { marginBottom: "10%" }]}>
-                                {isWeb &&
-                                    <React.Fragment>
-                                        <RichText render={heading1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                        <RichText render={paragraph1} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                        <View style={{ width: "50%" }}>
-                                            <Button
-                                                nativeID="button"
-                                                onPress={executeScroll}
-                                                title="Scroll to Volunteer Form"
-                                                color="green"
-                                                style={styles.button_green_text}
-                                            />
-                                        </View>
-                                    </React.Fragment>
-                                }
 
-                                <View style={[styles.section, { paddingBottom: 0, paddingTop: dimensions.width < 900 ? 40 : 80 }]}>
-                                    <View style={styles.content}>
-                                        <RichText render={content._body} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                    </View>
-                                </View>
+                        <PageTitle title={content.page_title} />
+                        <View style={[styles.section]}>
+                            <View style={[styles.content]}>
+                                <RichText render={_use_content} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
+
+                                {isWeb && <View style={{ width: "50%" }}>
+                                    <Button
+                                        nativeID="button"
+                                        onPress={executeScroll}
+                                        title="Scroll to Volunteer Form"
+                                        color={Theme.green}
+                                        style={styles.button_green}
+                                    />
+                                </View>}
                             </View>
                         </View>
-                        <View nativeID="div1" style={[styles.section, hiddenStyles.div1]}>
-                            <View nativeID="div2" style={styles.content}>
-                                <View nativeID="flexcontainer" style={isWeb ? hiddenStyles.grid : null}>
-                                    <View style={isWeb ? { paddingLeft: "2rem", gridColumnStart: "2", gridColumnEnd: "4" } : null}>
+
+                        <View style={[styles.section, { paddingTop: 0 }]}>
+                            <View style={styles.content}>
+                                <View style={dimensions.width < 900 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+                                    <View style={dimensions.width < 900 ? {} : {flex: 3}}>
+                                        {_photo && _photo.value && _photo.value[0] && <ResponsiveImage
+                                            style={{width: _photo.value[0].dimensions.width, resizeMode: 'contain', aspectRatio: _photo.value[0].dimensions.height/_photo.value[0].dimensions.width}}
+                                            alt="Spicy Green Book"
+                                            source={{uri: _photo.value[0].url}}
+                                        />}
+                                    </View>
+                                    <View style={dimensions.width < 900 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
                                         <FlatList
                                             nativeID="flatLIST"
                                             key={'cols' + numColumns}
@@ -185,9 +133,12 @@ function Page(props) {
                                                     }}
                                                 >
                                                     <TouchableOpacity onPress={(e) => {
-                                                        let state = roleState;
-                                                        state[index] = state[index] ? false : true;
-                                                        setRoleState(state);
+                                                        console.log('pressed')
+                                                        setRoleState(prevState => {
+                                                            let newState = {};
+                                                            newState[index] = prevState[index] ? false : true;
+                                                            return {...prevState, ...newState}
+                                                        });
 
                                                         console.log("INDEX CURRENTLY AT:", index)
                                                         console.log("PREVIOUS ID:", selectedId);
@@ -206,24 +157,11 @@ function Page(props) {
                                                             {roleState[index] ? '-' : '+'}{' '}{' '}{item.title}
                                                         </Text>
                                                     </TouchableOpacity>
-                                                    <View style={{
-                                                        display: Platform.OS === "web" ? "block" : 'flex',
-                                                        // marginBefore: "0.5em",
-                                                        // marginAfter: "0.5em",
-                                                        overflow: "hidden",
-                                                        // borderStyle: "inset",
-                                                        borderWidth: 1,
-                                                        width: "100%",
-                                                        opacity: .5
-                                                    }} />
-                                                    <View
-                                                        nativeID="hidden"
-                                                        style={
-                                                            roleState[index] ? hiddenStyles.shown : hiddenStyles.hidden
-                                                        }>
+                                                    {!!roleState[index] && <View>
                                                         <Text style={[styles.text_body, { marginTop: 10, fontStyle: 'italic' }]}>{item.location}</Text>
                                                         <RichText render={item._description} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />
-                                                    </View>
+                                                    </View>}
+                                                    
                                                 </View>
                                             )}
                                             keyExtractor={(item, index) => 'press' + index}
@@ -232,6 +170,7 @@ function Page(props) {
                                 </View>
                             </View>
                         </View>
+
                         <View nativeID="formBelow" style={[styles.section]}>
                             <View style={styles.content}>
                                 <View style={[{ flex: 1, backgroundColor: '#000', width: '100%', flexDirection: dimensions.width < 900 ? 'column' : 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
