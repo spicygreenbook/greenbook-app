@@ -101,12 +101,14 @@ export function RichText(props) {
                 source={{uri:part.url}} />)
         } else if (part.type === 'paragraph') {
             return (<View key={key} style={{marginTop: 10, marginBottom: 10}}>
-                {renderHTML(part.text, part.spans, body_style, isWeb, dispatch)}
+                <Text>
+                    {renderHTML(part.text, part.spans, body_style, isWeb, dispatch)}
+                </Text>
             </View>)
         } else if (part.type === 'list-item') {
             return (<Text key={key} style={[body_style, {marginTop: 10, marginBottom: 10}]}>
                 {props.bullet === 'check' ? <Entypo name="check" size={24} color={Theme.green} style={{marginRight: 8}}/> : <Text style={[body_style]}>• </Text>}
-                {renderHTML(part.text, part.spans, body_style, isWeb, dispatch)}
+                <Text>{renderHTML(part.text, part.spans, body_style, isWeb, dispatch)}</Text>
             </Text>)
         } else if(part.text) {
             return (<Text key={key} style={body_style}>{part.text}</Text>)
