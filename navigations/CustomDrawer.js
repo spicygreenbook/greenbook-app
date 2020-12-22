@@ -29,6 +29,10 @@ const CustomDrawer = (props) => {
           <Button onPress={() => Linking.openURL("https://www.facebook.com/SpicyGreenBook/")}>
             <Icon type="FontAwesome" style={styles.default} name="facebook" size={22} />
           </Button>
+
+          <Button onPress={() => Linking.openURL("https://www.youtube.com/channel/UCS5gEWNUF2fibLwwxFibKGg")}>
+            <Icon type="FontAwesome" style={styles.default} name="youtube" size={22} />
+          </Button>
         </FooterTab>
       </Footer>
     </Container>

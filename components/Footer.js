@@ -38,6 +38,10 @@ export default function(props) {
                         <Link href="https://www.facebook.com/SpicyGreenBook/">
                             <FontAwesome name="facebook" size={32} color="#fff" />
                         </Link>
+
+                        <Link href="https://www.youtube.com/channel/UCS5gEWNUF2fibLwwxFibKGg">
+                            <FontAwesome name="youtube" size={32} color="#fff" />
+                        </Link>
                     </View>
                 </View>
                 <View style={{marginTop: 40}}>
