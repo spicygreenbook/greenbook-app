@@ -101,29 +101,25 @@ export default function (props) {
 
         chevronLeft: {
             backgroundColor: 'black',
-            width: '5rem',
-            height: '5rem',
+            width: '2.5rem',
+            height: '2.5rem',
             borderRadius: '50%',
             textAlign: 'center',
-            paddingTop: '0.9rem',
-            paddingRight: '0.3rem',
+            paddingTop: '0.6rem',
+            paddingRight: '0.2rem',
             opacity: '.7'
         },
 
         chevronRight: {
             backgroundColor: 'black',
-            width: '5rem',
-            height: '5rem',
+            width: '2.5rem',
+            height: '2.5rem',
             borderRadius: '50%',
             textAlign: 'center',
-            paddingTop: '0.9rem',
-            paddingLeft: '0.3rem',
+            paddingTop: '0.6rem',
+            paddingLeft: '0.2rem',
             opacity: '.7'
         },
-
-
-
-
     })
 
     const Hover = styled.div`
@@ -195,14 +191,14 @@ export default function (props) {
                     marginLeft: '1rem',
                     marginRight: '1rem',
                 }}>
-                    <View style={{ width: 100, height: 100, alignItems: 'flex-end' }}>
+                    <View style={{ width: 100, height: 100, alignItems: 'flex-start' }}>
                         <TouchableOpacity onPress={(e) => scrollToIndexImage({ animated: true, index: currentIndexImage - 1 }, images.length)}>
-                            <Entypo name="chevron-thin-left" size={48} color="#fff" style={styles.chevronLeft} />
+                            <Entypo name="chevron-thin-left" size={18} color="#fff" style={styles.chevronLeft} />
                         </TouchableOpacity>
                     </View>
                     <View style={{ width: 100, height: 100, alignItems: 'flex-end' }}>
                         <TouchableOpacity onPress={(e) => scrollToIndexImage({ animated: true, index: currentIndexImage + 1 }, images.length)}>
-                            <Entypo name="chevron-thin-right" size={48} color="#fff" style={styles.chevronRight} />
+                            <Entypo name="chevron-thin-right" size={18} color="#fff" style={styles.chevronRight} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -212,7 +208,7 @@ export default function (props) {
             <TouchableOpacity onPress={e => {
                 dispatch({ type: 'lightbox', value: false })
             }}>
-                <EvilIcons name="close" size={48} color="#fff" />
+                <EvilIcons name="close" size={32} color="#fff" />
             </TouchableOpacity>
         </View>
     </View>
