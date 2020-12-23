@@ -13,6 +13,7 @@ import { handleRootClick } from '../utils/rootClickHandler';
 import { Fontisto } from '@expo/vector-icons'; 
 import AppStoreIconBadge from '../public/app-store.svg';
 import GooglePlayIconBadge from '../public/google-play.svg';
+import CallToAction from './Home/CallToAction';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -283,6 +284,9 @@ function Page(props) {
 
                 </View>
             </View>
+
+            {/* Call to Action Section */}
+            <CallToAction />
 
             <View style={[styles.section, {flex:1, paddingTop: 0}]}>
                 <View style={[styles.content, {flex:1}]}>
