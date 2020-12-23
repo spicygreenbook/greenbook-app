@@ -16,11 +16,9 @@ export default function(props) {
             <View style={{flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2}}>
                 <View style={[dimensions.width < 980 ? {} : {flexDirection: 'row'}, {flex:1, width: 1024, maxWidth: '100%'}]}>
                     <View style={{flex: 2/3, justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', borderColor: '#fff', borderRightWidth: dimensions.width < 980 ? 0 : 2, paddingTop: 40, paddingBottom:40, paddingRight: dimensions.width < 980 ? 0 : 40, paddingLeft: dimensions.width < 980 ? 0 : dimensions.width < 1080 ? 20 : 0}}>
-                        <Link href="/search"><Text style={styles.text_footer}>Browse</Text></Link>
                         <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
                         <Link href="/add"><Text style={styles.text_footer}>Add Listing</Text></Link>
                         <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
-                        <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
                         <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
                         <Link href="/https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf" target="_blank"><Text style={styles.text_footer}>Press Kit</Text></Link>
                     </View>
