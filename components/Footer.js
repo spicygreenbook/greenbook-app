@@ -21,6 +21,8 @@ export default function(props) {
                         <Link href="/add"><Text style={styles.text_footer}>Add Listing</Text></Link>
                         <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
                         <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
+                        <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
+                        <Link href="/https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf" target="_blank"><Text style={styles.text_footer}>Press Kit</Text></Link>
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40, paddingBottom: 40}}>
                         <Link href="https://www.instagram.com/spicygreenbook/">

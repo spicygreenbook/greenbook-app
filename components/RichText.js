@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStateValue } from "../components/State";
 import { getStyles, Theme } from '../utils';
-import { View, Text, StyleSheet, Image, Linking} from 'react-native';
+import { View, Text, StyleSheet, Button, Image, Linking} from 'react-native';
 import { ResponsiveImage } from '../components/ResponsiveImage';
 import { Link } from "../components/Link"; 
 import { Entypo } from '@expo/vector-icons'; 
@@ -45,10 +45,13 @@ function renderHTML(markup, spans, body_style, isWeb, dispatch) {
                 url = segment_map[i].data.value.file.url
             }
         }
+        button = false; // strange issues on mobile with this becaues its trying to go within a <Text> componenet
 
-        //console.log('partspart', parts[part]);
+        console.log('partspart', 'is button', button, parts[part], segment_map[i], url);
         return segment_map[i].type === 'hyperlink' && button ? (
-            <Link key={i} href={url} button={'button_green'} title={parts[part] || ''} />
+            <React.Fragment>
+                {isWeb ? <Link key={i} href={url} ><Button color={Theme.green} title={parts[part] || ''} /></Link> : <View><Button color={Theme.green} title={parts[part] || ' '} onPress={e=>{Linking.openURL(url)}} /></View>}
+            </React.Fragment>
         ) : segment_map[i].type === 'hyperlink' ? (<Text key={'subpart' + i} style={body_style} onPress={e => {
             //console.log('link to', url)
             const external = url.slice(0,1) !== '/';
