@@ -2,7 +2,7 @@
   "expo": {
     "name": "Spicy Green Book",
     "slug": "spicygreenbook",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "icon": "./public/icon.png",
     "splash": {
       "orientation": "portrait",
@@ -17,7 +17,9 @@
     "android": {
       "package": "com.spicygreenbook.app",
       "versionCode": 2,
-      "permissions": ["ACCESS_FINE_LOCATION"]
+      "permissions": [
+        "ACCESS_FINE_LOCATION"
+      ]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,6 +29,8 @@
     ],
     "web": {
       "favicon": "./public/apple-touch-icon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/spicygreenbook/greenbook-app"
   }
 }
