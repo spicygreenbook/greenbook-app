@@ -49,7 +49,7 @@ export default function(props) {
                         </View>
                     </View>
                 </View>
-                {isWeb && <View style={{marginBottom: 40, marginTop: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex:1, width: 1024, maxWidth: '100%'}}>
+                {isWeb && <View style={{marginBottom: 40, marginTop: 40, flexDirection: dimensions.width < 980 ? 'column' : 'row', alignItems: 'center', justifyContent: 'space-between', flex:1, width: 1024, maxWidth: '100%'}}>
                     <View style={dimensions.width < 980 ? {marginTop: 40, marginBottom: 20} : {}}>
                         <a href="https://vercel.com/?utm_source=spicygreenbook" style={{color: 'inherit', textDecoration: 'none'}} target="_blank">
                             <span style={{display:'inline-block', verticalAlign: 'middle', lineHeight: '50%', fontFamily: 'ApercuMedium', color: '#fff'}}>Powered By</span>
