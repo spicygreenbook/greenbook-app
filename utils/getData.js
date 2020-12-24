@@ -207,6 +207,48 @@ export async function getInstagram() {
 
 }
 
+/* send setData object if you want to write to disk/cache */
+export async function getSetSearchInfo(setData) {
+    let searchInfo;
+    if (setData) {
+        try {
+            console.log('setting searchInfo to', setData)
+            return await AsyncStorage.setItem('searchInfo', JSON.stringify(setData))
+        } catch(e) {
+            console.log('failed to set async storage of searchInfo')
+        }
+    } else {
+        try {
+            searchInfo = await AsyncStorage.getItem('searchInfo');
+            let parsedSearchInfo;
+            if (searchInfo) {
+                parsedSearchInfo = JSON.parse(searchInfo);
+            }
+            //console.log('search info from cache is', searchInfo)
+            if (!searchInfo || (parsedSearchInfo && !parsedSearchInfo.city)) {
+                const geoip = await fetch('https://spicygreenbook.org/api/location');
+                const geoip_json = await geoip.json();
+
+                //console.log('setting searchInfo to geoip_json', geoip_json)
+                if (geoip_json && geoip_json.city) {
+                    searchInfo = JSON.stringify({
+                        city: geoip_json.city || '',
+                        state: geoip_json.region_code
+                    })
+                } else {
+                    searchInfo= '{}';
+                }
+                parsedSearchInfo = JSON.parse(searchInfo);
+            }
+            return parsedSearchInfo;
+        } catch(e) {
+            console.error(e);
+            console.log('failed to fetch or parse searchInfo')
+            return {};
+        }
+    }
+}
+
 async function getCacheMeta(setData) {
     let cache_meta;
     if (setData) {
