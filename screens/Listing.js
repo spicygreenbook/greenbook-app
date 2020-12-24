@@ -5,11 +5,13 @@ import { Link } from "../components/Link";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
 import Map from "../components/Map";
+//import MapView from 'react-native-maps'; this breaks web still
 import { FontAwesome } from '@expo/vector-icons';
 import Attribution from "../components/Attribution";
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
 import Spinner from '../components/Spinner';
+
 
 function Page(props) {
 
@@ -19,6 +21,10 @@ function Page(props) {
     const [ pageLoading, setPageLoading ] = useState(!props.content);
     const [ content, setContent ] = useState(props.content);
     const [ galleryOpen, setGalleryOpen ] = useState(false);
+
+    const mapKeys = ['geocoordinates', 'name', 'address'];
+    const [ mapInfoStr, setMapStr ] = useState('');
+    const mapInfo = {};
 
     const navigation = !isWeb ? useNavigation() : null;
 
@@ -34,7 +40,16 @@ function Page(props) {
             console.error(err);
         });
     }, [view])
-   
+
+    useEffect(() => {
+        if (content && typeof content === 'object') {
+            mapKeys.forEach(key => {
+                mapInfo[key] = content[key];
+            })
+            setMapStr(encodeURIComponent(JSON.stringify(mapInfo)));
+            console.log('sendinfostr', mapInfoStr);
+        }
+    }, [content])
 
     function clickImage(index) {
         const images = content.images.filter(image => image.image).map(image => image.image);
@@ -182,6 +197,11 @@ function Page(props) {
                         </View>
                     </View>
                 </View>
+                {dimensions.width < 600 ? (
+                    <React.Fragment>
+                        {isWeb ? <Map list={[content]} mode="m"/> : <WebView style={{height: 200}} source={{uri: 'https://spicygreenbook.org/map?info=' + mapInfoStr}}/>}
+                    </React.Fragment>
+                ) : null}
                 {content.youtube_video && <View style={[styles.section, {paddingBottom: 0}]}>
                     <View style={[styles.content, isWeb ? {} : {height: 300}]}>
                         {isWeb ? (
