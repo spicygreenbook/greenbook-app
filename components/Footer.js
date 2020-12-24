@@ -44,7 +44,7 @@ export default function(props) {
                                 <FontAwesome name="youtube" size={32} color="#fff" />
                             </Link>
                         </View>
-                        <View style={{textAlign: 'center'}}>
+                        <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between'}}>
                             <Text style={styles.text_footer}>Follow @spicygreenbook</Text>
                         </View>
                     </View>
