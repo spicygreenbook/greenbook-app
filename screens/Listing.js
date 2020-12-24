@@ -202,34 +202,27 @@ function Page(props) {
                         {isWeb ? <Map list={[content]} single mode="m"/> : <WebView style={{height: 200}} source={{uri: 'https://spicygreenbook.org/map?info=' + mapInfoStr}}/>}
                     </React.Fragment>
                 ) : null}
-                <View style={{flexDirection: isWeb && dimensions.width >= 900 ? 'row' : 'column'}}>
-                    <View style={{flex: 2}}>
-                        {content.youtube_video && <View style={[styles.section, {paddingBottom: 0}]}>
-                            <View style={[styles.content, isWeb ? {} : {height: 300}]}>
-                                {isWeb ? (
-                                    <div
-                                    dangerouslySetInnerHTML={{
-                                      __html: content.youtube_video.html}} />
-                                ) : (
-                                    <WebView
-                                            style={ styles.WebViewContainer }
-                                            javaScriptEnabled={true}
-                                            domStorageEnabled={true}
-                                            source={{uri: 'https://www.youtube.com/embed/' + (content.youtube_video.embed_url.split(/youtu.be\/|youtube.com\//)[1] || '') }}
-                                    />
-                                )}
-                            </View>
-                        </View>}
-                        <View style={[styles.section]}>
-                            <View style={[styles.content]}>
-                                <RichText render={content._bio} isWeb={isWeb} />
-                                {!!(content.attribution && content.attribution.length) && <Attribution attribution={content.attribution} />}
-                            </View>
-                        </View>
+                {content.youtube_video && <View style={[styles.section, {paddingBottom: 0}]}>
+                    <View style={[styles.content, isWeb ? {} : {height: 300}]}>
+                        {isWeb ? (
+                            <div
+                            dangerouslySetInnerHTML={{
+                              __html: content.youtube_video.html}} />
+                        ) : (
+                            <WebView
+                                    style={ styles.WebViewContainer }
+                                    javaScriptEnabled={true}
+                                    domStorageEnabled={true}
+                                    source={{uri: 'https://www.youtube.com/embed/' + (content.youtube_video.embed_url.split(/youtu.be\/|youtube.com\//)[1] || '') }}
+                            />
+                        )}
                     </View>
-                    {isWeb && dimensions.width >= 900 && <View style={{flex: 1}}>
-                        <Map list={[content]} single mode="m"/>
-                    </View>}
+                </View>}
+                <View style={[styles.section]}>
+                    <View style={[styles.content]}>
+                        <RichText render={content._bio} isWeb={isWeb} />
+                        {!!(content.attribution && content.attribution.length) && <Attribution attribution={content.attribution} />}
+                    </View>
                 </View>
             </React.Fragment>
         )}
