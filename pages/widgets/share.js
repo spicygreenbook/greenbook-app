@@ -75,7 +75,7 @@ function App(props) {
                         source={{ uri: '/images/logo_nav_dark.png' }}
                     />
                 </View>
-                <View style={{position: 'absolute', left: 0, bottom:0, right:0, backgroundColor: Theme.green, padding: 12, justifyContent: 'rows', alignItems: 'center', justifyContent: 'space-between'}}>
+                <View style={{zIndex: (2147483639 + 1), position: 'absolute', left: 0, bottom:0, right:0, backgroundColor: Theme.green, padding: 12, justifyContent: 'rows', alignItems: 'center', justifyContent: 'space-between'}}>
                     <View style={{padding: 10}}>
                         <Text style={[styles.text_body, {fontSize: 24, color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase'}]}>Support Black-Owned Businesses</Text>
                     </View>

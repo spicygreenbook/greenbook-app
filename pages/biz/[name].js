@@ -36,7 +36,7 @@ function App(props) {
             <meta property="og:title" content={content.name + " - Spicy Green Book"} key="og:title" />
             <meta
                 name="og:image"
-                content={content.primary_image.url + '&w=1200'}
+                content={'https://spicygreenbook.org/api/share/' + content.uid + '/listing.png'}
                 key="og:image"
             />
             <meta property="og:url" content={"https://spicygreenbook.org/biz/" + content.uid } key="og:url" />
