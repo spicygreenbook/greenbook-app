@@ -143,7 +143,7 @@ function Page(props) {
                 </View>
             }
 
-            <View style={[styles.section, { paddingTop: 20 }]}>
+            <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
                 <View style={styles.content}>
                     <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
                         <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
@@ -280,9 +280,9 @@ function Page(props) {
             </View>
 
             {/* Map */}
-            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 176 : 80}]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80}]}>
                 
-                <View style={[styles.content, {flex:1}]}>
+                <View style={[styles.content, {flex:1}]}> 
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
                         WHERE WE'RE AT
                     </Text>
@@ -292,7 +292,7 @@ function Page(props) {
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, lineHeight: isWeb ? 1 : 0, fontWeight: 'normal' }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold', lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, lineHeight: 1, fontWeight: 'normal' }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
                     </View>
-                    <SGBMap style={{marginTop: dimensions.width < 700 ? -20 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
+                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
             </View>
   
