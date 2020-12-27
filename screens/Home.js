@@ -185,9 +185,9 @@ function Page(props) {
                                 them to invest in Black business owners in their communities.
                             </Text>
                             <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
-                                    <View style={[styles.button_green, { marginTop: 40 }]} >    
+                                <View style={[styles.button_green, { marginTop: 40 }]} >    
                                     <Text style={[styles.button_green_text]}>Learn More</Text>
-                                    </View>
+                                </View>
                             </Link>
                         </View>
                     </View>

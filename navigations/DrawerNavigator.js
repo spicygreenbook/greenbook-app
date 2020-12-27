@@ -6,6 +6,7 @@ import CustomDrawer from './CustomDrawer';
 import CustomHeader from './CustomHeader';
 import BottomTabNavigator from './BottomTabNavigator';
 import Donate from '../screens/Donate';
+import Shop from '../screens/Shop';
 import About from '../screens/About';
 import Updates from '../screens/Updates';
 import Team from '../screens/Team';
@@ -32,6 +33,7 @@ const DrawerNavigator = () => (
   >
     <Drawer.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
     <Drawer.Screen name="Donate" component={WithScrollView(Donate)}  />
+    <Drawer.Screen name="Store" component={WithScrollView(Shop)}  />
     <Drawer.Screen name="About" component={WithScrollView(About)}  />
     <Drawer.Screen name="Updates" component={WithScrollView(Updates)}  />
     <Drawer.Screen name="Team" component={WithScrollView(Team)}  />
