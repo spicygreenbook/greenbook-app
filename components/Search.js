@@ -93,10 +93,8 @@ const Search = ({
     })
 
     if (isWeb) {
-      if(router.route !== '/search') {
-        const url = `/search?${new URLSearchParams(q).toString()}`;
-        router.push(url);
-      }
+      const url = `/search?${new URLSearchParams(q).toString()}`;
+      router.push(url);
       return;
     }
 
