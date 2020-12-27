@@ -109,7 +109,7 @@ function Page(props) {
             <View>
                 {/* Begin Top About Us Bar */}
                 <View style={{
-                    flexDirection: 'row', height: 300, backgroundColor: Theme.green_bg, alignItems: 'center',
+                    flexDirection: 'row', height: 'auto', backgroundColor: Theme.green_bg, alignItems: 'center',
                     justifyContent: 'center', paddingTop: 120,
                 }}>
 
@@ -133,7 +133,7 @@ function Page(props) {
 
                 {/* End "We are gathering a growing list" Text box */}
 
-                <View style={[styles.section, { paddingTop: 80 }]}>
+                <View style={[styles.section, { fontSize: 24, paddingTop: 80 }]}>
                     <View style={styles.content}>
                         <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
                             <View style={{ flex: 1 }}>
@@ -167,29 +167,29 @@ function Page(props) {
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ height: 'auto', justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', paddingRight: 100, fontSize: 24, flex: 2, backgroundColor: Theme.green_bg }} >
 
-                        <Text style={{ alignSelf: 'flex-end', paddingTop: 40, color: '#ffffff', flex: 1 }}>
+                        <Text style={{ fontSize: 24, alignSelf: 'flex-end', paddingTop: 40, color: '#ffffff', flex: 1 }}>
                             Support for these businesses will:
                         </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                        <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
                             <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help decrease the wealth gap
                         </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                        <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
                             <FontAwesome name="check" size={25} style={{ color: 'white' }} />Create more job opportunities
                         </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                        <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
                             <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help prevent further injustices
                         </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                        <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
                             <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help implement needed reform
                         </Text>
 
-                        <Text style={{ paddingLeft: 0, paddingRight: 10, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
+                        <Text style={{ fontSize: 24, paddingLeft: 0, paddingRight: 10, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
                             <FontAwesome name="check" size={25} style={{ color: 'white' }} />Ensure greater representation of
                         </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
+                        <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
                             people who will change outdated
                         </Text>
-                        <Text style={{ paddingRight: 158, alignContent: 'flexStart', alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
+                        <Text style={{ fontSize: 24, paddingRight: 158, alignContent: 'flexStart', alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
                             policies.
                         </Text>
                     </View>
@@ -208,17 +208,17 @@ function Page(props) {
                 </View>
 
                 <View style={dimensions.width < 700 ? {} : { backgroundColor: '#ffffff', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, width: 400 }}>
 
-                    </View>
-                    <View style={{ paddingTop: 50, alignContent: 'center', height: 200, width: 700, flex: 50 }}>
 
-                        <Text style={[styles.text_body, { paddingBottom: 30, alignSelf: 'center', textAlign: 'center', color: '#000' }]}>
+                        <View style={{ flexDirection: 'column', paddingBottom: 50, paddingTop: 50, justifyContent: 'center', alignContent: 'center' }}>
 
-                            We have a hard-working and <Text style={[styles.text_body, { fontWeight: "bold", color: '#000' }]}>growing team</Text> of volunteers to help provide this service with skills in writing, photography, and other professionl serices.  We will do our best to <Text style={[styles.text_body, { fontWeight: "bold", color: '#000' }]}>represent everyone in our list with high quality photography, videography and story-telling</Text> so everyone can enjoy discovering and learning more about businesses in their area.
+                            <Text style={[styles.text_body, { fontSize: 24, paddingRight: 50, paddingLeft: 50, alignSelf: 'center', textAlign: 'center', color: '#000' }]}>
+
+                                We have a hard-working and <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>growing team</Text> of volunteers to help provide this service with skills in writing, photography, and other professionl serices.  We will do our best to <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>represent everyone in our list with high quality photography, videography and story-telling</Text> so everyone can enjoy discovering and learning more about businesses in their area.
                             </Text>
 
-
+                        </View>
 
 
 
@@ -230,133 +230,95 @@ function Page(props) {
                     </View>
 
                 </View>
-                {/* ** */}
+                {/* *Begin Row 1* */}
                 <View style={{ flexDirection: 'row' }}>
-                    <View style={{ height: 'auto', justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', paddingRight: 100, fontSize: 24, flex: 2, backgroundColor: '#ffffff' }} >
+                    <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', flex: 2, backgroundColor: '#ffffff' }} >
+                        <Text style={[styles.text_header3, { paddingBottom: 30, paddingLeft: 80, fontSize: 36, fontWeight: "bold", color: '#006634' }]}>A PEEK BACK TO LOOK FORWARD</Text>
 
-                        <Text style={{ alignSelf: 'flex-end', paddingTop: 40, color: '#ffffff', flex: 1 }}>
-                            Support for these businesses will:
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help decrease the wealth gap
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Create more job opportunities
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help prevent further injustices
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help implement needed reform
-                        </Text>
+                        <Text style={[{ height: 'auto', fontSize: 24, color: '#000', paddingLeft: 80 }]}>
 
-                        <Text style={{ paddingLeft: 0, paddingRight: 10, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Ensure greater representation of
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            people who will change outdated
-                        </Text>
-                        <Text style={{ paddingRight: 158, alignContent: 'flexStart', alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            policies.
-                        </Text>
+                            From 1936 to 1964, in the midst of the Jim Crow era, black men and women were under the persistent threat of violence after sunset in the form of lynchings and other very real hate crimes. To help many escape this violence, Victor Green created the Negro Motorist Green Book.
+                            </Text>
+                        <Text style={[{ paddingBottom: 70, height: 'auto', fontSize: 24, color: '#000', paddingLeft: 80, paddingTop: 20 }]}>
+
+                            This book listed vital places of refuge during the segregation era that included hotels, gas stations, grocery stores, night clubs, restaurants, and "tourist homes" where homeowners welcomed travelers who had nowhere else to go.  This valuable note of history not only shows us the racial discrimination that existed, but also the importance and ingenuity of black entrepreneurship. Today we continue to push forward with black innovation and invite you to be a part of it.
+                            </Text>
+
                     </View>
 
 
 
-                    <View style={{ paddingTop: 50, paddingBottom: 30, height: "100%", width: "100%", flexDirection: 'column', flex: 2, backgroundColor: '#ffffff' }} >
+                    <View style={{ paddingBottom: 30, height: "100%", width: "100%", flexDirection: 'column', flex: 2, backgroundColor: '#ffffff' }} >
 
                         <ResponsiveImage
-                            style={{ height: 'auto', width: 400, aspectRatio: 1 }}
+                            style={{ height: 'auto', width: 410, aspectRatio: 1.3 }}
                             alt="Spicy Green Book"
-                            source={isWeb ? { uri: '/images/home_green_book.png' } : require('../public/images/home_green_book.png')}
+                            source={isWeb ? { uri: '/images/Capture Spicy Green Book dos.png' } : require('../public/images/Capture Spicy Green Book dos.png')}
                         />
                     </View>
 
                 </View>
+                {/* *End Row 1* */}
+                {/* * Begin Row 2* */}
                 <View style={{ flexDirection: 'row' }}>
-                    <View style={{ height: 'auto', justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', paddingRight: 100, fontSize: 24, flex: 2, backgroundColor: Theme.green_bg }} >
+                    <View style={{ paddingLeft: 82, paddingBottom: 30, height: "100%", width: "100%", flexDirection: 'column', flex: 2, backgroundColor: '#ffffff' }} >
 
-                        <Text style={{ alignSelf: 'flex-end', paddingTop: 40, color: Theme.green_bg, flex: 1 }}>
-                            Support for these businesses will:
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help decrease the wealth gap
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Create more job opportunities
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help prevent further injustices
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help implement needed reform
-                        </Text>
+                        <ResponsiveImage
+                            style={{ height: 'auto', width: 400, aspectRatio: 1.3 }}
+                            alt="Spicy Green Book"
+                            source={isWeb ? { uri: '/images/spicygreenbookphotorowdos.png' } : require('../public/images/spicygreenbookphotorowdos.png')}
 
-                        <Text style={{ paddingLeft: 0, paddingRight: 10, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Ensure greater representation of
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            people who will change outdated
-                        </Text>
-                        <Text style={{ paddingRight: 158, alignContent: 'flexStart', alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            policies.
-                        </Text>
+                        />
+                    </View>
+                    <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', flex: 2, backgroundColor: '#ffffff' }} >
+                        <Text style={[styles.text_header3, { paddingBottom: 30, fontSize: 36, fontWeight: "bold", color: '#006634' }]}>BLACK OWNED BUSINESS</Text>
+
+                        <Text style={[{ height: 'auto', fontSize: 24, color: '#000' }]}>
+
+                            Each business has a story and we at Spicy Green Book set out to share them. Getting these stories out will allow police and people of varying backgrounds to come experience the culture within each business. Through this process we will begin to humanize the black community and change the taught perspectives which far too often lead to unnecessary violence and systematic oppression.
+                            </Text>
+                        <Text style={[{ paddingBottom: 30, height: 'auto', fontSize: 24, color: '#000', paddingTop: 20 }]}>
+
+                            As perspectives change we will see an increase of people who begin to value the black life and decrease the number of people who engage in violent acts towards the black community. Here we can create a dialogue which allows the stereotypes that black men and women are threats to be disproven.
+                            </Text>
+
                     </View>
 
 
 
-                    <View style={{ height: "100%", width: "100%", flexDirection: 'column', flex: 2, backgroundColor: '#ffffff' }} >
+
+
+                </View>
+                {/* * End Row 2* */}
+                {/* * Begin Row 3* */}
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', flex: 2, backgroundColor: '#ffffff' }} >
+                        <Text style={[styles.text_header3, { paddingBottom: 30, paddingLeft: 80, fontSize: 36, fontWeight: "bold", color: '#006634' }]}>HOW WE ARE MAKING OUR LISTINGS DIFFERENT</Text>
+
+                        <Text style={[{ height: 'auto', fontSize: 24, color: '#000', paddingLeft: 80 }]}>
+
+                            Spicy Green Book is offering a space that allows these nationwide black owned businesses to amplify their voices. Spicy Green Book is hand curating content for each business so, every one is represented well and the image coincides with the owner's vision. Nothing is listed on the business's webpage that was not approved by the business owner.
+                            </Text>
+                        <Text style={[{ paddingBottom: 30, height: 'auto', fontSize: 24, color: '#000', paddingLeft: 80, paddingTop: 20 }]}>
+
+                            This way we can assure everything listed on the businesses web page is high quality and is brand consistent. Additionally, we are a nonprofit organization. Money donated will be repurposed back into the black community. Spicy Green Book will look to also make donations to causes that benefit the black community. Together we can contribute to the fight against racial inequality.
+                            </Text>
+
+                    </View>
+
+
+
+                    <View style={{ paddingBottom: 30, height: "100%", width: "100%", flexDirection: 'column', flex: 2, backgroundColor: '#ffffff' }} >
 
                         <ResponsiveImage
-                            style={{ height: 'auto', position: 'relative', top: 50, width: 400, aspectRatio: 1 }}
+                            style={{ height: 'auto', width: 400, aspectRatio: 1.3 }}
                             alt="Spicy Green Book"
-                            source={isWeb ? { uri: '/images/SpicyBookAboutUs.png' } : require('../public/images/SpicyBookAboutUs.png')}
+                            source={isWeb ? { uri: '/images/spicygreenbookphotorowtres.png' } : require('../public/images/spicygreenbookphotorowtres.png')}
                         />
                     </View>
 
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <View style={{ height: 'auto', justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-start', paddingRight: 100, fontSize: 24, flex: 2, backgroundColor: Theme.green_bg }} >
-
-                        <Text style={{ alignSelf: 'flex-end', paddingTop: 40, color: '#ffffff', flex: 1 }}>
-                            Support for these businesses will:
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help decrease the wealth gap
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Create more job opportunities
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help prevent further injustices
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Help implement needed reform
-                        </Text>
-
-                        <Text style={{ paddingLeft: 0, paddingRight: 10, alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            <FontAwesome name="check" size={25} style={{ color: 'white' }} />Ensure greater representation of
-                        </Text>
-                        <Text style={{ alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            people who will change outdated
-                        </Text>
-                        <Text style={{ paddingRight: 158, alignContent: 'flexStart', alignSelf: 'flex-end', color: '#ffffff', flex: .5 }}>
-                            policies.
-                        </Text>
-                    </View>
-
-
-
-                    <View style={{ height: "100%", width: "100%", flexDirection: 'column', flex: 2, backgroundColor: '#ffffff' }} >
-
-                        <ResponsiveImage
-                            style={{ height: 'auto', position: 'relative', top: 50, width: 400, aspectRatio: 1 }}
-                            alt="Spicy Green Book"
-                            source={isWeb ? { uri: '/images/SpicyBookAboutUs.png' } : require('../public/images/SpicyBookAboutUs.png')}
-                        />
-                    </View>
-
-                </View>
+                {/* * End Row 3* */}
 
 
             </View>
