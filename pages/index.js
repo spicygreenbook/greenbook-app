@@ -34,17 +34,17 @@ function App(props) {
 
 export async function getStaticProps(context) {
 
-    let listings = await getData({
-      type: 'listing'
-    });
-    let press = await getData({type: 'press'})
-    let updates = await getData({type: 'updates'})
+    let listings = await getData({type: 'listing'});
+    let press = await getData({type: 'press'});
+    let updates = await getData({type: 'updates'});
+    let testimonials = await getData({type: 'testimonial'});
 
     return {
         props: {
-            listings: listings,
-            press: press,
-            updates: updates,
+            listings,
+            press,
+            updates,
+            testimonials,
             url: '/'
         },
     };

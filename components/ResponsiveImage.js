@@ -34,12 +34,13 @@ export function ResponsiveImage(props) {
             if (props.cdn && props.source && props.source.uri && props.source.uri.indexOf('prismic-io.s3.amazonaws.com/spicygreenbook') > -1) {
                 setURI(props.source.uri + '?w=' + responsiveImageWidthCDN({containerWidth: w}));
             }
-        }}>
+        }} style={{position: 'relative'}}>
             <Image
                 { ...props }
                 { ...set }
                 style={{width: width, height: height}}
             />
+            {props.layerColor && <View style={{position: 'absolute', left: 0, top: 0, width: width, height: height, backgroundColor: props.layerColor}} />}
         </View>
 
     )

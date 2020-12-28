@@ -16,6 +16,7 @@ import Volunteers from '../screens/Volunteers';
 import Testimonials from '../screens/Testimonials';
 import Team from '../screens/Team';
 import Donate from '../screens/Donate';
+import Shop from '../screens/Shop';
 import NotFound from '../screens/NotFound';
 import List from '../screens/List';
 import Listing from '../screens/Listing';
@@ -78,11 +79,12 @@ function Main(props) {
                       : view === '/contact' ? <Contact {...props} />
                         : view === '/add' ? <AddListing {...props} />
                           : view === '/volunteer' ? <Volunteer {...props} />
-                            : view === '/donate' ? <Donate {...props} />
-                              : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
-                                : view.indexOf('/biz') === 0 ? <Listing {...props} />
-                                  : view === '/' ? <Home {...props} />
-                                    : <NotFound {...props} />
+                            : view === '/shop' ? <Shop {...props} />
+                              : view === '/donate' ? <Donate {...props} />
+                                : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
+                                  : view.indexOf('/biz') === 0 ? <Listing {...props} />
+                                    : view === '/' ? <Home {...props} />
+                                      : <NotFound {...props} />
       )
   }
 

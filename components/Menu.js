@@ -20,6 +20,9 @@ export default function(props) {
         title: 'Donate',
         href: '/donate'
     }, {
+        title: 'Store',
+        href: '/shop'
+    }, {
         title: 'Add Request',
         href: '/add'
     }, {

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
-import { getStyles, Theme, getData, GridWidth } from '../utils';
+import { getStyles, Theme, getData, getListingsByState, GridWidth } from '../utils';
 import { parseAddress } from '../utils/cityState';
 import { Entypo } from '@expo/vector-icons'; 
 import Search from "../components/Search";
@@ -14,6 +14,7 @@ import { Fontisto } from '@expo/vector-icons';
 import AppStoreIconBadge from '../public/app-store.svg';
 import GooglePlayIconBadge from '../public/google-play.svg';
 import CallToAction from './Home/CallToAction';
+import Testimonial from './Home/Testimonial';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -45,6 +46,10 @@ function Page(props) {
     const [ errorListings, setErrorListings ] = useState('');
     const [ Listings, setListings ] = useState(props.listings || []);
 
+    const [ loadingTestimonial, setLoadingTestimonial ] = useState(!props.testimonials);
+    const [ errorTestimonials, setErrorTestimonials ] = useState('');
+    const [ testimonials, setTestimonials ] = useState(props.testimonials || []);
+
     const responsiveStyles = StyleSheet.create(getStyles('middle_all, text_hero'));
 
     useEffect( () => {
@@ -61,7 +66,7 @@ function Page(props) {
                 setErrorPress('Failed to load latest press updates.');
             })
         } else {
-            console.log('press static is', props.press)
+            // console.log('press static is', props.press)
         }
 
         if (!props.updates) {
@@ -96,6 +101,19 @@ function Page(props) {
                 console.error(err);
                 setLoadingListings(false);
                 setErrorListings('Failed to load latest listings.');
+            })
+        }
+
+        if (!props.testimonials) {
+            getData({
+                type: 'testimonial'
+            }).then(testimonials => {
+                setLoadingTestimonial(false);
+                setTestimonials(testimonials)
+            }).catch(err => {
+                console.error(err);
+                setLoadingTestimonial(false);
+                setErrorTestimonials('Failed to load latest testimonial.');
             })
         }
     }, [])
@@ -143,6 +161,35 @@ function Page(props) {
                 </View>
             }
 
+            <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+                <View style={styles.content}>
+                    <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
+                            <ResponsiveImage
+                                style={{width: 804, resizeMode: 'contain', aspectRatio: 1.37245}}
+                                alt="Spicy Green Book"
+                                source={isWeb ? {uri: '/images/home_green_book.png'} : require('../public/images/home_green_book.png')}
+                            />
+                        </View>
+                        <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
+                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>ABOUT SGB</Text>
+                            <Text style={[styles.text_body, {color: '#000'}]}>
+                                Inspired by Victor Green, Spicy Green Book is a team of committed volunteers compiling a directory of 
+                                Black owned businesses and performing marketing services for these businesses free of charge. 
+                                We are establishing a space for people who seek to create change, and creating a platform for 
+                                them to invest in Black business owners in their communities.
+                            </Text>
+                            <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
+                                <View style={[styles.button_green, { marginTop: 40 }]} >    
+                                    <Text style={[styles.button_green_text]}>Learn More</Text>
+                                </View>
+                            </Link>
+                        </View>
+                    </View>
+                </View>
+            </View>
+
+            {/* About SGB */}
             <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 60, paddingBottom: 60}}>
                 <View style={{justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
                     {loadingPress ? (
@@ -166,33 +213,9 @@ function Page(props) {
                     }
                 </View>
             </View>
-            <View style={[styles.section, { paddingTop: 80 }]}>
-                <View style={styles.content}>
-                    <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
-                        <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
-                            <ResponsiveImage
-                                style={{width: 804, resizeMode: 'contain', aspectRatio: 1.37245}}
-                                alt="Spicy Green Book"
-                                source={isWeb ? {uri: '/images/home_green_book.png'} : require('../public/images/home_green_book.png')}
-                            />
-                        </View>
-                        <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
-                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>ABOUT SGB</Text>
-                            <Text style={[styles.text_body, {color: '#000'}]}>
-                                Inspired by Victor Green, Spicy Green Book is a team of committed volunteers compiling a directory of 
-                                Black owned businesses and performing marketing services for these businesses free of charge. 
-                                We are establishing a space for people who seek to create change, and creating a platform for 
-                                them to invest in Black business owners in their communities.
-                            </Text>
-                            <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
-                                    <View style={[styles.button_green, { marginTop: 40 }]} >    
-                                    <Text style={[styles.button_green_text]}>Learn More</Text>
-                                    </View>
-                            </Link>
-                        </View>
-                    </View>
-                </View>
-            </View>
+
+            {/* Divider */}
+            <View style={{ height: 5, backgroundColor: '#000' }} />
 
             <View style={{backgroundColor: '#000', position: 'relative'}}>
                 {loadingListings ? (
@@ -274,20 +297,29 @@ function Page(props) {
                 )}
             </View>
 
-            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: 80}]}>
-                <View style={[styles.content, {flex:1}]}>
-                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
+            {/* Map */}
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 60 }]}>
+                <View style={[styles.content, {flex:1}]}> 
+                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
                         WHERE WE'RE AT
                     </Text>
 
-                    <SGBMap style={{marginTop: -80}} listings={Listings} loadingListings={loadingListings} />
-
+                    <View style={{ alignSelf: 'flex-start' }}>
+                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>We are a growing community of</Text>
+                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30 }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
+                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
+                    </View>
+                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
             </View>
 
+            {/* Testimonials */}
+            <Testimonial testimonials={testimonials}  />
+            
             {/* Call to Action Section */}
             <CallToAction />
 
+            {/* Updates */}
             <View style={[styles.section, {flex:1, paddingTop: 0}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
@@ -385,6 +417,6 @@ function Page(props) {
     );
 }
 
-const styles = StyleSheet.create(getStyles('button_green, button_white, button_white_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer'));
+const styles = StyleSheet.create(getStyles('button_green, button_white, button_white_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_body3, text_quote, section, content, footer'));
 
 export default Page;
