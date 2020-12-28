@@ -131,7 +131,7 @@ function Page(props) {
 
     return (
         <>
-            {/* <View style={{height: 700, backgroundColor: '#000'}}>
+            <View style={{height: 700, backgroundColor: '#000'}}>
                 <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
                     <View style={[responsiveStyles.middle_all, { width: '100%', flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
@@ -159,9 +159,9 @@ function Page(props) {
                         <img style={{ height: 66 }} src={GooglePlayIconBadge} />
                     </Link>
                 </View>
-            } */}
+            }
 
-            {/* <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+            <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
                 <View style={styles.content}>
                     <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
                         <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
@@ -187,10 +187,10 @@ function Page(props) {
                         </View>
                     </View>
                 </View>
-            </View> */}
+            </View>
 
             {/* About SGB */}
-            {/* <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 60, paddingBottom: 60}}>
+            <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 60, paddingBottom: 60}}>
                 <View style={{justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
                     {loadingPress ? (
                         <ActivityIndicator color={Theme.green} size="large" />
@@ -212,12 +212,12 @@ function Page(props) {
                     )
                     }
                 </View>
-            </View> */}
+            </View>
 
             {/* Divider */}
             <View style={{ height: 5, backgroundColor: '#000' }} />
 
-            {/* <View style={{backgroundColor: '#000', position: 'relative'}}>
+            <View style={{backgroundColor: '#000', position: 'relative'}}>
                 {loadingListings ? (
                     <ActivityIndicator color={Theme.green} size="large" />
                 ) : errorListings ? (
@@ -295,10 +295,10 @@ function Page(props) {
                         </View>
                     </React.Fragment>
                 )}
-            </View> */}
+            </View>
 
             {/* Map */}
-            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 80}]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 60 }]}>
                 <View style={[styles.content, {flex:1}]}> 
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
                         WHERE WE'RE AT

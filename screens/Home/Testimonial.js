@@ -32,7 +32,7 @@ const Testimonial = ({ testimonials }) => {
   }
 
   return (
-    <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingBottom: 40}]}>
+    <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingBottom: 40, marginBottom: 40}]}>
       <View style={styles.content}>
         <View style={[{ position: 'absolute', zIndex: 99, paddingTop: isWeb ? 20 : 40, paddingLeft: 0 }]}>
           <Text style={[styles.text_header5, {color: '#000', fontSize: isWeb ? 28 : 22}]}>TESTIMONIALS</Text>
@@ -63,7 +63,7 @@ const Testimonial = ({ testimonials }) => {
                       <Image style={ isWeb ? {flex: 1, width: dimensions.width < 900 ? 280 : 380, height: dimensions.width < 900 ? 257 : 347 } : { width: 250, height: 227}} alt='Testimonial cover' source={isWeb ? '/images/testimonial.png' : require('../../public/images/testimonial.png')} />
                     </ImageBackground>
 
-                    <View style={{ flex: 1, flexDirection: isWeb ? dimensions.width < 900 ? 'column' : 'row' : 'column', paddingHorizontal: isWeb ? dimensions.width < 900 ? 0 : 28 : 0, alignSelf: 'flex-start', height: '100%' }}>
+                    <View style={{ flex: 1, flexDirection: isWeb ? dimensions.width < 900 ? 'column' : 'row' : 'column', paddingHorizontal: isWeb ? dimensions.width < 900 ? 0 : 28 : 0, alignSelf: 'stretch' }}>
                         <Fontisto name="quote-left" size={isWeb ? dimensions.width < 900 ? 24 : 32 : 18} style={{ marginBottom: isWeb ? dimensions.width < 900 ? 10 : 0 : 10 }} />
 
                         <View style={{ flex: 1, justifyContent: isWeb ? 'space-between' : 'space-around'}}>
