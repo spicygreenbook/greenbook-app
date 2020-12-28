@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import { getStyles, Theme, getData, getListingsByState, GridWidth } from '../utils';
@@ -305,9 +305,9 @@ function Page(props) {
                     </Text>
 
                     <View style={{ alignSelf: 'flex-start' }}>
-                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold', lineHeight: 36 }]}>We are a growing community of</Text>
-                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, lineHeight: isWeb ? 1 : 0, fontWeight: 'normal' }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
-                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold', lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, lineHeight: 1, fontWeight: 'normal' }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
+                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>We are a growing community of</Text>
+                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30 }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
+                        <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
                     </View>
                     <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
