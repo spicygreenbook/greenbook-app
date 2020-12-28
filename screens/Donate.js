@@ -6,6 +6,7 @@ import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
 import Stripe from "../components/Stripe";
+import { SubscriptionButton, DonateButton } from "../components/PayPal";
 
 
 function Page(props) {
@@ -43,6 +44,8 @@ function Page(props) {
                         <RichText render={content._body} isWeb={isWeb} />
                         {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/donate'} button={'button_green'} title="Go To Donation Form" />}
                     </View>
+                    <SubscriptionButton />
+                    <DonateButton />
                     {isWeb && <View style={styles.content}>
                         <Stripe form="donate" />
                     </View>}
