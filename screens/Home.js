@@ -129,6 +129,8 @@ function Page(props) {
         }
     }
 
+    console.log(getListingsByState(Listings));
+
     return (
         <>
             <View style={{height: 700, backgroundColor: '#000'}}>

@@ -38,6 +38,9 @@ export default function(props) {
         title: 'Team',
         href: '/team'
     }, {
+        title: 'Volunteers',
+        href: '/volunteers'
+    }, {
         title: 'Process',
         href: '/process'
     }, {

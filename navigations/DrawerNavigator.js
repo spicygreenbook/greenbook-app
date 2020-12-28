@@ -13,6 +13,7 @@ import Team from '../screens/Team';
 import Process from '../screens/Process';
 import Press from '../screens/Press';
 import Contact from '../screens/Contact';
+import Volunteers from '../screens/Volunteers';
 
 const Drawer = createDrawerNavigator();
 
@@ -37,6 +38,7 @@ const DrawerNavigator = () => (
     <Drawer.Screen name="About" component={WithScrollView(About)}  />
     <Drawer.Screen name="Updates" component={WithScrollView(Updates)}  />
     <Drawer.Screen name="Team" component={WithScrollView(Team)}  />
+    <Drawer.Screen name="Volunteers" component={WithScrollView(Volunteers)}  />
     <Drawer.Screen name="Process" component={WithScrollView(Process)}  />
     <Drawer.Screen name="Press" component={WithScrollView(Press)}  />
     <Drawer.Screen name="Contact" component={WithScrollView(Contact)}  />

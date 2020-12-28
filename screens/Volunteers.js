@@ -10,7 +10,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage"
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, text_header4, text_header5, section, content', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, text_header3, text_header4, text_header5, section, content', {isWeb}));
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
@@ -45,9 +45,20 @@ function Page(props) {
         }
     }, [])
 
-    let numColumns = dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 3
-
+    let numColumns = dimensions.width < 600 ? 1 : 2
     let hasBody = content.body && content.body.join('');
+
+    let stats = {
+        count: 0,
+        hours: 0,
+        dollars: 0
+    };
+    volunteers.forEach(volunteer => {
+        stats.count++;
+        stats.dollars += (volunteer.amount || 0);
+        stats.hours += volunteer.amount ? (volunteer.amount / 100) : 0
+    })
+    console.log('volunteers', volunteers);
 
     return (
         <React.Fragment>
@@ -57,84 +68,84 @@ function Page(props) {
             </View>
         : (
             <React.Fragment>
-                <PageTitle title={content.page_title} />
+                <PageTitle navigation={props.navigation} title={content.page_title} button={{
+                    title: 'Get Involved',
+                    href: '/volunteer',
+                    nav: 'Volunteer'
+                }}/>
                 {!!hasBody && <View style={[styles.section]}>
                     <View style={styles.content}>
                         <RichText render={content._body} isWeb={isWeb} />
                     </View>
                 </View>}
-                <View style={[styles.section]} nativeID="volunteersLinks">
-                    <View style={styles.content}>
-                        {loadingVolunteers ? (
-                            <ActivityIndicator color={Theme.green} size="large" />
-                        ) : errorVolunteers ? (
-                            <Text>{errorVolunteers}</Text>
-                        ) : (
-                            <FlatList
-                                key={'cols' + numColumns}
-                                data={volunteers}
-                                numColumns={numColumns}
-                                renderItem={({ item, index, separators }) => (
-                                    <View
-                                    style={{ flexDirection: "row" }}
-                                    key={'volunteers' + index}
-                                    style={{
-                                        flex: 1/numColumns,
-                                        margin: 10,
-                                        borderTopWidth: 2,
-                                        borderColor: Theme.green,
-                                        shadowColor: "#000",
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 3,
-                                        },
-                                        shadowOpacity: 0.27,
-                                        shadowRadius: 4.65,
-
-                                        elevation: 6,
-                                    }}
-                                    >
-                                        {item.image && item.image.url && (
-                                        <ResponsiveImage style={{
-                                        maxWidth: '100%',
-                                        width: item.image.width,
-                                        height: item.image.height
-                                        }}
-                                        source={{uri: item.image.url + '&w=600'}} />
-                                        )}
-
+                {loadingVolunteers ? (
+                    <ActivityIndicator color={Theme.green} size="large" />
+                ) : errorVolunteers ? (
+                    <Text>{errorVolunteers}</Text>
+                ) : (
+                    <React.Fragment>
+                        <View style={[styles.section, {backgroundColor: '#F2F2F2'}]}>
+                            <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', textAlign: 'center'}]}>
+                                <View>
+                                    <Text style={[styles.text_body, {fontSize: 40, fontWeight: 'bold', marginBottom: 10}]}>{stats.count}+</Text>
+                                    <Text>total volunteers</Text>
+                                </View>
+                                <View>
+                                    <Text style={[styles.text_body, {fontSize: 40, fontWeight: 'bold', marginBottom: 10}]}>{Math.round(stats.hours)}+</Text>
+                                    <Text>hours donated</Text>
+                                </View>
+                                <View>
+                                    <Text style={[styles.text_body, {fontSize: 40, fontWeight: 'bold', marginBottom: 10}]}>${(Math.round(stats.dollars/1000))}K+</Text>
+                                    <Text>in time volunteered</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={[styles.section]} nativeID="volunteersLinks">
+                            <View style={styles.content}>
+                                <FlatList
+                                    key={'cols' + numColumns}
+                                    data={volunteers}
+                                    numColumns={numColumns}
+                                    renderItem={({ item, index, separators }) => (
                                         <View
-                                            style={{
-                                                flex: 1,
-                                                padding: 20
-                                            }}
+                                        style={{ flexDirection: "row" }}
+                                        key={'volunteers' + index}
+                                        style={{
+                                            flex: 1/numColumns,
+                                            margin: 10,
+                                            elevation: 6,
+                                        }}
                                         >
-                                            <View>
-                                                <Text>{item.date}</Text>
-                                                <Text style={styles.text_header5}>{item.title}</Text>
-                                            </View>
-                
-                                            {!!item.action_text && !!item.link && (
-                                                <View style={{ marginTop: "auto" }}>
-                                                <Link href={item.link}>
+                                            <View style={{flexDirection: 'row'}}>
+                                                <View style={{flex: 1}}>
+                                                    {item.image && item.image.url && (
+                                                    <ResponsiveImage style={{
+                                                    maxWidth: '100%',
+                                                    width: item.image.width,
+                                                    height: item.image.height
+                                                    }}
+                                                    source={{uri: item.image.url + '&w=600'}} />
+                                                    )}
+                                                </View>
+                                                <View style={{flex: 2, paddingLeft: 20}}>
                                                     <View>
-                                                        <Text style={[styles.text_header4]}>{item.action_text} &gt;</Text>
+                                                        <Text style={styles.text_header4}>{item.name}</Text>
+                                                        <Text style={[styles.text_header4, {fontSize: 18, paddingBottom: 4, paddingTop: 4}]}>{item.role || ''}</Text>
+                                                        <View style={{maxHeight: 50, overflow: 'hidden'}}>
+                                                            <Text style={[styles.text_body]}>{item.description || ''} ...</Text>
+                                                        </View>
+                                                        {/*<Text style={[styles.text_body, {color: Theme.green, marginTop: 20}]}>See full bio</Text>*/}
                                                     </View>
-                                                </Link>
+                                                </View>
                                             </View>
-                                            )}
-
-                                            {!!(item.attribution && item.attribution.length) && (
-                                                <Attribution attribution={item.attribution} />
-                                            )}
                                         </View>
-                                    </View>
-                                )}
-                                keyExtractor={(item, index) => 'volunteers' + index}
-                            />
-                        )}
-                    </View>
-                </View>
+                                    )}
+                                    keyExtractor={(item, index) => 'volunteers' + index}
+                                />
+                            </View>
+                        </View>
+                    </React.Fragment>
+                )}
             </React.Fragment>
         )}
         </React.Fragment>
