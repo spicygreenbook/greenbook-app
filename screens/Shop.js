@@ -173,7 +173,7 @@ function Page(props) {
                 <ActivityIndicator color={Theme.green} size="large" />
             </View>
         : (
-            <React.Fragment>
+            <View>
                 <PageTitle title={"Shop Our Merch"} />
 {/*                <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
@@ -182,9 +182,11 @@ function Page(props) {
                     </View>
                 </View>
 */}
-                {isWeb && <View style={[styles.section]}>
+                {isWeb && <View style={[styles.section, {}]}>
                     <View style={styles.content}>
-                        <div id='collection-component-1609092145121'></div>
+                      <View>
+                        <div id='collection-component-1609176709023'></div>
+                      </View>
                     </View>
                 </View>}
                 {!isWeb && 
@@ -196,7 +198,7 @@ function Page(props) {
                         </Link>
                     </View>
                 }
-            </React.Fragment>
+            </View>
         )}
         </React.Fragment>
     )
