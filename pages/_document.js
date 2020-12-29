@@ -50,12 +50,6 @@ class CustomDocument extends Document {
                 `,
             }}
           />
-          <script
-            async
-            src={`https://www.paypal.com/sdk/js?client-id=Ae73Ynq2bKWliaxvDFIyhWD68XqFUewaCfojgCG3hcK6oWTj_4otZuQ-r0aAvSLM9gTMBUaamoRl5dry&vault=true&intent=subscription`}
-            data-sdk-integration-source={`button-factory`}
-          />
-          <script src={`/paypal.js`} />
         </body>
       </html>
     )

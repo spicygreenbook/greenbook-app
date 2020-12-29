@@ -1,59 +1,44 @@
 import React from "react";
 
-export const SubscriptionButton = () => {
-  return <div id={`paypal-sub-button-container`} />;
-};
-
 export const DonateButton = () => {
   return (
-    <div id="smart-button-container">
-      <div style={{textAlign: "center"}}>
-        <label htmlFor="description">Name </label>
-        <input
-          type="text"
-          name="descriptionInput"
-          id="description"
-          maxLength="127"
-          value=""
-        />
+    <>
+      <link href="/paypal.css" rel="stylesheet" />
+
+      <div className="flex-container">
+        <div className="align-right">
+          <img src="/images/paypal.png" className="paypal-img" />
+        </div>
+
+        <div className="col-1">
+          <form
+            action="https://www.paypal.com/donate"
+            method="post"
+            target="top"
+          >
+            <input
+              type="hidden"
+              name="hosted_button_id"
+              value="54M2WUMT6FTDU"
+            />
+            <input
+              type="image"
+              src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+              border="0"
+              name="submit"
+              title="PayPal - The safer, easier way to pay online!"
+              alt="Donate with PayPal button"
+            />
+            <img
+              alt=""
+              border="0"
+              src="https://www.paypal.com/en_US/i/scr/pixel.gif"
+              width="1"
+              height="1"
+            />
+          </form>
+        </div>
       </div>
-      <p
-        id="descriptionError"
-        style={{visibility: "hidden", color: "red", textAlign: "center"}}
-      >
-        Please enter a description
-      </p>
-      <div style={{textAlign: "center"}}>
-        <label htmlFor="amount">Amount </label>
-        <input name="amountInput" type="number" id="amount" value="" />
-        <span> USD</span>
-      </div>
-      <p
-        id="priceLabelError"
-        style={{visibility: "hidden", color: "red", textAlign: "center"}}
-      >
-        Please enter a price
-      </p>
-      <div id="invoiceidDiv" style={{textAlign: "center", display: "none"}}>
-        <label htmlFor="invoiceid"> </label>
-        <input
-          name="invoiceid"
-          maxLength="127"
-          type="text"
-          id="invoiceid"
-          value=""
-        />
-      </div>
-      <p
-        id="invoiceidError"
-        style={{visibility: "hidden", color: "red", textAlign: "center"}}
-      >
-        Please enter an Invoice ID
-      </p>
-      <div
-        style={{textAlign: "center", marginTop: "0.625rem"}}
-        id="paypal-button-container"
-      ></div>
-    </div>
+    </>
   );
 };
