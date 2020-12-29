@@ -52,7 +52,7 @@ function SGBMap(props) {
 							}
 
 							return (
-								<G style={{cursor:"pointer"}} key={state.id + 'fill'} onPress={e => {
+								<G style={{cursor:"pointe"}} key={state.id + 'fill'} onPress={e => {
 									if (mappedState) {
 										if(!isWeb) {
 											navigation.navigate('StateListing', { 
