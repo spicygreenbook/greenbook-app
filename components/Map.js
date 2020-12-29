@@ -21,7 +21,9 @@ export default function Map({
 	const [map, setMap] = useState();
 
 	useEffect(() => {
+		console.log('attempt map load...')
 		const onLoad = () => {
+			console.log('map loading...')
 			document.querySelector('#gmaps').setAttribute('data-ready', '1')
 			if (!window.google && !window.google.maps) {
 				setTimeout(onLoad, 100)
@@ -155,7 +157,7 @@ export default function Map({
 			style={{
 				height: '100%',
 				width: '100%',
-				height: mode === "d" ? `100vh` : "50vh",
+				height: mode === "d" ? `100vh` : 200,
 				margin: mode === "d" ? 0 : "20px 0",
 				borderRadius: mode === "d" ? 0 : 5,
 			}}

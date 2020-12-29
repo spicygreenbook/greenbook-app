@@ -5,6 +5,7 @@ import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
+import { ResponsiveImage } from "../components/ResponsiveImage";
 
 function Page(props) {
 
@@ -58,13 +59,15 @@ function Page(props) {
                 </View>
                 {isWeb && (<View style={[styles.section]}>
                     <View style={styles.content}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
-                            <Image
-                                style={{width: 350, height: 350, resizeMode: 'cover', display: dimensions.width < 1015 ? 'none' : 'flex' }}
-                                alt="Spicy Green Book"
-                                source='https://res.cloudinary.com/honeybook/image/upload/c_crop,f_auto,fl_lossy,h_1305,q_auto,w_2003,x_0,y_608/v1/companies/5f0282afa1f62a61eedd082a/cover/EETeaCo_MorganWhitneyPhotography-112_sh58eu'
-                            />
-                            <View style={{ flex: 1 }}>
+                        <View style={dimensions.width < 800 ? {} : { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+                            <View style={{flex: 1, paddingLeft: dimensions.width < 800 ? 0 : 20, paddingBottom: dimensions.width < 800 ? 40 : 0}}>
+                                <ResponsiveImage
+                                    style={{width: 1338, resizeMode: 'contain', aspectRatio: 873/1338}}
+                                    alt="Spicy Green Book"
+                                    source={{uri: 'https://res.cloudinary.com/honeybook/image/upload/c_crop,f_auto,fl_lossy,h_1305,q_auto,w_2003,x_0,y_608/v1/companies/5f0282afa1f62a61eedd082a/cover/EETeaCo_MorganWhitneyPhotography-112_sh58eu'}}
+                                />
+                            </View>
+                            <View style={{ flex: 2 }}>
                                 <CustomLink href="https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa" label="FILL OUT FORM" text="Are you ready? Let's fill out the request form!" />
                                 <CustomLink href="/donate" label="Donate" style={{ marginTop: 30 }} buttonStyle={{width: 173, borderWidth: 2, backgroundColor: '#fff', justifyContent: 'center'}} textStyle={{ color: Theme.green }} text="If you want to make a donation please click" />
                             </View>

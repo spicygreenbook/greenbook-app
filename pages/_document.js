@@ -20,6 +20,8 @@ class CustomDocument extends Document {
             <link rel="preconnect" href="https://www.google-analytics.com" />
             <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0"/>
             <link rel="manifest" href="site.webmanifest" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta property="twitter:domain" content="spicygreenbook.org" />
         </Head>
         <body>
           <Main />
@@ -46,7 +48,7 @@ class CustomDocument extends Document {
                 lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
               })();
-                `}} />
+           `}} />
         </body>
       </html>
     )

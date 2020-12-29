@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import getUserLocation from '../utils/getUserLocation';
 import { addRootClickHandler, removeRootClickHandler } from '../utils/rootClickHandler';
 import { useNavigation } from '@react-navigation/native';
+import { getSetSearchInfo } from '../utils/getData';
 
 const Search = ({
   city,
@@ -24,10 +25,11 @@ const Search = ({
       staticCityState = city + ', ' + state;
   }
 
-  const [query, setQuery] = useState(searchConfig.q || '');
-  const [near, setNear] = useState(staticCityState || searchConfig.near || '');
+  const [query, setQuery] = useState((searchConfig.q || '').replace(/\+/g, ' '));
+  const [near, setNear] = useState((staticCityState || searchConfig.near || '').replace(/\+/g, ' '));
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [loadingUserLocation, setLoadingUserLocation] = useState(false);
+  const [searchInfoCache, setSearchInfoCache] = useState();
 
   const small = dimensions.width < 900 || mode === 'results';
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
@@ -42,6 +44,7 @@ const Search = ({
       const location = await getUserLocation();
       submitSearch({ q: query, near: location.city });
     } catch (reason) {
+      setSearchInfoCache()
       alert('Could not get location data');
       setDropdownOpen(false);
       setLoadingUserLocation(false);
@@ -50,22 +53,48 @@ const Search = ({
   };
 
   useEffect(() => {
+    async function fetchSearchInfo() {
+      setSearchInfoCache(await getSetSearchInfo());
+    }
+    fetchSearchInfo()
     addRootClickHandler(onRootClick);
     return () => removeRootClickHandler(onRootClick);
   }, []);
+
+  useEffect(() => {
+    console.log('search info', searchInfoCache);
+    if (searchInfoCache && typeof searchInfoCache === 'object') {
+      if (!near && searchInfoCache.near) {
+        setNear(searchInfoCache.near);
+      } else if (searchInfoCache.city && searchInfoCache.state && !near) {
+        setNear(searchInfoCache.city + ', ' + searchInfoCache.state)
+      }
+      if (!query && searchInfoCache.q) {
+        setQuery(searchInfoCache.q);
+      }
+    }
+  }, [searchInfoCache])
 
   const submitSearch = (q) => {
 
     if(searchConfig.near === near && searchConfig.q === query) return;
 
+    if (q.near) {
+      q.near = q.near.replace(/\+/g, ' ')
+    }
     dispatch({ type: 'loading', value: true });
     dispatch({ type: 'searchConfig', value: q });
 
+    getSetSearchInfo({
+      q: q.q || '',
+      near: q.near || '',
+      city: searchInfoCache && searchInfoCache.city,
+      state: searchInfoCache && searchInfoCache.state
+    })
+
     if (isWeb) {
-      if(router.route !== '/search') {
-        const url = `/search?${new URLSearchParams(q).toString()}`;
-        router.push(url);
-      }
+      const url = `/search?${new URLSearchParams(q).toString()}`;
+      router.push(url);
       return;
     }
 

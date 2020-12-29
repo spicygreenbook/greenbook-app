@@ -30,7 +30,7 @@ const allStyles = {
     return {
       zIndex: 2,
       elevation: 2,
-      backgroundColor: theme.green_bg,
+      backgroundColor: '#000',
     };
   },
   body: function (config) {

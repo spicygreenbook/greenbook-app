@@ -10,7 +10,18 @@ import Spinner from '../components/Spinner';
 
 function Page({ listings, viewMode, city, state }) {
     
-    const [{ isWeb, dimensions, searchConfig, isLoading }, dispatch] = useStateValue();
+/*
+json output to console to convert to a table to act as an export for people that ask for all listing data
+    console.log(listings.map(row => {
+        Object.keys(row).forEach(key => {
+            if (key.substr(0,1) === '_') {
+                delete row[key]
+            }
+        })
+        delete row.images;
+        return row;
+    }))
+*/    const [{ isWeb, dimensions, searchConfig, isLoading }, dispatch] = useStateValue();
 
     let staticCityState = '';
     if (city && state) {
