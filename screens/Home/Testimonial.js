@@ -18,7 +18,7 @@ const Testimonial = ({ testimonials }) => {
   const navigation = !isWeb ? useNavigation() : null;
   const data = testimonials.filter(data => data?.image && data ); // render testimonial that has image only, for now
 
-  const deviceWidth = isWeb ? 1024 : dimensions.width - 40;
+  const deviceWidth = isWeb ? dimensions.width > 1083 ? 1024 : dimensions.width - 60 : dimensions.width - 40;
   const getItemLayout = (data, index) => ({ length: deviceWidth, offset: deviceWidth * index, index })
   
   const scrollToIndexListing = (obj, len) => {
