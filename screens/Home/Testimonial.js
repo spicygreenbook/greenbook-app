@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
 import { Entypo } from '@expo/vector-icons'; 
 import { useStateValue } from "../../components/State";
@@ -11,25 +11,43 @@ let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems }) => {
     currentIndexListing = viewableItems && viewableItems[0] && viewableItems[0].index;
 }
-const viewableItemsChangedConfigListing = {
-    itemVisiblePercentThreshold: 50
-};
 
 const Testimonial = ({ testimonials }) => {
+  let testimonialListRef = useRef(null)
   const [{ isWeb, dimensions }, dispatch] = useStateValue();
   const navigation = !isWeb ? useNavigation() : null;
   const data = testimonials.filter(data => data?.image && data ); // render testimonial that has image only, for now
 
-  let newListingRef;
+  const deviceWidth = isWeb ? dimensions.width > 1083 ? 1024 : dimensions.width - 60 : dimensions.width - 40;
+  const getItemLayout = (data, index) => ({ length: deviceWidth, offset: deviceWidth * index, index })
+  
   const scrollToIndexListing = (obj, len) => {
       if (obj.index < 0) { obj.index = 0; }
       if (obj.index > len-1) { obj.index = len-1; }
-      if (newListingRef) {
-          newListingRef.scrollToIndex(obj)
+      if (testimonialListRef.current) {
+          testimonialListRef.current.scrollToIndex(obj)
       } else {
           console.log('no listing ref')
       }
   }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      let i;
+      
+      if(currentIndexListing < data.length - 1) {
+        i = currentIndexListing + 1;
+      } else {
+        i = 0
+      }
+      
+      currentIndexListing = i;
+      testimonialListRef.current.scrollToIndex({ animated: true, index: i })
+    }, 5000)
+
+    return () => clearInterval(intervalId)
+  }, [data])
+  
 
   return (
     <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingBottom: 40, marginBottom: 40}]}>
@@ -42,9 +60,9 @@ const Testimonial = ({ testimonials }) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             data={data} 
-            ref={(ref) => { newListingRef = ref; }}
+            ref={testimonialListRef}
             onViewableItemsChanged={viewableItemsChangedListing}
-            viewabilityConfig={viewableItemsChangedConfigListing}
+            getItemLayout={getItemLayout}
             renderItem={({ item }) => {
                 const url = `/biz/${item.link.match(/[^/]*$/)}`;
 
