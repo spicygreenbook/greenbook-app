@@ -28,6 +28,7 @@ class CustomDocument extends Document {
           <NextScript />
             <link href="/site.css" rel="stylesheet" />
 
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=UA-168538359-1`}/>
           <script
             dangerouslySetInnerHTML={{
               __html: `
