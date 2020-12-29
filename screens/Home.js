@@ -316,7 +316,12 @@ function Page(props) {
             </View>
 
             {/* Testimonials */}
-            <Testimonial testimonials={testimonials}  />
+            {loadingTestimonial 
+                ? <ActivityIndicator color={Theme.green} size="large" />
+                : errorTestimonials 
+                    ? <Text>{errorTestimonials}</Text>
+                    : <Testimonial testimonials={testimonials}  />
+            }
             
             {/* Call to Action Section */}
             <CallToAction />
