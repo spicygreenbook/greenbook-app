@@ -64,7 +64,7 @@ const Testimonial = ({ testimonials }) => {
             onViewableItemsChanged={viewableItemsChangedListing}
             getItemLayout={getItemLayout}
             renderItem={({ item }) => {
-                const url = `/biz/${item.link.match(/[^/]*$/)}`;
+                const url = item && item.link && `/biz/${item.link.match(/[^/]*$/)}` || '';
 
                 return (
                   <View style={[{ 
@@ -91,7 +91,7 @@ const Testimonial = ({ testimonials }) => {
                             <Text style={{ color: '#fff', fontFamily: 'ApercuMedium', fontSize: 18 }}>{item.quote_credit}</Text>
                             <Text style={{ color: '#000', fontFamily: 'ApercuMedium', fontSize: 14, fontWeight: 'bold', marginBottom: 20 }}>{item.sub_title}</Text>
 
-                            <Link href={url} contain 
+                            {!!url && <Link href={url} contain 
                               onPress={() => {
                                 dispatch({type: 'setView', view: url});
                                 navigation.navigate('Browse', {screen: 'Listing'});
@@ -99,7 +99,7 @@ const Testimonial = ({ testimonials }) => {
                               <View style={[styles.button_green, { borderColor: '#fff', height: 40 }]} >    
                                   <Text style={[styles.button_green_text, { fontSize: isWeb ? 16 : 12 }]}>SEE LISTING</Text>
                               </View>
-                          </Link>
+                          </Link>}
                           </View>
                         </View>
                       </View>
