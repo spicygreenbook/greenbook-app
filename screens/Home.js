@@ -129,7 +129,7 @@ function Page(props) {
         }
     }
 
-    console.log(getListingsByState(Listings));
+    //console.log(getListingsByState(Listings));
 
     return (
         <>
