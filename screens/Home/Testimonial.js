@@ -64,7 +64,10 @@ const Testimonial = ({ testimonials }) => {
             onViewableItemsChanged={viewableItemsChangedListing}
             getItemLayout={getItemLayout}
             renderItem={({ item }) => {
-                const url = item && item.link && `/biz/${item.link.match(/[^/]*$/)}` || '';
+                if (item.link && item.link.indexOf('http') !== 0) {
+                  item.link = 'http://' + item.link
+                }
+                console.log('testominal item', item)
 
                 return (
                   <View style={[{ 
@@ -91,13 +94,9 @@ const Testimonial = ({ testimonials }) => {
                             <Text style={{ color: '#fff', fontFamily: 'ApercuMedium', fontSize: 18 }}>{item.quote_credit}</Text>
                             <Text style={{ color: '#000', fontFamily: 'ApercuMedium', fontSize: 14, fontWeight: 'bold', marginBottom: 20 }}>{item.sub_title}</Text>
 
-                            {!!url && <Link href={url} contain 
-                              onPress={() => {
-                                dispatch({type: 'setView', view: url});
-                                navigation.navigate('Browse', {screen: 'Listing'});
-                              }} >
+                            {!!item.link && <Link href={item.link} contain>
                               <View style={[styles.button_green, { borderColor: '#fff', height: 40 }]} >    
-                                  <Text style={[styles.button_green_text, { fontSize: isWeb ? 16 : 12 }]}>SEE LISTING</Text>
+                                  <Text style={[styles.button_green_text, { fontSize: isWeb ? 16 : 12}]}>{item.link_text || 'SEE LISTING'}</Text>
                               </View>
                           </Link>}
                           </View>
