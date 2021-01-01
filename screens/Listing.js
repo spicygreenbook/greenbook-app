@@ -11,7 +11,7 @@ import Attribution from "../components/Attribution";
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
 import Spinner from '../components/Spinner';
-
+import get from 'lodash/get';
 
 function Page(props) {
 
@@ -90,18 +90,18 @@ function Page(props) {
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>
-                            <Image source={{uri: primaryImages[0].url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602}} resizeMode="cover" />
+                            <Image source={{uri: get(primaryImages, '0.url') + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602}} resizeMode="cover" />
                         </TouchableOpacity>
                     </View>
                     <View style={{flex: 1}}>
                         <View style={{flex: 1, borderBottomWidth: 2, borderColor: '#fff'}}>
                             <TouchableOpacity onPress={e => clickImage(1)}>
-                                <Image source={{uri: primaryImages[1].url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
+                                <Image source={{uri: get(primaryImages, '1.url') + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                             </TouchableOpacity>
                         </View>
                         <View style={{flex: 1}}>
                             <TouchableOpacity onPress={e => clickImage(2)}>
-                                <Image source={{uri: primaryImages[2].url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
+                                <Image source={{uri: get(primaryImages, '2.url') + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                             </TouchableOpacity>
                         </View>
                     </View>
