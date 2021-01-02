@@ -19,7 +19,7 @@ export default function(props) {
                         <Link href="/about"><Text style={styles.text_footer}>About</Text></Link>
                         <Link href="/add"><Text style={styles.text_footer}>Add Listing</Text></Link>
                         <Link href="/donate"><Text style={styles.text_footer}>Donate</Text></Link>
-                        <Link href="/shop"><Text style={styles.text_footer}>Store</Text></Link>
+                        <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_footer}>Store</Text></Link>
                         <Link href="/volunteer"><Text style={styles.text_footer}>Volunteer</Text></Link>
                         <Link href="/https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf" target="_blank"><Text style={styles.text_footer}>Press Kit</Text></Link>
                     </View>
