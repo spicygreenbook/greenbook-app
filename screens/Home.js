@@ -320,7 +320,7 @@ function Page(props) {
                 ? <ActivityIndicator color={Theme.green} size="large" />
                 : errorTestimonials 
                     ? <Text>{errorTestimonials}</Text>
-                    : <Testimonial testimonials={testimonials}  />
+                    : <Testimonial testimonials={testimonials.filter(x => x.type !== "Volunteer")}  />
             }
             
             {/* Call to Action Section */}
