@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useStateValue } from './State';
-import fetch from 'isomorphic-unfetch'
+import fetch from 'isomorphic-unfetch';
 
 export default () => {
   const [{ dimensions }] = useStateValue();
@@ -9,33 +9,33 @@ export default () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  // TODO: Implement the API
-  const onSubmit = () => {
-    setStatus({
-      status: null,
-      error: null,
-      loading: true, 
-    });
-    fetch('/api/subscribe', {
-      body: JSON.stringify({ name, email })
-    }).then(res => res.json())
-      .then(() => {
-        setStatus({ ...status, success: true })
-      }).catch(e => {
-        setStatus({ error: e.message })
-      }).finally(() => {
-        setStatus({ ...status, loading: false  })
-      })
+  const onSubmit = async () => {
+    try {
+      setStatus({ ...status, loading: true, error: null });
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ email, name }),
+      });
+      if (!response.ok) {
+        const { error } = await response.json();
+        setStatus({ ...status, loading: false, error });
+      } else {
+        setStatus({ success: true, error: null, loading: false });
+      }
+    } catch (e) {
+      setStatus({ ...status, loading: false, error: 'Unknown Error' });
+    }
   };
 
-  const { error } = status;
+  const { error, success } = status;
 
   return (
     <View style={styles.wrapper}>
       <Text style={styles.header}>
           {'Subscribe to get our newsletter'.toUpperCase()}
       </Text>
-      <View style={[styles.inner, dimensions.width > 980 ? { flexDirection: 'row' } : { flexDirection: 'column' }]}>
+      {!success && (
+        <View style={[styles.inner, dimensions.width > 980 ? { flexDirection: 'row' } : { flexDirection: 'column' }]}>
           <TextInput
               style={styles.input}
               placeholder="Enter Full Name"
@@ -48,14 +48,18 @@ export default () => {
               onChangeText={e => setEmail(e)}
               value={email}
           />
-          <TouchableOpacity onPress={onSubmit} style={styles.btn}>
+          <TouchableOpacity disabled={status.loading} onPress={onSubmit} style={styles.btn}>
               <Text style={styles.btnLabel}>
                   {`Subscribe`.toUpperCase()}
               </Text>
           </TouchableOpacity>
       </View>
+      )}
       {error && (<Text style={styles.errorMsg}>
         {error}
+      </Text>)}
+      {success && (<Text style={styles.successMsg}>
+        Thanks for subscribing!
       </Text>)}
     </View>
   );
@@ -104,6 +108,12 @@ const styles = StyleSheet.create({
   },
   errorMsg: {
     color: '#dc3545',
+    opacity: .9,
+    paddingTop: 12,
+    paddingLeft: 12,
+  },
+  successMsg: {
+    color: '#006233',
     opacity: .9,
     paddingTop: 12,
     paddingLeft: 12,
