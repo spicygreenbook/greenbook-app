@@ -12,7 +12,7 @@ import { DonateButton } from "../components/PayPal";
 function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-    const styles = StyleSheet.create(getStyles('text_header2, section, content, button_green, button_green_text', {isWeb}));
+    const styles = StyleSheet.create(getStyles('text_header2, text_header3, section, content, button_green, button_green_text, text_body', {isWeb}));
     //console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
@@ -41,7 +41,55 @@ function Page(props) {
                 <PageTitle title={content.page_title} />
                 <View style={[styles.section]}>
                     <View style={styles.content}>
-                        <RichText render={content._body} isWeb={isWeb} />
+                        <View style={dimensions.width < 900 ? {paddingTop: 40} : {paddingTop: 0}}>
+                            <Text style={styles.text_body}>
+                                As a donor and active volunteer, your role cannot be overstated. Spicy Green Book is a nonprofit organization that relies on volunteers and donations to continuously spark change in Black communities. More than just a donation, we welcome you to make an <Text style={{fontWeight: 'bold'}}>investment</Text>. An investment that will work to help a marginalized people. All contributions are put directly towards the upkeep and expansion of Spicy Green Book. Your contribution is will be used to directly aid our mission in abolishing social injustice, by providing promotional services to small businesses, or by aiding expansion into Black communities around the nation.  Encourage your networks to also support the mission of Spicy Green Book.
+                            </Text>
+                        </View>
+
+                        <View style={{paddingTop: 40}}>
+                            <Text style={styles.text_header3}>
+                                Transparency
+                            </Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.text_body}>
+                                Transparency is fundamental to our organization's purpose and success. It is important to us that our donors know exactly how we work to create change within their communities. We do not charge the businesses to be listed on Spicy Green Book. We are grateful for the support of our dedicated donors. Our work would not be possible without you. Your contributions will go to the upkeep of the site, and addition of new resources and events. 
+                                Spicy Green Book is a legally incorporated nonprofit organization pending our 501(c)(3) status.
+                            </Text>
+                        </View>
+
+                        <View style={{paddingTop: 40}}>
+                            <Text style={styles.text_header3}>
+                                How Do I Donate?
+                            </Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.text_body}>
+                                Thank you for wanting to help support the growth of Spicy Green Book in helping our community. We are currently accepting donations and there are a few ways you can do that. To donate to our mission you may:
+
+                                1. Fill out the form at the bottom of the page
+                                2. Donate via Cash App: $spicygreenbook 
+                                3. Donate via PayPal with the donate button below
+                            </Text>
+                        </View>
+
+                         <View style={{paddingTop: 40}}>
+                            <Text style={styles.text_header3}>
+                                I Want to Continue to Support the Growth of Spicy Green Book
+                            </Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.text_body}>
+                                That is great news! For just as little as $5.00/month you can help sponsor the growth of Spicy Green Book. Spicy Green Book combines your monthly support with the support of other sponsors — creating a "ripple effect" of positive change and funding long term community development. Hit the donate button below where you can pick the recurring donation of your choice. 
+                            </Text>
+                        </View>
+
+
+                        {/* <RichText render={content._body} isWeb={isWeb} /> */}
                         {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/donate'} button={'button_green'} title="Go To Donation Form" />}
                     </View>
                     {isWeb && <View style={styles.content}>
