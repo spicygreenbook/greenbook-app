@@ -235,7 +235,7 @@ function Page(props) {
             </View>
 
             {/* Shop link */}
-            <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', position: 'relative', height: 350, backgroundColor: Theme.green_bg }}>
+            <View style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexDirection: 'row', position: 'relative', height: 350, backgroundColor: Theme.green_bg }}>
                 <Image source={require('../public/images/ShopNowBanner.jpg')} style={{ position: 'absolute', left: 0, height: 350, width: 1240 }} />
                 <View style={[styles.content, { display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40, paddingBottom: 40, paddingLeft: 20, paddingRight: 20 }]}>
                     <View style={{ display: 'flex', flexDirection: 'column' }}>
