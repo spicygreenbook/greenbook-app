@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Linking} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Linking, SectionList} from 'react-native';
 import { Link } from "../components/Link"; 
 import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
 import Stripe from "../components/Stripe";
-import { DonateButton } from "../components/PayPal";
+import { PayPalButton, CashAppButton, DonateButtons } from "../components/DonateButtons";
+import { FlatList } from 'react-native-gesture-handler';
 
 
 function Page(props) {
@@ -69,20 +70,38 @@ function Page(props) {
                         <View>
                             <Text style={styles.text_body}>
                                 Thank you for wanting to help support the growth of Spicy Green Book in helping our community. We are currently accepting donations and there are a few ways you can do that. To donate to our mission you may:
-
-                                1. Fill out the form at the bottom of the page
-                                2. Donate via Cash App: $spicygreenbook 
-                                3. Donate via PayPal with the donate button below
+                                {isWeb &&
+                                    <Text>
+                                        {"\n"}
+                                        {"\n"}1.  Fill out the form at the bottom of the page
+                                        {"\n"}2. Donate via PayPal with the donate button below
+                                        {"\n"}3. Donate via Cash App with the button below
+                                    </Text>
+                                }
                             </Text>
                         </View>
 
-                         <View style={{paddingTop: 40}}>
+                        {isWeb ? (
+                            <View style={styles.content}>
+                                <DonateButtons />
+                            </View>
+                            ) : (       
+                            <View style={[styles.section]}>
+                                <Link href="https://spicygreenbook.org/donate" contain onPress={() => Linking.openURL('https://spicygreenbook.org/donate')} >
+                                    <View style={[styles.button_green, { marginTop: 40 }]} >    
+                                    <Text style={[styles.button_green_text]}>Go To Online Donation Form</Text>
+                                </View>
+                                </Link>
+                            </View>
+                        )}
+
+                         <View>
                             <Text style={styles.text_header3}>
                                 I Want to Continue to Support the Growth of Spicy Green Book
                             </Text>
                         </View>
 
-                        <View>
+                        <View style={{paddingBottom: 40}}>
                             <Text style={styles.text_body}>
                                 That is great news! For just as little as $5.00/month you can help sponsor the growth of Spicy Green Book. Spicy Green Book combines your monthly support with the support of other sponsors — creating a "ripple effect" of positive change and funding long term community development. Hit the donate button below where you can pick the recurring donation of your choice. 
                             </Text>
@@ -93,7 +112,7 @@ function Page(props) {
                         {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/donate'} button={'button_green'} title="Go To Donation Form" />}
                     </View>
                     {isWeb && <View style={styles.content}>
-                        <DonateButton />
+                        <PayPalButton />
                         <Stripe form="donate" />
                     </View>}
                     {!isWeb && 
