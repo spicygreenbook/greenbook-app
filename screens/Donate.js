@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Linking, SectionList} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Linking, SectionList, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
@@ -49,36 +49,48 @@ function Page(props) {
                         </View>
 
                         <View style={{paddingTop: 40}}>
-                            <Text style={styles.text_header3}>
-                                Transparency
-                            </Text>
-                        </View>
-
-                        <View>
-                            <Text style={styles.text_body}>
-                                Transparency is fundamental to our organization's purpose and success. It is important to us that our donors know exactly how we work to create change within their communities. We do not charge the businesses to be listed on Spicy Green Book. We are grateful for the support of our dedicated donors. Our work would not be possible without you. Your contributions will go to the upkeep of the site, and addition of new resources and events. 
-                                Spicy Green Book is a legally incorporated nonprofit organization pending our 501(c)(3) status.
-                            </Text>
+                            <View style={ isWeb ?  dimensions.width < 900 ? { flexDirection: 'column-reverse', flexGrow: 1 } : { flexDirection: 'row' } : { flexDirection: 'column-reverse' } }>
+                                <View style={ isWeb ? dimensions.width < 900 ? { width: '99%', paddingTop: 60 } : { width: '70%', paddingRight: 20 } : { paddingTop: 60 } }>
+                                    <Text style={styles.text_header3}>
+                                        Transparency
+                                    </Text>
+                                    <Text style={styles.text_body}>
+                                        Transparency is fundamental to our organization's purpose and success. It is important to us that our donors know exactly how we work to create change within their communities. We do not charge the businesses to be listed on Spicy Green Book. We are grateful for the support of our dedicated donors. Our work would not be possible without you. Your contributions will go to the upkeep of the site, and addition of new resources and events. 
+                                        Spicy Green Book is a legally incorporated nonprofit organization pending our 501(c)(3) status.
+                                    </Text>
+                                </View>
+                                <Image
+                                    style={{ width: dimensions.width < 900 ? '100%' : 300, resizeMode: 'contain' }}
+                                    alt="Spicy Green Book"
+                                    source={isWeb ? { uri: '/images/search.png' } : require('../public/images/search.png')}
+                                />
+                            </View>
                         </View>
 
                         <View style={{paddingTop: 40}}>
-                            <Text style={styles.text_header3}>
-                                How Do I Donate?
-                            </Text>
-                        </View>
-
-                        <View>
-                            <Text style={styles.text_body}>
-                                Thank you for wanting to help support the growth of Spicy Green Book in helping our community. We are currently accepting donations and there are a few ways you can do that. To donate to our mission you may:
-                                {isWeb &&
-                                    <Text>
-                                        {"\n"}
-                                        {"\n"}1.  Fill out the form at the bottom of the page
-                                        {"\n"}2. Donate via PayPal with the donate button below
-                                        {"\n"}3. Donate via Cash App with the button below
+                            <View style={ isWeb ?  dimensions.width < 900 ? { flexDirection: 'column' } : { flexDirection: 'row' } : { flexDirection: 'column' } }>
+                                <Image
+                                    style={{ width: dimensions.width < 900 ? '100%' : 300, resizeMode: 'contain' }}
+                                    alt="Spicy Green Book"
+                                    source={isWeb ? { uri: '/images/donate.png' } : require('../public/images/donate.png')}
+                                />
+                                <View style={ isWeb ? dimensions.width < 900 ? { width: '99%', paddingTop: 60 } : { width: '70%', paddingLeft: 20 } : { paddingTop: 60 } }>
+                                    <Text style={styles.text_header3}>
+                                        How Do I Donate?
                                     </Text>
-                                }
-                            </Text>
+                                    <Text style={styles.text_body}>
+                                        Thank you for wanting to help support the growth of Spicy Green Book in helping our community. We are currently accepting donations and there are a few ways you can do that. To donate to our mission you may:
+                                        {isWeb &&
+                                            <Text>
+                                                {"\n"}
+                                                {"\n"}1.  Fill out the form at the bottom of the page
+                                                {"\n"}2. Donate via PayPal with the donate button below
+                                                {"\n"}3. Donate via Cash App with the button below
+                                            </Text>
+                                        }
+                                    </Text>
+                                </View>
+                            </View>
                         </View>
 
                         {isWeb ? (
