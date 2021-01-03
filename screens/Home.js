@@ -234,6 +234,26 @@ function Page(props) {
                 </View>
             </View>
 
+            {/* Shop link */}
+            <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', position: 'relative', height: 350, backgroundColor: Theme.green_bg }}>
+                <Image source={require('../public/images/ShopNowBanner.jpg')} style={{ position: 'absolute', left: 0, height: 350, width: 1240 }} />
+                <View style={[styles.content, { display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40, paddingBottom: 40, paddingLeft: 20, paddingRight: 20 }]}>
+                    <View style={{ display: 'flex', flexDirection: 'column' }}>
+                        <View style={{ flex: 1 }}>
+                            <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
+                                Visit Our{"\n"}
+                                Store
+                            </Text>
+                        </View>
+                        <Link href="https://shop.spicygreenbook.org">
+                            <View style={[styles.button_green, { borderColor: '#fff' }]} >
+                                <Text style={[styles.button_green_text, { textAlign: 'center' }]}>Shop Now</Text>
+                            </View>
+                        </Link>
+                    </View>
+                </View>
+            </View>
+
             {/* Testimonials */}
             {loadingTestimonial 
                 ? <ActivityIndicator color={Theme.green} size="large" />
