@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 24,
       paddingLeft: 12,
-      fontWeight: 700,
+      fontWeight: "700",
       paddingBottom: 24,
   },
   inner: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
       border: 2,
       borderStyle: 'solid',
       borderColor: '#006233',
-      fontWeight: 700,
+      fontWeight: "700",
   },
   errorMsg: {
     color: '#dc3545',
