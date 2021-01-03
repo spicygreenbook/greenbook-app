@@ -1,8 +1,8 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
 
 mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY = '24e36889d4acd29a905b32132e320051-us10',
-  server: process.env.MAILCHIMP_SERVER_PREFIX = 'us10',
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_SERVER_PREFIX,
 });
 
 const LIST_ID = "e09a86d809";
