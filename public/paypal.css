@@ -1,29 +1,29 @@
 .flex-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding-top: 30px;
 }
 
-.paypal-img {
+.paypal-logo {
     width: 40%;
 }
 
-.col-1 {
-    flex-grow: 1;
+.paypal-img {
+    height: 4rem;
 }
 
-.align-right {
-    text-align: right;
+form {
+    display: inline-block;
+    align-self: center;
 }
-
 
 @media all and (max-width: 800px) {
-    .align-right {
-        text-align: center;
-    }
-
     .flex-container {
         flex-direction: column;
+    }
+
+    .paypal-img {
+        height: 3rem;
     }
 }
