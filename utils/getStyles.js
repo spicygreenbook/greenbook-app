@@ -106,6 +106,7 @@ const allStyles = {
       fontSize: config.windowWidth < 600 ? 12 : 18,
       textTransform: "uppercase",
       color: "#fff",
+      padding: 24,
     };
   },
   text_header: function (config) {
