@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   btnLabel: {
       color: '#fff',
-      border: 2,
+      borderWidth: 2,
       borderStyle: 'solid',
       borderColor: '#006233',
       fontWeight: "700",
