@@ -11,7 +11,7 @@ const LINKS = [
     { url: '/about', label: 'About' },
     { url: '/add', label: 'Add Listing' },
     { url: '/donate', label: 'Donate' },
-    { url: '/shop', label: 'Store' },
+    { url: 'https://shop.spicygreenbook.org', label: 'Store' },
     { url: '/volunteer', label: 'Volunteer' },
     { url: 'https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf', label: 'Press Kit' }
 ];
