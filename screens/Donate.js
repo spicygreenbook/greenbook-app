@@ -100,7 +100,7 @@ function Page(props) {
                             ) : (       
                             <View style={[styles.section]}>
                                 <Link href="https://spicygreenbook.org/donate" contain onPress={() => Linking.openURL('https://spicygreenbook.org/donate')} >
-                                    <View style={[styles.button_green, { marginTop: 40 }]} >    
+                                    <View style={[styles.button_green, { marginTop: 65 }]} >    
                                     <Text style={[styles.button_green_text]}>Go To Online Donation Form</Text>
                                 </View>
                                 </Link>
