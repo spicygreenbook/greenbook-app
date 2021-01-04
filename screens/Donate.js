@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, Linking, SectionList, Image} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator, Linking, Image} from 'react-native';
 import { Link } from "../components/Link"; 
 import { PageTitle } from "../components/PageTitle"; 
-import { RichText } from "../components/RichText"; 
+// import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent } from '../utils';
 import Stripe from "../components/Stripe";
-import { PayPalButton, CashAppButton, DonateButtons } from "../components/DonateButtons";
-import { FlatList } from 'react-native-gesture-handler';
+import { PayPalButton, DonateButtons } from "../components/DonateButtons";
 
 
 function Page(props) {
