@@ -26,4 +26,8 @@ form {
     .paypal-img {
         height: 3rem;
     }
+
+    .paypal-logo {
+        height: 100%;
+    }
 }
