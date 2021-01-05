@@ -199,7 +199,7 @@ function Page(props) {
                     <View style={{ flex: 1, width: 400, shadowOpacity: 0.4, shadowRadius: 10, backgroundColor: '#fff', maxWidth: '80%'}}>
                         <View style={{ flexDirection: 'column', paddingBottom: 50, paddingTop: 50, justifyContent: 'center', alignContent: 'center' }}>
                             <Text style={[styles.text_body, { fontSize: 24, paddingRight: 50, paddingLeft: 50, alignSelf: 'center', textAlign: 'center', color: '#000' }]}>
-                                We have a hard-working and <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>growing team</Text> of volunteers to help provide this service with skills in writing, photography, and other professionl serices.  We will do our best to <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>represent everyone in our list with high quality photography, videography and story-telling</Text> so everyone can enjoy discovering and learning more about businesses in their area.
+                                We have a hard-working and <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>growing team</Text> of volunteers to help provide this service with skills in writing, photography, and other professional services.  We will do our best to <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>represent everyone in our list with high quality photography, videography and story-telling</Text> so everyone can enjoy discovering and learning more about businesses in their area.
                             </Text>
                         </View>
                     </View>
@@ -238,10 +238,7 @@ function Page(props) {
                             <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
                                 <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>BLACK OWNED BUSINESS</Text>
                                 <Text style={[styles.text_body, {color: '#000'}]}>
-                                    Each business has a story and we at Spicy Green Book set out to share them. Getting these stories out will allow police and people of varying backgrounds to come experience the culture within each business. Through this process we will begin to humanize the black community and change the taught perspectives which far too often lead to unnecessary violence and systematic oppression.
-                                    <Text style={{paddingTop: 20}}>
-                                        As perspectives change we will see an increase of people who begin to value the black life and decrease the number of people who engage in violent acts towards the black community. Here we can create a dialogue which allows the stereotypes that black men and women are threats to be disproven.
-                                    </Text>
+                                    Each business has a story and we at Spicy Green Book set out to share them. Getting these stories out will allow police and people of varying backgrounds to come experience the culture within each business. Through this process we will begin to humanize the black community and change the taught perspectives which far too often lead to unnecessary violence and systematic oppression. As perspectives change we will see an increase of people who begin to value the black life and decrease the number of people who engage in violent acts towards the black community. Here we can create a dialogue which allows the stereotypes that black men and women are threats to be disproven.
                                 </Text>
                             </View>
                         </View>
