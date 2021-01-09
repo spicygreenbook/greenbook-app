@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
@@ -15,6 +15,7 @@ import AppStoreIconBadge from '../public/app-store.svg';
 import GooglePlayIconBadge from '../public/google-play.svg';
 import CallToAction from './Home/CallToAction';
 import Testimonial from './Home/Testimonial';
+import useFetchData from '../hooks/useFetchData';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -30,93 +31,13 @@ function Page(props) {
 
     const [{ isWeb, dimensions }, dispatch] = useStateValue();
 
-    const [ loadingPress, setLoadingPress ] = useState(!props.press);
-    const [ errorPress, setErrorPress ] = useState('');
-    const [ press, setPress ] = useState(props.press || []);
-
-    const [ loadingUpdates, setLoadingUpdates ] = useState(!props.updates);
-    const [ errorUpdates, setErrorUpdates ] = useState('');
-    const [ updates, setUpdates ] = useState(props.updates || []);
-
-    const [ loadingInstagram, setLoadingInstagram ] = useState(true);
-    const [ errorInstagram, setErrorInstagram ] = useState('');
-    const [ instagram, setInstagram ] = useState([]);
-
-    const [ loadingListings, setLoadingListings ] = useState(!props.listings);
-    const [ errorListings, setErrorListings ] = useState('');
-    const [ Listings, setListings ] = useState(props.listings || []);
-
-    const [ loadingTestimonial, setLoadingTestimonial ] = useState(!props.testimonials);
-    const [ errorTestimonials, setErrorTestimonials ] = useState('');
-    const [ testimonials, setTestimonials ] = useState(props.testimonials || []);
+    const [instagram, loadingInstagram, errorInstagram] = useFetchData(() => getInstagram());
+    const [updates, loadingUpdates, errorUpdates] = useFetchData('updates', props.updates);
+    const [press, loadingPress, errorPress] = useFetchData('press', props.press);
+    const [Listings, loadingListings, errorListings] = useFetchData('listing', props.listings);
+    const [testimonials, loadingTestimonial, errorTestimonials] = useFetchData('testimonial', props.testimonials);
 
     const responsiveStyles = StyleSheet.create(getStyles('middle_all, text_hero'));
-
-    useEffect( () => {
-
-        if (!props.press) {
-            getData({
-                type: 'press'
-            }).then(press => {
-                setLoadingPress(false);
-                setPress(press)
-            }).catch(err => {
-                console.error(err);
-                setLoadingPress(false);
-                setErrorPress('Failed to load latest press updates.');
-            })
-        } else {
-            // console.log('press static is', props.press)
-        }
-
-        if (!props.updates) {
-            getData({
-                type: 'updates'
-            }).then(updates => {
-                setLoadingUpdates(false);
-                setUpdates(updates)
-            }).catch(err => {
-                console.error(err);
-                setLoadingUpdates(false);
-                setErrorUpdates('Failed to load latest updates.');
-            })
-        }
-
-        getInstagram().then(instagram => {
-            setLoadingInstagram(false);
-            setInstagram(instagram)
-        }).catch(err => {
-            console.error(err);
-            setLoadingInstagram(false);
-            setErrorInstagram('Failed to load latest instagram.');
-        })
-
-        if (!props.listings) {
-            getData({
-                type: 'listing'
-            }).then(listings => {
-                setLoadingListings(false);
-                setListings(listings)
-            }).catch(err => {
-                console.error(err);
-                setLoadingListings(false);
-                setErrorListings('Failed to load latest listings.');
-            })
-        }
-
-        if (!props.testimonials) {
-            getData({
-                type: 'testimonial'
-            }).then(testimonials => {
-                setLoadingTestimonial(false);
-                setTestimonials(testimonials)
-            }).catch(err => {
-                console.error(err);
-                setLoadingTestimonial(false);
-                setErrorTestimonials('Failed to load latest testimonial.');
-            })
-        }
-    }, [])
 
     let newListingRef;
     const scrollToIndexListing = (obj, len) => {
@@ -128,8 +49,6 @@ function Page(props) {
             console.log('no listing ref')
         }
     }
-
-    //console.log(getListingsByState(Listings));
 
     return (
         <>
@@ -312,6 +231,26 @@ function Page(props) {
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
                     </View>
                     <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
+                </View>
+            </View>
+
+            {/* Shop link */}
+            <View style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexDirection: 'row', position: 'relative', height: 350, backgroundColor: Theme.green_bg }}>
+                <Image source={require('../public/images/ShopNowBanner.jpg')} style={{ position: 'absolute', left: 0, height: 350, width: 1240 }} />
+                <View style={[styles.content, { display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40, paddingBottom: 40, paddingLeft: 20, paddingRight: 20 }]}>
+                    <View style={{ display: 'flex', flexDirection: 'column' }}>
+                        <View style={{ flex: 1 }}>
+                            <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
+                                Visit Our{"\n"}
+                                Store
+                            </Text>
+                        </View>
+                        <Link href="https://shop.spicygreenbook.org">
+                            <View style={[styles.button_green, { borderColor: '#fff' }]} >
+                                <Text style={[styles.button_green_text, { textAlign: 'center' }]}>Shop Now</Text>
+                            </View>
+                        </Link>
+                    </View>
                 </View>
             </View>
 

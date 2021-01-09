@@ -106,6 +106,7 @@ const allStyles = {
       fontSize: config.windowWidth < 600 ? 12 : 18,
       textTransform: "uppercase",
       color: "#fff",
+      padding: 24,
     };
   },
   text_header: function (config) {
@@ -164,8 +165,8 @@ const allStyles = {
   text_body: function (config) {
     return {
       fontFamily: "ApercuMedium",
-      fontSize: config.windowWidth < 900 ? 20 : 24,
-      lineHeight: config.windowWidth < 900 ? 20 : 32,
+      fontSize: config.windowWidth < 900 ? 18 : 20,
+      lineHeight: config.windowWidth < 900 ? 18 : 28,
       color: "#606060",
     };
   },
