@@ -132,6 +132,7 @@ export default function (props) {
                                 }} onPress={() => setActive(!active)}>     
                                     <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>    
                                     <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
+                                    <Link href="/volunteers"><Text style={styles.text_nav_sub}>Volunteers</Text></Link>
                                     <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>       
                                     <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>              
                                     <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_nav_sub}>Store</Text></Link>              
