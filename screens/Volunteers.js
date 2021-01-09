@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, Image} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, Image, TouchableOpacity} from 'react-native';
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle"; 
 import { RichText } from "../components/RichText"; 
 import { getStyles, Theme, getContent, getData } from '../utils';
 import { ResponsiveImage } from "../components/ResponsiveImage"
+import VolunteerModal from "../components/VolunteerModal";
 
 function Page(props) {
 
@@ -18,6 +19,13 @@ function Page(props) {
     const [ loadingVolunteers, setLoadingVolunteers ] = useState(!props.volunteers);
     const [ errorVolunteers, setErrorVolunteers ] = useState('');
     const [ volunteers, setVolunteers ] = useState(props.volunteers || []);
+
+    const [ modalOpen, setModalOpen ] = useState(false);
+    const [ modalData, setModalData ] = useState({});
+
+    function closeModal() {
+        setModalOpen(false);
+    }
 
     if (!props.content) {
         useEffect(() => {
@@ -83,7 +91,8 @@ function Page(props) {
                 ) : errorVolunteers ? (
                     <Text>{errorVolunteers}</Text>
                 ) : (
-                    <React.Fragment>
+                    <View>
+                        <VolunteerModal open={modalOpen} data={modalData} close={closeModal} isWeb={isWeb} />
                         <View style={[styles.section, {backgroundColor: '#F2F2F2'}]}>
                             <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', textAlign: 'center'}]}>
                                 <View>
@@ -116,35 +125,37 @@ function Page(props) {
                                             elevation: 6,
                                         }}
                                         >
-                                            <View style={{flexDirection: 'row'}}>
-                                                <View style={{flex: 1}}>
-                                                    {item.image && item.image.url && (
-                                                    <ResponsiveImage style={{
-                                                    maxWidth: '100%',
-                                                    width: item.image.width,
-                                                    height: item.image.height
-                                                    }}
-                                                    source={{uri: item.image.url + '&w=600'}} />
-                                                    )}
-                                                </View>
-                                                <View style={{flex: 2, paddingLeft: 20}}>
-                                                    <View>
-                                                        <Text style={styles.text_header4}>{item.name}</Text>
-                                                        <Text style={[styles.text_header4, {fontSize: 18, paddingBottom: 4, paddingTop: 4}]}>{item.role || ''}</Text>
-                                                        <View style={{maxHeight: 50, overflow: 'hidden'}}>
-                                                            <Text style={[styles.text_body]}>{item.description || ''} ...</Text>
+                                            <TouchableOpacity onPress={e => { setModalData(item); setModalOpen(true);}}>
+                                                <View style={{flexDirection: 'row'}}>
+                                                    <View style={{flex: 1}}>
+                                                        {item.image && item.image.url && (
+                                                        <ResponsiveImage style={{
+                                                        maxWidth: '100%',
+                                                        width: item.image.width,
+                                                        height: item.image.height
+                                                        }}
+                                                        source={{uri: item.image.url + '&w=600'}} />
+                                                        )}
+                                                    </View>
+                                                    <View style={{flex: 2, paddingLeft: 20}}>
+                                                        <View>
+                                                            <Text style={styles.text_header4}>{item.name}</Text>
+                                                            <Text style={[styles.text_header4, {fontSize: 18, paddingBottom: 4, paddingTop: 4}]}>{item.role || ''}</Text>
+                                                            <View style={{maxHeight: 50, overflow: 'hidden'}}>
+                                                                <Text style={[styles.text_body]}>{item.description || ''} ...</Text>
+                                                            </View>
+                                                            {/*<Text style={[styles.text_body, {color: Theme.green, marginTop: 20}]}>See full bio</Text>*/}
                                                         </View>
-                                                        {/*<Text style={[styles.text_body, {color: Theme.green, marginTop: 20}]}>See full bio</Text>*/}
                                                     </View>
                                                 </View>
-                                            </View>
+                                            </TouchableOpacity>
                                         </View>
                                     )}
                                     keyExtractor={(item, index) => 'volunteers' + index}
                                 />
                             </View>
                         </View>
-                    </React.Fragment>
+                    </View>
                 )}
             </React.Fragment>
         )}
