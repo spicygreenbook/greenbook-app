@@ -47,6 +47,9 @@ export default function(props) {
         title: 'Press',
         href: '/press'
     }, {
+        title: 'FAQ',
+        href: '/faq'
+    }, {
         title: 'Contact',
         href: '/contact'
     }];

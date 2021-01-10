@@ -121,7 +121,7 @@ const allStyles = {
   text_header2: function (config) {
     return {
       fontFamily: "KnockoutBold",
-      fontSize: config.windowWidth < 900 ? 40 : 75,
+      fontSize: config.windowWidth < 900 ? 40 : 72,
       lineHeight: config.windowWidth < 900 ? 42 : 66,
       textTransform: "uppercase",
       color: "#006233",

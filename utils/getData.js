@@ -352,6 +352,8 @@ export async function getData(config) {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.press.date%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'volunteers') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.volunteers.date_started%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
+    } else if (config.type === 'faq') {
+        url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.faq.order%20desc%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'testimonial') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'roles') {

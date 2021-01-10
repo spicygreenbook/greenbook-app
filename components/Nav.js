@@ -149,6 +149,7 @@ export default function (props) {
                                     <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>       
                                     <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>              
                                     <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_nav_sub}>Store</Text></Link>              
+                                    <Link href="/faq"><Text style={styles.text_nav_sub}>FAQ</Text></Link>                           
                                     <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>                           
                                 </div>
                             </View>
