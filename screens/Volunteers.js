@@ -57,9 +57,9 @@ function Page(props) {
     let hasBody = content.body && content.body.join('');
 
     let stats = {
-        count: 0,
-        hours: 0,
-        dollars: 0
+        count: 200,
+        hours: 10000,
+        dollars: 700000
     };
     volunteers.forEach(volunteer => {
         stats.count++;
