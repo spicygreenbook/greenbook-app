@@ -17,11 +17,11 @@ function App(props) {
             <title>Spicy Green Book</title>
             <meta
               name="description"
-              content="Spicy Green Book is a team of volunteers committed to help complie a directory of black owned businesses"
+              content="Spicy Green Book is a team of volunteers committed to help compile a directory of black owned businesses"
               key="description"
             />
             <meta name="og:description"
-              content="Spicy Green Book is a team of volunteers committed to help complie a directory of black owned businesses"
+              content="Spicy Green Book is a team of volunteers committed to help compile a directory of black owned businesses"
               key="og:description"
             />
             <meta property="og:title" content={"Spicy Green Book"} key="title" />
