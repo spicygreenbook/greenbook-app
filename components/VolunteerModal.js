@@ -91,7 +91,7 @@ export default function App(props) {
               <Text style={styles.text_body2}>${data.amount} in time volunteered</Text>
             </View>}
 
-            {data.links && data.links.length > 1 && <View style={{flexDirection: 'row', marginTop: 20}}>
+            {data.links && data.links.length > 0 && <View style={{flexDirection: 'row', marginTop: 20}}>
               {data.links.map(link => (
                   <View style={{flexDirection: 'row', alignItems: 'center', marginRight: 20}}>
                       <Link href={link.link}>
