@@ -68,6 +68,8 @@ function Page(props) {
     })
     console.log('volunteers', volunteers);
 
+    let shuffledVolunteers = volunteers.sort( () => Math.random() - 0.5 );
+
     return (
         <React.Fragment>
         { pageLoading ?
@@ -113,7 +115,7 @@ function Page(props) {
                             <View style={styles.content}>
                                 <FlatList
                                     key={'cols' + numColumns}
-                                    data={volunteers}
+                                    data={shuffledVolunteers}
                                     numColumns={numColumns}
                                     renderItem={({ item, index, separators }) => (
                                         <View
