@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useStateValue } from "../components/State";
 import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import { getStyles, Theme, getData } from '../utils';
@@ -30,6 +30,8 @@ json output to console to convert to a table to act as an export for people that
 
     const [data, setData] = useState(listings || []); // This data is for all platforms to search to. In native listings is null
     const [filteredList, setFilteredList] = useState(listings || []);
+    const [geoCoords, setGeoCoords] = useState();
+    const [sortOption, setSortingOption] = useState("distance");
 
     const updateData = async () => {
         let toSearch = searchSeries(fixSearch(searchConfig.q));
@@ -41,16 +43,23 @@ json output to console to convert to a table to act as an export for people that
                 const geoUrl = isWeb ? '/api/geocode?query=' : 'https://spicygreenbook.org/api/geocode?query=';
                 const res = await fetch(geoUrl + searchConfig.near);
                 const geo = await res.json();
-                newListings = findListings(data, geo.coords, toSearch);
+                setGeoCoords(geo.coords);
+                newListings = findListings(data, geo.coords, toSearch, sortOption);
             } catch (err) {
                 console.error(err)
             }
         } else {
-            newListings = findListings(data, false, toSearch);
+            newListings = findListings(data, false, toSearch, sortOption);
         }  
 
         setFilteredList(newListings);
         dispatch({ type: 'loading', value: false });
+    };
+
+    //Handler for Search component select option
+    const handleSortChange = (sort) => {
+        dispatch({type: 'loading', value: true});
+        setSortingOption(sort);
     };
 
     // Check and initialized data for native platforms
@@ -86,12 +95,28 @@ json output to console to convert to a table to act as an export for people that
         updateData();
     }, [searchConfig]);
 
+    const isMount = useRef(true);
+    //When sort option is changed
+    useEffect(() => {
+        //Skip first render
+        if(isMount.current) {
+            isMount.current = false;
+            return;
+        }
+        let sortedListings = null;
+        let toSearch = searchSeries(fixSearch(searchConfig.q));
+        sortedListings = findListings(data, geoCoords, toSearch, sortOption);
+        setFilteredList(sortedListings);
+        dispatch({type: 'loading', value: false});
+    }, [sortOption]);
+        
+
     const HeaderList = () => (
         <View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
             </Text>
-            {!viewMode && <Search mode="results" city={city} state={state}/> }
+            {!viewMode && <Search mode="results" city={city} state={state} sortOption={sortOption} handleSortChange={handleSortChange}/> }
          </View>
     )
 
