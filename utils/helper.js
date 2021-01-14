@@ -190,7 +190,13 @@ function searchRank(processedSearchTerms, row) {
     return searchRank;
 }
 
-export function findListings (listings, geoLocation, keywords) {
+function ascendingSortSearch(a,b) {
+    if(a.uid < b.uid) return -1;
+    if(a.uid > b.uid) return 1;
+    return 0;
+}
+
+export function findListings (listings, geoLocation, keywords, sort) {
     const filter = (row) => {
         var go = true;
         if (keywords.words.length) {
@@ -221,5 +227,21 @@ export function findListings (listings, geoLocation, keywords) {
         return go;
       };
 
-    return listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+      let sortedArray = [];
+
+      switch(sort.toLowerCase()) {
+        case "relevance":
+            sortedArray = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+            break;
+        case "asc":
+            sortedArray = listings.filter(filter).sort(ascendingSortSearch);
+            break;
+        case "desc":
+            sortedArray = listings.filter(filter).sort(ascendingSortSearch).reverse();
+            break;
+        default:
+            sortedArray = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+      }
+    return sortedArray;
+
 };
