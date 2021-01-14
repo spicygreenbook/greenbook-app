@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useStateValue } from "../components/State";
-import { Text, StyleSheet, ActivityIndicator, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, ActivityIndicator, View, TextInput, TouchableOpacity, Picker} from 'react-native';
 import { getStyles, Theme } from '../utils';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'next/router';
@@ -13,6 +13,8 @@ const Search = ({
   city,
   state,
   mode,
+  handleSortChange,
+  sortOption,
   includeUseLocationOption = false
 }) => {
   const [{ isWeb, dimensions, searchConfig }, dispatch] = useStateValue();
@@ -32,6 +34,8 @@ const Search = ({
   const [searchInfoCache, setSearchInfoCache] = useState();
 
   const small = dimensions.width < 900 || mode === 'results';
+  const smallSize = dimensions.width < 900;
+  const tablet = dimensions.width < 1400;
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
 
   const onRootClick = useCallback((e) => {
@@ -108,17 +112,19 @@ const Search = ({
 
   const searchForm = (
     <View style={{
-      flexDirection: 'row',
+      flexDirection: mode === 'results' ? 'column' : 'row',
       justifyContent: 'center',
+      width: '100%',
       minHeight: includeUseLocationOption ? 140 : 0,
     }}>
       <View
         onStartShouldSetResponder={() => true}
-        style={{ flex: 1, maxWidth: 840 }}>
+        style={{ flex: 1, flexDirection: 'row', alignItems: 'center', maxWidth: mode === 'results' ? '100%' : 840}}>
         <View style={{
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
+          flex: small || mode !== 'results' ? 1 : tablet ? 0.75 : 0.70,
           borderWidth: mode === 'results' ? 1 : 0,
           borderColor: Theme.green,
           backgroundColor: '#fff',
@@ -180,6 +186,27 @@ const Search = ({
             {isWeb && <div style={{ width: 0, height: 0, overflow: 'hidden' }}><input type="submit" /></div>}
           </View>
         </View>
+        {smallSize ? null : (
+          <View style={{
+            display: mode === 'results' ? '' : 'none',
+            flex: tablet ? 0.25 : 0.30,
+            flexDirection: tablet ? 'column' : 'row',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Text style={[styles.text_body, {color: Theme.green, fontWeight: 'bold', flex: 1, marginLeft: 10, marginRight: 5}]}>Sort By:</Text>
+            <View style={{flex: 1}}>
+              <Picker
+                selectedValue={sortOption}
+                onValueChange={value => {handleSortChange(value)}}
+              >
+                <Picker.Item label="Relevance" value="relevance" />
+                <Picker.Item label="A-Z" value="asc" />
+                <Picker.Item label="Z-A" value="desc" />
+              </Picker>
+            </View>
+          </View>
+        )}
         {(includeUseLocationOption && dropdownOpen && !near) ? (
           <View style={{
             flexDirection: 'row',
@@ -228,6 +255,28 @@ const Search = ({
           </View>
         ) : null}
       </View>
+      {smallSize ? (
+        <View style={{
+          display: mode === 'results' ? 'flex' : 'none',
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 10
+        }}>
+          <Text style={[styles.text_body, {color: Theme.green, fontWeight: 'bold', flex: 1, marginLeft: 10, marginRight: 10}]}>Sort By:</Text>
+          <View style={{flex: 1}}>
+            <Picker
+              selectedValue={sortOption}
+              onValueChange={value => {handleSortChange(value)}}
+            >
+              <Picker.Item label="Relevance" value="relevance"/>
+              <Picker.Item label="A-Z" value="asc"/>
+              <Picker.Item label="Z-A" value="desc"/>
+            </Picker>
+          </View>
+        </View>
+      ) : null}
     </View> 
   );
 
