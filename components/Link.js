@@ -4,7 +4,7 @@ import { useStateValue } from "../components/State";
 import { TouchableOpacity, Linking } from 'react-native';
 
 export const Link = ({href = '', as = '', children, ...props}) => {
-    const [{ isWeb }] = useStateValue();
+    const [{ isWeb, dimensions }] = useStateValue();
     let webProps = isWeb && props.download ? {download: props.download} : {};
     let more = props.fill ? {height: '100%'} : 
                props.contain ? isWeb ? { width: 'fit-content' } : { alignSelf: 'flex-start'} : {}
@@ -17,7 +17,7 @@ export const Link = ({href = '', as = '', children, ...props}) => {
 
     return isWeb 
         ? <NextLink href={href} as={as} prefetch={false}>
-                <a target={external ? '_blank' : ''} {...webProps} style={{ textDecoration: 'none', ...more}}>
+                <a target={external ? '_blank' : ''} {...webProps} style={{ textDecoration: 'none', marginBottom: dimensions.width < 980 ? 5 : 0, ...more}}>
                     {children}
                 </a>
            </NextLink>
