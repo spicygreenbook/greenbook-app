@@ -109,7 +109,8 @@ export default function App(props) {
               styles.modalView,
               {
                 top: isWeb ? 120 : 0,
-                width: "100%"
+                width: "100%",
+                height: isWeb ? "100%" : null
               }
             ]}
           >
