@@ -3,6 +3,7 @@ import { useStateValue } from "../components/State";
 import {
   Alert,
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -30,7 +31,6 @@ export default function App(props) {
     },
     modalView: {
       backgroundColor: "white",
-      // padding: 20,
       alignItems: "flex-start",
       shadowColor: "#000",
       shadowOffset: {
@@ -59,7 +59,7 @@ export default function App(props) {
           opacity: open ? 1 : 0,
           pointerEvents: open ? "" : "none",
           position: "fixed",
-          top: 100,
+          top: 0,
           bottom: 0,
           left: 0,
           right: 0,
@@ -73,7 +73,12 @@ export default function App(props) {
         }}
       >
         <View
-          style={{ width: 500, maxWidth: "100%", margin: "0 auto" }}
+          style={{
+            width: isWeb ? 500 : "100%",
+            maxWidth: "100%",
+            height: "100%",
+            margin: "0 auto"
+          }}
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -99,11 +104,18 @@ export default function App(props) {
         style={{ borderColor: "transparent" }}
       >
         <View style={[styles.centeredView, isWeb ? { width: "100%" } : {}]}>
-          <View style={styles.modalView}>
+          <ScrollView
+            contentContainerStyle={[
+              styles.modalView,
+              {
+                top: isWeb ? 120 : 0,
+                width: "100%"
+              }
+            ]}
+          >
             <View
               style={{
-                minWidth: "100%",
-                top: !isWeb ? 100 : null
+                width: "100%"
               }}
             >
               {data.image && data.image.url && (
@@ -271,13 +283,33 @@ export default function App(props) {
                     </View>
                   </View>
                 )}
+                <View
+                  style={{
+                    position: "relative",
+                    bottom: isWeb ? -20 : 0,
+                    alignSelf: "center",
+                    padding: 30,
+                    minWidth: 200,
+                    minHeight: "150%"
+                  }}
+                >
+                  <Button
+                    onPress={close}
+                    title="Close"
+                    color={Theme.green}
+                    style={[styles.button_green, { fontSize: 40 }]}
+                    accessibilityLabel="Close the pop-up screen with volunteer details"
+                  />
+                </View>
               </View>
 
               <View
                 style={{
                   position: "absolute",
-                  top: !isWeb ? 50 : 0,
-                  right: 0
+                  top: 0,
+                  right: 0,
+                  minWidth: 40,
+                  minHeight: 40
                 }}
               >
                 <Button
@@ -288,7 +320,7 @@ export default function App(props) {
                 />
               </View>
             </View>
-          </View>
+          </ScrollView>
         </View>
       </Modal>
     </WebWrapper>
