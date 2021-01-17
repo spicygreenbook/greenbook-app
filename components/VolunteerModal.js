@@ -103,32 +103,46 @@ export default function App(props) {
         }}
         style={{ borderColor: "transparent" }}
       >
-        <View style={[styles.centeredView, isWeb ? { width: "100%" } : {}]}>
+        <View
+          style={[
+            styles.centeredView,
+            isWeb
+              ? {
+                  flex: 1,
+                  width: "100%",
+                  height: "100%"
+                }
+              : {}
+          ]}
+        >
           <ScrollView
             contentContainerStyle={[
               styles.modalView,
               {
                 top: isWeb ? 120 : 0,
                 width: "100%",
-                height: isWeb ? "100%" : null
+                height: "100%",
+                minHeight: dimensions.height - 120
               }
             ]}
           >
             <View
               style={{
-                width: "100%"
+                width: "100%",
+                maxWidth: dimensions.width,
+                height: "100%"
               }}
             >
               {data.image && data.image.url && (
                 <ResponsiveImage
                   style={{
-                    minWidth: dimensions.width,
-                    width: data.image.width,
-                    height: data.image.height
+                    width: dimensions.width,
+                    height: 300
                   }}
                   source={{ uri: data.image.url + "&w=600" }}
                 />
               )}
+
               <View
                 style={{
                   marginHorizontal: 10
@@ -137,12 +151,15 @@ export default function App(props) {
                 <View>
                   <Text style={styles.text_header3}>{data.name}</Text>
                 </View>
+
                 <View>
                   <Text style={styles.text_header4}>{data.role}</Text>
                 </View>
+
                 <View style={styles.volunteerDetailItem}>
                   <Text style={styles.text_body2}>{data.description}</Text>
                 </View>
+
                 {!!data._date_started && (
                   <View style={styles.volunteerDetailItem}>
                     {!!isWeb ? (
@@ -166,6 +183,7 @@ export default function App(props) {
                     )}
                   </View>
                 )}
+
                 {!!data.amount && (
                   <View style={styles.volunteerDetailItem}>
                     <Text style={styles.text_body2}>
@@ -175,7 +193,13 @@ export default function App(props) {
                 )}
 
                 {data.links && data.links.length > 0 && (
-                  <View style={{ flexDirection: "row", marginTop: 20 }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      marginTop: 20
+                    }}
+                  >
                     {data.links.map((link) => (
                       <View
                         style={{
@@ -244,6 +268,18 @@ export default function App(props) {
                                   style={{ marginRight: 10 }}
                                 />
                               )}
+                            {link &&
+                              link.link_title &&
+                              link.link_title
+                                .toLowerCase()
+                                .indexOf("facebook") > -1 && (
+                                <FontAwesome
+                                  name="facebook"
+                                  size={16}
+                                  color="#B56230"
+                                  style={{ marginRight: 10 }}
+                                />
+                              )}
 
                             {isWeb ? link.link_title : " " + link.link_title}
                           </Text>
@@ -284,24 +320,25 @@ export default function App(props) {
                     </View>
                   </View>
                 )}
-                <View
-                  style={{
-                    position: "relative",
-                    bottom: isWeb ? -20 : 0,
-                    alignSelf: "center",
-                    padding: 30,
-                    minWidth: 200,
-                    minHeight: "150%"
-                  }}
-                >
-                  <Button
-                    onPress={close}
-                    title="Close"
-                    color={Theme.green}
-                    style={[styles.button_green, { fontSize: 40 }]}
-                    accessibilityLabel="Close the pop-up screen with volunteer details"
-                  />
-                </View>
+              </View>
+
+              <View
+                style={{
+                  // position: "relative",
+                  // bottom: isWeb ? -20 : 0,
+                  alignSelf: "center",
+                  padding: 30,
+                  minWidth: 200,
+                  minHeight: "100%"
+                }}
+              >
+                <Button
+                  onPress={close}
+                  title="Close"
+                  color={Theme.green}
+                  style={[styles.button_green, { fontSize: 40 }]}
+                  accessibilityLabel="Close the pop-up screen with volunteer details"
+                />
               </View>
 
               <View

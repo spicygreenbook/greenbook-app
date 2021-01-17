@@ -130,7 +130,7 @@ function Page(props) {
                     styles.content,
                     {
                       flexDirection: "row",
-                      justifyContent: "space-between",
+                      justifyContent: isWeb ? "space-evenly" : "space-between",
                       alignItems: "center",
                       textAlign: "center",
                       marginTop: 20
@@ -140,35 +140,65 @@ function Page(props) {
                   <View>
                     <Text
                       style={
-                        ([styles.text_body, styles.statsItem],
-                        { fontSize: dimensions.width < 980 ? 26 : 40 })
+                        ([styles.text_body, styles.statsCounter],
+                        {
+                          fontSize: dimensions.width < 980 ? 26 : 40,
+                          alignSelf: "center"
+                        })
                       }
                     >
                       {stats.count}+
                     </Text>
-                    <Text>total volunteers</Text>
+                    <Text
+                      style={[
+                        styles.text_body,
+                        { fontSize: dimensions.width < 980 ? 13 : 24 }
+                      ]}
+                    >
+                      total volunteers
+                    </Text>
                   </View>
                   <View>
                     <Text
                       style={
-                        ([styles.text_body, styles.statsItem],
-                        { fontSize: dimensions.width < 980 ? 26 : 40 })
+                        ([styles.text_body, styles.statsCounter],
+                        {
+                          fontSize: dimensions.width < 980 ? 26 : 40,
+                          alignSelf: "center"
+                        })
                       }
                     >
                       {Math.round(stats.hours)}+
                     </Text>
-                    <Text>hours donated</Text>
+                    <Text
+                      style={[
+                        styles.text_body,
+                        { fontSize: dimensions.width < 980 ? 13 : 24 }
+                      ]}
+                    >
+                      hours donated
+                    </Text>
                   </View>
                   <View>
                     <Text
                       style={
-                        ([styles.text_body, styles.statsItem],
-                        { fontSize: dimensions.width < 980 ? 26 : 40 })
+                        ([styles.text_body, styles.statsCounter],
+                        {
+                          fontSize: dimensions.width < 980 ? 26 : 40,
+                          alignSelf: "center"
+                        })
                       }
                     >
                       ${Math.round(stats.dollars / 1000)}K+
                     </Text>
-                    <Text>in time volunteered</Text>
+                    <Text
+                      style={[
+                        styles.text_body,
+                        { fontSize: dimensions.width < 980 ? 13 : 24 }
+                      ]}
+                    >
+                      in time volunteered
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -260,7 +290,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  statsItem: {
+  statsCounter: {
     fontWeight: "bold",
     marginBottom: 10
   }
