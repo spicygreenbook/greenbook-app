@@ -121,7 +121,7 @@ export default function App(props) {
               {
                 top: isWeb ? 120 : 0,
                 width: "100%",
-                height: "100%",
+                height: isWeb ? "100%" : null,
                 minHeight: dimensions.height - 120
               }
             ]}
@@ -137,7 +137,7 @@ export default function App(props) {
                 <ResponsiveImage
                   style={{
                     width: dimensions.width,
-                    height: 300
+                    height: isWeb ? 300 : 200
                   }}
                   source={{ uri: data.image.url + "&w=600" }}
                 />
@@ -320,26 +320,48 @@ export default function App(props) {
                     </View>
                   </View>
                 )}
+                {!isWeb ? (
+                  <View
+                    style={{
+                      // position: "relative",
+                      // bottom: isWeb ? -20 : 0,
+                      alignSelf: "center",
+                      padding: 30,
+                      minWidth: 200,
+                      minHeight: "100%"
+                    }}
+                  >
+                    <Button
+                      onPress={close}
+                      title="Close"
+                      color={Theme.green}
+                      style={[styles.button_green, { fontSize: 40 }]}
+                      accessibilityLabel="Close the pop-up screen with volunteer details"
+                    />
+                  </View>
+                ) : null}
               </View>
 
-              <View
-                style={{
-                  // position: "relative",
-                  // bottom: isWeb ? -20 : 0,
-                  alignSelf: "center",
-                  padding: 30,
-                  minWidth: 200,
-                  minHeight: "100%"
-                }}
-              >
-                <Button
-                  onPress={close}
-                  title="Close"
-                  color={Theme.green}
-                  style={[styles.button_green, { fontSize: 40 }]}
-                  accessibilityLabel="Close the pop-up screen with volunteer details"
-                />
-              </View>
+              {isWeb ? (
+                <View
+                  style={{
+                    // position: "relative",
+                    // bottom: isWeb ? -20 : 0,
+                    alignSelf: "center",
+                    padding: 30,
+                    minWidth: 200,
+                    minHeight: "100%"
+                  }}
+                >
+                  <Button
+                    onPress={close}
+                    title="Close"
+                    color={Theme.green}
+                    style={[styles.button_green, { fontSize: 40 }]}
+                    accessibilityLabel="Close the pop-up screen with volunteer details"
+                  />
+                </View>
+              ) : null}
 
               <View
                 style={{
