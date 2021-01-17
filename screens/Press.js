@@ -9,13 +9,14 @@ import {
   Platform,
   ActivityIndicator,
   FlatList,
-  Image
+  Image,
+  Linking
 } from "react-native";
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText";
-import { getStyles, Theme, getContent, getData } from "../utils";
 import { ResponsiveImage } from "../components/ResponsiveImage";
+import { getStyles, Theme, getContent, getData } from "../utils";
 
 function Page(props) {
   const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
@@ -85,12 +86,18 @@ function Page(props) {
               <View style={styles.content}>
                 <RichText render={content._body} isWeb={isWeb} />
                 <TouchableOpacity
+                  activeOpacity={1}
                   style={[
                     styles.button_green,
                     {
                       alignSelf: "flex-start"
                     }
                   ]}
+                  onPress={() => {
+                    Linking.openURL(
+                      "https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf"
+                    );
+                  }}
                 >
                   <Text style={styles.button_green_text}>
                     {`See our Press Kit`.toUpperCase()}
