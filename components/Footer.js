@@ -54,7 +54,7 @@ export default function (props) {
                 {/** Navigation Area */}
                 <View style={{ flex: 1, justifyContent: 'center', maxWidth: '100%', alignItems: 'center', width: 1024, marginTop: 48, flexDirection: dimensions.width > 980 ? 'row' : 'column' }}>
                     {LINKS.map(({ url, label }) => (
-                        <Link key={url} style={{ display: 'block' }} href={url} target={url.includes('http') ? '__blank' : null}><Text style={styles.text_footer}>{label}</Text></Link>
+                        <Link key={url} style={{ display: 'block' }} href={url} target={url.includes('http') ? '__blank' : null}><Text style={[styles.text_footer, {padding: dimensions.width < 980 ? 5 : 24}]}>{label}</Text></Link>
                     ))}
                 </View>
                 {/** End Navigation Area */}
