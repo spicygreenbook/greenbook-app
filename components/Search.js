@@ -102,7 +102,7 @@ const Search = ({
       return;
     }
 
-    navigation.navigate('Browse', { screen: 'Home'})
+    navigation.navigate('Directory', { screen: 'Home'})
     dispatch({ type: 'setView', view: '/search' })
   };
 

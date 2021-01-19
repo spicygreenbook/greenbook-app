@@ -54,7 +54,7 @@ const StateListingComponent = ({navigation}) => {
                 onPress={() => {
                   dispatch({ type: 'loading', value: true });
                   dispatch({type: 'searchConfig', value: { q: "", near: `${cityCapatalized}, ${abbr}`}});
-                  navigation.navigate('Browse', { screen: 'Home' })
+                  navigation.navigate('Directory', { screen: 'Home' })
                 }}>
                 <Text style={[styles.text_body,{ color: Theme.green, fontSize: 18, paddingTop: 5, paddingBottom: 5, textTransform: 'capitalize'}]}>{city}</Text>
               </Link> 

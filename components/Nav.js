@@ -119,7 +119,7 @@ export default function (props) {
                     </View>
                 ) : (
                         <View style={[{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}, view !== '/' && { maxWidth: 750, justifyContent: 'space-between' }]}>
-                            <Link href="/search"><Text style={styles.text_nav}>Browse</Text></Link>                            
+                            <Link href="/search"><Text style={styles.text_nav}>Directory</Text></Link>                            
                             <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                                     <Link href="/about"><Text style={[styles.text_nav]}>About</Text></Link>

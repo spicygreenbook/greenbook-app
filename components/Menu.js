@@ -14,7 +14,7 @@ export default function(props) {
     const router = useRouter();
 
     const menu = [{
-        title: 'Browse',
+        title: 'Directory',
         href: '/search'
     }, {
         title: 'Donate',
