@@ -13,9 +13,9 @@ const Onboarding = () => {
 
         imageStyle2: {
             height: 400,
-            width: 400,
-            position: 'relative',
-            top: 80
+            width: width,
+            position: 'absolute',
+            top: 50
         },
 
 
@@ -23,38 +23,63 @@ const Onboarding = () => {
             position: 'absolute',
             width: 100,
             height: 30,
-            top: 50
+            top: 30
 
         },
 
         logo2: {
-            position: 'absolute',
-            width: 200,
-            height: 40,
-            top: 50
+            position: 'relative',
+            width: 100,
+            height: 30,
+            top: 10
 
         },
+
         wrapper: {
             justifyContent: 'center',
             alignItems: 'center',
             marginVertical: 30,
         },
-        header: {
+
+        header_white: {
             position: 'absolute',
             textAlign: 'center',
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: 'bold',
             color: 'white',
             bottom: 200
 
         },
 
-        paragraph: {
+        paragraph_white: {
             position: 'absolute',
             fontSize: 14,
             color: 'white',
             textAlign: 'center',
-            bottom: 120
+            bottom: 100,
+            padding: 20,
+        },
+
+        header_black: {
+            position: 'absolute',
+            textAlign: 'center',
+            fontSize: 25,
+            fontWeight: 'bold',
+            color: 'black',
+            top: 455
+
+
+        },
+
+        paragraph_black: {
+            position: 'relative',
+            textAlign: 'center',
+            fontSize: 14,
+            color: 'black',
+            top: 470,
+            padding: 20,
+
+
         },
     });
 
@@ -73,15 +98,20 @@ const Onboarding = () => {
                         <View style={styles.wrapper}>
                             <Image source={require('../public/images/Screen1.png')} style={styles.imageStyle1} />
                             <Image source={require('../public/images/nav_resized_2.png')} style={styles.logo} />
-                            <Text style={styles.header}>Discover and support over 150 local Black-owned Businesses</Text>
-                            <Text style={styles.paragraph}>Spicy Green Book is a non-profit focused on helping black owned businessses succeed through
+                            <Text style={styles.header_white}>Discover and support over 150 local Black-owned Businesses</Text>
+                            <Text style={styles.paragraph_white}>Spicy Green Book is a non-profit focused on helping black owned businessses succeed through
                             a netowrk of volunteer professionals
                             </Text>
                         </View>
                     </View>
                     <View style={{ width, height }}>
                         <View style={styles.wrapper}>
-                            <Text>Screen 2</Text>
+                            <Image source={require('../public/images/nav_resized_3.png')} style={styles.logo2} />
+                            <Image source={require('../public/images/Screen2.png')} style={styles.imageStyle2} />
+                            <Text style={styles.header_black}>Search for businessses that are located near you.</Text>
+                            <Text style={styles.paragraph_black}>Tap on the Browse tab to discover and search for a specific
+                            businesss. We are continuously adding more businesss to SGB.
+                            </Text>
                         </View>
                     </View>
                     <View style={{ width, height }}>
