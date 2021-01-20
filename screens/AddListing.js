@@ -85,32 +85,6 @@ function Page(props) {
           <View style={[styles.section, { paddingBottom: isWeb ? 0 : 80 }]}>
             <View style={styles.content}>
               <RichText render={content._body} isWeb={isWeb} />
-              {/* {!isWeb && <Link contain href={'https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa'}>  */}
-              {/* <TouchableOpacity
-                activeOpacity={1}
-                style={[
-                  styles.button_green,
-                  {
-                    alignSelf: "flex-end",
-                    marginTop: 50
-                  }
-                ]}
-                onPress={() => {
-                  Linking.openURL(
-                    "https://prismic-io.s3.amazonaws.com/spicygreenbook/04cb42ed-a40b-4199-835a-ee1b5f5f6982_SGB+Flyer.pdf"
-                  );
-                }}
-              >
-                <Text style={styles.button_green_text}>
-                  {`Download Our Flyer`.toUpperCase()}
-                </Text>
-              </TouchableOpacity> */}
-              {/* <View style={[styles.button_green, { marginTop: 40 }]}>
-                <Text style={[styles.button_green_text]}>
-                  Go To Add Listing Form
-                </Text>
-              </View> */}
-              {/* </Link>} */}
             </View>
           </View>
           {isWeb && (
