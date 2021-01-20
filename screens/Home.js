@@ -186,7 +186,7 @@ function Page(props) {
                                                 contain
                                                 onPress={() => {
                                                     dispatch({type: 'setView', view: '/biz/' + item.uid});
-                                                    props.navigation.navigate('Browse', {screen: 'Listing', home: true});
+                                                    props.navigation.navigate('Directory', {screen: 'Listing', home: true});
                                                 }}>
                                                     
                                                     <View style={[styles.button_white, { marginTop: 40}]} >    
