@@ -19,7 +19,7 @@ function Page(props) {
   const [{ isWeb, dimensions }] = useStateValue();
   const styles = StyleSheet.create(
     getStyles(
-      "button_link_text, text_body, text_header2, button_green, button_green_text, section, content",
+      "button_link_text, text_body, text_header2, button_green, button_green_text, button_white, button_white_text, section, content",
       { isWeb }
     )
   );
@@ -86,7 +86,7 @@ function Page(props) {
             <View style={styles.content}>
               <RichText render={content._body} isWeb={isWeb} />
               {/* {!isWeb && <Link contain href={'https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa'}>  */}
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 activeOpacity={1}
                 style={[
                   styles.button_green,
@@ -104,7 +104,7 @@ function Page(props) {
                 <Text style={styles.button_green_text}>
                   {`Download Our Flyer`.toUpperCase()}
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               {/* <View style={[styles.button_green, { marginTop: 40 }]}>
                 <Text style={[styles.button_green_text]}>
                   Go To Add Listing Form
@@ -147,7 +147,7 @@ function Page(props) {
                       }}
                     />
                   </View>
-                  <View style={{ flex: 2 }}>
+                  <View style={{ flex: 2, marginLeft: 20, flexWrap: "wrap" }}>
                     <CustomLink
                       href="https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa"
                       label="FILL OUT FORM"
@@ -163,8 +163,21 @@ function Page(props) {
                         backgroundColor: "#fff",
                         justifyContent: "center"
                       }}
-                      textStyle={{ color: Theme.green }}
+                      textStyle={{ color: Theme.green, textAlign: "center" }}
                       text="If you want to make a donation please click"
+                    />
+                    <CustomLink
+                      href="https://prismic-io.s3.amazonaws.com/spicygreenbook/04cb42ed-a40b-4199-835a-ee1b5f5f6982_SGB+Flyer.pdf"
+                      label="Download Our Flyer"
+                      style={{ marginTop: 30 }}
+                      buttonStyle={{
+                        width: 173,
+                        borderWidth: 2,
+                        backgroundColor: "#fff",
+                        justifyContent: "center"
+                      }}
+                      textStyle={{ color: Theme.green, textAlign: "center" }}
+                      text={`Help spread the word about us by \n downloading and sharing our flyer`}
                     />
                   </View>
                 </View>
