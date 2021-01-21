@@ -23,7 +23,7 @@ export default function(props) {
         title: 'Store',
         href: '/shop'
     }, {
-        title: 'Add Request',
+        title: 'Add Listing',
         href: '/add'
     }, {
         title: 'Volunteer',
