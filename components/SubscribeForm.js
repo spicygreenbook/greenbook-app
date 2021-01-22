@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { useStateValue } from './State';
 import fetch from 'isomorphic-unfetch';
 
-export default () => {
+export default ({ showTitle = true }) => {
   const [{ dimensions }] = useStateValue();
   const [status, setStatus] = useState({ success: false, error: null, loading: null });
   const [name, setName] = useState('');
@@ -31,20 +31,22 @@ export default () => {
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.header}>
+      {showTitle && <Text style={styles.header}>
           {'Subscribe to get our newsletter'.toUpperCase()}
-      </Text>
+      </Text>}
       {!success && (
         <View style={[styles.inner, dimensions.width > 980 ? { flexDirection: 'row' } : { flexDirection: 'column' }]}>
           <TextInput
               style={styles.input}
               placeholder="Enter Full Name"
+              placeholderTextColor="#ebebeb"
               onChangeText={e => setName(e)}
               value={name}
           />
           <TextInput
               style={styles.input}
               placeholder="Enter Email"
+              placeholderTextColor="#ebebeb"
               onChangeText={e => setEmail(e)}
               value={email}
           />
