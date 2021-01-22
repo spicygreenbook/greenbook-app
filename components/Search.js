@@ -34,8 +34,8 @@ const Search = ({
   const [searchInfoCache, setSearchInfoCache] = useState();
 
   const small = dimensions.width < 900 || mode === 'results';
-  const smallSize = dimensions.width < 900;
-  const tablet = dimensions.width < 1400;
+  const smallSize = dimensions.width < 1400;
+  const tablet = dimensions.width < 1700;
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
 
   const onRootClick = useCallback((e) => {
