@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-//import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import { getStyles, Theme } from '../utils';
 import {useStateValue} from "../components/State";
 import { Link, Click } from '../components/Link';

@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, TouchableOpacity} from 'react-native';
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent, getData } from '../utils';
 import styled from 'styled-components';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 
 
