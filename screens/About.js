@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
 import { Link } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { getStyles, Theme, getData, GridWidth } from '../utils';
@@ -12,6 +12,7 @@ import { getInstagram } from '../utils/getData';
 import { handleRootClick } from '../utils/rootClickHandler';
 import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { WebView } from 'react-native-webview';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -22,6 +23,17 @@ const viewableItemsChangedListing = ({ viewableItems, changed }) => {
 const viewableItemsChangedConfigListing = {
     itemVisiblePercentThreshold: 50
 };
+
+function getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+    }
+    return { top: _y, left: _x };
+}
 
 function Page(props) {
 
@@ -123,18 +135,31 @@ function Page(props) {
 
                             </View>
                             <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 5 }}>
-                                <Text><Text style={[styles.text_body, { fontWeight: "bold", color: '#000' }]}>
+                                <Text style={[styles.text_body, { fontWeight: "bold", color: '#000' }]}>
                                     We are gathering a growing list of volunteers to help compile a directory of black owned businesses.  Our mission is to establish a space to help people who seek to create change within their communities.{"\n"}{"\n"}
                                 </Text>
-                                    <Text style={[styles.text_body, { color: '#000' }]}>
-
-                                        If you're interested in helping but feel that you don't fit any of the roles listed above, let us know! Website development and upkeep require many different skill sets so we're sure that you can help in some way.  Also feel free to send people our way who you feel may be able to help.{"\n"}{"\n"}
+                                <Text style={[styles.text_body, { color: '#000' }]}>
+                                    If you're interested in helping but feel that you don't fit any of the roles listed above, let us know! Website development and upkeep require many different skill sets so we're sure that you can help in some way.  Also feel free to send people our way who you feel may be able to help.{"\n"}{"\n"}
                                     If you're looking to help grow our mission but can't give your time you can always dontate.  We also encourage you to help by being a patron of black-owned businesses!
-                                    </Text>
                                 </Text>
-                                <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
+                                {isWeb && 
+                                    <Text style={{marginTop: 20}}><Button
+                                      onPress={e => {
+                                        var pos = getOffset(document.querySelector('iframe'));
+                                        console.log('scroll to', pos.top);
+                                        window.scrollTo({
+                                          top: pos.top - 120,
+                                          left: 0,
+                                          behavior: 'smooth'
+                                        })
+                                      }}
+                                      title="See Us On ABC"
+                                      color={Theme.green}
+                                      style={[styles.button_green, { fontSize: 40, marginTop: 20 }]}
+                                      accessibilityLabel="See Us On ABC"
+                                    /></Text>
+                                }
 
-                                </Link>
                             </View>
                         </View>
                     </View>
@@ -265,6 +290,45 @@ function Page(props) {
                                 />
                             </View>
                         </View>
+                    </View>
+                </View>
+
+               <View style={[styles.section, { paddingTop: 80 }]}>
+                    <View style={styles.content}>
+                        {isWeb ? (
+                            <div style={{position: 'relative'}}>
+                                <div style={{paddingTop: ((272/476)*100) + '%'}} />
+                                <iframe style={{
+                                    overflow: 'hidden',
+                                    position: 'absolute',
+                                    top: 0,
+                                    bottom: 0,
+                                    right: 0,
+                                    left: 0,
+                                    border: 0,
+                                    background: '#fff'
+                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" />
+                            </div>
+                        ) : (
+                            <WebView 
+                                originWhitelist={['*']}
+                                source={{html: `
+                                   <div style="position:relative">
+                                        <div style="paddingTop: ${((272/476)*100)}%"></div>
+                                        <iframe style="
+                                            overflow: hidden,
+                                            position: absolute,
+                                            top: 0,
+                                            bottom: 0,
+                                            right: 0,
+                                            left: 0,
+                                            border: 0,
+                                            background: #fff
+                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%"></iframe>
+                                    </div>
+                                `}}
+                            />
+                        )}
                     </View>
                 </View>
 
