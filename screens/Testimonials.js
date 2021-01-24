@@ -19,12 +19,12 @@ function Page(props) {
 
   const testimonialStyles = StyleSheet.create({
     testimonialsHeaderContainer: {
-      paddingTop: "4rem",
-      width: "70%",
-      margin: "auto",
+      //paddingTop: "4rem",
+      //width: "70%",
+      //margin: "auto",
     },
     testimonialsHeader: {
-      fontSize: "2.5rem",
+      //fontSize: "2.5rem",
       textAlign: "center",
       margin: 0,
       lineHeight: 50,
@@ -40,7 +40,6 @@ function Page(props) {
       },
       shadowOpacity: 0.175,
       shadowRadius: 14,
-
       elevation: 6,
     },
     testimonialCardHeader: {
@@ -48,31 +47,30 @@ function Page(props) {
       justifyContent: "center",
     },
     testimonialAvatar: {
-      width: "60px",
-      height: "60px",
-      borderRadius: "50%",
-      objectFit: "cover",
-      marginRight: "1rem",
+      width: 60,
+      height: 60,
+      //borderRadius: "50%",
+      //objectFit: "cover",
+      //marginRight: "1rem",
     },
     testimonialAuthor: {
-      fontSize: "1.1rem",
+      //fontSize: "1.1rem",
       fontWeight: "bold",
-      lineHeight: "22px",
+      lineHeight: 22,
     },
     testimonialSubtitle: {
-      fontSize: "1rem",
-      lineHeight: "22px",
+      //fontSize: "1rem",
+      lineHeight: 22,
     },
     testimonialTextContainer: {
-      marginTop: "20px",
+      marginTop: 20,
     },
     testimonialText: {
       lineHeight: 25,
-      fontSize: "1rem",
+      //fontSize: "1rem",
     },
     testimonialLink: {
-      marginTop: "auto",
-      paddingTop: "20px",
+      paddingTop: 20,
     },
   });
 
@@ -101,7 +99,7 @@ function Page(props) {
   useEffect(() => {
     if (!props.testimonials) {
       getData({
-        type: "testimonials",
+        type: "testimonial",
       })
         .then((_testimonials) => {
           setLoadingTestimonials(false);
