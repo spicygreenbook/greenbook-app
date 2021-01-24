@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { getStyles } from '../utils';
 import SubscribeForm from './SubscribeForm';
