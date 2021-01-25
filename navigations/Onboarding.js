@@ -76,7 +76,7 @@ const Onboarding = () => {
             textAlign: 'center',
             fontSize: 14,
             color: 'black',
-            top: 470,
+            top: 480,
             padding: 20,
 
 
@@ -115,7 +115,14 @@ const Onboarding = () => {
                         </View>
                     </View>
                     <View style={{ width, height }}>
-                        <Text>Screen 3</Text>
+                        <View style={styles.wrapper}>
+                            <Image source={require('../public/images/nav_resized_3.png')} style={styles.logo2} />
+                            <Image source={require('../public/images/Screen3.png')} style={styles.imageStyle2} />
+                            <Text style={styles.header_black}>Learn about each businesss and their story</Text>
+                            <Text style={styles.paragraph_black}>Choose a business to learn about what they do, how to get in contact,
+                            and how to support them.
+                            </Text>
+                        </View>
                     </View>
                     <View style={{ width, height }}>
                         <Text>Screen 4</Text>
