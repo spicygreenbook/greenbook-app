@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet, PixelRatio, Image } from 'react-native';
 
 const Onboarding = () => {
 
+    const [sliderState, setSliderState] = useState({ currentPage: 0 });
     const { width, height } = Dimensions.get('window');
+
+    const setSliderPage = (event) => {
+        const { currentPage } = sliderState;
+        const { x } = event.nativeEvent.contentOffset;
+        const indexOfNextScreen = Math.floor(x / width);
+        if (indexOfNextScreen !== currentPage) {
+            setSliderState({
+                ...sliderState,
+                currentPage: indexOfNextScreen,
+            });
+        }
+    };
+
     const styles = StyleSheet.create({
         imageStyle1: {
             height: height,
@@ -81,8 +95,27 @@ const Onboarding = () => {
 
 
         },
+
+        paginationWrapper: {
+            position: 'absolute',
+            bottom: 80,
+            left: 0,
+            right: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+        },
+
+        paginationDots: {
+            height: 10,
+            width: 10,
+            borderRadius: 10 / 2,
+            backgroundColor: '#0898A0',
+            marginLeft: 10,
+        },
     });
 
+    const { currentPage: pageIndex } = sliderState;
 
     return (
         <>
@@ -93,6 +126,10 @@ const Onboarding = () => {
                     horizontal={true}
                     scrollEventThrottle={16}
                     pagingEnabled={true}
+                    showsHorizontalScrollIndicator={false}
+                    onScroll={(event) => {
+                        setSliderPage(event)
+                    }}
                 >
                     <View style={{ width, height }}>
                         <View style={styles.wrapper}>
@@ -124,13 +161,12 @@ const Onboarding = () => {
                             </Text>
                         </View>
                     </View>
-                    <View style={{ width, height }}>
-                        <Text>Screen 4</Text>
-                    </View>
-                    <View style={{ width, height }}>
-                        <Text>Screen 5</Text>
-                    </View>
                 </ScrollView>
+                <View style={styles.paginationWrapper}>
+                    {Array.from(Array(3).keys()).map((key, index) => (
+                        <View style={[styles.paginationDots, { opacity: pageIndex === index ? 1 : 0.2 }]} key={index} />
+                    ))}
+                </View>
             </SafeAreaView>
         </>
     );
