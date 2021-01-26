@@ -3,16 +3,16 @@ import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet
 
 const Onboarding = () => {
 
-    const [sliderState, setSliderState] = useState({ currentPage: 0 });
+    const [slider, setslider] = useState({ currentPage: 0 });
     const { width, height } = Dimensions.get('window');
 
     const setSliderPage = (event) => {
-        const { currentPage } = sliderState;
+        const { currentPage } = slider;
         const { x } = event.nativeEvent.contentOffset;
         const indexOfNextScreen = Math.floor(x / width);
         if (indexOfNextScreen !== currentPage) {
-            setSliderState({
-                ...sliderState,
+            setslider({
+                ...slider,
                 currentPage: indexOfNextScreen,
             });
         }
@@ -115,7 +115,7 @@ const Onboarding = () => {
         },
     });
 
-    const { currentPage: pageIndex } = sliderState;
+    const { currentPage: pageIndex } = slider;
 
     return (
         <>
