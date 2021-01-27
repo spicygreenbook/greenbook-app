@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity, TextInput } from 'react-native';
-//import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
 import { FontAwesome } from '@expo/vector-icons';

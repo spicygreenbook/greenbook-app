@@ -52,7 +52,7 @@ function SGBMap(props) {
 							}
 
 							return (
-								<G style={{cursor:"pointer"}} key={state.id + 'fill'} onPress={e => {
+								<G style={{cursor:"pointer"}} key={state.id + 'fill'} onPressIn={e => {
 									if (mappedState) {
 										if(!isWeb) {
 											navigation.navigate('StateListing', { 
@@ -71,6 +71,23 @@ function SGBMap(props) {
 									} else {
 											setCurState('');
 									}
+									}} onClick={e => {
+										if (mappedState) {
+											if(!isWeb) {
+												navigation.navigate('StateListing', { 
+													stateName: state.id, 
+													cities: 
+														Object.keys(mappedState)
+														.filter(key => {return key.indexOf('_') !== 0})
+														.sort(),
+													abbr: statesObjRev[mappedState._state].toUpperCase(),
+												 });
+												return;
+											}
+											setCurState(mappedState);
+										} else {
+												setCurState('');
+										}
 									}}>
 										<Path d={state.d[0]} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'}/>
 										<Path d={state.d[0]} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} stroke="#efefef" strokeWidth="0.5" fill="none" />

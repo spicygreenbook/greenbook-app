@@ -17,6 +17,7 @@ import CallToAction from './Home/CallToAction';
 import Testimonial from './Home/Testimonial';
 import useFetchData from '../hooks/useFetchData';
 import {WebView} from 'react-native-webview';
+import SubscribeSection from '../components/SubscribeSection';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -373,6 +374,8 @@ function Page(props) {
                 </View>
             </View>
 
+            <SubscribeSection />
+
             <View style={[styles.section, {flex:1}]}>
                 <View style={[styles.content, {flex:1}]}>
                     <View>
@@ -388,20 +391,6 @@ function Page(props) {
                     </View>
                 </View>
             </View>
-
-            {/*<View style={styles.footer}>
-                <View style={{flexDirection: 'column', alignItems: 'center'}}>
-                    <View style={{flex: 1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
-                        <View style={{flex: 1, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingRight: 40, paddingTop: 40, paddingBottom: 40}}>
-                            <Text style={[styles.text_header3, {color: '#fff'}]}>Subscribe</Text>
-                        </View>
-                        <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', paddingLeft: 40, paddingTop: 40, paddingBottom: 40}}>
-                            <Text>yolo</Text>
-                        </View>
-                    </View>
-                </View>
-            </View>*/}
-
         </>
     );
 }
