@@ -16,6 +16,7 @@ import GooglePlayIconBadge from '../public/google-play.svg';
 import CallToAction from './Home/CallToAction';
 import Testimonial from './Home/Testimonial';
 import useFetchData from '../hooks/useFetchData';
+import {WebView} from 'react-native-webview';
 import SubscribeSection from '../components/SubscribeSection';
 
 let currentIndexListing = 0;
@@ -254,6 +255,48 @@ function Page(props) {
                     </View>
                 </View>
             </View>
+
+            {/*ABC Video*/}
+            <View style={[styles.section, { paddingTop: 80 }]}>
+                <View style={styles.content}>
+                    {isWeb ? (
+                        <div style={{position: 'relative'}}>
+                            <div style={{paddingTop: ((272/476)*100) + '%'}} />
+                                <iframe style={{
+                                    overflow: 'hidden',
+                                    position: 'absolute',
+                                    top: 0,
+                                    bottom: 0,
+                                    right: 0,
+                                    left: 0,
+                                    border: 0,
+                                    background: '#fff',
+                                    frameborder: 0
+                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowfullscreen />
+                            </div>
+                        ) : (
+                            <WebView 
+                                originWhitelist={['*']}
+                                source={{html: `
+                                   <div style="position:relative">
+                                        <div style="paddingTop: ${((272/476)*100)}%"></div>
+                                        <iframe style="
+                                            overflow: hidden,
+                                            position: absolute,
+                                            top: 0,
+                                            bottom: 0,
+                                            right: 0,
+                                            left: 0,
+                                            border: 0,
+                                            background: #fff,
+                                            frameborder:0
+                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowfullscreen ></iframe>
+                                    </div>
+                                `}}
+                            />
+                        )}
+                    </View>
+                </View>
 
             {/* Testimonials */}
             {loadingTestimonial 
