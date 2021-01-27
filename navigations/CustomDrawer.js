@@ -35,6 +35,25 @@ const CustomDrawer = (props) => {
           </Button>
         </FooterTab>
       </Footer>
+      <Footer style={{ backgroundColor: Theme.green }}>
+        <FooterTab style={{ backgroundColor: Theme.green }}>
+          <Button onPress={() => Linking.openURL("https://github.com/spicygreenbook/greenbook-app")}>
+            <Icon type="FontAwesome" style={styles.default} name="github" size={22} />
+          </Button>
+
+          <Button onPress={() => Linking.openURL("https://www.behance.net/spicygreenbook/")}>
+            <Icon type="FontAwesome" style={styles.default} name="behance" size={22} />
+          </Button>
+
+          <Button onPress={() => Linking.openURL("https://www.pinterest.com/spicygreenbook/")}>
+            <Icon type="FontAwesome" style={styles.default} name="pinterest" size={22} />
+          </Button>
+          
+          <Button onPress={() => Linking.openURL("mailto:admin@spicygreenbook.org")}>
+            <Icon type="FontAwesome" style={styles.default} name="envelope" size={22} />
+          </Button>
+        </FooterTab>
+      </Footer>
     </Container>
   );
 }
