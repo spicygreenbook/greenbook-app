@@ -1,3 +1,4 @@
+import { Button } from "native-base";
 import React, { useState } from "react";
 import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet, Image } from 'react-native';
 
@@ -114,8 +115,26 @@ const Onboarding = () => {
             height: 10,
             width: 10,
             borderRadius: 10 / 2,
-            backgroundColor: '#0898A0',
+            backgroundColor: '#006233',
             marginLeft: 10,
+        },
+
+        button: {
+            position: 'absolute',
+            bottom: 20,
+            left: 50,
+            height: 50,
+            width: 325,
+            backgroundColor: "#006233",
+            justifyContent: 'center',
+            textAlign: 'center'
+        },
+
+        button_white: {
+            fontSize: 20,
+            fontFamily: 'ApercuMedium',
+            fontWeight: 'bold',
+            color: 'white',
         },
     });
 
@@ -168,9 +187,14 @@ const Onboarding = () => {
                 </ScrollView>
                 <View style={styles.paginationWrapper}>
                     {Array.from(Array(3).keys()).map((key, index) => (
-                        <View style={[styles.paginationDots, { opacity: pageIndex === index ? 1 : 0.2 }]} key={index} />
+                        <View style={[styles.paginationDots, { backgroundColor: pageIndex === index ? '#006233' : 'grey' }]} key={index} />
                     ))}
                 </View>
+                <Button style={styles.button}>
+                    <Text style={styles.button_white}>Get Started!</Text>
+                </Button>
+
+
             </SafeAreaView>
         </>
     );
