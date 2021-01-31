@@ -17,7 +17,7 @@ function App(props) {
         <StatusBar barStyle="dark-content" />
         <NavigationContainer>
           {onboarding
-            ? <Onboarding />
+            ? <Onboarding onChange={() => setOnboarding(false)} />
             : <DrawerNavigator />
           }
         </NavigationContainer>

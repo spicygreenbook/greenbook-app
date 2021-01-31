@@ -1,8 +1,7 @@
-import { Button } from "native-base";
 import React, { useState } from "react";
-import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet, Image } from 'react-native';
+import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet, Image, Button } from 'react-native';
 
-const Onboarding = () => {
+const Onboarding = (props) => {
 
     const [slider, setslider] = useState({ currentPage: 0 });
     const { width, height } = Dimensions.get('window');
@@ -18,6 +17,7 @@ const Onboarding = () => {
             });
         }
     };
+
 
     const styles = StyleSheet.create({
         imageStyle1: {
@@ -190,9 +190,9 @@ const Onboarding = () => {
                         <View style={[styles.paginationDots, { backgroundColor: pageIndex === index ? '#006233' : 'grey' }]} key={index} />
                     ))}
                 </View>
-                <Button style={styles.button}>
-                    <Text style={styles.button_white}>Get Started!</Text>
-                </Button>
+                <View style={styles.button}>
+                    <Button color="white" title="Get Started" onPress={(event) => props.onChange(event.target)} />
+                </View>
 
 
             </SafeAreaView>
