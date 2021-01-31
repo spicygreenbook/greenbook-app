@@ -56,7 +56,7 @@ function Page(props) {
         <>
             <View style={{height: 700, backgroundColor: '#000'}}>
                 <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
-                    <View style={[responsiveStyles.middle_all, { width: '100%', flex: 1, alignItems: 'stretch', padding: 20}]}>
+                    <View style={[responsiveStyles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
                             Support{"\n"}
                             Black-Owned{"\n"}
@@ -237,21 +237,32 @@ function Page(props) {
             </View>
 
             {/* Shop link */}
-            <View style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexDirection: 'row', position: 'relative', height: 350, backgroundColor: Theme.green_bg }}>
-                <Image source={require('../public/images/ShopNowBanner.jpg')} style={{ position: 'absolute', left: 0, height: 350, width: 1240 }} />
-                <View style={[styles.content, { display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40, paddingBottom: 40, paddingLeft: 20, paddingRight: 20 }]}>
-                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                        <View style={{ flex: 1 }}>
-                            <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
-                                Visit Our{"\n"}
-                                Store
-                            </Text>
-                        </View>
-                        <Link href="https://shop.spicygreenbook.org">
-                            <View style={[styles.button_green, { borderColor: '#fff' }]} >
-                                <Text style={[styles.button_green_text, { textAlign: 'center' }]}>Shop Now</Text>
+            <View style={{ position: 'relative', backgroundColor: '#006439' }}>
+                <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={
+                        [
+                            {position: 'relative', height: 400},
+                            dimensions.width < 700 ? {flex: 1} : {flex: 2, flexDirection: 'column'}
+                        ]}>
+                        <ImageBackground source={isWeb ? {uri: '/images/home_store_image.png'} : require('../public/images/home_store_image.png')}
+                        imageStyle={{resizeMode: 'cover'}}
+                        style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
+                    </View>
+                    <View style={dimensions.width < 700 ? {} : {flex: 1, paddingLeft: 40}}>
+                        <View style={{marginTop: 40, marginBottom: 40}}>
+                            <View style={{ flex: 1, maxWidth: 400}}>
+                                <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
+                                    Visit Our Store
+                                </Text>
                             </View>
-                        </Link>
+                            <Link href="https://shop.spicygreenbook.org">
+                                <View style={{width: 200, marginTop: 20}}>
+                                    <View style={[styles.button_green, { borderColor: '#fff', justifyContent: 'center', alignItems: 'center'}]} >
+                                        <Text style={[styles.button_green_text, { textAlign: 'center'}]}>Shop Now</Text>
+                                    </View>
+                                </View>
+                            </Link>
+                        </View>
                     </View>
                 </View>
             </View>
