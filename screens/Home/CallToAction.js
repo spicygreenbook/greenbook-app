@@ -22,7 +22,7 @@ const CallToAction = () => {
     {
       url: isWeb ? '/images/piggy.png' : require('../../public/images/piggy.png'),
       call: 'Become a donor',
-      q: 'Support your local small Black-owned local business.',
+      q: 'Support a Black-owned business.',
       btnText: 'DONATE NOW',
       link: '/donate',
       navigate: 'Donate'

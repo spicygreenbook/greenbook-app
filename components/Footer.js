@@ -21,7 +21,13 @@ const SOCIAL_LINKS = [
     { name: 'twitter', url: 'https://twitter.com/spicygreenbook' },
     { name: 'linkedin', url: 'https://www.linkedin.com/company/spicy-green-book/' },
     { name: 'facebook', url: 'https://www.facebook.com/SpicyGreenBook/' },
-    { name: 'youtube', url: 'https://www.youtube.com/channel/UCS5gEWNUF2fibLwwxFibKGg' },
+    { name: 'youtube', url: 'https://www.youtube.com/channel/UCS5gEWNUF2fibLwwxFibKGg' }
+];
+const SOCIAL_LINKS_2 = [
+    { name: 'github', url: 'https://github.com/spicygreenbook/greenbook-app' },
+    { name: 'behance', url: 'https://www.behance.net/spicygreenbook/' },
+    { name: 'pinterest', url: 'https://www.pinterest.com/spicygreenbook/' },
+    { name: 'envelope', url: 'mailto:admin@spicygreenbook.org' }
 ];
 
 export default function (props) {
@@ -42,6 +48,13 @@ export default function (props) {
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 24 }}>
                             {SOCIAL_LINKS.map(({ name, url }) => (
+                                <Link key={url} href={url}>
+                                    <FontAwesome name={name} size={32} color="#fff" />
+                                </Link>
+                            ))}
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 24, paddingTop: 0 }}>
+                            {SOCIAL_LINKS_2.map(({ name, url }) => (
                                 <Link key={url} href={url}>
                                     <FontAwesome name={name} size={32} color="#fff" />
                                 </Link>
