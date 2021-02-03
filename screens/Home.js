@@ -221,7 +221,7 @@ function Page(props) {
             </View>
 
             {/* Map */}
-            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 60 }]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: '15%' }]}>
                 <View style={[styles.content, {flex:1}]}> 
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
                         WHERE WE'RE AT
@@ -232,7 +232,7 @@ function Page(props) {
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30 }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
                     </View>
-                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
+                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.11 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
             </View>
 
@@ -321,8 +321,8 @@ function Page(props) {
             <CallToAction />
 
             {/* Updates */}
-            <View style={[styles.section, {flex:1, paddingTop: 0}]}>
-                <View style={[styles.content, {flex:1}]}>
+            <View style={[styles.section, {paddingTop: 0}]}>
+                <View style={[styles.content]}>
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES
                     </Text>
@@ -358,7 +358,7 @@ function Page(props) {
                 </View>
             </View>
 
-            <View style={[styles.section, {flex:1}]}>
+            <View style={[styles.section]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Link contain href='https://instagram.com/spicygreenbook'>
                         <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
@@ -387,11 +387,11 @@ function Page(props) {
 
             <SubscribeSection />
 
-            <View style={[styles.section, {flex:1}]}>
+            <View style={[styles.section ]}>
                 <View style={[styles.content, {flex:1}]}>
                     <View>
                         <Fontisto name="quote-left" size={64} color={Theme.green} />
-                        <Text style={[styles.text_quote, {marginTop: 20}]}>
+                        <Text style={[styles.text_quote, {marginTop: 10}]}>
                             It is certain, in any case, that ignorance,
                             allied with power, is the most ferocious enemy
                             justice can have.
