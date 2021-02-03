@@ -17,7 +17,7 @@ function SGBMap(props) {
 		const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
 
     return (
-			<View style={[{flex: 1, width: '100%', position: 'relative'}, props.style || {}]}>
+			<View style={[{height: '100%', width: '100%', position: 'relative'}, props.style || {}]}>
 				{!!curState && 
 					<ScrollView style={{position: 'absolute', left: dimensions.width > 400 ? (((dimensions.width > 1024 ? 1024 : dimensions.width) - 420) * 0.5) : '4%', top: '40%', width: 400, height: 200, maxWidth: '92%', backgroundColor: Theme.green, borderWidth: 2, borderColor: '#fff', padding: 20}}>
 							<View style={{flexDirection: 'row', justifyContent:'space-between', alignItems: 'flex-start'}}>
