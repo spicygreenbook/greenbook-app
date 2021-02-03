@@ -1,5 +1,18 @@
 import { getData } from '../../utils';
 
+function displayField(val) {
+    let type = typeof val;
+    if (type === 'string' || type === 'number') {
+        return val
+    } else if (Array.isArray(val)){
+        return val.map(displayField).join('');
+    } else if (type === 'object') {
+        return JSON.stringify(val);
+    } else {
+        return 'unknown data type ' + type
+    }
+}
+
 const listings = async (req, res) => {
 
   let listings = await getData({
@@ -21,7 +34,7 @@ const listings = async (req, res) => {
     <tbody>
         ${listings.map(listing => 
             `<tr>
-                ${cols.map(col => `<td>${listing[col] || ''}</td>
+                ${cols.map(col => `<td>${displayField(listing[col])}</td>
 `).join('')}
             </tr>`
         ).join('')}
