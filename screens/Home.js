@@ -227,11 +227,11 @@ function Page(props) {
                         WHERE WE'RE AT
                     </Text>
 
-                    {/* <View style={{ alignSelf: 'flex-start' }}> */}
+                    <View style={{ alignSelf: 'flex-start' }}>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>We are a growing community of</Text>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30 }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
-                    {/* </View> */}
+                    </View>
                     <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.11 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
             </View>
