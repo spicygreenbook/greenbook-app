@@ -76,8 +76,7 @@ function Page(props) {
 
     const myRef = useRef(null);
     const executeScroll = () => {
-        console.log("pressed")
-        myRef.current.focus({ behavior: "smooth" })
+        window.scrollTo(0, myRef.current.offsetTop);
     }
 
     return (
@@ -170,7 +169,7 @@ function Page(props) {
                             </View>
                         </View>
 
-                        <View nativeID="formBelow" style={[styles.section]}>
+                        <View ref={myRef} nativeID="formBelow" style={[styles.section]}>
                             <View style={styles.content}>
                                 <View style={[{ flex: 1, backgroundColor: '#000', width: '100%', flexDirection: dimensions.width < 900 ? 'column' : 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
                                     <View style={{ flex: 3, padding: 20 }}>
@@ -190,7 +189,6 @@ function Page(props) {
                                 </View>
                             </View>
                         </View>
-                        <View ref={myRef} />
                     </React.Fragment>
                 )}
         </React.Fragment>
