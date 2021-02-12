@@ -101,6 +101,15 @@ function Page(props) {
 
     }
 
+    let faqByCat = {};
+    //let faqByCatName = {};
+    faqs.forEach(faq => {
+        let category = faq.category || 'General';
+        if (!faqByCat[category]) {
+            faqByCat[category] = [];
+        }
+        faqByCat[category].push(faq);
+    })
 
     return (
         <React.Fragment>
@@ -119,11 +128,16 @@ function Page(props) {
                     <React.Fragment>
                         <View style={[styles.section, {marginTop: 80}]}>
                             <View style={styles.content}>
-                                <FlatList
-                                    data={faqs}
-                                    renderItem={({ item, index, separators }) => (<ListRow item={item} />)}
-                                    keyExtractor={(item, index) => 'image' + index}
-                                />
+                                {Object.keys(faqByCat).map((category, c) => (
+                                    <View style={{marginTop: c > 0 ? 40 : 0}}>
+                                        <Text style={[styles.text_header3, {marginBottom: 10}]}>{category}</Text>
+                                        <FlatList
+                                            data={faqByCat[category]}
+                                            renderItem={({ item, index, separators }) => (<ListRow item={item} />)}
+                                            keyExtractor={(item, index) => 'image' + index}
+                                        />
+                                    </View>
+                                ))}
                             </View>
                         </View>
                         <View style={[styles.section, { paddingTop: 0 }]}>
