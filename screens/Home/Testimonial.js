@@ -108,7 +108,7 @@ const Testimonial = ({ testimonials }) => {
             if (item.link && item.link.indexOf("http") !== 0) {
               item.link = "http://" + item.link;
             }
-            console.log("testominal item", item);
+            //console.log("testominal item", item);
 
             return (
               <View

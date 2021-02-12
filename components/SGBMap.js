@@ -12,9 +12,22 @@ function SGBMap(props) {
     const { listings, loadingListings } = props;
     const [ curState, setCurState ] = useState('');
     const listingsByState = getListingsByState(listings);
-		const navigation = !isWeb ? useNavigation() : null
+	const navigation = !isWeb ? useNavigation() : null
 
-		const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
+	const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
+
+	function G(props) {
+		let webProps = {}
+		if (isWeb && props.onPressIn) {
+			webProps = {...props}
+			webProps.onClick = props.onPressIn;
+			delete webProps.onPressIn;
+		} else {
+			webProps = props;
+		}
+		return isWeb ? <g {...webProps}>{props.children}</g> : <G {...props}>{props.children}</G>
+	}
+
 
     return (
 			<View style={[{height: '100%', width: '100%', position: 'relative'}, props.style || {}]}>

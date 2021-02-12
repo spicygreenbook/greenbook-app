@@ -283,7 +283,7 @@ function Page(props) {
                                     border: 0,
                                     background: '#fff',
                                     frameborder: 0
-                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowfullscreen />
+                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen />
                             </div>
                         ) : (
                             <WebView 
@@ -301,7 +301,7 @@ function Page(props) {
                                             border: 0,
                                             background: #fff,
                                             frameborder:0
-                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowfullscreen ></iframe>
+                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen ></iframe>
                                     </div>
                                 `}}
                             />
