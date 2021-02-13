@@ -31,16 +31,18 @@ function Main(props) {
 
   console.log('render')
   const [{ view, isWeb, theme, menuOpen, lightbox, lightboxConfig }, dispatch] = useStateValue();
-  const [isFrontEnd, setIsFrontEnd] = useState(false);
+  const [isFrontEnd, setIsFrontEnd] = useState(true);
 
   const styles = StyleSheet.create(getStyles('body'));
 
   // This will ensure dimensions is defined in the frontend
   useEffect(() => {
-    setIsFrontEnd(true);
+    //console.log('set front end')
+    //setIsFrontEnd(true);
   }, []);
 
   function onChangeScreenSize() {
+    console.log('dispatch set dimensions')
     dispatch({ type: 'setDimensions', value: {
       width: Dimensions.get("window").width,
       height: Dimensions.get("screen").height
@@ -48,6 +50,7 @@ function Main(props) {
   };
 
   useEffect(() => {
+    console.log('useeffect hit, onChangeScreenSize')
     const fn = debounce(300, onChangeScreenSize)
     Dimensions.addEventListener("change", fn, false);
  
