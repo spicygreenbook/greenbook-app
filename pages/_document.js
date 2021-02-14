@@ -2,13 +2,13 @@
 //export { default } from '@expo/next-adapter/document';
 
 import { getInitialProps } from '@expo/next-adapter/document';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Main, Html, NextScript } from 'next/document';
 import React from 'react';
 
 class CustomDocument extends Document {
   render() {
     return (
-      <html>
+      <Html>
         <Head>
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -50,7 +50,7 @@ class CustomDocument extends Document {
               })();
            `}} />
         </body>
-      </html>
+      </Html>
     )
   }
 };

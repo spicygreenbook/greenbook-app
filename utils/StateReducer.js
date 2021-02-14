@@ -95,8 +95,8 @@ export const InitialState = (props) => {
     url: url,
     searchConfig: searchConfig,
     dimensions: {
-        width: Dimensions.get("window").width,
-        height: Dimensions.get("screen").height
+        width: Dimensions.get("window").width || 1280,
+        height: Dimensions.get("screen").height || 720
     },
     isLoading: true
   };

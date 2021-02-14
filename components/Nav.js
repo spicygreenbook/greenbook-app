@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, Text, View, Easing, Animated, Image, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, Text, View, Easing, Animated, TouchableOpacity, Linking, Image as RNImage } from 'react-native';
 import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
 import { AntDesign } from '@expo/vector-icons';
 import { Link } from '../components/Link';
 import { debounce} from 'lodash/fp';
 import useOutsideClick from '../hooks/useOutSideClick';
+import Image from 'next/image';
 
-export default function (props) {
+export default function Nav(props) {
 
     const [{ view, isWeb, theme, dimensions }, dispatch] = useStateValue();
     // const [active, setActive] = useState(false);
@@ -89,17 +90,21 @@ export default function (props) {
             <View style={{ padding: 20, flex: 1, alignContent: 'center', borderRightWidth: 2, borderColor: props.theme == 'light' ? Theme.green : '#fff' }}>
                 <Link href="/" fill>
                     <View style={{ height: '100%' }}>
-                        {props.theme == 'light' ?
-                            <Image
-                                style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
+                        {isWeb ? <Image 
+                            priority={true}
+                            src={props.theme == 'light' ? '/images/logo_nav_light.png' : '/images/logo_nav_dark.png' }
+                            layout="fill"
+                            quality={100}
+                        /> : <RNImage
+                                width={1291}
+                                height={586}
+                                style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain', aspectRatio: 0.4546159813809154}}
                                 alt="Spicy Green Book"
-                                source={isWeb ? { uri: '/images/logo_nav_light.png' } : require('../public/images/logo_nav_light.png')}
-                            />
-                            :
-                            <Image
-                                style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
-                                alt="Spicy Green Book"
-                                source={isWeb ? { uri: '/images/logo_nav_dark.png' } : require('../public/images/logo_nav_dark.png')}
+                                source={
+                                    props.theme == 'light' ?
+                                        require('../public/images/logo_nav_light.png')
+                                    : require('../public/images/logo_nav_dark.png')
+                                }
                             />
                         }
                     </View>

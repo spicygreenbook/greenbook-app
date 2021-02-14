@@ -18,6 +18,7 @@ import Testimonial from './Home/Testimonial';
 import useFetchData from '../hooks/useFetchData';
 import {WebView} from 'react-native-webview';
 import SubscribeSection from '../components/SubscribeSection';
+import NextImage from 'next/image';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -55,7 +56,8 @@ function Page(props) {
     return (
         <>
             <View style={{height: 700, backgroundColor: '#000'}}>
-                <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
+                <ImageBackground source={isWeb ? {} : require('../public/images/home_hero.png')} style={{height: 700}}>
+                    {isWeb && <NextImage src="/images/home_hero.png" layout="fill" objectFit="cover" quality={100}/>}
                     <View style={[responsiveStyles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
                             Support{"\n"}
@@ -89,9 +91,10 @@ function Page(props) {
                     <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
                         <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
                             <ResponsiveImage
+                                NextImage={{src: '/images/home_green_book.png'}}
                                 style={{width: 804, resizeMode: 'contain', aspectRatio: 1.37245}}
                                 alt="Spicy Green Book"
-                                source={isWeb ? {uri: '/images/home_green_book.png'} : require('../public/images/home_green_book.png')}
+                                source={require('../public/images/home_green_book.png')}
                             />
                         </View>
                         <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
