@@ -47,10 +47,10 @@ async function handler(req, res) {
                 return handleFinal(JSON.parse(data.Item.value));
             } else {
                 console.log('fetch from instagram cause', lastUpdated, '<', (now - cacheDuration));
-                let new_data = await fetch('https://www.instagram.com/spicygreenbook/?__a=1');
-                let json = await new_data.json();
                 let formatted = [];
                 try {
+                    let new_data = await fetch('https://www.instagram.com/spicygreenbook/?__a=1');
+                    let json = await new_data.json();
                     formatted = json.graphql.user.edge_owner_to_timeline_media.edges.map(item => {
                         return {
                             title: item.node.edge_media_to_caption.edges[0].node.text || node.accessibility_caption,
@@ -64,7 +64,6 @@ async function handler(req, res) {
                     console.error(e);
                 }
                 if (formatted && formatted.length) {
-
                     docClient.put({
                         TableName: tableName,
                         Item: {

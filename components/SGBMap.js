@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
-import Svg, { G, Path } from 'react-native-svg';
+import Svg, { G as RNG, Path } from 'react-native-svg';
 import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { getStyles, Theme, states, getListingsByState, statesObj, statesObjRev } from '../utils';
@@ -25,9 +25,8 @@ function SGBMap(props) {
 		} else {
 			webProps = props;
 		}
-		return isWeb ? <g {...webProps}>{props.children}</g> : <G {...props}>{props.children}</G>
+		return isWeb ? <g {...webProps}>{props.children}</g> : <RNG {...props}>{props.children}</RNG>
 	}
-
 
     return (
 			<View style={[{height: '100%', width: '100%', position: 'relative'}, props.style || {}]}>
