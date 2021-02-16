@@ -377,7 +377,7 @@ export async function getData(config) {
                 if (nextInfo.next_page) {
                     console.log('fetching next page', nextInfo.next_page)
                     let data = await fetch(nextInfo.next_page);
-                    getLoop(await data.json());
+                    await getLoop(await data.json());
                 }
             }
             await getLoop(await data.json());
