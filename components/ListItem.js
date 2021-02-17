@@ -41,7 +41,7 @@ export default function ListItem({ listing, last }) {
     return (
         <Link href='/biz/[name]' as={'/biz/' + listing.uid} onPress={() => {
             dispatch({type: 'setView', view: '/biz/' + listing.uid});
-            navigation.navigate('Browse', {screen: 'Listing'}) }}>
+            navigation.navigate('Directory', {screen: 'Listing'}) }}>
             {content}
         </Link>
     ) 

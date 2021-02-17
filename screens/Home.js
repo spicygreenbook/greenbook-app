@@ -16,6 +16,8 @@ import GooglePlayIconBadge from '../public/google-play.svg';
 import CallToAction from './Home/CallToAction';
 import Testimonial from './Home/Testimonial';
 import useFetchData from '../hooks/useFetchData';
+import {WebView} from 'react-native-webview';
+import SubscribeSection from '../components/SubscribeSection';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -54,7 +56,7 @@ function Page(props) {
         <>
             <View style={{height: 700, backgroundColor: '#000'}}>
                 <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
-                    <View style={[responsiveStyles.middle_all, { width: '100%', flex: 1, alignItems: 'stretch', padding: 20}]}>
+                    <View style={[responsiveStyles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
                             Support{"\n"}
                             Black-Owned{"\n"}
@@ -186,7 +188,7 @@ function Page(props) {
                                                 contain
                                                 onPress={() => {
                                                     dispatch({type: 'setView', view: '/biz/' + item.uid});
-                                                    props.navigation.navigate('Browse', {screen: 'Listing', home: true});
+                                                    props.navigation.navigate('Directory', {screen: 'Listing', home: true});
                                                 }}>
                                                     
                                                     <View style={[styles.button_white, { marginTop: 40}]} >    
@@ -219,7 +221,7 @@ function Page(props) {
             </View>
 
             {/* Map */}
-            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 60 }]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: '15%' }]}>
                 <View style={[styles.content, {flex:1}]}> 
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
                         WHERE WE'RE AT
@@ -230,29 +232,82 @@ function Page(props) {
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30 }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
                     </View>
-                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
+                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.11 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
             </View>
 
             {/* Shop link */}
-            <View style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexDirection: 'row', position: 'relative', height: 350, backgroundColor: Theme.green_bg }}>
-                <Image source={require('../public/images/ShopNowBanner.jpg')} style={{ position: 'absolute', left: 0, height: 350, width: 1240 }} />
-                <View style={[styles.content, { display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40, paddingBottom: 40, paddingLeft: 20, paddingRight: 20 }]}>
-                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                        <View style={{ flex: 1 }}>
-                            <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
-                                Visit Our{"\n"}
-                                Store
-                            </Text>
-                        </View>
-                        <Link href="https://shop.spicygreenbook.org">
-                            <View style={[styles.button_green, { borderColor: '#fff' }]} >
-                                <Text style={[styles.button_green_text, { textAlign: 'center' }]}>Shop Now</Text>
+            <View style={{ position: 'relative', backgroundColor: '#006439' }}>
+                <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={
+                        [
+                            {position: 'relative', height: 400},
+                            dimensions.width < 700 ? {flex: 1} : {flex: 2, flexDirection: 'column'}
+                        ]}>
+                        <ImageBackground source={isWeb ? {uri: '/images/home_store_image.png'} : require('../public/images/home_store_image.png')}
+                        imageStyle={{resizeMode: 'cover'}}
+                        style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
+                    </View>
+                    <View style={dimensions.width < 700 ? {} : {flex: 1, paddingLeft: 40}}>
+                        <View style={{marginTop: 40, marginBottom: 40}}>
+                            <View style={{ flex: 1, maxWidth: 400}}>
+                                <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
+                                    Visit Our Store
+                                </Text>
                             </View>
-                        </Link>
+                            <Link href="https://shop.spicygreenbook.org">
+                                <View style={{width: 200, marginTop: 20}}>
+                                    <View style={[styles.button_green, { borderColor: '#fff', justifyContent: 'center', alignItems: 'center'}]} >
+                                        <Text style={[styles.button_green_text, { textAlign: 'center'}]}>Shop Now</Text>
+                                    </View>
+                                </View>
+                            </Link>
+                        </View>
                     </View>
                 </View>
             </View>
+
+            {/*ABC Video*/}
+            <View style={[styles.section, { paddingTop: 80 }]}>
+                <View style={styles.content}>
+                    {isWeb ? (
+                        <div style={{position: 'relative'}}>
+                            <div style={{paddingTop: ((272/476)*100) + '%'}} />
+                                <iframe style={{
+                                    overflow: 'hidden',
+                                    position: 'absolute',
+                                    top: 0,
+                                    bottom: 0,
+                                    right: 0,
+                                    left: 0,
+                                    border: 0,
+                                    background: '#fff',
+                                    frameborder: 0
+                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen />
+                            </div>
+                        ) : (
+                            <WebView 
+                                originWhitelist={['*']}
+                                source={{html: `
+                                   <div style="position:relative">
+                                        <div style="paddingTop: ${((272/476)*100)}%"></div>
+                                        <iframe style="
+                                            overflow: hidden,
+                                            position: absolute,
+                                            top: 0,
+                                            bottom: 0,
+                                            right: 0,
+                                            left: 0,
+                                            border: 0,
+                                            background: #fff,
+                                            frameborder:0
+                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen ></iframe>
+                                    </div>
+                                `}}
+                            />
+                        )}
+                    </View>
+                </View>
 
             {/* Testimonials */}
             {loadingTestimonial 
@@ -266,8 +321,8 @@ function Page(props) {
             <CallToAction />
 
             {/* Updates */}
-            <View style={[styles.section, {flex:1, paddingTop: 0}]}>
-                <View style={[styles.content, {flex:1}]}>
+            <View style={[styles.section, {paddingTop: 0}]}>
+                <View style={[styles.content]}>
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES
                     </Text>
@@ -303,7 +358,7 @@ function Page(props) {
                 </View>
             </View>
 
-            <View style={[styles.section, {flex:1}]}>
+            <View style={[styles.section]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Link contain href='https://instagram.com/spicygreenbook'>
                         <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
@@ -330,11 +385,13 @@ function Page(props) {
                 </View>
             </View>
 
-            <View style={[styles.section, {flex:1}]}>
+            <SubscribeSection />
+
+            <View style={[styles.section ]}>
                 <View style={[styles.content, {flex:1}]}>
                     <View>
                         <Fontisto name="quote-left" size={64} color={Theme.green} />
-                        <Text style={[styles.text_quote, {marginTop: 20}]}>
+                        <Text style={[styles.text_quote, {marginTop: 10}]}>
                             It is certain, in any case, that ignorance,
                             allied with power, is the most ferocious enemy
                             justice can have.
@@ -345,20 +402,6 @@ function Page(props) {
                     </View>
                 </View>
             </View>
-
-            {/*<View style={styles.footer}>
-                <View style={{flexDirection: 'column', alignItems: 'center'}}>
-                    <View style={{flex: 1, flexDirection: 'row', width: 1024, maxWidth: '100%'}}>
-                        <View style={{flex: 1, justifyContent: 'flex-start', flexDirection: 'row', borderColor: '#fff', borderRightWidth: 2, paddingRight: 40, paddingTop: 40, paddingBottom: 40}}>
-                            <Text style={[styles.text_header3, {color: '#fff'}]}>Subscribe</Text>
-                        </View>
-                        <View style={{flex: 3, justifyContent: 'flex-start', flexDirection: 'row', paddingLeft: 40, paddingTop: 40, paddingBottom: 40}}>
-                            <Text>yolo</Text>
-                        </View>
-                    </View>
-                </View>
-            </View>*/}
-
         </>
     );
 }

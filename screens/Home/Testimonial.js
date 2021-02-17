@@ -13,7 +13,7 @@ const viewableItemsChangedListing = ({ viewableItems }) => {
 }
 
 const Testimonial = ({ testimonials }) => {
-  let testimonialListRef = useRef(null)
+  let testimonialListRef = useRef(null);
   const [{ isWeb, dimensions }, dispatch] = useStateValue();
   const navigation = !isWeb ? useNavigation() : null;
   const data = testimonials.filter(data => data?.image && data); // render testimonial that has image only, for now
@@ -38,12 +38,12 @@ const Testimonial = ({ testimonials }) => {
       if (currentIndexListing < data.length - 1) {
         i = currentIndexListing + 1;
       } else {
-        i = 0
+        i = 0;
       }
 
       currentIndexListing = i;
-      testimonialListRef.current.scrollToIndex({ animated: true, index: i })
-    }, 5000)
+      testimonialListRef.current.scrollToIndex({ animated: true, index: i });
+    }, 5000);
 
     return () => clearInterval(intervalId)
   }, [data])
@@ -133,7 +133,9 @@ const Testimonial = ({ testimonials }) => {
 };
 
 const styles = StyleSheet.create({
-  ...getStyles('section, text_body3, text_quote, content, text_header5, button_green, button_green_text, text_quote')
+  ...getStyles(
+    "section, text_body3, text_quote, content, text_header5, button_green, button_green_text, text_quote"
+  )
 });
 
 export default Testimonial;

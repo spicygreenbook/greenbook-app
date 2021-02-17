@@ -49,7 +49,7 @@ const BottomTabNavigator = ({ navigation }) => {
       />
 
       <BottomTab.Screen
-        name="Browse"
+        name="Directory"
         component={BrowseStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <Icon type="MaterialIcons" style={{ fontSize: 22, color }} name="search" />
@@ -62,7 +62,7 @@ const BottomTabNavigator = ({ navigation }) => {
             if(home) {
               navigation.reset({
                 index: 0,
-                routes: [{ name: 'Browse' }],
+                routes: [{ name: 'Directory' }],
               });
             }
           }

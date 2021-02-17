@@ -34,8 +34,8 @@ const Search = ({
   const [searchInfoCache, setSearchInfoCache] = useState();
 
   const small = dimensions.width < 900 || mode === 'results';
-  const smallSize = dimensions.width < 900;
-  const tablet = dimensions.width < 1400;
+  const smallSize = dimensions.width < 1400;
+  const tablet = dimensions.width < 1700;
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
 
   const onRootClick = useCallback((e) => {
@@ -102,13 +102,17 @@ const Search = ({
       return;
     }
 
-    navigation.navigate('Browse', { screen: 'Home'})
+    navigation.navigate('Directory', { screen: 'Home'})
     dispatch({ type: 'setView', view: '/search' })
   };
 
   const onSubmit = () => {
     submitSearch({ q: query, near });
   };
+
+  let onStartProp = isWeb ? {} : {
+    onStartShouldSetResponder:() => true
+  }
 
   const searchForm = (
     <View style={{
@@ -118,7 +122,7 @@ const Search = ({
       minHeight: includeUseLocationOption ? 140 : 0,
     }}>
       <View
-        onStartShouldSetResponder={() => true}
+        {...onStartProp}
         style={{ flex: 1, flexDirection: 'row', alignItems: 'center', maxWidth: mode === 'results' ? '100%' : 840}}>
         <View style={{
           flexDirection: 'row',

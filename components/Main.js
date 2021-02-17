@@ -29,6 +29,7 @@ import { debounce} from 'lodash/fp';
 
 function Main(props) {
 
+  console.log('render')
   const [{ view, isWeb, theme, menuOpen, lightbox, lightboxConfig }, dispatch] = useStateValue();
   const [isFrontEnd, setIsFrontEnd] = useState(false);
 

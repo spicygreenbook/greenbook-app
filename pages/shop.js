@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import { StateReducer, InitialState, getContent } from '../utils';
-//import 'react-native-gesture-handler';
+
 import {StateProvider} from "../components/State";
 import Main from "../components/Main";
 import Head from "next/head";

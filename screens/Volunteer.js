@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, TouchableOpacity} from 'react-native';
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent, getData } from '../utils';
 import styled from 'styled-components';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 
 
@@ -77,8 +76,7 @@ function Page(props) {
 
     const myRef = useRef(null);
     const executeScroll = () => {
-        console.log("pressed")
-        myRef.current.focus({ behavior: "smooth" })
+        window.scrollTo(0, myRef.current.offsetTop);
     }
 
     return (
@@ -171,7 +169,7 @@ function Page(props) {
                             </View>
                         </View>
 
-                        <View nativeID="formBelow" style={[styles.section]}>
+                        <View ref={myRef} nativeID="formBelow" style={[styles.section]}>
                             <View style={styles.content}>
                                 <View style={[{ flex: 1, backgroundColor: '#000', width: '100%', flexDirection: dimensions.width < 900 ? 'column' : 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
                                     <View style={{ flex: 3, padding: 20 }}>
@@ -191,7 +189,6 @@ function Page(props) {
                                 </View>
                             </View>
                         </View>
-                        <View ref={myRef} />
                     </React.Fragment>
                 )}
         </React.Fragment>

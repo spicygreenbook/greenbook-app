@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
 import { Link } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { getStyles, Theme, getData, GridWidth } from '../utils';
@@ -12,6 +12,7 @@ import { getInstagram } from '../utils/getData';
 import { handleRootClick } from '../utils/rootClickHandler';
 import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { WebView } from 'react-native-webview';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -22,6 +23,17 @@ const viewableItemsChangedListing = ({ viewableItems, changed }) => {
 const viewableItemsChangedConfigListing = {
     itemVisiblePercentThreshold: 50
 };
+
+function getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+    }
+    return { top: _y, left: _x };
+}
 
 function Page(props) {
 
@@ -120,25 +132,36 @@ function Page(props) {
                     <View style={styles.content}>
                         <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
                             <View style={{ flex: 1 }}>
-
-                            </View>
-                            <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 5 }}>
-                                <Text><Text style={[styles.text_body, { fontWeight: "bold", color: '#000' }]}>
-                                    We are gathering a growing list of volunteers to help compile a directory of black owned businesses.  Our mission is to establish a space to help people who seek to create change within their communities.{"\n"}{"\n"}
-                                </Text>
-                                    <Text style={[styles.text_body, { color: '#000' }]}>
-
-                                        If you're interested in helping but feel that you don't fit any of the roles listed above, let us know! Website development and upkeep require many different skill sets so we're sure that you can help in some way.  Also feel free to send people our way who you feel may be able to help.{"\n"}{"\n"}
-                                    If you're looking to help grow our mission but can't give your time you can always dontate.  We also encourage you to help by being a patron of black-owned businesses!
-                                    </Text>
-                                </Text>
-                                <Link href="/about" contain onPress={() => props.navigation.navigate('About')} >
-
-                                </Link>
+                                        <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <View style={dimensions.width < 700 ? {paddingTop: 40} : {flex: 2, paddingLeft: 20}}>
+                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>MISSION STATEMENT</Text>
+                                            <Text style={[styles.text_body, {color: '#000'}]}>
+                                            Spicy Green Book’s mission is to build substantive relationships and increase social trust between three groups of people, Black small business owners, potential customers of these businesses located in their communities, and volunteers passionate about economic justice, all in order to improve the economic well-being of Black business owners, better integrate racially separated communities, and develop marketable skills in volunteers.
+                                            </Text>
+                                        </View>
+                                </View>
                             </View>
                         </View>
                     </View>
                 </View>
+                <View style={[styles.section, { fontSize: 24}]}>
+                    <View style={styles.content}>
+                        <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
+                            <View style={{ flex: 1 }}>
+                                        <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <View style={dimensions.width < 700 ? {paddingTop: 10} : {flex: 2, paddingLeft: 20}}>
+                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>PRODUCT AND SERVICES</Text>
+                                            <Text style={[styles.text_body, {color: '#000'}]}>
+                                            Spicy Green Book provides a variety of professional services to Black restauranteurs. These include online marketing and advertising, content creation, photography and videography, and business development education all in an effort to increase their business and achieve our mission. SGB does this by getting to know these business owners, understanding their most pressing needs, and attempting to meet those needs by matching the owners with qualified professional volunteers.{'\n'}{'\n'}
+                                            We are a growing group of volunteers with a passion for sparking and creating change. At Spicy Green Book, we want to not only compile a directory of Black-owned businesses, but establish a space where business owners and loyal patrons can come together to support their local community. Additionally, we create volunteer service opportunities for upcoming professionals, matching them with members of these business owners. We offer all these introductory promotional services all a no cost to the business owner.
+                                            </Text>
+                                        </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+
 
 
                 <View style={{ flexDirection: dimensions.width < 800 ? 'column' : 'row', backgroundColor: Theme.green_bg}}>
@@ -153,7 +176,7 @@ function Page(props) {
                             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 10}}>
                                 <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10}}/>
                                 <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                    Help decrease the wealth gap
+                                    Decrease the wealth gap
                                 </Text>
                             </View>
                             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 10}}>
@@ -165,19 +188,19 @@ function Page(props) {
                             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 10}}>
                                 <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10}} />
                                 <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                    Help prevent further injustices
+                                    Prevent further injustices
                                 </Text>
                             </View>
                             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 10}}>
                                 <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10}} />
                                 <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                    Help implement needed reform
+                                    Implement needed reform
                                 </Text>
                             </View>
                             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 80}}>
                                 <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10}} />
                                 <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                    Ensure greater representation of people who will change outdated policies.
+                                    Ensure marginalized people will receive the representation they deserve.
                                 </Text>
                             </View>
 
@@ -199,7 +222,7 @@ function Page(props) {
                     <View style={{ flex: 1, width: 400, shadowOpacity: 0.4, shadowRadius: 10, backgroundColor: '#fff', maxWidth: '80%'}}>
                         <View style={{ flexDirection: 'column', paddingBottom: 50, paddingTop: 50, justifyContent: 'center', alignContent: 'center' }}>
                             <Text style={[styles.text_body, { fontSize: 24, paddingRight: 50, paddingLeft: 50, alignSelf: 'center', textAlign: 'center', color: '#000' }]}>
-                                We have a hard-working and <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>growing team</Text> of volunteers to help provide this service with skills in writing, photography, and other professional services.  We will do our best to <Text style={[styles.text_body, { fontSize: 24, fontWeight: "bold", color: '#000' }]}>represent everyone in our list with high quality photography, videography and story-telling</Text> so everyone can enjoy discovering and learning more about businesses in their area.
+                                Our growing team helps provide marketing services like photography, videography, graphic design, and other creative services. Our mission is to represent everyone with authentic storytelling so our communities can discover and support Black-owned businesses near them.
                             </Text>
                         </View>
                     </View>
@@ -265,6 +288,45 @@ function Page(props) {
                                 />
                             </View>
                         </View>
+                    </View>
+                </View>
+
+               <View style={[styles.section, { paddingTop: 80 }]}>
+                    <View style={styles.content}>
+                        {isWeb ? (
+                            <div style={{position: 'relative'}}>
+                                <div style={{paddingTop: ((272/476)*100) + '%'}} />
+                                <iframe style={{
+                                    overflow: 'hidden',
+                                    position: 'absolute',
+                                    top: 0,
+                                    bottom: 0,
+                                    right: 0,
+                                    left: 0,
+                                    border: 0,
+                                    background: '#fff'
+                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" />
+                            </div>
+                        ) : (
+                            <WebView 
+                                originWhitelist={['*']}
+                                source={{html: `
+                                   <div style="position:relative">
+                                        <div style="paddingTop: ${((272/476)*100)}%"></div>
+                                        <iframe style="
+                                            overflow: hidden,
+                                            position: absolute,
+                                            top: 0,
+                                            bottom: 0,
+                                            right: 0,
+                                            left: 0,
+                                            border: 0,
+                                            background: #fff
+                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%"></iframe>
+                                    </div>
+                                `}}
+                            />
+                        )}
                     </View>
                 </View>
 
