@@ -26,6 +26,7 @@ import ImageGallery from '../components/ImageGallery';
 import { useStateValue } from "../components/State";
 import { getStyles, Theme } from '../utils';
 import { debounce} from 'lodash/fp';
+import Sponsors from '../screens/Sponsors'
 
 function Main(props) {
 
@@ -71,6 +72,7 @@ function Main(props) {
   function renderContent(props) {
     return (
       view === '/about' ? <About {...props} />
+       :view === '/sponsors' ? <Sponsors {...props}/>
         : view === '/updates' ? <Updates {...props} />
           : view === '/privacy' ? <Privacy {...props} />
             : view === '/press' ? <Press {...props} />
