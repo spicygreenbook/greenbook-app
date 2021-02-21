@@ -2,6 +2,8 @@ import React from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
+import HybridImageBackground from "../components/HybridImageBackground"; 
+import HybridImage from "../components/HybridImage"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import { getStyles, Theme, getData, getListingsByState, GridWidth } from '../utils';
 import { parseAddress } from '../utils/cityState';
@@ -55,7 +57,7 @@ function Page(props) {
     return (
         <>
             <View style={{height: 700, backgroundColor: '#000'}}>
-                <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
+                <HybridImageBackground source={require('../public/images/home_hero.png')} src={'/images/home_hero.png'} style={{height: 700}}>
                     <View style={[responsiveStyles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
                             Support{"\n"}
@@ -66,7 +68,7 @@ function Page(props) {
                             <Search includeUseLocationOption />
                         </View>
                     </View>
-                </ImageBackground>
+                </HybridImageBackground>
             </View>
 
             {isWeb && 
@@ -127,7 +129,7 @@ function Page(props) {
                             }).map((pressRow, p) => 
                                 (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
                                     <Link href={pressRow.link}>
-                                        <Image source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
+                                        <HybridImage source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
                                     </Link>
                                 </View>)
                             )}
@@ -161,8 +163,7 @@ function Page(props) {
 
                                 return (
                                     <View>
-                                        <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}}>
-                                        </ImageBackground>
+                                        <HybridImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}} />
                                         <View style={{
                                             position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
                                             flexDirection: 'column',
@@ -244,7 +245,7 @@ function Page(props) {
                             {position: 'relative', height: 400},
                             dimensions.width < 700 ? {flex: 1} : {flex: 2, flexDirection: 'column'}
                         ]}>
-                        <ImageBackground source={isWeb ? {uri: '/images/home_store_image.png'} : require('../public/images/home_store_image.png')}
+                        <HybridImageBackground source={isWeb ? {uri: '/images/home_store_image.png'} : require('../public/images/home_store_image.png')}
                         imageStyle={{resizeMode: 'cover'}}
                         style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
                     </View>
@@ -338,7 +339,7 @@ function Page(props) {
                                 function Item() {
                                     return <React.Fragment>
                                         <View>
-                                            <Image source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
+                                            <HybridImage source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
                                         </View>
                                         <View>
                                             <Text style={styles.text_header4}>{item.title}</Text>

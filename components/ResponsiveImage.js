@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Image } from 'react-native';
+import { Platform, View, Image } from 'react-native';
 import { responsiveImageWidthCDN } from '../utils';
+import NextImage from 'next/image';
+const isWeb = Platform.OS === 'web';
 
 export function ResponsiveImage(props) {
 
@@ -21,8 +23,19 @@ export function ResponsiveImage(props) {
     }
     //console.log('set', set)
 
-    return (
-        <View onLayout={(event) => {
+    let src = props.src || props.source && props.source.uri
+    if (isWeb) {
+        console.log('src', src)
+        return <NextImage
+                    src={src}
+                    alt={props.alt || null}
+                    layout="responsive"
+                    width={props.style.width}
+                    height={props.style.height || props.style.width * props.style.aspectRatio}
+                    quality={100}
+                  />
+    }
+    return <View onLayout={(event) => {
             let w = props.style.width;
             //console.log('w', w, 'layout view width', event.nativeEvent.layout.width)
             if (w > event.nativeEvent.layout.width) {
@@ -35,14 +48,21 @@ export function ResponsiveImage(props) {
                 setURI(props.source.uri + '?w=' + responsiveImageWidthCDN({containerWidth: w}));
             }
         }} style={{position: 'relative'}}>
-            <Image
+            {isWeb ? 
+                <NextImage
+                    src={src}
+                    alt={props.alt || null}
+                    layout="fill"
+                    objectFit="contain"
+                    objectPosition="left top"
+                    quality={100}
+                  />
+            : <Image
                 { ...props }
                 { ...set }
                 style={{width: width, height: height}}
-            />
+            />}
             {props.layerColor && <View style={{position: 'absolute', left: 0, top: 0, width: width, height: height, backgroundColor: props.layerColor}} />}
         </View>
-
-    )
 
 }
