@@ -15,6 +15,5 @@ export default function HybridImage(props) {
         layout="fill"
         objectFit="contain"
         objectPosition="left top"
-        quality={100}
       /> : <Image {...props} />
 }

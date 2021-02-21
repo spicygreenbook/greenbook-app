@@ -32,7 +32,6 @@ export function ResponsiveImage(props) {
                     layout="responsive"
                     width={props.style.width}
                     height={props.style.height || props.style.width * props.style.aspectRatio}
-                    quality={100}
                   />
     }
     return <View onLayout={(event) => {
