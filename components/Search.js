@@ -147,7 +147,14 @@ const Search = ({
                 fontWeight: 'bold',
               }]}>Find</Text>
             }
-            <TextInput key="searchQuery" name="q" value={query} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} onChangeText={text => setQuery(text)} />
+            <TextInput 
+              key="searchQuery" 
+              name="q" value={query} 
+              style={[styles.text_body, { height: 30, fontSize: 16 }]} 
+              placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} 
+              onChangeText={text => setQuery(text)}
+              onSubmitEditing={() => onSubmit()}
+            />
           </View>
           <View style={{ width: 1, borderRightWidth: 1, height: 48, borderColor: 'rgba(0, 0, 0, 0.5)', marginLeft: 15, marginRight: 15 }} />
           <View style={{
@@ -170,6 +177,7 @@ const Search = ({
                 style={[styles.text_body, { height: 30, fontSize: 16 }]}
                 placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"}
                 onChangeText={text => setNear(text)}
+                onSubmitEditing={() => onSubmit()}
                 onFocus={(e) => {
                   if (isWeb) e.target.setAttribute('autocomplete', 'off');
                   setDropdownOpen(true);
