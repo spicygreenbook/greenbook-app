@@ -47,7 +47,7 @@ function renderHTML(markup, spans, body_style, isWeb, dispatch) {
         }
         button = false; // strange issues on mobile with this becaues its trying to go within a <Text> componenet
 
-        console.log('partspart', 'is button', button, parts[part], segment_map[i], url);
+        //console.log('partspart', 'is button', button, parts[part], segment_map[i], url);
         return segment_map[i].type === 'hyperlink' && button ? (
             <React.Fragment>
                 {isWeb ? <Link key={i} href={url} ><Button color={Theme.green} title={parts[part] || ''} /></Link> : <View><Button color={Theme.green} title={parts[part] || ' '} onPress={e=>{Linking.openURL(url)}} /></View>}

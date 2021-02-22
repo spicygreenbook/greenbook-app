@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Link } from '../components/Link';
 import { debounce} from 'lodash/fp';
 import useOutsideClick from '../hooks/useOutSideClick';
+import HybridImage from "../components/HybridImage"; 
 
 export default function (props) {
 
@@ -90,13 +91,13 @@ export default function (props) {
                 <Link href="/" fill>
                     <View style={{ height: '100%' }}>
                         {props.theme == 'light' ?
-                            <Image
+                            <HybridImage
                                 style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
                                 alt="Spicy Green Book"
                                 source={isWeb ? { uri: '/images/logo_nav_light.png' } : require('../public/images/logo_nav_light.png')}
                             />
                             :
-                            <Image
+                            <HybridImage
                                 style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
                                 alt="Spicy Green Book"
                                 source={isWeb ? { uri: '/images/logo_nav_dark.png' } : require('../public/images/logo_nav_dark.png')}

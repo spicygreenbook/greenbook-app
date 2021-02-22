@@ -110,6 +110,10 @@ const Search = ({
     submitSearch({ q: query, near });
   };
 
+  let onStartProp = isWeb ? {} : {
+    onStartShouldSetResponder:() => true
+  }
+
   const searchForm = (
     <View style={{
       flexDirection: mode === 'results' ? 'column' : 'row',
@@ -118,7 +122,7 @@ const Search = ({
       minHeight: includeUseLocationOption ? 140 : 0,
     }}>
       <View
-        onStartShouldSetResponder={() => true}
+        {...onStartProp}
         style={{ flex: 1, flexDirection: 'row', alignItems: 'center', maxWidth: mode === 'results' ? '100%' : 840}}>
         <View style={{
           flexDirection: 'row',

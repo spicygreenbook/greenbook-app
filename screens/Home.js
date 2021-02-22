@@ -2,6 +2,8 @@ import React from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
+import HybridImageBackground from "../components/HybridImageBackground"; 
+import HybridImage from "../components/HybridImage"; 
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import { getStyles, Theme, getData, getListingsByState, GridWidth } from '../utils';
 import { parseAddress } from '../utils/cityState';
@@ -55,7 +57,7 @@ function Page(props) {
     return (
         <>
             <View style={{height: 700, backgroundColor: '#000'}}>
-                <ImageBackground source={require('../public/images/home_hero.png')} style={{height: 700}}>
+                <HybridImageBackground source={require('../public/images/home_hero.png')} src={'/images/home_hero.png'} style={{height: 700}}>
                     <View style={[responsiveStyles.middle_all, {flex: 1, alignItems: 'stretch', padding: 20}]}>
                         <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
                             Support{"\n"}
@@ -66,7 +68,7 @@ function Page(props) {
                             <Search includeUseLocationOption />
                         </View>
                     </View>
-                </ImageBackground>
+                </HybridImageBackground>
             </View>
 
             {isWeb && 
@@ -127,7 +129,7 @@ function Page(props) {
                             }).map((pressRow, p) => 
                                 (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
                                     <Link href={pressRow.link}>
-                                        <Image source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
+                                        <HybridImage source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
                                     </Link>
                                 </View>)
                             )}
@@ -161,8 +163,7 @@ function Page(props) {
 
                                 return (
                                     <View>
-                                        <ImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}}>
-                                        </ImageBackground>
+                                        <HybridImageBackground source={{uri: item.images[0].image.url}} style={{width: dimensions.width, height: 700}} />
                                         <View style={{
                                             position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', paddingTop: 80, paddingBottom: 80, paddingLeft: 20, paddingRight: 20,
                                             flexDirection: 'column',
@@ -221,7 +222,6 @@ function Page(props) {
             </View>
 
             {/* Map */}
-     
             <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 60 }]}>
                 <View style={[styles.content, {flex:1}]}> 
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
@@ -233,7 +233,7 @@ function Page(props) {
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }]}><Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30 }]}>{Listings.length}</Text> black-owned business nationwide,</Text>
                         <Text style={[ styles.text_body3, { fontSize: 18, fontWeight: 'bold' }, isWeb && { lineHeight: 36 }]}>and across <Text style={[styles.text_header, { fontSize: 26, fontWeight: 'normal' }, { lineHeight: isWeb ? 1 : Platform.OS === 'ios' ? 0 : 30  }]}>{ Listings.length > 0 ? Object.keys(getListingsByState(Listings)).length : 0}</Text> states.</Text>
                     </View>
-                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.18 }} listings={Listings} loadingListings={loadingListings} />
+                    <SGBMap style={{marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.11 }} listings={Listings} loadingListings={loadingListings} />
                 </View>
             </View>
 
@@ -245,8 +245,7 @@ function Page(props) {
                             {position: 'relative' }, isWeb ? {height: 400}:{height:150},
                             dimensions.width < 700 ? {flex: 1} : {flex: 2, flexDirection: 'column'}
                         ]}>
-                        <ImageBackground source={isWeb ? {uri: '/images/home_store_image_new.png'} : require('../public/images/home_store_image_new.png')}
-                        imageStyle={{resizeMode: 'cover'}}
+                        <HybridImageBackground source={isWeb ? {uri: '/images/home_store_image_new.png'} : require('../public/images/home_store_image_new.png')}
                         style= {{position: 'absolute',right: 0, bottom: 0}, isWeb ? {height:312,width:727,left:145,top:31 }:{height:133,width:310,left:52,top:33} } />
                     </View>
                     <View style={dimensions.width < 700 ? {} : {flex: 1, paddingLeft: 40}}>
@@ -284,7 +283,7 @@ function Page(props) {
                                     border: 0,
                                     background: '#fff',
                                     frameborder: 0
-                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowfullscreen />
+                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen />
                             </div>
                         ) : (
                             <WebView 
@@ -302,7 +301,7 @@ function Page(props) {
                                             border: 0,
                                             background: #fff,
                                             frameborder:0
-                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowfullscreen ></iframe>
+                                        }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen ></iframe>
                                     </div>
                                 `}}
                             />
@@ -322,8 +321,8 @@ function Page(props) {
             <CallToAction />
 
             {/* Updates */}
-            <View style={[styles.section, {flex:1, paddingTop: 0}]}>
-                <View style={[styles.content, {flex:1}]}>
+            <View style={[styles.section, {paddingTop: 0}]}>
+                <View style={[styles.content]}>
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
                         UPDATES
                     </Text>
@@ -339,7 +338,7 @@ function Page(props) {
                                 function Item() {
                                     return <React.Fragment>
                                         <View>
-                                            <Image source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
+                                            <HybridImage source={{uri: item.image.url + '&w=600'}} style={{width: 300, height:300, resizeMode: 'cover'}} />
                                         </View>
                                         <View>
                                             <Text style={styles.text_header4}>{item.title}</Text>
@@ -359,7 +358,7 @@ function Page(props) {
                 </View>
             </View>
 
-            <View style={[styles.section, {flex:1}]}>
+            <View style={[styles.section]}>
                 <View style={[styles.content, {flex:1}]}>
                     <Link contain href='https://instagram.com/spicygreenbook'>
                         <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 20}]}>
@@ -388,11 +387,11 @@ function Page(props) {
 
             <SubscribeSection />
 
-            <View style={[styles.section, {flex:1}]}>
+            <View style={[styles.section ]}>
                 <View style={[styles.content, {flex:1}]}>
                     <View>
                         <Fontisto name="quote-left" size={64} color={Theme.green} />
-                        <Text style={[styles.text_quote, {marginTop: 20}]}>
+                        <Text style={[styles.text_quote, {marginTop: 10}]}>
                             It is certain, in any case, that ignorance,
                             allied with power, is the most ferocious enemy
                             justice can have.
