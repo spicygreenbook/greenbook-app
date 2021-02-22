@@ -222,7 +222,7 @@ function Page(props) {
             </View>
 
             {/* Map */}
-            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: '15%' }]}>
+            <View style={[styles.section, {flex:1, paddingBottom: 0, paddingTop: isWeb ? dimensions.width < 500 ? 60 : 86 : 80, marginBottom: 60 }]}>
                 <View style={[styles.content, {flex:1}]}> 
                     <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, {marginBottom: 30}]}>
                         WHERE WE'RE AT
@@ -242,23 +242,22 @@ function Page(props) {
                 <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', alignItems: 'center'}}>
                     <View style={
                         [
-                            {position: 'relative', height: 400},
+                            {position: 'relative' }, isWeb ? {height: 400}:{height:150},
                             dimensions.width < 700 ? {flex: 1} : {flex: 2, flexDirection: 'column'}
                         ]}>
-                        <HybridImageBackground source={isWeb ? {uri: '/images/home_store_image.png'} : require('../public/images/home_store_image.png')}
-                        imageStyle={{resizeMode: 'cover'}}
-                        style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
+                        <HybridImageBackground source={isWeb ? {uri: '/images/home_store_image_new.png'} : require('../public/images/home_store_image_new.png')}
+                        style= {{position: 'absolute',right: 0, bottom: 0}, isWeb ? {height:312,width:727,left:145,top:31 }:{height:133,width:310,left:52,top:33} } />
                     </View>
                     <View style={dimensions.width < 700 ? {} : {flex: 1, paddingLeft: 40}}>
-                        <View style={{marginTop: 40, marginBottom: 40}}>
+                     <View style={{marginTop: 40, marginBottom: 40}} >
                             <View style={{ flex: 1, maxWidth: 400}}>
-                                <Text accessibilityRole="header" aria-level="1"  style={responsiveStyles.text_hero}>
+                                <Text accessibilityRole="header" aria-level="1"  style={[responsiveStyles.text_hero,isWeb ? {} : {position:'relative',left:20}]}>
                                     Visit Our Store
                                 </Text>
                             </View>
                             <Link href="https://shop.spicygreenbook.org">
                                 <View style={{width: 200, marginTop: 20}}>
-                                    <View style={[styles.button_green, { borderColor: '#fff', justifyContent: 'center', alignItems: 'center'}]} >
+                                    <View style={[styles.button_green, { borderColor: '#fff', justifyContent: 'center', alignItems: 'center'},isWeb ? {} : {position:'relative',left:100}]} >
                                         <Text style={[styles.button_green_text, { textAlign: 'center'}]}>Shop Now</Text>
                                     </View>
                                 </View>
