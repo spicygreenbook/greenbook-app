@@ -1,8 +1,8 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a bug report to inform us what functionality is not working anymore, so that we can fix it.
 title: ''
-labels: bug
+labels: "Type: Bug", "Priority: Medium", "Status: Available"
 assignees: ''
 
 ---
