@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, ActivityIndicator, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, FlatList, Image, TouchableOpacity, SafeAreaView } from "react-native";
 
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
@@ -11,6 +11,7 @@ import { getStyles, Theme, getContent, getData } from "../utils";
 function Page(props) {
   const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
   let numColumns = dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 2;
+  console.log("DIMENSIONS", dimensions)
   const styles = StyleSheet.create(
     getStyles("button_green, button_green_text, text_header2,text_header3, text_header4, text_header6, text_body2, section, content", {
       isWeb,
@@ -21,55 +22,59 @@ function Page(props) {
 
     HeaderContainer: {
       paddingTop: 80,
-      margin: "auto",
     },
 
     listingsORvolunteers: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: "space-between",
-      margin: "auto",
-      paddingTop: "5%",
-      paddingBottom: "10%",
-      width: 500
+      alignContent: "center",
+      alignItems: "center",
+      paddingBottom: 20,
+      marginTop: 50,
+      width: "auto"
     },
 
     buttonStyle: {
-      flex: 1,
-      margin: "1rem",
-      height: "55px",
       display: "flex",
-      justifyContent: "center"
+      alignContent: "center",
+      backgroundColor: "#006633",
+      color: "#fff",
+      padding: 20,
+      margin: 10
     },
 
     volunteerSection: {
-      marginTop: "5rem"
+      marginTop: 25,
     },
 
     testimonialsHeader: {
-      textAlign: "center",
-      margin: 0,
-      paddingTop: "10%",
-      paddingBottom: "10%",
-      paddingLeft: 0,
-      paddingRight: 0,
+      display: "flex",
+      marginBottom: 50,
       lineHeight: 50,
+      padding: 25,
       backgroundColor: "#006633",
-      color: "#fff"
+      color: "#fff",
+      width: "90%",
+      alignContent: "center",
+      alignSelf: "center",
+      justifyContent: "center",
+      alignItems: "center",
+      textAlign: "center",
     },
 
     secondaryTestimonialsHeader: {
-      fontWeight: 100,
+      fontWeight: "100",
       textAlign: "center",
       color: "#1f1f1f",
-      marginBottom: "3%"
+      marginBottom: 30
     },
 
     everyOtherTestimonial: {
       height: "90%",
       flex: 1,
       margin: 10,
-      padding: 72,
+      padding: 45,
       justifyContent: 'space-evenly',
       shadowColor: "#000",
       shadowOffset: {
@@ -83,7 +88,7 @@ function Page(props) {
     testimonialCard: {
       flex: 1 / numColumns,
       margin: 10,
-      padding: 72,
+      padding: 45,
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
@@ -116,7 +121,7 @@ function Page(props) {
     testimonialAvatar: {
       width: 60,
       height: 60,
-      marginRight: "1rem"
+      marginRight: 10
       //borderRadius: "50%",
       //objectFit: "cover",
       //marginRight: "1rem",
@@ -150,8 +155,10 @@ function Page(props) {
   const [content, setContent] = useState(props.content || {});
 
   const [loadingTestimonials, setLoadingTestimonials] = useState(!props.testimonials);
+  const [loadingVolunteers, setLoadingVolunteers] = useState(!props.volunteers);
   const [errorTestimonials, setErrorTestimonials] = useState("");
-  const [testimonials, setTestimonials, setVolunteers] = useState(props.testimonials || []);
+  const [testimonials, setTestimonials] = useState(props.testimonials || []);
+  const [volunteers, setVolunteers] = useState(props.volunteers || []);
   
 
   if (!props.content) {
@@ -175,8 +182,9 @@ function Page(props) {
         type: "testimonial",
       })
         .then((_testimonials) => {
+          const business = _testimonials.filter(item => item.type !== "Volunteer")
           setLoadingTestimonials(false);
-          setTestimonials(_testimonials);
+          setTestimonials(business);
         })
         .catch((err) => {
           console.error(err);
@@ -184,14 +192,25 @@ function Page(props) {
           setErrorTestimonials("Failed to load testimonials.");
         });
     }
+
+    // Render Business Testimonials only
+    if(props.testimonials) {
+      let business = testimonials.filter(item => item.type !== "Volunteer")
+      setTestimonials(business)
+    }
   }, []);
 
 
-  // Render Businesses Testimonials only
   useEffect(() => {
-    if(props.testimonials){
-      let listings = testimonials.filter(item => item.type !== "Volunteer")
-      setTestimonials(listings)
+    if(!props.volunteers){
+      getData({
+        type: "testimonial",
+      })
+      .then((_testimonials) => {
+        let volunteers = _testimonials.filter(item => item.type === "Volunteer")
+        setLoadingVolunteers(false)
+        setVolunteers(volunteers)
+      })
     }
   }, [])
 
@@ -200,10 +219,10 @@ function Page(props) {
   const businessRef = useRef(null);
 
   const scrollToVolunteer = () => {
-      window.scrollTo(0, volunteerRef.current.offsetTop);
+    window.scrollTo(0, volunteerRef.current.offsetTop - 200);
   }
   const scrollToBusiness = () => {
-      window.scrollTo(0, businessRef.current.offsetTop);
+    window.scrollTo(0, businessRef.current.offsetTop - 200);
   }
 
   return (
@@ -213,7 +232,7 @@ function Page(props) {
           <ActivityIndicator color={Theme.green} size="large" />
         </View>
       ) : (
-        <React.Fragment>
+        <SafeAreaView>
           <PageTitle title={content.page_title} />
           {!!hasBody && (
             <View style={[styles.section]}>
@@ -224,8 +243,10 @@ function Page(props) {
           )}
 
           {/****************************************** HEADER *******************************************/}
+
+
           <View                   
-              style={[testimonialStyles.HeaderContainer, styles.content]}
+              style={[testimonialStyles.HeaderContainer, styles.section]}
             >
             <Text style={[styles.text_header3, testimonialStyles.secondaryTestimonialsHeader]}>
               Community
@@ -234,19 +255,25 @@ function Page(props) {
               Read what businesses and volunteers are saying about Spicy Green Book.
             </Text>
             <View style={[styles.content, testimonialStyles.listingsORvolunteers]}>
-              <Text onPress={scrollToBusiness} style={[testimonialStyles.buttonStyle, styles.button_green, styles.button_green_text]}>Businesses</Text>
-              <Text onPress={scrollToVolunteer} style={[testimonialStyles.buttonStyle, styles.button_green, styles.button_green_text]}>Volunteers</Text>
+            <TouchableOpacity onPress={scrollToBusiness}> 
+              <Text  style={[ styles.text_header4, testimonialStyles.buttonStyle ]}>Businesses</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={scrollToVolunteer}> 
+              <Text  style={[ styles.text_header4,  testimonialStyles.buttonStyle]}>Volunteers</Text>
+              </TouchableOpacity>
             </View>
-
-            <Text ref={businessRef} style={[styles.text_header2, testimonialStyles.testimonialsHeader]}>
-              Businesses
-            </Text>
-
           </View>
+
+
+
           
           {/********************************** Business Testimonials ***********************************/}
-          <View style={[styles.section]} nativeID="testimonialsLinks">
+          
+          <View ref={businessRef} style={[styles.section]} nativeID="testimonialsLinks">
             <View style={styles.content}>
+            <Text style={[ styles.text_header3, testimonialStyles.testimonialsHeader]}>
+              Businesses
+            </Text>
               {loadingTestimonials ? (
                 <ActivityIndicator color={Theme.green} size="large" />
               ) : errorTestimonials ? (
@@ -330,7 +357,8 @@ function Page(props) {
               )}
             </View>
           </View>
-        </React.Fragment>
+        
+        </SafeAreaView>
       )}
       
     {/********************************                                          ********************************/}
@@ -340,15 +368,21 @@ function Page(props) {
     {/********************************                                          ********************************/}
       
     <>
+    
     <View ref={volunteerRef} style={[styles.section]} nativeID="testimonialsLinks">
       <View style={styles.content}>
       <Text style={[styles.text_header2, testimonialStyles.testimonialsHeader]}>
           Volunteers
       </Text>
+      {loadingVolunteers ? (
+                <ActivityIndicator color={Theme.green} size="large" />
+              ) : errorTestimonials ? (
+                <Text>{errorTestimonials}</Text>
+              ) : (
       <FlatList
           style={testimonialStyles.volunteerSection}
           key={"cols" + numColumns}
-          data={props.volunteers} 
+          data={volunteers} 
           numColumns={numColumns}
           renderItem={({ item, index, separators }) => (
           <View
@@ -419,8 +453,11 @@ function Page(props) {
             )}
           </View>
           )}
+          
           keyExtractor={(item, index) => "volunteers" + index}
           />
+          )}
+
         </View>
       </View>
       </>
