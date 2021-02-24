@@ -11,7 +11,7 @@ function Page(props) {
 
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header2, section, content', {isWeb}));
-    //console.log('page props', props)
+    // console.log('page props', props)
 
     const [ pageLoading, setPageLoading ] = useState(props.content ? false: true);
     const [ content, setContent ] = useState(props.content || {});
@@ -27,6 +27,8 @@ function Page(props) {
             });
         }, [])
     }
+
+    let numColumns = dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 3;
 
     return (
         <React.Fragment>
