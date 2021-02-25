@@ -2,13 +2,13 @@
 //export { default } from '@expo/next-adapter/document';
 
 import { getInitialProps } from '@expo/next-adapter/document';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
 class CustomDocument extends Document {
   render() {
     return (
-      <html>
+      <Html>
         <Head>
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -18,7 +18,6 @@ class CustomDocument extends Document {
             <meta name="msapplication-TileColor" content="#da532c" />
             <meta name="theme-color" content="#eaeaea" />
             <link rel="preconnect" href="https://www.google-analytics.com" />
-            <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0"/>
             <link rel="manifest" href="site.webmanifest" />
             <meta name="twitter:card" content="summary_large_image" />
             <meta property="twitter:domain" content="spicygreenbook.org" />
@@ -50,7 +49,7 @@ class CustomDocument extends Document {
               })();
            `}} />
         </body>
-      </html>
+      </Html>
     )
   }
 };
