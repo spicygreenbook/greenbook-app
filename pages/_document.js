@@ -1,11 +1,16 @@
 // @generated: @expo/next-adapter@2.1.0
 //export { default } from '@expo/next-adapter/document';
 
-import { getInitialProps } from '@expo/next-adapter/document';
-import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class CustomDocument extends Document {
+
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
+  }
+
   render() {
     return (
       <Html>
@@ -25,7 +30,7 @@ class CustomDocument extends Document {
         <body>
           <Main />
           <NextScript />
-            <link href="/site.css" rel="stylesheet" />
+          <link href="/site.css" rel="stylesheet" />
 
           <script async src={`https://www.googletagmanager.com/gtag/js?id=UA-168538359-1`}/>
           <script
@@ -52,12 +57,6 @@ class CustomDocument extends Document {
       </Html>
     )
   }
-};
-
-CustomDocument.getInitialProps = async props => {
-  const result = await getInitialProps(props);
-  // Mutate result...
-  return result;
 };
 
 export default CustomDocument;
