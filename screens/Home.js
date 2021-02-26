@@ -10,16 +10,17 @@ import { parseAddress } from '../utils/cityState';
 import { Entypo } from '@expo/vector-icons'; 
 import Search from "../components/Search";
 import SGBMap from "../components/SGBMap";
-import { getInstagram } from '../utils/getData';
-import { handleRootClick } from '../utils/rootClickHandler';
-import { Fontisto } from '@expo/vector-icons'; 
-import AppStoreIconBadge from '../public/app-store.svg';
-import GooglePlayIconBadge from '../public/google-play.svg';
-import CallToAction from './Home/CallToAction';
-import Testimonial from './Home/Testimonial';
-import useFetchData from '../hooks/useFetchData';
-import {WebView} from 'react-native-webview';
-import SubscribeSection from '../components/SubscribeSection';
+import { getInstagram } from "../utils/getData";
+import { handleRootClick } from "../utils/rootClickHandler";
+import { Fontisto } from "@expo/vector-icons";
+import AppStoreIconBadge from "../public/app-store.svg";
+import GooglePlayIconBadge from "../public/google-play.svg";
+import ABCVideoThumbnail from "../public/images/abc-video-thumbnail.png";
+import CallToAction from "./Home/CallToAction";
+import Testimonial from "./Home/Testimonial";
+import useFetchData from "../hooks/useFetchData";
+import { WebView } from "react-native-webview";
+import SubscribeSection from "../components/SubscribeSection";
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -267,28 +268,49 @@ function Page(props) {
                 </View>
             </View>
 
-            {/*ABC Video*/}
-            <View style={[styles.section, { paddingTop: 80 }]}>
-                <View style={styles.content}>
-                    {isWeb ? (
-                        <div style={{position: 'relative'}}>
-                            <div style={{paddingTop: ((272/476)*100) + '%'}} />
-                                <iframe style={{
-                                    overflow: 'hidden',
-                                    position: 'absolute',
-                                    top: 0,
-                                    bottom: 0,
-                                    right: 0,
-                                    left: 0,
-                                    border: 0,
-                                    background: '#fff',
-                                    frameborder: 0
-                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen />
-                            </div>
-                        ) : (
-                            <WebView 
-                                originWhitelist={['*']}
-                                source={{html: `
+      {/*ABC Video*/}
+      <View style={[styles.section, { paddingTop: 80 }]}>
+        <View style={styles.content}>
+          {isWeb ? (
+            <div id="test" style={{ position: "relative" }}>
+              <div style={{ paddingTop: (272 / 476) * 100 + "%" }}>
+                <img
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    top: 0,
+                    left: 0,
+                    zIndex: 1,
+                  }}
+                  src={ABCVideoThumbnail}
+                />
+
+                <iframe
+                  style={{
+                    position: "absolute",
+                    overflow: "hidden",
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    border: 0,
+                    background: "#fff",
+                    frameborder: 0,
+                  }}
+                  src="https://abc7.com/video/embed/?pid=9623765"
+                  width="100%"
+                  height="100%"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ) : (
+            <WebView
+              originWhitelist={["*"]}
+              source={{
+                html: `
                                    <div style="position:relative">
                                         <div style="paddingTop: ${((272/476)*100)}%"></div>
                                         <iframe style="
