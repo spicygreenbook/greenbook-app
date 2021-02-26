@@ -51,6 +51,19 @@ function Page(props) {
         { href: '#become_sponsor', title: 'BECOME A SPONSOR' }
     ]
 
+    const sponsorLevels = [
+        { title: 'Seed', amount: '500' },
+        { title: 'Earth', amount: '1K' },
+        { title: 'Water', amount: '2K' },
+        { title: 'Light', amount: '3K' },
+        { title: 'Sprout', amount: '4K' },
+        { title: 'Ramekin', amount: '5K' },
+        { title: 'Rolling Pin', amount: '10K' },
+        { title: 'Spatula', amount: '15K' },
+        { title: 'Martini Glass', amount: '20K' },
+        { title: 'Ladle', amount: '25K+' },
+    ]
+
     return (
         <React.Fragment>
             { pageLoading ?
@@ -91,7 +104,7 @@ function Page(props) {
                                 </View>
                             </View>
 
-                            <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingTop: 20, paddingBottom: 20, marginLeft: 70, marginRight: 70 }]}>
+                            <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingTop: 20, paddingBottom: 20, marginLeft: 100, marginRight: 100 }]}>
                                 <View style={styles.content}>
                                     <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <View style={dimensions.width < 700 ? { paddingLeft: 40, paddingRight: 40 } : { flex: 2, paddingLeft: 80, paddingRight: 80 }}>
@@ -120,7 +133,7 @@ function Page(props) {
                             <View style={styles.section}>
                                 <View style={styles.content}>
                                     <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center' }}>
-                                        <View style={dimensions.width < 700 ? { paddingLeft: 40, paddingRight: 40 } : { flex: 2 }}>
+                                        <View style={dimensions.width < 700 ? { paddingLeft: 40, paddingRight: 40, marginLeft: 150 } : { flex: 2 }}>
                                             <ResponsiveImage
                                                 style={{ width: 100, resizeMode: 'contain', aspectRatio: 1 }}
                                                 alt="danilo"
@@ -135,35 +148,65 @@ function Page(props) {
                                 </View>
                             </View>
 
+                            <View style={[styles.section, { paddingTop: 20, paddingBottom: 20 }]}>
+                                <View style={styles.content}>
+                                    <View style={{ alignSelf: 'flex-start' }}>
+                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP BENEFITS</Text>
+                                    </View>
+                                    <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+
+                                        <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 20, paddingRight: 5 }}>
+                                            <Text style={{ fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 60 }}>
+                                                Broaden your visibility:
+                                </Text>                              
+
+                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                Reach 193+ participating businesses, thousands of customers, and 800+ volunteers
+                                </Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                Appear on the SGB website and app
+                                </Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                Engage with SGB's Instagram, Facebook, and Twitter communities
+                                </Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                Meet like-minded sponsors, donors, and partners
+                                </Text>
+                                        </View>
+                                    </View>
+
+                                    <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
+                                        <ResponsiveImage
+                                            style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
+                                            alt="Mayas Cookies"
+                                            source={require('../public/images/mayascookies.png')}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+
 
 
                         </View>
                     </TouchableOpacity>
-                )}
-        </React.Fragment>
+    )
+}
+        </React.Fragment >
     )
 }
 
 
 
 export default Page;
-
-{/* <View style={styles.section}>
-                                <View style={styles.content}>
-                                <View style={{ backgroundColor: Theme.green_bg, height: 600, display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-                                    <View>
-                                        <ResponsiveImage
-                                            style={{ width: 500, aspectRatio: 1 }}
-                                            alt="Opportunity Gap"
-                                            // layerColor={'rgba(0,0,0,0.5)'}
-                                            source={require('../public/images/opportunity_gap.jpg')}
-                                        />
-                                    </View>
-                                    <View>
-                                        <Text style={styles.button_white_text}>Due to systemic racism and societal injustices, Black-owned businesses often have insufficient access to funding, marketing support, and other services.</Text>
-                                        <Text style={styles.button_white_text}>Did you know that 87% of C-Level decision-makers in this nation are white men, while white men make up only 20% of the overall population?</Text>
-                                        <Text style={styles.button_white_text}>This statistic alone shines a bright light on what we are trying to change. Your conscientious contribution goes toward helping us level these disparities.</Text>
-                                    </View>
-                                </View>
-                                </View>
-                            </View> */}
