@@ -43,11 +43,18 @@ function App(props) {
 export async function getStaticProps(context) {
     let content = await getContent({type: 'content', uid: 'testimonials', ref_id: context.preview || ''});
     let testimonials = await getData({type: 'testimonial'})
+    let volunteers = await getData({type: 'testimonial'})
+        .then(data => {
+        return data.filter(item => {
+            return item.type === "Volunteer"
+        })
+    })
     console.log('testimonials', testimonials, 'content', content)
     return {
         props: {
             content: content && content.content || {},
             testimonials: testimonials,
+            volunteers,
             url: '/testimonials'
         }
     };
