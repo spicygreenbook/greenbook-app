@@ -29,7 +29,7 @@ function Page(props) {
     const [errorUpdates, setErrorUpdates] = useState('');
     const [sponsors, setSponsors] = useState(props.sponsors || []);
 
-    const responsiveStyles = StyleSheet.create(getStyles('middle_all, text_hero'));
+    // const responsiveStyles = StyleSheet.create(getStyles('middle_all, text_hero'));
 
     if (!props.content) {
         useEffect(() => {
@@ -158,54 +158,137 @@ function Page(props) {
                                         <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 20, paddingRight: 5 }}>
                                             <Text style={{ fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 60 }}>
                                                 Broaden your visibility:
-                                </Text>                              
+                                </Text>
 
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                Reach 193+ participating businesses, thousands of customers, and 800+ volunteers
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Reach 193+ participating businesses, thousands of customers, and 800+ volunteers
                                 </Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                Appear on the SGB website and app
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Appear on the SGB website and app
                                 </Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                Engage with SGB's Instagram, Facebook, and Twitter communities
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Engage with SGB's Instagram, Facebook, and Twitter communities
                                 </Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                            <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                            <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                Meet like-minded sponsors, donors, and partners
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Meet like-minded sponsors, donors, and partners
                                 </Text>
+                                            </View>
                                         </View>
-                                    </View>
 
-                                    <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
-                                        <ResponsiveImage
-                                            style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
-                                            alt="Mayas Cookies"
-                                            source={require('../public/images/mayascookies.png')}
-                                        />
+                                        <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
+                                            <ResponsiveImage
+                                                style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
+                                                alt="Mayas Cookies"
+                                                source={require('../public/images/mayascookies.png')}
+                                            />
+                                        </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
 
+                            <View style={[styles.section, { paddingTop: 20, paddingBottom: 20 }]}>
+                                <View style={styles.content}>
+                                    <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+
+                                        <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
+                                            <ResponsiveImage
+                                                style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
+                                                alt="Mayas Cookies"
+                                                source={require('../public/images/plateofcrab.png')}
+                                            />
+                                        </View>
+
+                                        <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 20, paddingRight: 5 }}>
+                                            <Text style={{ fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 60 }}>
+                                                Build your reputation:
+                                </Text>
+
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Support diversity and eliminating marginalization
+                                </Text>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Gain valuable partnerships with SGB and the many Black-owned businesses we support
+                                </Text>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Be recognized in your community as a fair, equitable business
+                                </Text>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                    Work with our dedicated PR team actively booking interviews, television appearances, and connecting with influencers
+                                </Text>
+                                            </View>
+                                        </View>
+
+
+                                    </View>
+                                </View>
+                            </View>
+
+
+                            <View style={styles.section}>
+                                <View style={styles.content}>
+                                <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
+                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP LEVELS</Text>
+                                        <Text style={styles.text_body}>Each Sponsorship contribution level has its own benefits. Tap to learn more or download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', justifyContent: 'space-around' }}>
+                                        {sponsorLevels && sponsorLevels.map(level => (
+                                            <View style={{ paddingBottom: 40 }} key={level.title}>
+                                                
+                                                    <View style={[additionalStyles.levels, { display: 'flex', justifyContent: 'center', flexDirection: 'row' }]}>
+                                                        <Text style={[styles.button_white_text, additionalStyles.amount]}><FontAwesome name="dollar" size={60} color="white" />{level.amount}</Text>
+                                                    </View>
+                    
+                                                <Text style={[styles.text_header4, { marginLeft: 50, paddingTop: 10 }]}>{level.title}</Text>
+                                            </View>
+                                        ))}
+                                    </View>
+                                </View>
+                            </View>
 
 
                         </View>
                     </TouchableOpacity>
-    )
-}
+                )
+            }
         </React.Fragment >
     )
 }
+
+const additionalStyles = StyleSheet.create({
+    levels: {
+        backgroundColor: 'black',
+        borderRadius: '50%',
+        height: 180,
+        width: 180
+    },
+    amount: {
+        fontWeight: 'bold',
+        fontSize: 60,
+        marginTop: 80
+    }
+})
 
 
 
