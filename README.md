@@ -4,6 +4,12 @@ Code base for the android, ios, and responseive web apps for [spicygreenbook.org
 # HOW TO CONTRIBUTE
 Find an [issue](https://github.com/spicygreenbook/greenbook-app/issues) and comment that you are going to handle it so we don't get duplicate effort on the same issue. If you are unable to solve the issue, let us know in the comments so someone else can take it.
 
+## New Developer Onboard Tutorial Video
+[https://youtu.be/WA54qPafeRU](https://youtu.be/WA54qPafeRU)
+## Wiki Page 
+[https://github.com/spicygreenbook/greenbook-app/wiki/Developer-Onboarding-Tutorial](https://github.com/spicygreenbook/greenbook-app/wiki/Developer-Onboarding-Tutorial)
+
+
 Join [our slack](https://spicy-green-book.slack.com) and let us know what you can do and we'll let you know how you can help!
 
 # PULL REQUEST
