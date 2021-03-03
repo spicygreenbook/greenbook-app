@@ -16,7 +16,7 @@ function Page(props) {
     const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
     // const styles = StyleSheet.create(getStyles('text_header2, text_header3, section, content', { isWeb }));
     // console.log('page props', props)
-    const styles = StyleSheet.create(getStyles('button_green, button_white, button_white_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer', { isWeb }));
+    const styles = StyleSheet.create(getStyles('button_green, button_white, button_white_text, button_link_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer', { isWeb }));
 
 
     const [pageLoading, setPageLoading] = useState(props.content ? false : true);
@@ -248,22 +248,65 @@ function Page(props) {
 
                             <View style={styles.section}>
                                 <View style={styles.content}>
-                                <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
+                                    <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
                                         <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP LEVELS</Text>
                                         <Text style={styles.text_body}>Each Sponsorship contribution level has its own benefits. Tap to learn more or download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', justifyContent: 'space-around' }}>
                                         {sponsorLevels && sponsorLevels.map(level => (
                                             <View style={{ paddingBottom: 40 }} key={level.title}>
-                                                
-                                                    <View style={[additionalStyles.levels, { display: 'flex', justifyContent: 'center', flexDirection: 'row' }]}>
-                                                        <Text style={[styles.button_white_text, additionalStyles.amount]}><FontAwesome name="dollar" size={60} color="white" />{level.amount}</Text>
-                                                    </View>
-                    
+
+                                                <View style={[additionalStyles.levels, { display: 'flex', justifyContent: 'center', flexDirection: 'row' }]}>
+                                                    <Text style={[styles.button_white_text, additionalStyles.amount]}><FontAwesome name="dollar" size={60} color="white" />{level.amount}</Text>
+                                                </View>
+
                                                 <Text style={[styles.text_header4, { marginLeft: 50, paddingTop: 10 }]}>{level.title}</Text>
                                             </View>
                                         ))}
                                     </View>
+                                </View>
+                            </View>
+
+                            <View style={styles.section}>
+                                <View style={styles.content}>
+                                    <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
+                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>OUR SPONSORS</Text>
+                                        <Text style={styles.text_body}>Call for Sponsors! Become one of the first to contribute to our cause. To learn more, download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
+                                        <Text style={styles.text_body}>To express your interest in sponsorship, please email us: <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43' }}>d.batson@spicygreenbook.org</a></Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
+                                        <TouchableOpacity style={button_white}><Text style={button_green_text}>DOWNLOAD SPONSORSHIP PACKET</Text></TouchableOpacity>
+                                        <TouchableOpacity style={button_green}><Text style={button_white_text}>BECOME A SPONSOR</Text></TouchableOpacity>
+                                    </View>
+
+                                </View>
+                            </View>
+
+                            <View style={styles.section}>
+                                <View style={styles.content}>
+                                    <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
+                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>IN KIND SUPPORT</Text>
+                                        <Text style={styles.text_body}>Want to contribute another way? We will happily accept your in kind support! <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43' }}>Contact Us</a> to share your product/service.</Text>
+                                        <Text style={styles.text_body}>Thank you to our following supporters for helping us reduce our operational expenses:</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+                                        <ResponsiveImage
+                                            style={{ width: 500, resizeMode: 'contain', aspectRatio: 1 }}
+                                            alt="Mayas Cookies"
+                                            source={require('../public/images/verizon.jpg')}
+                                        />
+                                        <ResponsiveImage
+                                            style={{ width: 500, resizeMode: 'contain', aspectRatio: 1 }}
+                                            alt="Mayas Cookies"
+                                            source={require('../public/images/sponsorIcon.jpg')}
+                                        />
+                                        <ResponsiveImage
+                                            style={{ width: 500, resizeMode: 'contain', aspectRatio: 1 }}
+                                            alt="Mayas Cookies"
+                                            source={require('../public/images/konnect_agency.jpg')}
+                                        />
+                                    </View>
+
                                 </View>
                             </View>
 
