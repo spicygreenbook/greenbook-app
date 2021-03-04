@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
-import { Link } from "../components/Link";
+import { Link as NavLink } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { RichText } from "../components/RichText";
@@ -10,6 +10,8 @@ import { getInstagram } from '../utils/getData';
 import { handleRootClick } from '../utils/rootClickHandler';
 import { FontAwesome } from '@expo/vector-icons';
 import { WebView } from 'react-native-webview';
+import * as Scroll from 'react-scroll';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 function Page(props) {
 
@@ -44,11 +46,11 @@ function Page(props) {
     }
 
     const headerLinks = [
-        { href: '#why_sponsor', title: 'Why Sponsor?' },
-        { href: '#sponsor_benefits', title: 'Sponsorship Benefits' },
-        { href: '#sponsor_levels', title: 'Sponsorship Levels' },
-        { href: '#our_sponsors', title: 'Our Sponsors' },
-        { href: '#become_sponsor', title: 'BECOME A SPONSOR' }
+        { href: 'why_sponsor', title: 'Why Sponsor?' },
+        { href: 'sponsor_benefits', title: 'Sponsorship Benefits' },
+        { href: 'sponsor_levels', title: 'Sponsorship Levels' },
+        { href: 'our_sponsors', title: 'Our Sponsors' },
+        { href: 'become_sponsor', title: 'BECOME A SPONSOR' }
     ]
 
     const sponsorLevels = [
@@ -79,7 +81,14 @@ function Page(props) {
                                 justifyContent: 'space-around', paddingTop: 70
                             }}>
                                 {headerLinks && headerLinks.map((header, index) => (
-                                    <Link key={index} href={header.href} contain>
+                                    <Link key={index}
+                                        to={header.href}
+                                        spy={true}
+                                        smooth={true}
+                                        duration={300}
+                                        activeClass="active"
+                                    >
+
                                         <View style={dimensions.width < 800 ? { marginTop: 40, marginLeft: 20 } : header.title !== 'BECOME A SPONSOR' ? { marginTop: 40 } : { backgroundColor: 'black', padding: 10, marginTop: 40 }} >
                                             <Text style={dimensions.width < 800 && header.title === 'BECOME A SPONSOR' ? { fontSize: 16, lineHeight: 16, fontFamily: "ApercuMedium", backgroundColor: 'black', padding: 10, color: 'white', fontWeight: 'bold', marginRight: 15, flex: 2, marginTop: 10 } : { fontFamily: "ApercuMedium", fontSize: 18, lineHeight: 16, color: 'white', fontWeight: 'bold' }}>{header.title}</Text>
                                         </View>
@@ -87,22 +96,24 @@ function Page(props) {
                                 ))}
                             </View>
 
-                            <View id="why_sponsor" style={[styles.section, { fontSize: 24, paddingTop: 40 }]}>
-                                <View style={styles.content}>
-                                    <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
-                                        <View style={{ flex: 1 }}>
-                                            <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 2, paddingLeft: 20 }}>
-                                                    <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>WHY SPONSOR?</Text>
-                                                    <Text style={[styles.text_body, { color: '#000' }]}>
-                                                        Spicy Green Book’s stories are rich in cultural identity—taking you on a fascinating, delicious journey. We can’t tell these stories without your help! Now is your chance to join our exciting movement by supporting our growth. Together, we can empower more Black-owned businesses, diversify the world’s business landscape, and bring amazing food, culture, and experiences to all!
+                            <Element name="why_sponsor">
+                                <View style={[styles.section, { fontSize: 24, paddingTop: 40 }]}>
+                                    <View style={styles.content}>
+                                        <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 50 }}>
+                                            <View style={{ flex: 1 }}>
+                                                <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 2, paddingLeft: 20 }}>
+                                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>WHY SPONSOR?</Text>
+                                                        <Text style={[styles.text_body, { color: '#000' }]}>
+                                                            Spicy Green Book’s stories are rich in cultural identity—taking you on a fascinating, delicious journey. We can’t tell these stories without your help! Now is your chance to join our exciting movement by supporting our growth. Together, we can empower more Black-owned businesses, diversify the world’s business landscape, and bring amazing food, culture, and experiences to all!
                                             </Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </Element>
 
                             <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingTop: 20, paddingBottom: 20, marginLeft: 100, marginRight: 100 }]}>
                                 <View style={styles.content}>
@@ -148,54 +159,56 @@ function Page(props) {
                                 </View>
                             </View>
 
-                            <View style={[styles.section, { paddingTop: 20, paddingBottom: 20 }]}>
-                                <View style={styles.content}>
-                                    <View style={{ alignSelf: 'flex-start' }}>
-                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP BENEFITS</Text>
-                                    </View>
-                                    <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
-
-                                        <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 20, paddingRight: 5 }}>
-                                            <Text style={{ fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 60 }}>
-                                                Broaden your visibility:
-                                </Text>
-
-                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                    Reach 193+ participating businesses, thousands of customers, and 800+ volunteers
-                                </Text>
-                                            </View>
-                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                    Appear on the SGB website and app
-                                </Text>
-                                            </View>
-                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                    Engage with SGB's Instagram, Facebook, and Twitter communities
-                                </Text>
-                                            </View>
-                                            <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
-                                                <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
-                                                <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
-                                                    Meet like-minded sponsors, donors, and partners
-                                </Text>
-                                            </View>
+                            <Element name="sponsor_benefits">
+                                <View style={[styles.section, { paddingTop: 20, paddingBottom: 20 }]}>
+                                    <View style={styles.content}>
+                                        <View style={{ alignSelf: 'flex-start' }}>
+                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP BENEFITS</Text>
                                         </View>
+                                        <View style={dimensions.width < 700 ? {} : { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
 
-                                        <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
-                                            <ResponsiveImage
-                                                style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
-                                                alt="Mayas Cookies"
-                                                source={require('../public/images/mayascookies.png')}
-                                            />
+                                            <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 40, paddingRight: 40 }}>
+                                                <Text style={{ fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 60 }}>
+                                                    Broaden your visibility:
+                                </Text>
+
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                    <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                    <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                        Reach 193+ participating businesses, thousands of customers, and 800+ volunteers
+                                </Text>
+                                                </View>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                    <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                    <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                        Appear on the SGB website and app
+                                </Text>
+                                                </View>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                    <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                    <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                        Engage with SGB's Instagram, Facebook, and Twitter communities
+                                </Text>
+                                                </View>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 }}>
+                                                    <FontAwesome name="check" size={25} style={{ color: 'white', marginRight: 10 }} />
+                                                    <Text style={{ fontSize: 24, alignSelf: 'flex-end', color: '#ffffff', flex: 1 }}>
+                                                        Meet like-minded sponsors, donors, and partners
+                                </Text>
+                                                </View>
+                                            </View>
+
+                                            <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
+                                                <ResponsiveImage
+                                                    style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
+                                                    alt="Mayas Cookies"
+                                                    source={require('../public/images/mayascookies.png')}
+                                                />
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </Element>
 
                             <View style={[styles.section, { paddingTop: 20, paddingBottom: 20 }]}>
                                 <View style={styles.content}>
@@ -204,12 +217,12 @@ function Page(props) {
                                         <View style={dimensions.width < 700 ? { paddingTop: 40 } : { flex: 1 }}>
                                             <ResponsiveImage
                                                 style={{ width: 700, resizeMode: 'contain', aspectRatio: 1.2 }}
-                                                alt="Mayas Cookies"
+                                                alt="plate of crab"
                                                 source={require('../public/images/plateofcrab.png')}
                                             />
                                         </View>
 
-                                        <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 20, paddingRight: 5 }}>
+                                        <View style={dimensions.width < 700 ? {} : { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 40, paddingRight: 40 }}>
                                             <Text style={{ fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 60 }}>
                                                 Build your reputation:
                                 </Text>
@@ -246,41 +259,45 @@ function Page(props) {
                             </View>
 
 
-                            <View style={styles.section}>
-                                <View style={styles.content}>
-                                    <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
-                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP LEVELS</Text>
-                                        <Text style={styles.text_body}>Each Sponsorship contribution level has its own benefits. Tap to learn more or download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', justifyContent: 'space-around' }}>
-                                        {sponsorLevels && sponsorLevels.map(level => (
-                                            <View style={{ paddingBottom: 40 }} key={level.title}>
+                            <Element name="sponsor_levels">
+                                <View style={styles.section}>
+                                    <View style={styles.content}>
+                                        <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
+                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>SPONSORSHIP LEVELS</Text>
+                                            <Text style={styles.text_body}>Each Sponsorship contribution level has its own benefits. Tap to learn more or download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', justifyContent: 'space-around' }}>
+                                            {sponsorLevels && sponsorLevels.map(level => (
+                                                <View style={{ paddingBottom: 40 }} key={level.title}>
 
-                                                <View style={[additionalStyles.levels, { display: 'flex', justifyContent: 'center', flexDirection: 'row' }]}>
-                                                    <Text style={[styles.button_white_text, additionalStyles.amount]}><FontAwesome name="dollar" size={60} color="white" />{level.amount}</Text>
+                                                    <View style={[additionalStyles.levels, { display: 'flex', justifyContent: 'center', flexDirection: 'row' }]}>
+                                                        <Text style={[styles.button_white_text, additionalStyles.amount]}><FontAwesome name="dollar" size={60} color="white" />{level.amount}</Text>
+                                                    </View>
+
+                                                    <Text style={[styles.text_header4, { marginLeft: 50, paddingTop: 10 }]}>{level.title}</Text>
                                                 </View>
-
-                                                <Text style={[styles.text_header4, { marginLeft: 50, paddingTop: 10 }]}>{level.title}</Text>
-                                            </View>
-                                        ))}
+                                            ))}
+                                        </View>
                                     </View>
                                 </View>
-                            </View>
+                            </Element>
 
-                            <View style={styles.section}>
-                                <View style={styles.content}>
-                                    <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
-                                        <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>OUR SPONSORS</Text>
-                                        <Text style={styles.text_body}>Call for Sponsors! Become one of the first to contribute to our cause. To learn more, download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
-                                        <Text style={styles.text_body}>To express your interest in sponsorship, please email us: <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43' }}>d.batson@spicygreenbook.org</a></Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
-                                        <TouchableOpacity style={[styles.button_green, { backgroundColor: 'white', marginRight: 10 }]}><Text style={{ color: '#246e43', fontSize: 16, lineHeight: 15, fontFamily: "ApercuMedium", }}>DOWNLOAD SPONSORSHIP PACKET</Text></TouchableOpacity>
-                                        <TouchableOpacity style={[styles.button_green, { marginLeft: 10, flexBasis: '30%' }]}><Text style={styles.button_white_text}>BECOME A SPONSOR</Text></TouchableOpacity>
-                                    </View>
+                            <Element name="our_sponsors">
+                                <View style={styles.section}>
+                                    <View style={styles.content}>
+                                        <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
+                                            <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>OUR SPONSORS</Text>
+                                            <Text style={styles.text_body}>Call for Sponsors! Become one of the first to contribute to our cause. To learn more, download our <span style={{ color: '#246e43' }}>Sponsorship Packet.</span></Text>
+                                            <Text style={styles.text_body}>To express your interest in sponsorship, please email us: <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43' }}>d.batson@spicygreenbook.org</a></Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
+                                            <TouchableOpacity style={[styles.button_green, { backgroundColor: 'white', marginRight: 10 }]}><Text style={{ color: '#246e43', fontSize: 16, lineHeight: 15, fontFamily: "ApercuMedium", }}>DOWNLOAD SPONSORSHIP PACKET</Text></TouchableOpacity>
+                                            <TouchableOpacity style={[styles.button_green, { marginLeft: 10, flexBasis: '30%' }]}><Text style={styles.button_white_text}>BECOME A SPONSOR</Text></TouchableOpacity>
+                                        </View>
 
+                                    </View>
                                 </View>
-                            </View>
+                            </Element>
 
                             <View style={styles.section}>
                                 <View style={[styles.content, { display: 'flex', flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }]}>
