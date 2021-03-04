@@ -275,40 +275,47 @@ function Page(props) {
                                         <Text style={styles.text_body}>To express your interest in sponsorship, please email us: <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43' }}>d.batson@spicygreenbook.org</a></Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
-                                        <TouchableOpacity style={button_white}><Text style={button_green_text}>DOWNLOAD SPONSORSHIP PACKET</Text></TouchableOpacity>
-                                        <TouchableOpacity style={button_green}><Text style={button_white_text}>BECOME A SPONSOR</Text></TouchableOpacity>
+                                        <TouchableOpacity style={[styles.button_green, { backgroundColor: 'white', marginRight: 10 }]}><Text style={{ color: '#246e43', fontSize: 16, lineHeight: 15, fontFamily: "ApercuMedium", }}>DOWNLOAD SPONSORSHIP PACKET</Text></TouchableOpacity>
+                                        <TouchableOpacity style={[styles.button_green, { marginLeft: 10, flexBasis: '30%' }]}><Text style={styles.button_white_text}>BECOME A SPONSOR</Text></TouchableOpacity>
                                     </View>
 
                                 </View>
                             </View>
 
                             <View style={styles.section}>
-                                <View style={styles.content}>
+                                <View style={[styles.content, { display: 'flex', flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }]}>
                                     <View style={{ alignSelf: 'flex-start', paddingBottom: 30 }}>
                                         <Text accessibilityRole="header" aria-level="3" style={[styles.text_header3, { marginBottom: 20 }]}>IN KIND SUPPORT</Text>
-                                        <Text style={styles.text_body}>Want to contribute another way? We will happily accept your in kind support! <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43' }}>Contact Us</a> to share your product/service.</Text>
+                                        <Text style={styles.text_body}>Want to contribute another way? We will happily accept your in kind support! <a href="mailto:d.batson@spicygreenbook.org" style={{ color: '#246e43', textDecoration: 'none' }}>Contact Us</a> to share your product/service.</Text>
                                         <Text style={styles.text_body}>Thank you to our following supporters for helping us reduce our operational expenses:</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-                                        <ResponsiveImage
-                                            style={{ width: 500, resizeMode: 'contain', aspectRatio: 1 }}
-                                            alt="Mayas Cookies"
-                                            source={require('../public/images/verizon.jpg')}
-                                        />
-                                        <ResponsiveImage
-                                            style={{ width: 500, resizeMode: 'contain', aspectRatio: 1 }}
-                                            alt="Mayas Cookies"
-                                            source={require('../public/images/sponsorIcon.jpg')}
-                                        />
-                                        <ResponsiveImage
-                                            style={{ width: 500, resizeMode: 'contain', aspectRatio: 1 }}
-                                            alt="Mayas Cookies"
-                                            source={require('../public/images/konnect_agency.jpg')}
-                                        />
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '100%', flexWrap: 'wrap' }}>
+                                        <View style={{ flexBasis: '20%' }}>
+                                            <ResponsiveImage
+                                                style={{ width: 200, resizeMode: 'contain', aspectRatio: .8 }}
+                                                alt="verizon"
+                                                source={require('../public/images/verizon.jpg')}
+                                            />
+                                        </View>
+                                        <View style={{ flexBasis: '20%' }}>
+                                            <ResponsiveImage
+                                                style={{ width: 200, resizeMode: 'contain', aspectRatio: 1 }}
+                                                alt="sponsor"
+                                                source={require('../public/images/sponsorIcon.jpg')}
+                                            />
+                                        </View>
+                                        <View style={{ flexBasis: '20%' }}>
+                                            <ResponsiveImage
+                                                style={{ width: 200, resizeMode: 'contain', aspectRatio: .5 }}
+                                                alt="sponsor"
+                                                source={require('../public/images/konnect.jpg')}
+                                            />
+                                        </View>
                                     </View>
 
                                 </View>
                             </View>
+
 
 
                         </View>
