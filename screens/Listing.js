@@ -95,7 +95,7 @@ function Page(props) {
                     </View>
                     <View style={{flex: 1}}>
                         {primaryImages.slice(1, 3).map(({ url }, i) => (
-                            <View style={{flex: 1, borderBottomWidth: i === 0 ? 2 : null, borderColor: i === 0 ? '#fff' : null }}>
+                            <View key={'url' + i} style={{flex: 1, borderBottomWidth: i === 0 ? 2 : null, borderColor: i === 0 ? '#fff' : null }}>
                                 <TouchableOpacity onPress={() => clickImage(i + 1)}>
                                     <Image source={{uri: url + '&w=600'}} style={{width: '100%', height: dimensions.width < 600 ? 150 : dimensions.width < 900 ? 200 : 300}} resizeMode="cover" />
                                 </TouchableOpacity>
@@ -200,17 +200,21 @@ function Page(props) {
                     </React.Fragment>
                 ) : null}
                 {content.youtube_video && <View style={[styles.section, {paddingBottom: 0}]}>
-                    <View style={[styles.content, isWeb ? {} : {height: 300}]}>
+                    <View style={[styles.content, isWeb ? {} : {height: 300, marginTop: 20}]}>
                         {isWeb ? (
-                            <div
-                            dangerouslySetInnerHTML={{
-                              __html: content.youtube_video.html}} />
+                            <div style={{position: 'relative'}}>
+                                <div style={{paddingTop: (100 * ((content.youtube_video.height || 360)/(content.youtube_video.width || 480))) + '%'}} />
+                                <div
+                                style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}}
+                                dangerouslySetInnerHTML={{
+                                  __html: `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${content.youtube_video.embed_url.split(/youtu.be\/|youtube.com\//)[1] || ''}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+                              }} />
+                            </div>
                         ) : (
                             <WebView
-                                    style={ styles.WebViewContainer }
-                                    javaScriptEnabled={true}
-                                    domStorageEnabled={true}
-                                    source={{uri: 'https://www.youtube.com/embed/' + (content.youtube_video.embed_url.split(/youtu.be\/|youtube.com\//)[1] || '') }}
+                                javaScriptEnabled={true}
+                                domStorageEnabled={true}
+                                source={{uri: 'https://www.youtube.com/embed/' + (content.youtube_video.embed_url.split(/youtu.be\/|youtube.com\//)[1] || '') + '?rel=0&autoplay=0&showinfo=0&controls=0' }}
                             />
                         )}
                     </View>
