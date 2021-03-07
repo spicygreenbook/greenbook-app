@@ -191,7 +191,7 @@ const Onboarding = (props) => {
                     ))}
                 </View>
                 <View style={styles.button}>
-                    <Button color="white" title="Get Started" onPress={(event) => props.onChange(event.target)} />
+                    <Button color="#006233" title="Get Started" onPress={(event) => props.onChange(event.target)} />
                 </View>
 
 
