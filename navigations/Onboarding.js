@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet, Image, Button } from 'react-native';
+import { View, SafeAreaView, Text, Dimensions, ScrollView, StatusBar, StyleSheet, Image, Button, Platform } from 'react-native';
+
+const ios = Platform.OS === 'ios';
 
 const Onboarding = (props) => {
 
@@ -191,7 +193,7 @@ const Onboarding = (props) => {
                     ))}
                 </View>
                 <View style={styles.button}>
-                    <Button color="#006233" title="Get Started" onPress={(event) => props.onChange(event.target)} />
+                    <Button color={ios ? '#fff' : '#006233'} title="Get Started" onPress={(event) => props.onChange(event.target)} />
                 </View>
 
 
