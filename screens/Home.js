@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
@@ -40,6 +40,7 @@ function Page(props) {
     const [press, loadingPress, errorPress] = useFetchData('press', props.press);
     const [Listings, loadingListings, errorListings] = useFetchData('listing', props.listings);
     const [testimonials, loadingTestimonial, errorTestimonials] = useFetchData('testimonial', props.testimonials);
+    const [ abcVideoClicked, setAbcVideoClicked ] = useState(false);
 
     const responsiveStyles = StyleSheet.create(getStyles('middle_all, text_hero'));
 
@@ -271,19 +272,38 @@ function Page(props) {
             <View style={[styles.section, { paddingTop: 80 }]}>
                 <View style={styles.content}>
                     {isWeb ? (
-                        <div style={{position: 'relative'}}>
-                            <div style={{paddingTop: ((272/476)*100) + '%'}} />
-                                <iframe style={{
-                                    overflow: 'hidden',
-                                    position: 'absolute',
-                                    top: 0,
-                                    bottom: 0,
-                                    right: 0,
-                                    left: 0,
-                                    border: 0,
-                                    background: '#fff',
-                                    frameborder: 0
-                                }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen />
+                        <div style={{position: 'relative', overflow: 'hidden'}}>
+                            <div style={!abcVideoClicked ? {} : {paddingTop: ((272/476)*100) + '%'}} />
+                                {!abcVideoClicked ? (
+                                    <View style={{positoin: 'relative'}}>
+                                        <TouchableOpacity onPress={e => setAbcVideoClicked(true)}>
+                                            <ResponsiveImage
+                                                style={{width: 1280, height: 720, resizeMode: 'contain'}}
+                                                alt="Spicy Green Book ABC Video"
+                                                source={{uri: '/images/abc_thumbnail.png'}}
+                                            />
+                                            <View style={{
+                                                position: 'absolute',
+                                                left: '50%',
+                                                top: '50%',
+                                                marginLeft: 0 - ((dimensions.width * 0.25) * 0.5),
+                                                marginTop: 0 - ((dimensions.width * 0.25) * 0.5)
+                                            }}><Entypo name="controller-play" size={dimensions.width * 0.25} color="rgba(0,0,0,0.5)" /></View>
+                                        </TouchableOpacity>
+                                    </View>
+                                ) : (
+                                    <iframe style={{
+                                        overflow: 'hidden',
+                                        position: 'absolute',
+                                        top: 0,
+                                        bottom: 0,
+                                        right: 0,
+                                        left: 0,
+                                        border: 0,
+                                        background: '#fff',
+                                        frameborder: 0
+                                    }} src="https://abc7.com/video/embed/?pid=9623765" width="100%" height="100%" allowFullScreen autoplay scrolling="no"/>
+                                )}
                             </div>
                         ) : (
                             <WebView 
