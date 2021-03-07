@@ -16,7 +16,7 @@
     },
     "android": {
       "package": "com.spicygreenbook.app",
-      "versionCode": 2,
+      "versionCode": 3,
       "permissions": [
         "ACCESS_FINE_LOCATION"
       ]
