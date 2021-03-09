@@ -16,6 +16,7 @@ import Testimonials from '../screens/Testimonials';
 import Contact from '../screens/Contact';
 import FAQ from '../screens/FAQ';
 import Volunteers from '../screens/Volunteers';
+import Sponsors from '../screens/Sponsors';
 
 const Drawer = createDrawerNavigator();
 
@@ -37,6 +38,7 @@ const DrawerNavigator = () => (
     <Drawer.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
     <Drawer.Screen name="Donate" component={WithScrollView(Donate)}  />
     <Drawer.Screen name="Store" component={WithScrollView(Shop)}  />
+    <Drawer.Screen name="Sponsor Us" component={WithScrollView(Sponsors)}  />
     <Drawer.Screen name="About" component={WithScrollView(About)}  />
     <Drawer.Screen name="Updates" component={WithScrollView(Updates)}  />
     <Drawer.Screen name="Team" component={WithScrollView(Team)}  />
