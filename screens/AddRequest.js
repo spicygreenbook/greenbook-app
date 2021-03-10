@@ -42,15 +42,14 @@ function Page(props) {
             </View>
         : (
             <React.Fragment>
-                <View style={[styles.section, {paddingBottom: isWeb ? 0 : 80}]}>
+                <View style={[styles.section, {marginTop: 40, paddingBottom: isWeb ? 0 : 80}]}>
                     <View style={styles.content}>
-                        
-                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/contact'} button={'button_green'} title="Go To Contact Form" />}
+                        {!isWeb && <Link style={{marginTop: 40}} href={'https://spicygreenbook.org/addrequest'} button={'button_green'} title="Go To Add Request Form" />}
                     </View>
                 </View>
+
                 {isWeb && <View style={[styles.section]}>
                     <View style={styles.content}>
-                        <Text style={styles.text_header3}>Honeybook Form</Text>
                         <div className="hb-p-5f0282b0a1f62a61eedd0881-4" style={{display: 'inline-block', maxWidth: '100%', minWidth: 600, boxSizing: 'border-box'}}/>
                         <img height="1" width="1" style={{display:'none'}} src="https://www.honeybook.com/p.png?pid=5f0282b0a1f62a61eedd0881" />
                     </View>

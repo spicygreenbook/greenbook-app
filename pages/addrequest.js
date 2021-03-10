@@ -11,7 +11,11 @@ import Head from "next/head";
 function App(props) {
 
   //const { content } = props;
-  const content = {};
+  const content = {
+    uid: 'addrequest',
+    page_title: 'Add Listing Request Form',
+    description: 'Fill out this form to add your listing to Spicy Green Book'
+  };
 
   const initialState = InitialState(props);
 
