@@ -8,6 +8,7 @@ import About from '../screens/About';
 import AddListing from '../screens/AddListing';
 import Volunteer from '../screens/Volunteer';
 import Contact from '../screens/Contact';
+import Test from '../screens/Test';
 import Privacy from '../screens/Privacy';
 import Process from '../screens/Process';
 import Updates from '../screens/Updates';
@@ -79,15 +80,16 @@ function Main(props) {
                   : view === '/team' ? <Team {...props} />
                     : view === '/process' ? <Process {...props} />
                       : view === '/contact' ? <Contact {...props} />
-                        : view === '/add' ? <AddListing {...props} />
-                          : view === '/volunteer' ? <Volunteer {...props} />
-                            : view === '/shop' ? <Shop {...props} />
-                              : view === '/donate' ? <Donate {...props} />
-                                : view === '/faq' ? <FAQ {...props} />
-                                  : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
-                                    : view.indexOf('/biz') === 0 ? <Listing {...props} />
-                                      : view === '/' ? <Home {...props} />
-                                        : <NotFound {...props} />
+                        : view === '/test' ? <Test {...props} />
+                          : view === '/add' ? <AddListing {...props} />
+                            : view === '/volunteer' ? <Volunteer {...props} />
+                              : view === '/shop' ? <Shop {...props} />
+                                : view === '/donate' ? <Donate {...props} />
+                                  : view === '/faq' ? <FAQ {...props} />
+                                    : view === '/search' || view.indexOf('/cities') > -1 ? <List {...props} />
+                                      : view.indexOf('/biz') === 0 ? <Listing {...props} />
+                                        : view === '/' ? <Home {...props} />
+                                          : <NotFound {...props} />
       )
   }
 
