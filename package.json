@@ -13,6 +13,7 @@
     "aws-sdk": "^2.792.0",
     "chrome-aws-lambda": "^5.5.0",
     "expo": "^40.0.0",
+    "expo-av": "~8.7.0",
     "expo-blur": "~8.2.2",
     "expo-font": "~8.4.0",
     "imagemin-optipng": "^8.0.0",

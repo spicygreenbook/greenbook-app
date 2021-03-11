@@ -20,6 +20,7 @@ import Testimonial from './Home/Testimonial';
 import useFetchData from '../hooks/useFetchData';
 import {WebView} from 'react-native-webview';
 import SubscribeSection from '../components/SubscribeSection';
+import { Video } from 'expo-av';
 
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
@@ -89,6 +90,20 @@ function Page(props) {
 
             <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
                 <View style={styles.content}>
+                    <View style={{position: 'relative', marginBottom: 40}}>
+                        <View style={{paddingTop: ((1080/1920) * 100) + '%'}} />
+                        <View style={{position: 'absolute', left: 0, top: 0, bottom:0, right: 0}}>
+                            <Video
+                                source={isWeb ? {uri: '/intro.mp4'} : {uri: 'https://spicygreenbook.org/intro.mp4'}}
+                                useNativeControls
+                                resizeMode="contain"
+                                isLooping
+                                usePoster={true} 
+                                style={{flex: 1}}
+                            />
+                        </View>
+                    </View>
+
                     <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
                         <View style={dimensions.width < 700 ? {paddingLeft: 40, paddingRight: 40} : {flex: 1, paddingLeft: 80, paddingRight: 80}}>
                             <ResponsiveImage
@@ -115,7 +130,7 @@ function Page(props) {
                 </View>
             </View>
 
-            {/* About SGB */}
+
             <View style={{backgroundColor: Theme.green_bg, padding: 20, paddingTop: 60, paddingBottom: 60}}>
                 <View style={{justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
                     {loadingPress ? (
@@ -268,7 +283,8 @@ function Page(props) {
                 </View>
             </View>
 
-            {/*ABC Video*/}
+
+            {/* ABC VIDEO HIDDEN TO PROMOTE OUR OWN VIDEO OP AT THE TOP OF THE PAGE
             <View style={[styles.section, { paddingTop: 80 }]}>
                 <View style={styles.content}>
                     {isWeb ? (
@@ -328,6 +344,7 @@ function Page(props) {
                         )}
                     </View>
                 </View>
+            /*}}
 
             {/* Testimonials */}
             {loadingTestimonial 
