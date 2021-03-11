@@ -39,7 +39,8 @@
     "react-native-web": "~0.13.12",
     "react-native-webview": "11.0.0",
     "stripe": "^8.121.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "unimodules-permissions-interface": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
