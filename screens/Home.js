@@ -128,9 +128,9 @@ function Page(props) {
                                 if (a.name && a.name.indexOf('ABC') > -1) { return -1; }
                                 return 0;
                             }).map((pressRow, p) => 
-                                (<View style={{width: GridWidth({minWidth: 140}), margin: 20}} key={'press' + p}>
+                                (<View style={{width: GridWidth({minWidth: 140}), margin: 20, height: 40}} key={'press' + p}>
                                     <Link href={pressRow.link}>
-                                        <HybridImage source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: 40, resizeMode: 'contain'}} />
+                                        <HybridImage source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: '100%'}}/>
                                     </Link>
                                 </View>)
                             )}
