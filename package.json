@@ -44,8 +44,6 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@expo/next-adapter": "^2.1.45",
-    "@unimodules/core": "^7.0.0",
-    "@unimodules/react-native-adapter": "^5.7.0",
     "fork-ts-checker-webpack-plugin": "^6.1.0",
     "html-webpack-plugin": "^4.3.0",
     "webpack": "^5.23.0",
