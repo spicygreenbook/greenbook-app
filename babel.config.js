@@ -3,5 +3,10 @@
 
 module.exports = {
     presets: ['@expo/next-adapter/babel'],
-    plugins: ["@babel/plugin-proposal-class-properties", { loose: true }]
+    overrides: [
+        {
+            test: "./node_modules/@expo/next-adapter/document.js",
+            plugins: [["@babel/plugin-proposal-class-properties"]],
+        },
+    ],
 };
