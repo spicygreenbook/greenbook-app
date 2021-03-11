@@ -93,14 +93,19 @@ function Page(props) {
                     <View style={{position: 'relative', marginBottom: 40}}>
                         <View style={{paddingTop: ((1080/1920) * 100) + '%'}} />
                         <View style={{position: 'absolute', left: 0, top: 0, bottom:0, right: 0}}>
-                            <Video
-                                source={isWeb ? {uri: '/intro.mp4'} : {uri: 'https://spicygreenbook.org/intro.mp4'}}
+                            {isWeb ? <video
+                                src={'/intro.mp4'}
+                                style={{width: '100%', height: '100%'}}
+                                controls
+                                autoplay
+                            /> : <Video
+                                source={{uri: 'https://spicygreenbook.org/intro.mp4'}}
                                 useNativeControls
                                 resizeMode="contain"
                                 isLooping
                                 usePoster={true} 
                                 style={{flex: 1}}
-                            />
+                            />}
                         </View>
                     </View>
 
@@ -258,11 +263,13 @@ function Page(props) {
                 <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', alignItems: 'center'}}>
                     <View style={
                         [
-                            {position: 'relative' }, isWeb ? {height: 400}:{height:150},
+                            {position: 'relative' }, isWeb ? {height: 400, overflow: 'hidden'}:{height:150},
                             dimensions.width < 700 ? {flex: 1} : {flex: 2, flexDirection: 'column'}
                         ]}>
-                        <HybridImageBackground source={isWeb ? {uri: '/images/home_store_image_new.png'} : require('../public/images/home_store_image_new.png')}
-                        style= {{position: 'absolute',right: 0, bottom: 0}, isWeb ? {height:312,width:727,left:145,top:31 }:{height:133,width:310,left:52,top:33} } />
+                        <HybridImageBackground
+                            source={isWeb ? {uri: '/images/home_store_image_new.png'} : require('../public/images/home_store_image_new.png')}
+                            style={{height: 400}}
+                        />
                     </View>
                     <View style={dimensions.width < 700 ? {} : {flex: 1, paddingLeft: 40}}>
                      <View style={{marginTop: 40, marginBottom: 40}} >
