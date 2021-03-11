@@ -8,5 +8,9 @@ module.exports = {
             test: "./node_modules/@expo/next-adapter/document.js",
             plugins: [["@babel/plugin-proposal-class-properties"]],
         },
+        {
+            test: "./node_modules/@expo/vector-icons/",
+            plugins: [["@babel/plugin-proposal-class-properties"]],
+        },
     ],
 };
