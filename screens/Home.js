@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import { useStateValue } from "../components/State";
 import { StyleSheet, View, FlatList, Text, Image, ImageBackground, ActivityIndicator, TouchableOpacity, Linking, Platform } from 'react-native';
 import { Link } from "../components/Link"; 
@@ -22,15 +22,10 @@ import {WebView} from 'react-native-webview';
 import SubscribeSection from '../components/SubscribeSection';
 import { Video } from 'expo-av';
 
-let currentIndexListing = 0;
-const viewableItemsChangedListing = ({ viewableItems, changed }) => {
-    //console.log("Visible items are", viewableItems);
-    //console.log("Changed in this iteration", changed);
-    currentIndexListing = viewableItems && viewableItems[0] && viewableItems[0].index;
-}
 const viewableItemsChangedConfigListing = {
     itemVisiblePercentThreshold: 50
 };
+let currentIndexListing = 0;
 
 function Page(props) {
 
@@ -55,6 +50,12 @@ function Page(props) {
             console.log('no listing ref')
         }
     }
+
+    const viewableItemsChangedListing = useRef(({ viewableItems, changed }) => {
+        //console.log("Visible items are", viewableItems);
+        //console.log("Changed in this iteration", changed);
+        currentIndexListing = viewableItems && viewableItems[0] && viewableItems[0].index;
+    })
 
     return (
         <>
@@ -176,7 +177,7 @@ function Page(props) {
                             data={Listings.sort((a, b) => b.updated - a.updated).slice(0,10).sort((a, b) =>  a.time - b.time).filter(item => item.images && item.images[0] && item.images[0].image).slice(0,10)
                             }
                             ref={(ref) => { newListingRef = ref; }}
-                            onViewableItemsChanged={viewableItemsChangedListing}
+                            onViewableItemsChanged={viewableItemsChangedListing.current}
                             viewabilityConfig={viewableItemsChangedConfigListing}
                             renderItem={({ item, index, separators }) => {
                                 const address = item.address && item.address[0];
