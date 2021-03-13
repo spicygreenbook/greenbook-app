@@ -37,7 +37,6 @@
     "react-native-svg": "12.1.0",
     "react-native-web": "~0.13.12",
     "react-native-webview": "11.0.0",
-    "react-scroll": "^1.8.1",
     "stripe": "^8.121.0",
     "styled-components": "^5.2.1"
   },
