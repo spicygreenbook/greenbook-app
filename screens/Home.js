@@ -25,7 +25,6 @@ import { Video } from 'expo-av';
 const viewableItemsChangedConfigListing = {
     itemVisiblePercentThreshold: 50
 };
-let currentIndexListing = 0;
 
 function Page(props) {
 
@@ -51,10 +50,11 @@ function Page(props) {
         }
     }
 
+    let currentIndexListing = useRef(0);
     const viewableItemsChangedListing = useRef(({ viewableItems, changed }) => {
         //console.log("Visible items are", viewableItems);
         //console.log("Changed in this iteration", changed);
-        currentIndexListing = viewableItems && viewableItems[0] && viewableItems[0].index;
+        currentIndexListing.current = viewableItems && viewableItems[0] && viewableItems[0].index;
     })
 
     return (
@@ -228,12 +228,12 @@ function Page(props) {
                         <View style={{position: 'absolute', top: '50%', marginTop: -100, left:10, right:10, height: 200, flex: 1}}>
                             <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
                                 <View style={{flex: 1}}>
-                                    <TouchableOpacity onPress={(e) => scrollToIndexListing({animated: true, index: currentIndexListing-1}, 10)}>
+                                    <TouchableOpacity onPress={(e) => scrollToIndexListing({animated: true, index: currentIndexListing.current-1}, 10)}>
                                         <Entypo name="chevron-thin-left" size={48} color="#fff" />
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{flex: 1, alignItems: 'flex-end'}}>
-                                    <TouchableOpacity onPress={(e) => scrollToIndexListing({animated: true, index: currentIndexListing+1}, 10)}>
+                                    <TouchableOpacity onPress={(e) => scrollToIndexListing({animated: true, index: currentIndexListing.current+1}, 10)}>
                                         <Entypo name="chevron-thin-right" size={48} color="#fff" />
                                     </TouchableOpacity>
                                 </View>
