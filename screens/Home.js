@@ -151,7 +151,7 @@ function Page(props) {
                             }).map((pressRow, p) => 
                                 (<View style={{width: GridWidth({minWidth: 140}), margin: 20, height: 40}} key={'press' + p}>
                                     <Link href={pressRow.link}>
-                                        <HybridImage source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: '100%'}}/>
+                                        <HybridImage source={{uri: pressRow.press_site_logo_white.url + '&w=300'}} style={{height: '100%', resizeMode: 'contain'}} objectFit="contain"/>
                                     </Link>
                                 </View>)
                             )}
