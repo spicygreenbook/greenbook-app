@@ -157,7 +157,7 @@ function Page(props) {
                     <View style={styles.section}>
                         <View style={styles.content}>
                             <View style={dimensions.width < 800 ? { alignItems: 'center', marginTop: 40 } : moreStyles.quoteLarge}>
-                                <View style={dimensions.width < 800 ? {} : { flex: 2 }}>
+                                <View style={dimensions.width < 800 ? {paddingTop: 20, paddingBottom: 20, width: 100} : { flex: 2 }}>
                                     <ResponsiveImage
                                         style={{ width: 100, resizeMode: 'contain', aspectRatio: 1 }}
                                         alt="danilo"
