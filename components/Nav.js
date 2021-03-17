@@ -157,6 +157,7 @@ export default function (props) {
                             </View>
     
                             <Link href="/add"><Text style={[styles.text_nav]}>Add Listing</Text></Link>
+                            <Link href="/sponsors"><Text style={[styles.text_nav]}>Sponsor Us</Text></Link>
                             <Link href="/donate"><Text style={[styles.text_nav]}>Donate</Text></Link>
                             <Link href="/volunteer"><Text style={[styles.text_nav]}>Volunteer</Text></Link>
                             
