@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, ActivityIndicator, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, FlatList, Image, TouchableOpacity, SafeAreaView } from "react-native";
 
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
@@ -9,30 +10,72 @@ import { getStyles, Theme, getContent, getData } from "../utils";
 
 function Page(props) {
   const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-  let numColumns = dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 3;
-
+  let numColumns = dimensions.width < 600 ? 1 : dimensions.width < 1000 ? 2 : 2;
+  console.log("DIMENSIONS", dimensions)
   const styles = StyleSheet.create(
-    getStyles("text_header3, text_header4, text_header6, text_body2, section, content", {
+    getStyles("button_green, button_green_text, text_header2,text_header3, text_header4, text_header6, text_body2, section, content", {
       isWeb,
     })
   );
 
   const testimonialStyles = StyleSheet.create({
-    testimonialsHeaderContainer: {
-      paddingTop: "4rem",
-      width: "70%",
-      margin: "auto",
+
+    HeaderContainer: {
+      paddingTop: 80,
     },
+
+    listingsORvolunteers: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: "space-between",
+      alignContent: "center",
+      alignItems: "center",
+      paddingBottom: 20,
+      marginTop: 50,
+      width: "auto"
+    },
+
+    buttonStyle: {
+      display: "flex",
+      alignContent: "center",
+      backgroundColor: "#006633",
+      color: "#fff",
+      padding: 20,
+      margin: 10
+    },
+
+    volunteerSection: {
+      marginTop: 25,
+    },
+
     testimonialsHeader: {
-      fontSize: "2.5rem",
-      textAlign: "center",
-      margin: 0,
+      display: "flex",
+      marginBottom: 50,
       lineHeight: 50,
+      padding: 25,
+      backgroundColor: "#006633",
+      color: "#fff",
+      width: "90%",
+      alignContent: "center",
+      alignSelf: "center",
+      justifyContent: "center",
+      alignItems: "center",
+      textAlign: "center",
     },
-    testimonialCard: {
-      flex: 1 / numColumns,
+
+    secondaryTestimonialsHeader: {
+      fontWeight: "100",
+      textAlign: "center",
+      color: "#1f1f1f",
+      marginBottom: 30
+    },
+
+    everyOtherTestimonial: {
+      height: "90%",
+      flex: 1,
       margin: 10,
-      padding: 40,
+      padding: 45,
+      justifyContent: 'space-evenly',
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
@@ -40,39 +83,71 @@ function Page(props) {
       },
       shadowOpacity: 0.175,
       shadowRadius: 14,
-
       elevation: 6,
     },
-    testimonialCardHeader: {
-      flex: 1,
-      justifyContent: "center",
+    testimonialCard: {
+      flex: 1 / numColumns,
+      margin: 10,
+      padding: 45,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3.5,
+      },
+      shadowOpacity: 0.175,
+      shadowRadius: 14,
+      elevation: 6,
     },
+    testimonialCardInner: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+
+    everyOtherTestimonialInner: {
+      display: 'flex',
+      flexDirection: 'column',
+      // alignItems: 'center',
+      // textAlign: 'center'
+
+    },
+    testimonialCardHeader: {
+      // flex: 1,
+      justifyContent: "center",
+      paddingTop: 12,
+      alignItems: "flex-start",
+      width: "100%"
+},
     testimonialAvatar: {
-      width: "60px",
-      height: "60px",
-      borderRadius: "50%",
-      objectFit: "cover",
-      marginRight: "1rem",
+      width: 60,
+      height: 60,
+      marginRight: 10
+      //borderRadius: "50%",
+      //objectFit: "cover",
+      //marginRight: "1rem",
     },
     testimonialAuthor: {
-      fontSize: "1.1rem",
+      //fontSize: "1.1rem",
       fontWeight: "bold",
-      lineHeight: "22px",
+      lineHeight: 22,
     },
     testimonialSubtitle: {
-      fontSize: "1rem",
-      lineHeight: "22px",
+      //fontSize: "1rem",
+      // lineHeight: 43,
+      color: "#A5A5A5",
+      fontSize: 17,
+      paddingTop: 10
     },
     testimonialTextContainer: {
-      marginTop: "20px",
+      marginTop: 18,
     },
     testimonialText: {
-      lineHeight: 25,
-      fontSize: "1rem",
+      lineHeight: 30,
+      //fontSize: "1rem",
+      fontSize: 16
     },
     testimonialLink: {
-      marginTop: "auto",
-      paddingTop: "20px",
+      paddingTop: 20,
     },
   });
 
@@ -80,8 +155,11 @@ function Page(props) {
   const [content, setContent] = useState(props.content || {});
 
   const [loadingTestimonials, setLoadingTestimonials] = useState(!props.testimonials);
+  const [loadingVolunteers, setLoadingVolunteers] = useState(!props.volunteers);
   const [errorTestimonials, setErrorTestimonials] = useState("");
   const [testimonials, setTestimonials] = useState(props.testimonials || []);
+  const [volunteers, setVolunteers] = useState(props.volunteers || []);
+  
 
   if (!props.content) {
     useEffect(() => {
@@ -101,11 +179,12 @@ function Page(props) {
   useEffect(() => {
     if (!props.testimonials) {
       getData({
-        type: "testimonials",
+        type: "testimonial",
       })
         .then((_testimonials) => {
+          const business = _testimonials.filter(item => item.type !== "Volunteer")
           setLoadingTestimonials(false);
-          setTestimonials(_testimonials);
+          setTestimonials(business);
         })
         .catch((err) => {
           console.error(err);
@@ -113,7 +192,38 @@ function Page(props) {
           setErrorTestimonials("Failed to load testimonials.");
         });
     }
+
+    // Render Business Testimonials only
+    if(props.testimonials) {
+      let business = testimonials.filter(item => item.type !== "Volunteer")
+      setTestimonials(business)
+    }
   }, []);
+
+
+  useEffect(() => {
+    if(!props.volunteers){
+      getData({
+        type: "testimonial",
+      })
+      .then((_testimonials) => {
+        let volunteers = _testimonials.filter(item => item.type === "Volunteer")
+        setLoadingVolunteers(false)
+        setVolunteers(volunteers)
+      })
+    }
+  }, [])
+
+  // Quick scroll solution
+  const volunteerRef = useRef(null);
+  const businessRef = useRef(null);
+
+  const scrollToVolunteer = () => {
+    window.scrollTo(0, volunteerRef.current.offsetTop - 200);
+  }
+  const scrollToBusiness = () => {
+    window.scrollTo(0, businessRef.current.offsetTop - 200);
+  }
 
   return (
     <React.Fragment>
@@ -122,7 +232,7 @@ function Page(props) {
           <ActivityIndicator color={Theme.green} size="large" />
         </View>
       ) : (
-        <React.Fragment>
+        <SafeAreaView>
           <PageTitle title={content.page_title} />
           {!!hasBody && (
             <View style={[styles.section]}>
@@ -131,14 +241,39 @@ function Page(props) {
               </View>
             </View>
           )}
-          <View style={testimonialStyles.testimonialsHeaderContainer}>
-            <Text style={[styles.text_header3, testimonialStyles.testimonialsHeader]}>
+
+          {/****************************************** HEADER *******************************************/}
+
+
+          <View                   
+              style={[testimonialStyles.HeaderContainer, styles.section]}
+            >
+            <Text style={[styles.text_header3, testimonialStyles.secondaryTestimonialsHeader]}>
+              Community
+            </Text>
+            <Text style={[styles.text_header4, testimonialStyles.secondaryTestimonialsHeader]}>
               Read what businesses and volunteers are saying about Spicy Green Book.
             </Text>
+            <View style={[styles.content, testimonialStyles.listingsORvolunteers]}>
+            <TouchableOpacity onPress={scrollToBusiness}> 
+              <Text  style={[ styles.text_header4, testimonialStyles.buttonStyle ]}>Businesses</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={scrollToVolunteer}> 
+              <Text  style={[ styles.text_header4,  testimonialStyles.buttonStyle]}>Volunteers</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
-          <View style={[styles.section]} nativeID="testimonialsLinks">
+
+
+          
+          {/********************************** Business Testimonials ***********************************/}
+          
+          <View ref={businessRef} style={[styles.section]} nativeID="testimonialsLinks">
             <View style={styles.content}>
+            <Text style={[ styles.text_header3, testimonialStyles.testimonialsHeader]}>
+              Businesses
+            </Text>
               {loadingTestimonials ? (
                 <ActivityIndicator color={Theme.green} size="large" />
               ) : errorTestimonials ? (
@@ -151,9 +286,9 @@ function Page(props) {
                   renderItem={({ item, index, separators }) => (
                     <View
                       key={"testimonials" + index}
-                      style={testimonialStyles.testimonialCard}
+                      style={index % 3 == 0 || index % 5 == 0? testimonialStyles.testimonialCard: testimonialStyles.everyOtherTestimonial }
                     >
-                      <View style={{ flexDirection: "row" }}>
+                      <View style={index % 3 == 0 || index % 5 == 0? testimonialStyles.testimonialCardInner: testimonialStyles.everyOtherTestimonialInner}>
                         {item.image && item.image.url && (
                           <Image
                             style={testimonialStyles.testimonialAvatar}
@@ -173,7 +308,7 @@ function Page(props) {
                           {item.sub_title && (
                             <Text
                               style={[
-                                styles.text_header4,
+                                styles.text_header5,
                                 testimonialStyles.testimonialSubtitle,
                               ]}
                             >
@@ -222,8 +357,110 @@ function Page(props) {
               )}
             </View>
           </View>
-        </React.Fragment>
+        
+        </SafeAreaView>
       )}
+      
+    {/********************************                                          ********************************/}
+    {/********************************                                          ********************************/}
+    {/********************************              VOLUNTEERS                  ********************************/}
+    {/********************************                                          ********************************/}
+    {/********************************                                          ********************************/}
+      
+    <>
+    
+    <View ref={volunteerRef} style={[styles.section]} nativeID="testimonialsLinks">
+      <View style={styles.content}>
+      <Text style={[styles.text_header2, testimonialStyles.testimonialsHeader]}>
+          Volunteers
+      </Text>
+      {loadingVolunteers ? (
+                <ActivityIndicator color={Theme.green} size="large" />
+              ) : errorTestimonials ? (
+                <Text>{errorTestimonials}</Text>
+              ) : (
+      <FlatList
+          style={testimonialStyles.volunteerSection}
+          key={"cols" + numColumns}
+          data={volunteers} 
+          numColumns={numColumns}
+          renderItem={({ item, index, separators }) => (
+          <View
+            key={"volunteers" + index}
+            style={index % 3 == 0 || index % 5 == 0? testimonialStyles.testimonialCard: testimonialStyles.everyOtherTestimonial }
+          >
+            <View style={index % 3 == 0 || index % 5 == 0? testimonialStyles.testimonialCardInner: testimonialStyles.everyOtherTestimonialInner}>
+              {item.image && item.image.url && (
+                <Image
+                  style={testimonialStyles.testimonialAvatar}
+                  source={{ uri: item.image.url + "&w=600" }}
+                />
+              )}
+              <View style={testimonialStyles.testimonialCardHeader}>
+                <Text
+                  style={[
+                    styles.text_header6,
+                    testimonialStyles.testimonialAuthor,
+                  ]}
+                >
+                  {item.quote_credit}
+                </Text>
+
+                {item.sub_title && (
+                  <Text
+                    style={[
+                      styles.text_header5,
+                      testimonialStyles.testimonialSubtitle,
+                    ]}
+                  >
+                    {item.sub_title}
+                  </Text>
+                )}
+                {item.type === "Volunteer" && (
+                  <Text
+                    style={[
+                      styles.text_header4,
+                      testimonialStyles.testimonialSubtitle,
+                    ]}
+                  >
+                    Volunteer
+                  </Text>
+                )}
+              </View>
+            </View>
+            <View style={[testimonialStyles.testimonialTextContainer]}>
+              <Text
+                style={[styles.text_body2, testimonialStyles.testimonialText]}
+              >
+                {item.asdf}
+              </Text>
+            </View>
+
+            {!!item.link_text && !!item.link && (
+              <View style={testimonialStyles.testimonialLink}>
+                <Link href={item.link}>
+                  <View>
+                    <Text style={[styles.text_header4]}>
+                      {item.link_text} &gt;
+                    </Text>
+                  </View>
+                </Link>
+              </View>
+            )}
+
+            {!!(item.attribution && item.attribution.length) && (
+              <Attribution attribution={item.attribution} />
+            )}
+          </View>
+          )}
+          
+          keyExtractor={(item, index) => "volunteers" + index}
+          />
+          )}
+
+        </View>
+      </View>
+      </>
     </React.Fragment>
   );
 }

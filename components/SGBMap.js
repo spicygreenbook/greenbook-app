@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
-import Svg, { G, Path } from 'react-native-svg';
+import Svg, { G as RNG, Path } from 'react-native-svg';
 import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { getStyles, Theme, states, getListingsByState, statesObj, statesObjRev } from '../utils';
@@ -12,12 +12,24 @@ function SGBMap(props) {
     const { listings, loadingListings } = props;
     const [ curState, setCurState ] = useState('');
     const listingsByState = getListingsByState(listings);
-		const navigation = !isWeb ? useNavigation() : null
+	const navigation = !isWeb ? useNavigation() : null
 
-		const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
+	const styles = StyleSheet.create(getStyles('text_body', {isWeb, theme}));
+
+	function G(props) {
+		let webProps = {}
+		if (isWeb && props.onPressIn) {
+			webProps = {...props}
+			webProps.onClick = props.onPressIn;
+			delete webProps.onPressIn;
+		} else {
+			webProps = props;
+		}
+		return isWeb ? <g {...webProps}>{props.children}</g> : <RNG {...props}>{props.children}</RNG>
+	}
 
     return (
-			<View style={[{flex: 1, width: '100%', position: 'relative'}, props.style || {}]}>
+			<View style={[{height: '100%', width: '100%', position: 'relative'}, props.style || {}]}>
 				{!!curState && 
 					<ScrollView style={{position: 'absolute', left: dimensions.width > 400 ? (((dimensions.width > 1024 ? 1024 : dimensions.width) - 420) * 0.5) : '4%', top: '40%', width: 400, height: 200, maxWidth: '92%', backgroundColor: Theme.green, borderWidth: 2, borderColor: '#fff', padding: 20}}>
 							<View style={{flexDirection: 'row', justifyContent:'space-between', alignItems: 'flex-start'}}>
@@ -52,7 +64,7 @@ function SGBMap(props) {
 							}
 
 							return (
-								<G style={{cursor:"pointer"}} key={state.id + 'fill'} onPress={e => {
+								<G style={{cursor:"pointer"}} key={state.id + 'fill'} onPressIn={e => {
 									if (mappedState) {
 										if(!isWeb) {
 											navigation.navigate('StateListing', { 
@@ -71,6 +83,23 @@ function SGBMap(props) {
 									} else {
 											setCurState('');
 									}
+									}} onClick={e => {
+										if (mappedState) {
+											if(!isWeb) {
+												navigation.navigate('StateListing', { 
+													stateName: state.id, 
+													cities: 
+														Object.keys(mappedState)
+														.filter(key => {return key.indexOf('_') !== 0})
+														.sort(),
+													abbr: statesObjRev[mappedState._state].toUpperCase(),
+												 });
+												return;
+											}
+											setCurState(mappedState);
+										} else {
+												setCurState('');
+										}
 									}}>
 										<Path d={state.d[0]} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'}/>
 										<Path d={state.d[0]} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} stroke="#efefef" strokeWidth="0.5" fill="none" />

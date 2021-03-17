@@ -34,8 +34,8 @@ const Search = ({
   const [searchInfoCache, setSearchInfoCache] = useState();
 
   const small = dimensions.width < 900 || mode === 'results';
-  const smallSize = dimensions.width < 900;
-  const tablet = dimensions.width < 1400;
+  const smallSize = dimensions.width < 1400;
+  const tablet = dimensions.width < 1700;
   const styles = StyleSheet.create(getStyles('text_body', { isWeb }));
 
   const onRootClick = useCallback((e) => {
@@ -110,6 +110,10 @@ const Search = ({
     submitSearch({ q: query, near });
   };
 
+  let onStartProp = isWeb ? {} : {
+    onStartShouldSetResponder:() => true
+  }
+
   const searchForm = (
     <View style={{
       flexDirection: mode === 'results' ? 'column' : 'row',
@@ -118,7 +122,7 @@ const Search = ({
       minHeight: includeUseLocationOption ? 140 : 0,
     }}>
       <View
-        onStartShouldSetResponder={() => true}
+        {...onStartProp}
         style={{ flex: 1, flexDirection: 'row', alignItems: 'center', maxWidth: mode === 'results' ? '100%' : 840}}>
         <View style={{
           flexDirection: 'row',
@@ -143,7 +147,14 @@ const Search = ({
                 fontWeight: 'bold',
               }]}>Find</Text>
             }
-            <TextInput key="searchQuery" name="q" value={query} style={[styles.text_body, { height: 30, fontSize: 16 }]} placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} onChangeText={text => setQuery(text)} />
+            <TextInput 
+              key="searchQuery" 
+              name="q" value={query} 
+              style={[styles.text_body, { height: 30, fontSize: 16 }]} 
+              placeholder={small ? 'Find' : "BBQ, Mexican, Seafood, etc."} 
+              onChangeText={text => setQuery(text)}
+              onSubmitEditing={() => onSubmit()}
+            />
           </View>
           <View style={{ width: 1, borderRightWidth: 1, height: 48, borderColor: 'rgba(0, 0, 0, 0.5)', marginLeft: 15, marginRight: 15 }} />
           <View style={{
@@ -166,6 +177,7 @@ const Search = ({
                 style={[styles.text_body, { height: 30, fontSize: 16 }]}
                 placeholder={small ? 'Near' : "Address, city, zip, state or neighborhood"}
                 onChangeText={text => setNear(text)}
+                onSubmitEditing={() => onSubmit()}
                 onFocus={(e) => {
                   if (isWeb) e.target.setAttribute('autocomplete', 'off');
                   setDropdownOpen(true);

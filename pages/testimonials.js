@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import { StateReducer, InitialState, getContent, getData } from '../utils';
-//import 'react-native-gesture-handler';
+
 import {StateProvider} from "../components/State";
 import Main from "../components/Main";
 import Head from "next/head";
@@ -43,11 +43,18 @@ function App(props) {
 export async function getStaticProps(context) {
     let content = await getContent({type: 'content', uid: 'testimonials', ref_id: context.preview || ''});
     let testimonials = await getData({type: 'testimonial'})
+    let volunteers = await getData({type: 'testimonial'})
+        .then(data => {
+        return data.filter(item => {
+            return item.type === "Volunteer"
+        })
+    })
     console.log('testimonials', testimonials, 'content', content)
     return {
         props: {
             content: content && content.content || {},
             testimonials: testimonials,
+            volunteers,
             url: '/testimonials'
         }
     };

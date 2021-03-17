@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-//import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import { getStyles, Theme } from '../utils';
 import {useStateValue} from "../components/State";
 import { Link, Click } from '../components/Link';
@@ -23,7 +23,7 @@ export default function(props) {
         title: 'Store',
         href: '/shop'
     }, {
-        title: 'Add Request',
+        title: 'Add Listing',
         href: '/add'
     }, {
         title: 'Volunteer',
@@ -46,6 +46,9 @@ export default function(props) {
     }, {
         title: 'Press',
         href: '/press'
+    }, {
+        title: 'Testomonials',
+        href: '/testimonials'
     }, {
         title: 'FAQ',
         href: '/faq'

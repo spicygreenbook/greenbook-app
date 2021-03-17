@@ -62,6 +62,10 @@ async function handle() {
 
 module.exports = withExpo(withFonts(withImages({
     projectRoot: __dirname,
-    generaiteSiteMap: handle()
+    generaiteSiteMap: handle(),
+    images: {
+        domains: ['images.prismic.io', 'prismic-io.s3.amazonaws.com', 'res.cloudinary.com']
+
+    }
 })));
 

@@ -13,6 +13,7 @@
     "aws-sdk": "^2.792.0",
     "chrome-aws-lambda": "^5.5.0",
     "expo": "^40.0.0",
+    "expo-av": "~8.7.0",
     "expo-blur": "~8.2.2",
     "expo-font": "~8.4.0",
     "imagemin-optipng": "^8.0.0",
@@ -20,7 +21,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "lodash": "^4.17.20",
     "native-base": "^2.13.14",
-    "next": "9.3.5",
+    "next": "10.0.7",
     "next-fonts": "^1.5.1",
     "next-optimized-images": "^2.6.2",
     "npm": "^6.14.8",
@@ -38,11 +39,21 @@
     "react-native-web": "~0.13.12",
     "react-native-webview": "11.0.0",
     "stripe": "^8.121.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "unimodules-permissions-interface": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@expo/next-adapter": "^2.1.45"
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@expo/next-adapter": "^2.1.45",
+    "@unimodules/core": "^7.0.0",
+    "@unimodules/react-native-adapter": "^5.7.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^5.23.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-middleware": "^4.1.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
     "build": "next build",

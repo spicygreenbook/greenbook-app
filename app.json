@@ -2,7 +2,7 @@
   "expo": {
     "name": "Spicy Green Book",
     "slug": "spicygreenbook",
-    "version": "0.2.5",
+    "version": "0.4.1",
     "icon": "./public/icon.png",
     "splash": {
       "orientation": "portrait",
@@ -16,7 +16,7 @@
     },
     "android": {
       "package": "com.spicygreenbook.app",
-      "versionCode": 2,
+      "versionCode": 4,
       "permissions": [
         "ACCESS_FINE_LOCATION"
       ]

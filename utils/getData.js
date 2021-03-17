@@ -359,7 +359,7 @@ export async function getData(config) {
     } else if (config.type === 'roles') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.roles.order%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else {
-        throw new Error(`not a valid ${config.type} to be fetch.`);
+        throw new Error(`${config.type} is not a valid endpoint of data to fetch`);
     }
     if (url) {
         let data;
@@ -377,7 +377,7 @@ export async function getData(config) {
                 if (nextInfo.next_page) {
                     console.log('fetching next page', nextInfo.next_page)
                     let data = await fetch(nextInfo.next_page);
-                    getLoop(await data.json());
+                    await getLoop(await data.json());
                 }
             }
             await getLoop(await data.json());

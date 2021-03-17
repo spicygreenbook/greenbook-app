@@ -133,7 +133,7 @@ json output to console to convert to a table to act as an export for people that
     )
 
     const WebList = () => (
-        <ScrollView style={{paddingTop: 120 }}>
+        <ScrollView style={[{paddingTop: 120}, isWeb ? {transform: "none"} : {}]}>
             <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                 <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: 'calc(100vh - 234px)'} : {}}>
                     <HeaderList />

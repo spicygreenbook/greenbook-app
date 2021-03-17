@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Link } from '../components/Link';
 import { debounce} from 'lodash/fp';
 import useOutsideClick from '../hooks/useOutSideClick';
+import HybridImage from "../components/HybridImage"; 
 
 export default function (props) {
 
@@ -90,13 +91,13 @@ export default function (props) {
                 <Link href="/" fill>
                     <View style={{ height: '100%' }}>
                         {props.theme == 'light' ?
-                            <Image
+                            <HybridImage
                                 style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
                                 alt="Spicy Green Book"
                                 source={isWeb ? { uri: '/images/logo_nav_light.png' } : require('../public/images/logo_nav_light.png')}
                             />
                             :
-                            <Image
+                            <HybridImage
                                 style={{ width: dimensions.width < 1100 ? '100%' : 200, flex: 1, resizeMode: 'contain' }}
                                 alt="Spicy Green Book"
                                 source={isWeb ? { uri: '/images/logo_nav_dark.png' } : require('../public/images/logo_nav_dark.png')}
@@ -143,12 +144,13 @@ export default function (props) {
                                     }} 
                         
                                 >     
+                                    <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_nav_sub}>Store</Text></Link>              
                                     <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>    
                                     <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
                                     <Link href="/volunteers"><Text style={styles.text_nav_sub}>Volunteers</Text></Link>
                                     <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>       
                                     <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>              
-                                    <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_nav_sub}>Store</Text></Link>              
+                                    <Link href="/testimonials"><Text style={styles.text_nav_sub}>Testimonials</Text></Link>              
                                     <Link href="/faq"><Text style={styles.text_nav_sub}>FAQ</Text></Link>                           
                                     <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>                           
                                 </div>
