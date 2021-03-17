@@ -3,12 +3,8 @@ import { useStateValue } from "../components/State";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Button, InteractionManager } from 'react-native';
 import { Link as NextLink } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
-import { RichText } from "../components/RichText";
 import { getStyles, getData, Theme, getContent } from '../utils';
-import { getInstagram } from '../utils/getData';
-import { handleRootClick } from '../utils/rootClickHandler';
 import { FontAwesome } from '@expo/vector-icons';
-import { WebView } from 'react-native-webview';
 
 
 function Page(props) {
@@ -42,13 +38,6 @@ function Page(props) {
 
     }
 
-    // useEffect(() => {
-    //     InteractionManager.runAfterInteractions(() => {
-    //         scrollViewRef.current.scrollTo({x:1000, y:3000.4564, animated: true})
-    //         console.log('called on mount')
-    //     })
-        
-    // }, [])
 
     const scrollToView = () => {
         scrollViewRef.current.scrollTo({ y: layout.y, animated: true }); 
@@ -97,7 +86,7 @@ function Page(props) {
                                             {
                                                 header.title === 'BECOME A SPONSOR' ? <NextLink href="mailto:d.batson@spicygreenbook.org"><Text style={dimensions.width < 800 ? moreStyles.webHeader2Small : moreStyles.webHeader2Large}>BECOME A SPONSOR</Text></NextLink>
                                                     :
-                                                    <Text onClick={() => handleScroll(index)} style={dimensions.width < 800 ? moreStyles.webHeaderSmall : moreStyles.webHeaderLarge}>{header.title}</Text>
+                                                    <TouchableOpacity><Text onClick={() => handleScroll(index)} style={dimensions.width < 800 ? moreStyles.webHeaderSmall : moreStyles.webHeaderLarge}>{header.title}</Text></TouchableOpacity>
                                             }
 
                                         </View>
@@ -373,7 +362,7 @@ const moreStyles = StyleSheet.create({
     textList: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', paddingBottom: 15 },
     checkMark: { color: 'white', marginRight: 10 },
     buildRepContainerSmall: { backgroundColor: Theme.green_bg, paddingLeft: 30, paddingRight: 30, paddingBottom: 30, marginTop: 30, marginBottom: 40 },
-    buildRepContainerLarge: { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 60, paddingRight: 60, paddingTop: 20, paddingBottom: 20 },
+    buildRepContainerLarge: { flex: 1, alignSelf: 'stretch', backgroundColor: Theme.green_bg, paddingLeft: 60, paddingRight: 60, paddingTop: 18, paddingBottom: 20 },
     listTitle: { fontSize: 24, paddingTop: 20, paddingBottom: 20, color: '#ffffff', marginTop: 40 },
     imgTxtContainer2: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' },
     broadVisContainerSmall: { backgroundColor: Theme.green_bg, paddingLeft: 30, paddingRight: 30, paddingBottom: 30 },
