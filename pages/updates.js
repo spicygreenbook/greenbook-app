@@ -43,11 +43,13 @@ function App(props) {
 export async function getStaticProps(context) {
     let content = await getContent({type: 'content', uid: 'updates', ref_id: context.preview || ''});
     let updates = await getData({type: 'updates'})
+    let social_media_graphics = await getData({type: 'social_media_graphics'})
 
     return {
         props: {
             content: content && content.content || {},
             updates: updates,
+            social_media_graphics: social_media_graphics,
             url: '/updates'
         }
     };
