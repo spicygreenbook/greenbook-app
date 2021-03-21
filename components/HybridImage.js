@@ -7,8 +7,8 @@ const isWeb = Platform.OS === 'web';
 
 export default function HybridImage(props) {
     let src = props.src || props.source && props.source.uri;
-    console.log('props', props);
-    console.log('source', src)
+    //console.log('props', props);
+    //console.log('source', src)
     return isWeb ? <NextImage
         {...props}
         src={src}

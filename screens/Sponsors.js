@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStateValue } from "../components/State";
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Button, InteractionManager } from 'react-native';
+import { StyleSheet, Platform, SafeAreaView, View, Text, TouchableOpacity, ScrollView, Button, InteractionManager } from 'react-native';
 import { Link as NextLink } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { getStyles, getData, Theme, getContent } from '../utils';
 import { FontAwesome } from '@expo/vector-icons';
+const ios = Platform.OS === 'ios';
+import Constants from 'expo-constants';
 
 
 function Page(props) {
@@ -21,26 +23,25 @@ function Page(props) {
     const scrollViewRef = useRef();
 
     const handleScroll = (index) => {
+
         if (index === 0) {
             whySponsor.current.scrollIntoView({ behavior: 'smooth' })
         }
         if (index === 1) {
             sponsorBenefit.current.scrollIntoView({ behavior: 'smooth' })
         }
-
         if (index === 2) {
             sponsorLevel.current.scrollIntoView({ behavior: 'smooth' })
         }
-
         if (index === 3) {
             ourSponsors.current.scrollIntoView({ behavior: 'smooth' })
         }
-
     }
 
 
-    const scrollToView = () => {
-        scrollViewRef.current.scrollTo({ y: layout.y, animated: true }); 
+    const scrollToView = (index) => {
+        console.log('attempt scroll', index)
+        scrollViewRef.current.scrollTo({ x: 20, y: 400, animated: true }); 
         // window.scrollTo(0, 400)
     }
 
@@ -48,11 +49,13 @@ function Page(props) {
     const [layout, setLayout] = useState(null)
 
 
-    const headerLinks = [
+    const headerLinks = isWeb ? [
         { href: 'why_sponsor', title: 'Why Sponsor?' },
         { href: 'sponsor_benefits', title: 'Sponsorship Benefits' },
         { href: 'sponsor_levels', title: 'Sponsorship Levels' },
         { href: 'our_sponsors', title: 'Our Sponsors' },
+        { href: 'become_sponsor', title: 'BECOME A SPONSOR' }
+    ] : [
         { href: 'become_sponsor', title: 'BECOME A SPONSOR' }
     ]
 
@@ -70,9 +73,8 @@ function Page(props) {
     ]
 
     return (
-        <React.Fragment>
-            <ScrollView ref={scrollViewRef}>
-                
+        <SafeAreaView style={{marginTop: Constants.statusBarHeight}}>
+            <ScrollView ref={scrollViewRef} scrollToOverflowEnabled={true}>
                     <View>
                         <View style={isWeb && dimensions.width > 800 ? {
                             height: 200,
@@ -99,7 +101,7 @@ function Page(props) {
                                                 {
                                                     header.title === 'BECOME A SPONSOR' ? <NextLink href="mailto:d.batson@spicygreenbook.org"><Text style={[moreStyles.btnHeader2, { color: 'white' }]}>BECOME A SPONSOR</Text></NextLink>
                                                         :
-                                                        <Button onPress={() => scrollToView()} color="white" style={dimensions.width < 800 && header.title === 'BECOME A SPONSOR' ? moreStyles.btnHeader2 : { fontFamily: "ApercuMedium", fontWeight: 'bold' }} title={header.title} />
+                                                        <Button onPress={() => scrollToView(index)} color={ios ? '#fff' : '#006233'} style={dimensions.width < 800 && header.title === 'BECOME A SPONSOR' ? moreStyles.btnHeader2 : { fontFamily: "ApercuMedium", fontWeight: 'bold' }} title={header.title} />
                                                 }
 
                                             </View>
@@ -350,7 +352,7 @@ function Page(props) {
                
 
             </ScrollView>
-        </React.Fragment >
+        </SafeAreaView>
     )
 }
 
