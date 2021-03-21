@@ -1,8 +1,8 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest an idea to make this project better
 title: ''
-labels: enhancement
+labels: 'Priority: Medium, Status: Available, Type: Enhancement'
 assignees: ''
 
 ---
