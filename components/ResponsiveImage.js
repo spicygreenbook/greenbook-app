@@ -25,7 +25,7 @@ export function ResponsiveImage(props) {
 
     let src = props.src || props.source && props.source.uri
     if (isWeb) {
-        console.log('src', src)
+        //console.log('src', src)
         return <NextImage
                     src={src}
                     alt={props.alt || null}

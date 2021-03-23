@@ -7,6 +7,7 @@ import { RichText } from "../components/RichText";
 import Attribution from "../components/Attribution"; 
 import { getStyles, Theme, getContent, getData } from '../utils';
 import { ResponsiveImage } from "../components/ResponsiveImage";
+import HybridImage from "../components/HybridImage";
 
 
 function Page(props) {
@@ -25,6 +26,8 @@ function Page(props) {
     const [ loadingUpdates, setLoadingUpdates ] = useState(!props.updates);
     const [ errorUpdates, setErrorUpdates ] = useState('');
     const [ updates, setUpdates ] = useState(props.updates || []);
+    const [ social_media_graphics, set_social_media_graphics ] = useState(props.social_media_graphics || []);
+    console.log('social_media_graphics', social_media_graphics)
 
     if (!props.content) {
         useEffect(() => {
@@ -57,6 +60,18 @@ function Page(props) {
 
     let hasBody = content.body && content.body.join("");
 
+    let social_media_items = [];
+    social_media_graphics.map((item, i) => {
+      item.images.map(image => {
+        social_media_items.push({
+          title: item.title,
+          image: image.image
+        });
+      })
+    })
+
+    console.log('social_media_items', social_media_items)
+
     return (
       <React.Fragment>
         {pageLoading ? (
@@ -69,6 +84,66 @@ function Page(props) {
             {!!hasBody && <View style={[styles.tagline]}>
               <View style={styles.content}>
                 <RichText render={content._body} isWeb={isWeb} />
+              </View>
+            </View>}
+            {social_media_graphics && social_media_graphics.length && <View style={[styles.section]}>
+              <View style={styles.content}>
+                  <FlatList
+                    key={"colssm" + numColumns}
+                    data={social_media_items}
+                    numColumns={numColumns}
+                    ItemSeparatorComponent={(highlighted) => (
+                      <View style={{ paddingTop: 80 }}></View>
+                    )}
+                    renderItem={({ item, index, separators }) => (
+                      <View
+                        style={{ flexDirection: "row" }}
+                        key={"update" + index}
+                        style={{
+                          flex: 1 / numColumns,
+                          margin: 10,
+                          borderTopWidth: 2,
+                          borderColor: Theme.green,
+                          shadowColor: "#000",
+                          shadowOffset: {
+                            width: 0,
+                            height: 3,
+                          },
+                          shadowOpacity: 0.27,
+                          shadowRadius: 4.65,
+
+                          elevation: 6,
+                        }}
+                      >
+                        {item.image && item.image.url && (
+                          <ResponsiveImage
+                            style={{
+                              maxWidth: "100%",
+                              width: item.image.width,
+                              height: item.image.height,
+                            }}
+                            source={{ uri: item.image.url + "&w=600" }}
+                          />
+                        )}
+
+                        <View
+                          style={{
+                            flex: 1,
+                            padding: 20,
+                          }}
+                        >
+                          <View>
+                            <Text style={styles.text_header5}>
+                              {item.title}
+                            </Text>
+                          </View>
+
+                        </View>
+                      </View>
+                    )}
+                    keyExtractor={(item, index) => "update" + index}
+                  />
+
               </View>
             </View>}
             <View style={[styles.section]} nativeID="updatesLinks">

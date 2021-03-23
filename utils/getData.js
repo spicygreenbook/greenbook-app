@@ -358,6 +358,10 @@ export async function getData(config) {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else if (config.type === 'roles') {
         url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.roles.order%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
+    } else if (config.type === 'sponsors'){
+        url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.sponsors.order%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
+    } else if (config.type === 'social_media_graphics'){
+        url = `https://spicygreenbook.cdn.prismic.io/api/v1/documents/search?ref=${master_ref}&q=%5B%5Bat(document.type%2C+%22${config.type}%22)%5D%5D&orderings=%5Bmy.social_media_graphics.updated%5D${config.limit ? ('&pageSize=' + config.limit) : ''}`;
     } else {
         throw new Error(`${config.type} is not a valid endpoint of data to fetch`);
     }
