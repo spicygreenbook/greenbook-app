@@ -35,8 +35,8 @@ function Page(props) {
     const [press, loadingPress, errorPress] = useFetchData('press', props.press);
     const [Listings, loadingListings, errorListings] = useFetchData('listing', props.listings);
     const [testimonials, loadingTestimonial, errorTestimonials] = useFetchData('testimonial', props.testimonials);
-    const [ abcVideoClicked, setAbcVideoClicked ] = useState(false);
-
+    const [ abcVideoClicked, setAbcVideoClicked ] = useState(false);    
+    
     const responsiveStyles = StyleSheet.create(getStyles('middle_all, text_hero'));
 
     let newListingRef;
@@ -98,7 +98,6 @@ function Page(props) {
                                 src={'/intro.mp4'}
                                 style={{width: '100%', height: '100%'}}
                                 controls
-                                autoplay
                             /> : <Video
                                 source={{uri: 'https://spicygreenbook.org/intro.mp4'}}
                                 useNativeControls
