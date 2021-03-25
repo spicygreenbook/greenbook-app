@@ -63,6 +63,7 @@ function Page(props) {
   };
 
   const scrollToView = (index) => {
+
     console.log("attempt scroll", index);
     scrollViewRef.current.scrollTo({ x: 20, y: 400, animated: true });
     // window.scrollTo(0, 400)
@@ -149,10 +150,12 @@ function Page(props) {
                               marginTop: 40,
                               minHeight: 58,
                               justifyContent: "center"
+
                             }
                       }
                     >
                       {header.title === "BECOME A SPONSOR" ? (
+
                         <TouchableOpacity
                           style={
                             isWeb && dimensions.width > 830
@@ -214,13 +217,16 @@ function Page(props) {
                       }
                     >
                       {header.title === "BECOME A SPONSOR" ? (
+
                         <Link href="mailto:d.batson@spicygreenbook.org">
+
                           <Text
                             style={[moreStyles.btnHeader2, { color: "white" }]}
                           >
                             BECOME A SPONSOR
                           </Text>
                         </Link>
+
                       ) : (
                         <Button
                           onPress={() => scrollToView(index)}
@@ -465,8 +471,9 @@ function Page(props) {
                       style={moreStyles.checkMark}
                     />
                     <Text style={moreStyles.checkedText}>
-                      Reach 193+ participating businesses, thousands of
-                      customers, and 800+ volunteers
+                      Reach 200+ participating businesses, thousands of
+                      customers, and our large volunteer network with over 1000
+                      applications from across the globe
                     </Text>
                   </View>
                   <View style={moreStyles.textList}>
@@ -695,6 +702,7 @@ function Page(props) {
             </View>
           </View>
 
+
           {/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
           {/* <View ref={ourSponsors} style={styles.section}> 
             <View style={styles.content}>
@@ -732,6 +740,7 @@ function Page(props) {
                       d.batson@spicygreenbook.org
                     </Text>
                   </Link>
+
                 </Text>
               </View>
               <View
