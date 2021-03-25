@@ -11,7 +11,7 @@ import {
   Button,
   InteractionManager
 } from "react-native";
-import { Link as NextLink } from "../components/Link";
+import { Link } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { getStyles, getData, Theme, getContent } from "../utils";
 import { FontAwesome } from "@expo/vector-icons";
@@ -146,22 +146,46 @@ function Page(props) {
                           : {
                               backgroundColor: "black",
                               padding: 10,
-                              marginTop: 40
+                              marginTop: 40,
+                              minHeight: 58,
+                              justifyContent: "center"
                             }
                       }
                     >
                       {header.title === "BECOME A SPONSOR" ? (
-                        <NextLink href="mailto:d.batson@spicygreenbook.org">
-                          <Text
-                            style={
-                              dimensions.width < 800
-                                ? moreStyles.webHeader2Small
-                                : moreStyles.webHeader2Large
-                            }
-                          >
-                            BECOME A SPONSOR
-                          </Text>
-                        </NextLink>
+                        <TouchableOpacity
+                          style={
+                            isWeb && dimensions.width > 830
+                              ? [
+                                  styles.button_black,
+                                  {
+                                    // marginLeft: 10,
+                                    flexBasis: "30%"
+                                  }
+                                ]
+                              : isWeb && dimensions.width < 830
+                              ? [
+                                  styles.button_black,
+                                  moreStyles.becomeSponsorWebLarge
+                                ]
+                              : [
+                                  styles.button_black,
+                                  moreStyles.becomeSponsorWebSmall
+                                ]
+                          }
+                        >
+                          <Link href="mailto:d.batson@spicygreenbook.org">
+                            <Text
+                              style={
+                                dimensions.width < 800
+                                  ? moreStyles.webHeader2Small
+                                  : moreStyles.webHeader2Large
+                              }
+                            >
+                              BECOME A SPONSOR
+                            </Text>
+                          </Link>
+                        </TouchableOpacity>
                       ) : (
                         <TouchableOpacity>
                           <Text
@@ -190,13 +214,13 @@ function Page(props) {
                       }
                     >
                       {header.title === "BECOME A SPONSOR" ? (
-                        <NextLink href="mailto:d.batson@spicygreenbook.org">
+                        <Link href="mailto:d.batson@spicygreenbook.org">
                           <Text
                             style={[moreStyles.btnHeader2, { color: "white" }]}
                           >
                             BECOME A SPONSOR
                           </Text>
-                        </NextLink>
+                        </Link>
                       ) : (
                         <Button
                           onPress={() => scrollToView(index)}
@@ -671,7 +695,8 @@ function Page(props) {
             </View>
           </View>
 
-          <View ref={ourSponsors} style={styles.section}>
+          {/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
+          {/* <View ref={ourSponsors} style={styles.section}> 
             <View style={styles.content}>
               <View
                 style={
@@ -690,7 +715,9 @@ function Page(props) {
                 <Text style={styles.text_body}>
                   Call for Sponsors! Become one of the first to contribute to
                   our cause. To learn more, download our{" "}
-                  <Text style={{ color: "#246e43" }}>Sponsorship Packet.</Text>
+                  <Link href="#" style={{ color: "#246e43" }}>
+                    <Text style={styles.text_body}>Sponsorship Packet.</Text>
+                  </Link>
                 </Text>
                 <Text
                   style={
@@ -700,24 +727,52 @@ function Page(props) {
                   }
                 >
                   To express your interest in sponsorship, please email us:{" "}
-                  <NextLink href="mailto:d.batson@spicygreenbook.org">
+                  <Link href="mailto:d.batson@spicygreenbook.org">
                     <Text style={{ color: "#246e43" }}>
                       d.batson@spicygreenbook.org
                     </Text>
-                  </NextLink>
+                  </Link>
                 </Text>
               </View>
               <View
                 style={
-                  dimensions.width < 830
-                    ? moreStyles.ourSponsorsBtnSmall
-                    : moreStyles.ourSponsorsBtnLarge
+                  isWeb && dimensions.width < 830
+                    ? [
+                        moreStyles.ourSponsorsBtnSmall,
+                        {
+                          alignSelf: "stretch",
+                          justifyContent: "center",
+                          flexDirection: "column"
+                        }
+                      ]
+                    : [
+                        moreStyles.ourSponsorsBtnLarge,
+                        {
+                          justifyContent: "flex-start"
+                        }
+                      ]
                 }
               >
                 <TouchableOpacity
-                  style={[styles.button_green, moreStyles.sponsorPacketBtn]}
+                  style={
+                    isWeb && dimensions.width > 830
+                      ? [
+                          styles.button_white,
+                          { marginLeft: 50, flexBasis: "30%" }
+                        ]
+                      : isWeb && dimensions.width < 830
+                      ? [
+                          styles.button_white,
+                          // moreStyles.sponsorPacketBtn,
+                          { alignSelf: "stretch", justifyContent: "center" }
+                        ]
+                      : [
+                          styles.button_white
+                          // moreStyles.sponsorPacketBtn
+                        ]
+                  }
                 >
-                  <Text style={moreStyles.sponsorPacketBtnText}>
+                  <Text style={styles.button_white_text}>
                     DOWNLOAD SPONSORSHIP PACKET
                   </Text>
                 </TouchableOpacity>
@@ -726,28 +781,36 @@ function Page(props) {
                     isWeb && dimensions.width > 830
                       ? [
                           styles.button_green,
-                          { marginLeft: 10, flexBasis: "30%" }
+                          { marginLeft: 50, flexBasis: "30%" }
                         ]
                       : isWeb && dimensions.width < 830
-                      ? [styles.button_green, moreStyles.becomeSponsorWebLarge]
+                      ? [
+                          styles.button_green,
+                          moreStyles.becomeSponsorWebLarge,
+                          { alignSelf: "stretch", justifyContent: "center" }
+                        ]
                       : [styles.button_green, moreStyles.becomeSponsorWebSmall]
                   }
                 >
-                  <NextLink href="mailto:d.batson@spicygreenbook.org">
+                  <Link href="mailto:d.batson@spicygreenbook.org">
                     <Text
                       style={
                         dimensions.width < 830
-                          ? [styles.button_white_text, { marginLeft: 50 }]
-                          : [styles.button_white_text, { paddingLeft: 20 }]
+                          ? styles.button_green_text
+                          : [
+                              styles.button_green_text,
+                              { textAlign: "center", paddingLeft: 50 }
+                            ]
                       }
                     >
                       BECOME A SPONSOR
                     </Text>
-                  </NextLink>
+                  </Link>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
+          */}
 
           <View style={styles.section}>
             <View style={(styles.content, moreStyles.sponsorLogoContent)}>
@@ -768,9 +831,9 @@ function Page(props) {
                 <Text style={styles.text_body}>
                   Want to contribute another way? We will happily accept your in
                   kind support!{" "}
-                  <NextLink href="mailto:d.batson@spicygreenbook.org">
+                  <Link href="mailto:d.batson@spicygreenbook.org">
                     <Text style={{ color: "#246e43" }}>Contact Us</Text>
-                  </NextLink>{" "}
+                  </Link>{" "}
                   to share your product/service.
                 </Text>
                 <Text style={styles.text_body}>
@@ -1010,7 +1073,7 @@ const moreStyles = StyleSheet.create({
     lineHeight: 30
   },
   levelTitleLarge: { alignSelf: "center", marginTop: 15, fontSize: 30 },
-  becomeSponsorWebLarge: { alignSelf: "center", width: 315, marginRight: 10 },
+  becomeSponsorWebLarge: { alignSelf: "center" },
   becomeSponsorWebSmall: {
     marginLeft: 12,
     marginRight: 20,
@@ -1025,18 +1088,19 @@ const moreStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center"
-  },
-  sponsorPacketBtn: {
-    backgroundColor: "white",
-    marginRight: 10,
-    marginBottom: 10
-  },
-  sponsorPacketBtnText: {
-    color: "#246e43",
-    fontSize: 16,
-    lineHeight: 15,
-    fontFamily: "ApercuMedium"
   }
+  // sponsorPacketBtn: {
+  //   backgroundColor: "white",
+  //   // marginRight: 10,
+  //   marginBottom: 10
+  // },
+  // sponsorPacketBtnText: {
+  //   color: "#246e43",
+  //   fontSize: 16,
+  //   lineHeight: 15,
+  //   fontFamily: "ApercuMedium",
+  //   textAlign: "center"
+  // }
 });
 
 export default Page;
