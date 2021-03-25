@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { Link } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
-import { getStyles, getData, Theme, getContent } from "../utils";
+import { getStyles, Theme } from "../utils";
 import { FontAwesome } from "@expo/vector-icons";
 const ios = Platform.OS === "ios";
 import Constants from "expo-constants";
@@ -28,6 +28,15 @@ function Page(props) {
     )
   );
 
+  // THESE PROPS ARE COMING FROM pages/sponsors.js
+  // THESE CAN BE USED TO SHOW ACTUAL NUMBERS ON THIS PAGE
+  // console.log(props.listingsCount);
+  console.log(`WE HAVE ${props.listingsCount} business listed!`);
+  // console.log(props.volunteersCount);
+  // console.log(`WE HAVE ${props.volunteersCount} volunteers!`);
+  // console.log(props.sponsors);
+  // console.log(`WE HAVE ${props.sponsorsCount} sponsors!`);
+
   const whySponsor = useRef();
   const sponsorBenefit = useRef();
   const sponsorLevel = useRef();
@@ -39,31 +48,30 @@ function Page(props) {
     if (index === 0) {
       whySponsor.current.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: !isWeb ? "center" : "nearest"
       });
     }
     if (index === 1) {
       sponsorBenefit.current.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: !isWeb ? "nearest" : "nearest"
       });
     }
     if (index === 2) {
       sponsorLevel.current.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: !isWeb ? "center" : "nearest"
       });
     }
     if (index === 3) {
       ourSponsors.current.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: !isWeb ? "center" : "nearest"
       });
     }
   };
 
   const scrollToView = (index) => {
-
     console.log("attempt scroll", index);
     scrollViewRef.current.scrollTo({ x: 20, y: 400, animated: true });
     // window.scrollTo(0, 400)
@@ -71,15 +79,16 @@ function Page(props) {
 
   const [layout, setLayout] = useState(null);
 
-  const headerLinks = isWeb
+  const headerLinks = isWeb && dimensions.width > 800
     ? [
-        { href: "why_sponsor", title: "Why Sponsor?" },
-        { href: "sponsor_benefits", title: "Sponsorship Benefits" },
-        { href: "sponsor_levels", title: "Sponsorship Levels" },
-        { href: "our_sponsors", title: "Our Sponsors" },
-        { href: "become_sponsor", title: "BECOME A SPONSOR" }
-      ]
-    : [{ href: "become_sponsor", title: "BECOME A SPONSOR" }];
+      { href: "why_sponsor", title: "Why Sponsor?" },
+      { href: "sponsor_benefits", title: "Sponsorship Benefits" },
+      { href: "sponsor_levels", title: "Sponsorship Levels" },
+      // { href: "our_sponsors", title: "Our Sponsors" },
+      { href: "become_sponsor", title: "BECOME A SPONSOR" }
+    ]
+    : [];
+    // [ { href: "become_sponsor", title: "BECOME A SPONSOR" } ];
 
   const sponsorLevels = [
     { title: "Seed", amount: "500" },
@@ -150,12 +159,10 @@ function Page(props) {
                               marginTop: 40,
                               minHeight: 58,
                               justifyContent: "center"
-
                             }
                       }
                     >
                       {header.title === "BECOME A SPONSOR" ? (
-
                         <TouchableOpacity
                           style={
                             isWeb && dimensions.width > 830
@@ -217,16 +224,13 @@ function Page(props) {
                       }
                     >
                       {header.title === "BECOME A SPONSOR" ? (
-
                         <Link href="mailto:d.batson@spicygreenbook.org">
-
                           <Text
                             style={[moreStyles.btnHeader2, { color: "white" }]}
                           >
                             BECOME A SPONSOR
                           </Text>
                         </Link>
-
                       ) : (
                         <Button
                           onPress={() => scrollToView(index)}
@@ -701,7 +705,6 @@ function Page(props) {
               </View>
             </View>
           </View>
-
 
           {/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
           {/* <View ref={ourSponsors} style={styles.section}> 
