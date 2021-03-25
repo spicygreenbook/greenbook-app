@@ -144,7 +144,7 @@ function Page(props) {
                   </View>
                   <View style={{ flex: 2, marginLeft: 20, flexWrap: "wrap" }}>
                     <CustomLink
-                      href="https://www.honeybook.com/widget/spicy_green_book_159485/cf_id/5f6bf5318be9f533980593fa"
+                      href="/addrequest"
                       label="FILL OUT FORM"
                       text="Are you ready? Let's fill out the request form!"
                     />
