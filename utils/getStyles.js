@@ -212,12 +212,13 @@ const allStyles = {
   button_white: function (config) {
     return {
       borderWidth: 1,
-      borderColor: "#fff",
-      backgroundColor: "rgba(0,0,0,0)",
+      borderColor: theme.green,
+      backgroundColor: "rgba(255,255,255,255)",
       alignItems: "center",
-      height: 80,
-      paddingLeft: 60,
-      paddingRight: 60,
+      height: 60,
+      paddingLeft: 30,
+      paddingRight: 30,
+      marginBottom: 20,
       flexDirection: "row"
     };
   },
@@ -227,7 +228,8 @@ const allStyles = {
       fontFamily: "ApercuMedium",
       fontSize: 16,
       lineHeight: 15,
-      color: "#000"
+      color: theme.green,
+      textAlign: "center"
     };
   },
   button_green: function (config) {
@@ -239,6 +241,7 @@ const allStyles = {
       height: 60,
       paddingLeft: 30,
       paddingRight: 30,
+      marginBottom: 20,
       flexDirection: "row"
     };
   },
@@ -248,7 +251,8 @@ const allStyles = {
       fontFamily: "ApercuMedium",
       fontSize: 16,
       lineHeight: 15,
-      color: "#fff"
+      color: "#fff",
+      textAlign: "center"
     };
   },
   button_black: function (config) {
@@ -260,6 +264,7 @@ const allStyles = {
       height: 60,
       paddingLeft: 30,
       paddingRight: 30,
+      marginBottom: 20,
       flexDirection: "row"
     };
   },
@@ -269,7 +274,8 @@ const allStyles = {
       fontFamily: "ApercuMedium",
       fontSize: 16,
       lineHeight: 15,
-      color: "#fff"
+      color: "#fff",
+      textAlign: "center"
     };
   },
 

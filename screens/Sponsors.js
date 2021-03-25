@@ -695,7 +695,8 @@ function Page(props) {
             </View>
           </View>
 
-          <View ref={ourSponsors} style={styles.section}>
+          {/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
+          {/* <View ref={ourSponsors} style={styles.section}> 
             <View style={styles.content}>
               <View
                 style={
@@ -739,9 +740,9 @@ function Page(props) {
                     ? [
                         moreStyles.ourSponsorsBtnSmall,
                         {
-                          minWidth: dimensions.width * 0.85,
-                          flexDirection: "column",
-                          justifyContent: "center"
+                          alignSelf: "stretch",
+                          justifyContent: "center",
+                          flexDirection: "column"
                         }
                       ]
                     : [
@@ -753,9 +754,25 @@ function Page(props) {
                 }
               >
                 <TouchableOpacity
-                  style={[styles.button_green, moreStyles.sponsorPacketBtn]}
+                  style={
+                    isWeb && dimensions.width > 830
+                      ? [
+                          styles.button_white,
+                          { marginLeft: 50, flexBasis: "30%" }
+                        ]
+                      : isWeb && dimensions.width < 830
+                      ? [
+                          styles.button_white,
+                          // moreStyles.sponsorPacketBtn,
+                          { alignSelf: "stretch", justifyContent: "center" }
+                        ]
+                      : [
+                          styles.button_white
+                          // moreStyles.sponsorPacketBtn
+                        ]
+                  }
                 >
-                  <Text style={moreStyles.sponsorPacketBtnText}>
+                  <Text style={styles.button_white_text}>
                     DOWNLOAD SPONSORSHIP PACKET
                   </Text>
                 </TouchableOpacity>
@@ -793,6 +810,7 @@ function Page(props) {
               </View>
             </View>
           </View>
+          */}
 
           <View style={styles.section}>
             <View style={(styles.content, moreStyles.sponsorLogoContent)}>
@@ -1070,19 +1088,19 @@ const moreStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center"
-  },
-  sponsorPacketBtn: {
-    backgroundColor: "white",
-    // marginRight: 10,
-    marginBottom: 10
-  },
-  sponsorPacketBtnText: {
-    color: "#246e43",
-    fontSize: 16,
-    lineHeight: 15,
-    fontFamily: "ApercuMedium",
-    textAlign: "center"
   }
+  // sponsorPacketBtn: {
+  //   backgroundColor: "white",
+  //   // marginRight: 10,
+  //   marginBottom: 10
+  // },
+  // sponsorPacketBtnText: {
+  //   color: "#246e43",
+  //   fontSize: 16,
+  //   lineHeight: 15,
+  //   fontFamily: "ApercuMedium",
+  //   textAlign: "center"
+  // }
 });
 
 export default Page;
