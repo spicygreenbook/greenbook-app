@@ -37,6 +37,7 @@ function Page(props) {
   // console.log(props.sponsors);
   // console.log(`WE HAVE ${props.sponsorsCount} sponsors!`);
 
+  const topPage = useRef();
   const whySponsor = useRef();
   const sponsorBenefit = useRef();
   const sponsorLevel = useRef();
@@ -46,9 +47,10 @@ function Page(props) {
 
   const handleScroll = (index) => {
     if (index === 0) {
-      whySponsor.current.scrollIntoView({
+      // Temp topPage ref fix because fixed nav covers heading when jumping up
+      topPage.current.scrollIntoView({
         behavior: "smooth",
-        block: !isWeb ? "center" : "nearest"
+        block: !isWeb ? "center" : "start"
       });
     }
     if (index === 1) {
@@ -105,8 +107,8 @@ function Page(props) {
 
   return (
     <SafeAreaView style={{ marginTop: Constants.statusBarHeight }}>
-      <ScrollView ref={scrollViewRef} scrollToOverflowEnabled={true}>
-        <View>
+      <ScrollView ref={scrollViewRef} scrollToOverflowEnabled={true} style={(isWeb && dimensions.width > 800) ? {transform: "none"} : {}}>
+        <View ref={topPage}>
           <View
             style={
               isWeb && dimensions.width > 800
