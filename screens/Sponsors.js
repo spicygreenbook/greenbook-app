@@ -79,16 +79,17 @@ function Page(props) {
 
   const [layout, setLayout] = useState(null);
 
-  const headerLinks = isWeb && dimensions.width > 800
-    ? [
-      { href: "why_sponsor", title: "Why Sponsor?" },
-      { href: "sponsor_benefits", title: "Sponsorship Benefits" },
-      { href: "sponsor_levels", title: "Sponsorship Levels" },
-      // { href: "our_sponsors", title: "Our Sponsors" },
-      { href: "become_sponsor", title: "BECOME A SPONSOR" }
-    ]
-    : [];
-    // [ { href: "become_sponsor", title: "BECOME A SPONSOR" } ];
+  const headerLinks =
+    isWeb && dimensions.width > 800
+      ? [
+          { href: "why_sponsor", title: "Why Sponsor?" },
+          { href: "sponsor_benefits", title: "Sponsorship Benefits" },
+          { href: "sponsor_levels", title: "Sponsorship Levels" },
+          // { href: "our_sponsors", title: "Our Sponsors" },
+          { href: "become_sponsor", title: "BECOME A SPONSOR" }
+        ]
+      : [];
+  // [ { href: "become_sponsor", title: "BECOME A SPONSOR" } ];
 
   const sponsorLevels = [
     { title: "Seed", amount: "500" },
@@ -854,37 +855,22 @@ function Page(props) {
                 </Text>
               </View>
               <View style={moreStyles.sponsorLogos}>
-                <View style={{ flexBasis: "20%" }}>
+                <View style={{ flexBasis: "30%", padding: "20px" }}>
                   <ResponsiveImage
                     style={{
-                      width: 200,
+                      width: 250,
                       resizeMode: "contain",
-                      aspectRatio: 0.8
+                      aspectRatio: 0.5
                     }}
                     alt="verizon"
                     source={
                       isWeb
-                        ? { uri: "/images/verizon.jpg" }
-                        : require("../public/images/verizon.jpg")
+                        ? { uri: "/images/sponsors/verizon.jpg" }
+                        : require("../public/images/sponsors/verizon.jpg")
                     }
                   />
                 </View>
-                <View style={{ flexBasis: "20%" }}>
-                  <ResponsiveImage
-                    style={{
-                      width: 200,
-                      resizeMode: "contain",
-                      aspectRatio: 1
-                    }}
-                    alt="sponsor"
-                    source={
-                      isWeb
-                        ? { uri: "/images/sponsorIcon.jpg" }
-                        : require("../public/images/sponsorIcon.jpg")
-                    }
-                  />
-                </View>
-                <View style={{ flexBasis: "20%" }}>
+                <View style={{ flexBasis: "30%", padding: "20px" }}>
                   <ResponsiveImage
                     style={{
                       width: 250,
@@ -894,10 +880,70 @@ function Page(props) {
                     alt="sponsor"
                     source={
                       isWeb
-                        ? { uri: "/images/konnect.jpg" }
-                        : require("../public/images/konnect.jpg")
+                        ? { uri: "/images/sponsors/konnect.jpg" }
+                        : require("../public/images/sponsors/konnect.jpg")
                     }
                   />
+                </View>
+                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                  <ResponsiveImage
+                    style={{
+                      width: 250,
+                      resizeMode: "contain",
+                      aspectRatio: 0.5
+                    }}
+                    alt="re-store LA"
+                    source={
+                      isWeb
+                        ? { uri: "/images/sponsors/re-store.png" }
+                        : require("../public/images/sponsors/re-store.png")
+                    }
+                  />
+                </View>
+                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                  <ResponsiveImage
+                    style={{
+                      width: 200,
+                      resizeMode: "contain",
+                      aspectRatio: 1
+                    }}
+                    alt="sponsor"
+                    source={
+                      isWeb
+                        ? { uri: "/images/sponsors/sponsorIcon.jpg" }
+                        : require("../public/images/sponsors/sponsorIcon.jpg")
+                    }
+                  />
+                </View>
+                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                  <ResponsiveImage
+                    style={{
+                      width: 250,
+                      resizeMode: "contain",
+                      aspectRatio: 0.8
+                    }}
+                    alt="vercel"
+                    source={
+                      isWeb
+                        ? { uri: "/images/sponsors/vercel.png" }
+                        : require("../public/images/sponsors/vercel.png")
+                    }
+                  />
+                </View>
+                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                  {/* <ResponsiveImage
+                    style={{
+                      width: 250,
+                      resizeMode: "contain",
+                      aspectRatio: 0.5
+                    }}
+                    alt="sponsor"
+                    source={
+                      isWeb
+                        ? { uri: "/images/sponsors/re-store.png" }
+                        : require("../public/images/sponsors/re-store.png")
+                    }
+                  /> */}
                 </View>
               </View>
             </View>
@@ -919,7 +965,7 @@ const moreStyles = StyleSheet.create({
   amount: { fontWeight: "bold", fontSize: 60, marginTop: 80 },
   sponsorLogos: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     flexWrap: "wrap"
