@@ -476,7 +476,7 @@ function Page(props) {
                       style={moreStyles.checkMark}
                     />
                     <Text style={moreStyles.checkedText}>
-                      Reach 200+ participating businesses, thousands of
+                      Reach {props.listingsCount} participating businesses, thousands of
                       customers, and our large volunteer network with over 1000
                       applications from across the globe
                     </Text>
