@@ -42,7 +42,7 @@ class CustomDocument extends Document {
 
               gtag('config', 'UA-168538359-1');
             `}} />
-            <script
+            {/* <script
             dangerouslySetInnerHTML={{
               __html: `
               window.__lc = window.__lc || {};
@@ -52,7 +52,7 @@ class CustomDocument extends Document {
                 lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
               })();
-           `}} />
+           `}} /> */}
         </body>
       </Html>
     )
