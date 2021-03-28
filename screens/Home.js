@@ -585,77 +585,59 @@ function Page(props) {
         </View>
       </View>
 
-      {/* Shop link */}
-      <View style={{ position: "relative", backgroundColor: "#006439" }}>
-        <View
-          style={
-            dimensions.width < 700
-              ? {}
-              : { flexDirection: "row", alignItems: "center" }
-          }
-        >
-          <View
-            style={[
-              { position: "relative" },
-              isWeb ? { height: 400, overflow: "hidden" } : { height: 150 },
-              dimensions.width < 700
-                ? { flex: 1 }
-                : { flex: 2, flexDirection: "column" },
-            ]}
-          >
-            <HybridImageBackground
-              source={
-                isWeb
-                  ? { uri: "/images/home_store_image_new.png" }
-                  : require("../public/images/home_store_image_new.png")
-              }
-              style={{ height: 400 }}
-            />
-          </View>
-          <View
-            style={dimensions.width < 700 ? {} : { flex: 1, paddingLeft: 40 }}
-          >
-            <View style={{ marginTop: 40, marginBottom: 40 }}>
-              <View style={{ flex: 1, maxWidth: 400 }}>
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  style={[
-                    responsiveStyles.text_hero,
-                    isWeb ? {} : { position: "relative", left: 20 },
-                  ]}
-                >
-                  Visit Our Store
-                </Text>
-              </View>
-              <Link href="https://shop.spicygreenbook.org">
-                <View style={{ width: 200, marginTop: 20 }}>
-                  <View
-                    style={[
-                      styles.button_green,
-                      {
-                        borderColor: "#fff",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      },
-                      isWeb ? {} : { position: "relative", left: 100 },
-                    ]}
-                  >
+
+     <View style={[styles.section, { backgroundColor: "#006439", paddingTop: 80 }]}>
+        <View style={styles.content}>
+            <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
+                <View style={dimensions.width < 700 ? {} : {flex: 2}}>
+                    <ResponsiveImage
+                        style={{width: 797, height: 381, resizeMode: 'contain', aspectRatio: 0.4780426599749059}}
+                        alt="Spicy Green Book"
+                        source={isWeb ? { uri: '/images/home_store_image_new.png' } : require('../public/images/home_store_image_new.png')}
+                    />
+                </View>
+                <View style={dimensions.width < 700 ? {paddingTop: 40, justifyContent: 'center', alignItems: 'center'} : {flex: 1, paddingLeft: 20}}>
+                  <View style={{ flex: 1, maxWidth: 400, textAlign: 'center'}}>
                     <Text
+                      accessibilityRole="header"
+                      aria-level="1"
                       style={[
-                        styles.button_green_text,
-                        { textAlign: "center" },
+                        responsiveStyles.text_hero,
+                        dimensions.width < 700 ? {fontSize: 42, lineHeight: 42} : {fontSize: 56, lineHeight: 60},
+                        {textAlign: dimensions.width < 700 ? 'center' : 'left'},
                       ]}
                     >
-                      Shop Now
+                      Visit Our Store
                     </Text>
                   </View>
+                  <Link href="https://shop.spicygreenbook.org">
+                    <View style={{ flex: 1, width: 200, marginTop: 20 }}>
+                      <View
+                        style={[
+                          styles.button_green,
+                          {
+                            borderColor: "#fff",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          },
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            styles.button_green_text,
+                            { textAlign: "center", color: '#fff' },
+                          ]}
+                        >
+                          Shop Now
+                        </Text>
+                      </View>
+                    </View>
+                  </Link>
                 </View>
-              </Link>
             </View>
-          </View>
         </View>
       </View>
+
 
       {/* ABC VIDEO HIDDEN TO PROMOTE OUR OWN VIDEO OP AT THE TOP OF THE PAGE
             <View style={[styles.section, { paddingTop: 80 }]}>

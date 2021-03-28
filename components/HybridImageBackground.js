@@ -12,7 +12,7 @@ export default function HybridImageBackground(props) {
       <Image
         src={src}
         layout="fill"
-        objectFit="cover"
+        objectFit={props.objectFit ? props.objectFit : "cover"}
       />
       {props.children}
     </View>
