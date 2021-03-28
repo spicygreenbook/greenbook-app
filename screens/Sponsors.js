@@ -45,7 +45,7 @@ function Page(props) {
 
   const scrollViewRef = useRef();
 
-  const handleScroll = (index) => {
+  const handleScroll = index => {
     if (index === 0) {
       // Temp topPage ref fix because fixed nav covers heading when jumping up
       topPage.current.scrollIntoView({
@@ -73,7 +73,7 @@ function Page(props) {
     }
   };
 
-  const scrollToView = (index) => {
+  const scrollToView = index => {
     console.log("attempt scroll", index);
     scrollViewRef.current.scrollTo({ x: 20, y: 400, animated: true });
     // window.scrollTo(0, 400)
@@ -440,7 +440,7 @@ function Page(props) {
           </View>
 
           <View
-            onLayout={(event) => setLayout(event.nativeEvent.layout)}
+            onLayout={event => setLayout(event.nativeEvent.layout)}
             ref={sponsorBenefit}
             style={[styles.section, { paddingTop: 20, paddingBottom: 20 }]}
           >
@@ -530,6 +530,7 @@ function Page(props) {
                       width: 700,
                       resizeMode: "contain",
                       aspectRatio: 1.2,
+                      objectFit: "cover"
                     }}
                     alt="Mayas Cookies"
                     source={
@@ -560,6 +561,7 @@ function Page(props) {
                       width: 700,
                       resizeMode: "contain",
                       aspectRatio: 1.2,
+                      objectFit: "cover"
                     }}
                     alt="plate of crab"
                     source={
@@ -661,7 +663,7 @@ function Page(props) {
                 }}
               >
                 {sponsorLevels &&
-                  sponsorLevels.map((level) => (
+                  sponsorLevels.map(level => (
                     <View style={{ paddingBottom: 40 }} key={level.title}>
                       <View
                         style={
