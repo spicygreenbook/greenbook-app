@@ -11,7 +11,7 @@ export default () => {
           <View style={[styles.content, { flex: 1, paddingTop: 80 }]}>
             <View style={{ alignItems: 'center' }}>
               <Text style={[styles.text_header2, { color: 'white', textAlign: 'center' }]}>Subscribe To Get Our Newsletter</Text>
-              <Text style={[styles.text_body, { color: 'white', maxWidth: 650, lineHeight: 40, textAlign: 'center' }]}>Want to keep up with the latest SGB news and information? Join the club and don’t miss out on any news</Text>
+              <Text style={[styles.text_body, { color: 'white', width: '100%', maxWidth: 650, lineHeight: 40, textAlign: 'center' }]}>Want to keep up with the latest SGB news and information? Join the club and don’t miss out on any news</Text>
             </View>
             <SubscribeForm showTitle={false} />
           </View>
