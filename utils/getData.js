@@ -83,6 +83,8 @@ const getPrismicValue = (ref, key) => {
             }).filter(item => item)
         } else if(ref.type === 'Embed') {
             return ref.value.oembed
+        } else if(ref.type === 'Timestamp') {
+            return ref.value
         } else {
             console.log('unhandled type', ref)
         }

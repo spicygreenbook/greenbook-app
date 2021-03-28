@@ -1,4 +1,3 @@
-// @generated: @expo/next-adapter@2.1.0
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Platform } from "react-native";
 import { StateReducer, InitialState, getContent, getData } from "../utils";
