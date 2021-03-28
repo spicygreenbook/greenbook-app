@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Button,
-  InteractionManager
+  InteractionManager,
 } from "react-native";
 import { Link } from "../components/Link";
 import { ResponsiveImage } from "../components/ResponsiveImage";
@@ -50,25 +50,25 @@ function Page(props) {
       // Temp topPage ref fix because fixed nav covers heading when jumping up
       topPage.current.scrollIntoView({
         behavior: "smooth",
-        block: !isWeb ? "center" : "start"
+        block: !isWeb ? "center" : "start",
       });
     }
     if (index === 1) {
       sponsorBenefit.current.scrollIntoView({
         behavior: "smooth",
-        block: !isWeb ? "nearest" : "nearest"
+        block: !isWeb ? "nearest" : "nearest",
       });
     }
     if (index === 2) {
       sponsorLevel.current.scrollIntoView({
         behavior: "smooth",
-        block: !isWeb ? "center" : "nearest"
+        block: !isWeb ? "center" : "nearest",
       });
     }
     if (index === 3) {
       ourSponsors.current.scrollIntoView({
         behavior: "smooth",
-        block: !isWeb ? "center" : "nearest"
+        block: !isWeb ? "center" : "nearest",
       });
     }
   };
@@ -88,7 +88,7 @@ function Page(props) {
           { href: "sponsor_benefits", title: "Sponsorship Benefits" },
           { href: "sponsor_levels", title: "Sponsorship Levels" },
           // { href: "our_sponsors", title: "Our Sponsors" },
-          { href: "become_sponsor", title: "BECOME A SPONSOR" }
+          { href: "become_sponsor", title: "BECOME A SPONSOR" },
         ]
       : [];
   // [ { href: "become_sponsor", title: "BECOME A SPONSOR" } ];
@@ -103,7 +103,7 @@ function Page(props) {
     { title: "Rolling Pin", amount: "10K" },
     { title: "Spatula", amount: "15K" },
     { title: "Martini Glass", amount: "20K" },
-    { title: "Ladle", amount: "25K+" }
+    { title: "Ladle", amount: "25K+" },
   ];
 
   return (
@@ -128,14 +128,14 @@ function Page(props) {
                     top: 0,
                     left: 0,
                     right: 0,
-                    zIndex: 10
+                    zIndex: 10,
                   }
                 : {
                     backgroundColor: Theme.green_bg,
                     paddingTop: 30,
                     justifyContent: "center",
                     alignItems: "center",
-                    paddingBottom: 20
+                    paddingBottom: 20,
                   }
             }
           >
@@ -156,7 +156,7 @@ function Page(props) {
                               display: "flex",
                               flexDirection: "row",
                               justifyContent: "center",
-                              flexWrap: "wrap"
+                              flexWrap: "wrap",
                             }
                           : header.title !== "BECOME A SPONSOR"
                           ? { marginTop: 40 }
@@ -165,7 +165,7 @@ function Page(props) {
                               padding: 10,
                               marginTop: 40,
                               minHeight: 58,
-                              justifyContent: "center"
+                              justifyContent: "center",
                             }
                       }
                     >
@@ -177,17 +177,17 @@ function Page(props) {
                                   styles.button_black,
                                   {
                                     // marginLeft: 10,
-                                    flexBasis: "30%"
-                                  }
+                                    flexBasis: "30%",
+                                  },
                                 ]
                               : isWeb && dimensions.width < 830
                               ? [
                                   styles.button_black,
-                                  moreStyles.becomeSponsorWebLarge
+                                  moreStyles.becomeSponsorWebLarge,
                                 ]
                               : [
                                   styles.button_black,
-                                  moreStyles.becomeSponsorWebSmall
+                                  moreStyles.becomeSponsorWebSmall,
                                 ]
                           }
                         >
@@ -248,7 +248,7 @@ function Page(props) {
                               ? moreStyles.btnHeader2
                               : {
                                   fontFamily: "ApercuMedium",
-                                  fontWeight: "bold"
+                                  fontWeight: "bold",
                                 }
                           }
                           title={header.title}
@@ -327,7 +327,7 @@ function Page(props) {
                     style={{
                       width: 800,
                       resizeMode: "contain",
-                      aspectRatio: 1.1
+                      aspectRatio: 1.1,
                     }}
                     alt="Opportunity Gap"
                     source={
@@ -362,7 +362,7 @@ function Page(props) {
                         : [
                             styles.text_body,
                             moreStyles.oppGapLarge,
-                            { paddingTop: 10 }
+                            { paddingTop: 10 },
                           ]
                     }
                   >
@@ -377,7 +377,7 @@ function Page(props) {
                         : [
                             styles.text_body,
                             moreStyles.oppGapLarge,
-                            { paddingTop: 10 }
+                            { paddingTop: 10 },
                           ]
                     }
                   >
@@ -410,7 +410,7 @@ function Page(props) {
                     style={{
                       width: 100,
                       resizeMode: "contain",
-                      aspectRatio: 1
+                      aspectRatio: 1,
                     }}
                     alt="danilo"
                     source={
@@ -453,7 +453,7 @@ function Page(props) {
                     styles.text_header3,
                     dimensions.width < 800
                       ? { marginBottom: 20, marginLeft: 50 }
-                      : { marginBottom: 20 }
+                      : { marginBottom: 20 },
                   ]}
                 >
                   SPONSORSHIP BENEFITS
@@ -659,7 +659,7 @@ function Page(props) {
                   flexDirection: "row",
                   flexWrap: "wrap",
                   alignContent: "center",
-                  justifyContent: "space-around"
+                  justifyContent: "space-around",
                 }}
               >
                 {sponsorLevels &&
@@ -672,15 +672,15 @@ function Page(props) {
                                 moreStyles.levels,
                                 {
                                   justifyContent: "flex-start",
-                                  alignItems: "center"
-                                }
+                                  alignItems: "center",
+                                },
                               ]
                             : [
                                 moreStyles.levels,
                                 {
                                   justifyContent: "center",
-                                  flexDirection: "row"
-                                }
+                                  flexDirection: "row",
+                                },
                               ]
                         }
                       >
@@ -690,7 +690,7 @@ function Page(props) {
                               ? [
                                   styles.button_white_text,
                                   moreStyles.amount,
-                                  { lineHeight: 65, marginTop: 60 }
+                                  { lineHeight: 65, marginTop: 60 },
                                 ]
                               : [styles.button_white_text, moreStyles.amount]
                           }
@@ -863,12 +863,12 @@ function Page(props) {
                 </Text>
               </View>
               <View style={moreStyles.sponsorLogos}>
-                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                <View style={{ flexBasis: "30%", padding: 20 }}>
                   <ResponsiveImage
                     style={{
                       width: 250,
                       resizeMode: "contain",
-                      aspectRatio: 0.5
+                      aspectRatio: 0.5,
                     }}
                     alt="verizon"
                     source={
@@ -878,12 +878,12 @@ function Page(props) {
                     }
                   />
                 </View>
-                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                <View style={{ flexBasis: "30%", padding: 20 }}>
                   <ResponsiveImage
                     style={{
                       width: 250,
                       resizeMode: "contain",
-                      aspectRatio: 0.5
+                      aspectRatio: 0.5,
                     }}
                     alt="sponsor"
                     source={
@@ -893,12 +893,12 @@ function Page(props) {
                     }
                   />
                 </View>
-                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                <View style={{ flexBasis: "30%", padding: 20 }}>
                   <ResponsiveImage
                     style={{
                       width: 250,
                       resizeMode: "contain",
-                      aspectRatio: 0.5
+                      aspectRatio: 0.5,
                     }}
                     alt="re-store LA"
                     source={
@@ -908,12 +908,12 @@ function Page(props) {
                     }
                   />
                 </View>
-                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                <View style={{ flexBasis: "30%", padding: 20 }}>
                   <ResponsiveImage
                     style={{
                       width: 200,
                       resizeMode: "contain",
-                      aspectRatio: 1
+                      aspectRatio: 1,
                     }}
                     alt="sponsor"
                     source={
@@ -923,12 +923,12 @@ function Page(props) {
                     }
                   />
                 </View>
-                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                <View style={{ flexBasis: "30%", padding: 20 }}>
                   <ResponsiveImage
                     style={{
                       width: 250,
                       resizeMode: "contain",
-                      aspectRatio: 0.8
+                      aspectRatio: 0.8,
                     }}
                     alt="vercel"
                     source={
@@ -938,7 +938,7 @@ function Page(props) {
                     }
                   />
                 </View>
-                <View style={{ flexBasis: "30%", padding: "20px" }}>
+                <View style={{ flexBasis: "30%", padding: 20 }}>
                   {/* <ResponsiveImage
                     style={{
                       width: 250,
@@ -968,7 +968,7 @@ const moreStyles = StyleSheet.create({
     borderRadius: 100,
     height: 180,
     width: 180,
-    display: "flex"
+    display: "flex",
   },
   amount: { fontWeight: "bold", fontSize: 60, marginTop: 80 },
   sponsorLogos: {
@@ -976,20 +976,20 @@ const moreStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   sponsorLogoContent: {
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   textList: {
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    paddingBottom: 15
+    paddingBottom: 15,
   },
   checkMark: { color: "white", marginRight: 10 },
   buildRepContainerSmall: {
@@ -998,7 +998,7 @@ const moreStyles = StyleSheet.create({
     paddingRight: 30,
     paddingBottom: 30,
     marginTop: 30,
-    marginBottom: 40
+    marginBottom: 40,
   },
   buildRepContainerLarge: {
     flex: 1,
@@ -1007,26 +1007,26 @@ const moreStyles = StyleSheet.create({
     paddingLeft: 60,
     paddingRight: 60,
     paddingTop: 18,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   listTitle: {
     fontSize: 24,
     paddingTop: 20,
     paddingBottom: 20,
     color: "#ffffff",
-    marginTop: 40
+    marginTop: 40,
   },
   imgTxtContainer2: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   broadVisContainerSmall: {
     backgroundColor: Theme.green_bg,
     paddingLeft: 30,
     paddingRight: 30,
-    paddingBottom: 30
+    paddingBottom: 30,
   },
   broadVisContainerLarge: {
     flex: 1,
@@ -1035,38 +1035,38 @@ const moreStyles = StyleSheet.create({
     paddingLeft: 60,
     paddingRight: 60,
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   checkedText: {
     fontSize: 24,
     alignSelf: "flex-end",
     color: "#ffffff",
     flex: 1,
-    lineHeight: 35
+    lineHeight: 35,
   },
   quoteLarge: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    alignItems: "center"
+    alignItems: "center",
   },
   oppGapSmall: {
     color: "white",
     paddingTop: 10,
     fontWeight: "bold",
     fontSize: 20,
-    lineHeight: 24
+    lineHeight: 24,
   },
   oppGapLarge: {
     color: "white",
     fontWeight: "bold",
     fontSize: 22,
-    lineHeight: 35
+    lineHeight: 35,
   },
   oppGapContainerSmall: {
     backgroundColor: Theme.green_bg,
     padding: 10,
-    paddingBottom: 40
+    paddingBottom: 40,
   },
   oppGapContainerLarge: {
     backgroundColor: Theme.green_bg,
@@ -1075,20 +1075,20 @@ const moreStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 40,
-    paddingBottom: 40
+    paddingBottom: 40,
   },
   whySponsorDiv: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   whySponsorSection: { fontSize: 24, paddingTop: 40, marginTop: 200 },
   whySponsorContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingRight: 50
+    paddingRight: 50,
   },
   btnHeader2: { fontFamily: "ApercuMedium", padding: 5, fontWeight: "bold" },
   btnHeader2Container: {
@@ -1097,7 +1097,7 @@ const moreStyles = StyleSheet.create({
     padding: 10,
     width: 210,
     alignItems: "center",
-    marginHorizontal: 90
+    marginHorizontal: 90,
   },
   webHeaderSmall: {
     fontSize: 24,
@@ -1105,14 +1105,14 @@ const moreStyles = StyleSheet.create({
     fontFamily: "ApercuMedium",
     color: "white",
     fontWeight: "bold",
-    marginTop: 5
+    marginTop: 5,
   },
   webHeaderLarge: {
     fontFamily: "ApercuMedium",
     fontSize: 18,
     lineHeight: 16,
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   webHeader2Small: {
     fontSize: 24,
@@ -1122,7 +1122,7 @@ const moreStyles = StyleSheet.create({
     padding: 10,
     color: "white",
     fontWeight: "bold",
-    marginTop: 5
+    marginTop: 5,
   },
   webHeader2Large: {
     backgroundColor: "black",
@@ -1130,31 +1130,31 @@ const moreStyles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 16,
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   levelTitleSmall: {
     alignSelf: "center",
     marginTop: 15,
     fontSize: 30,
-    lineHeight: 30
+    lineHeight: 30,
   },
   levelTitleLarge: { alignSelf: "center", marginTop: 15, fontSize: 30 },
   becomeSponsorWebLarge: { alignSelf: "center" },
   becomeSponsorWebSmall: {
     marginLeft: 12,
     marginRight: 20,
-    alignSelf: "stretch"
+    alignSelf: "stretch",
   },
   ourSponsorsBtnSmall: {
     justifyContent: "center",
     alignItems: "center",
-    alignContent: "center"
+    alignContent: "center",
   },
   ourSponsorsBtnLarge: {
     flexDirection: "row",
     justifyContent: "center",
-    alignContent: "center"
-  }
+    alignContent: "center",
+  },
   // sponsorPacketBtn: {
   //   backgroundColor: "white",
   //   // marginRight: 10,
