@@ -120,7 +120,11 @@ export default function (props) {
                     </View>
                 ) : (
                         <View style={[{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}, view !== '/' && { maxWidth: 750, justifyContent: 'space-between' }]}>
-                            <Link href="/search"><Text style={styles.text_nav}>Directory</Text></Link>                            
+                            <Link href="/search"><Text style={styles.text_nav}>Directory</Text></Link>                                
+                            <Link href="/add"><Text style={[styles.text_nav]}>Add Listing</Text></Link>
+                            <Link href="/donate"><Text style={[styles.text_nav]}>Donate</Text></Link>
+                            <Link href="/sponsors"><Text style={[styles.text_nav]}>Sponsor Us</Text></Link>
+                            <Link href="/volunteer"><Text style={ [ styles.text_nav ] }>Volunteer</Text></Link>
                             <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'flex-end' }}>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                                     <Link href="/about"><Text style={[styles.text_nav]}>About</Text></Link>
@@ -144,22 +148,16 @@ export default function (props) {
                                     }} 
                         
                                 >     
-                                    <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_nav_sub}>Store</Text></Link>              
                                     <Link href="/updates"><Text style={styles.text_nav_sub}>Updates</Text></Link>    
                                     <Link href="/team"><Text style={styles.text_nav_sub}>Team</Text></Link>
                                     <Link href="/volunteers"><Text style={styles.text_nav_sub}>Volunteers</Text></Link>
-                                    <Link href="/process"><Text style={styles.text_nav_sub}>Process</Text></Link>       
                                     <Link href="/press"><Text style={styles.text_nav_sub}>Press</Text></Link>              
                                     <Link href="/testimonials"><Text style={styles.text_nav_sub}>Testimonials</Text></Link>              
                                     <Link href="/faq"><Text style={styles.text_nav_sub}>FAQ</Text></Link>                           
                                     <Link href="/contact"><Text style={styles.text_nav_sub}>Contact Us</Text></Link>                           
                                 </div>
                             </View>
-    
-                            <Link href="/add"><Text style={[styles.text_nav]}>Add Listing</Text></Link>
-                            <Link href="/sponsors"><Text style={[styles.text_nav]}>Sponsor Us</Text></Link>
-                            <Link href="/donate"><Text style={[styles.text_nav]}>Donate</Text></Link>
-                            <Link href="/volunteer"><Text style={[styles.text_nav]}>Volunteer</Text></Link>
+                            <Link href="https://shop.spicygreenbook.org"><Text style={styles.text_nav}>Store</Text></Link>
                             
                             { view === '/' &&
                                 <TouchableOpacity onPress={() => {
