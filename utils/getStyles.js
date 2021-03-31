@@ -228,7 +228,7 @@ const allStyles = {
       fontFamily: "ApercuMedium",
       fontSize: 16,
       lineHeight: 15,
-      color: "#fff",
+      color: theme.green,
       textAlign: "center"
     };
   },
@@ -251,7 +251,7 @@ const allStyles = {
       fontFamily: "ApercuMedium",
       fontSize: 16,
       lineHeight: 15,
-      color: theme.green,
+      color: "#fff",
       textAlign: "center"
     };
   },

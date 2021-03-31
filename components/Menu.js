@@ -5,7 +5,7 @@ import {
   View,
   Button,
   Image,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 
 import { getStyles, Theme } from "../utils";
@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 export default function (props) {
   const [
     { view, isWeb, theme, dimensions, menuOpen },
-    dispatch,
+    dispatch
   ] = useStateValue();
   const styles = StyleSheet.create(getStyles("text_menu", { isWeb, theme }));
   const router = useRouter();
@@ -25,64 +25,60 @@ export default function (props) {
   const menu = [
     {
       title: "Directory",
-      href: "/search",
-    },
-    {
-      title: "Donate",
-      href: "/donate",
-    },
-    {
-      title: "Sponsor Us",
-      href: "/sponsors",
-    },
-    {
-      title: "Store",
-      href: "/shop",
+      href: "/search"
     },
     {
       title: "Add Listing",
-      href: "/add",
+      href: "/add"
+    },
+    {
+      title: "Donate",
+      href: "/donate"
+    },
+    {
+      title: "Sponsor Us",
+      href: "/sponsors"
     },
     {
       title: "Volunteer",
-      href: "/volunteer",
+      href: "/volunteer"
     },
     {
       title: "About",
-      href: "/about",
+      href: "/about"
     },
     {
       title: "Updates",
-      href: "/updates",
+      href: "/updates"
     },
     {
       title: "Team",
-      href: "/team",
+      href: "/team"
     },
     {
       title: "Volunteers",
-      href: "/volunteers",
-    },
-    {
-      title: "Process",
-      href: "/process",
+      href: "/volunteers"
     },
     {
       title: "Press",
-      href: "/press",
+      href: "/press"
     },
     {
       title: "Testomonials",
-      href: "/testimonials",
+      href: "/testimonials"
     },
     {
       title: "FAQ",
-      href: "/faq",
+      href: "/faq"
     },
     {
       title: "Contact",
-      href: "/contact",
+      href: "/contact"
     },
+    {
+      title: "Store",
+      href: "/shop"
+    }
   ];
 
   return (
@@ -97,7 +93,7 @@ export default function (props) {
         height: "100%",
         zIndex: 10,
         paddingTop: isWeb ? 0 : 40,
-        backgroundColor: Theme.green_bg,
+        backgroundColor: Theme.green_bg
       }}
     >
       <View
@@ -105,7 +101,7 @@ export default function (props) {
           position: "absolute",
           left: 10,
           top: isWeb ? 10 : 60,
-          zIndex: 10,
+          zIndex: 10
         }}
       >
         <TouchableOpacity
@@ -124,7 +120,7 @@ export default function (props) {
               justifyContent: "center",
               alignItems: "center",
               borderColor: "#fff",
-              borderBottomWidth: 2,
+              borderBottomWidth: 2
             }}
           >
             <TouchableOpacity

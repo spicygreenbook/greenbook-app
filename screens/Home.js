@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Linking,
-  Platform,
+  Platform
 } from "react-native";
 import { Link } from "../components/Link";
 import HybridImageBackground from "../components/HybridImageBackground";
@@ -21,7 +21,7 @@ import {
   Theme,
   getData,
   getListingsByState,
-  GridWidth,
+  GridWidth
 } from "../utils";
 import { parseAddress } from "../utils/cityState";
 import { Entypo } from "@expo/vector-icons";
@@ -40,7 +40,7 @@ import SubscribeSection from "../components/SubscribeSection";
 import { Video } from "expo-av";
 
 const viewableItemsChangedConfigListing = {
-  itemVisiblePercentThreshold: 50,
+  itemVisiblePercentThreshold: 50
 };
 
 function Page(props) {
@@ -63,7 +63,10 @@ function Page(props) {
     props.testimonials
   );
   const [abcVideoClicked, setAbcVideoClicked] = useState(false);
-  const [isMobileHomePageVideoPlaying, setisMobileHomePageVideoPlaying] = useState(false);
+  const [
+    isMobileHomePageVideoPlaying,
+    setisMobileHomePageVideoPlaying
+  ] = useState(false);
 
   const responsiveStyles = StyleSheet.create(
     getStyles("middle_all, text_hero")
@@ -103,7 +106,7 @@ function Page(props) {
           <View
             style={[
               responsiveStyles.middle_all,
-              { flex: 1, alignItems: "stretch", padding: 20 },
+              { flex: 1, alignItems: "stretch", padding: 20 }
             ]}
           >
             <Text
@@ -128,7 +131,7 @@ function Page(props) {
             flexDirection: dimensions.width > 624 ? "row" : "column",
             justifyContent: "center",
             alignItems: "center",
-            padding: 10,
+            padding: 10
           }}
         >
           <Text
@@ -136,7 +139,7 @@ function Page(props) {
             aria-level="3"
             style={[
               styles.text_header3,
-              { fontSize: 36, marginBottom: dimensions.width > 624 ? 0 : 10 },
+              { fontSize: 36, marginBottom: dimensions.width > 624 ? 0 : 10 }
             ]}
           >
             DOWNLOAD OUR APP
@@ -145,7 +148,7 @@ function Page(props) {
             style={{
               marginLeft: 32,
               marginRight: 32,
-              display: dimensions.width > 624 ? "flex" : "none",
+              display: dimensions.width > 624 ? "flex" : "none"
             }}
           >
             <Fontisto name="arrow-right-l" size={46} color={Theme.green} />
@@ -173,7 +176,7 @@ function Page(props) {
                 left: 0,
                 top: 0,
                 bottom: 0,
-                right: 0,
+                right: 0
               }}
             >
               {isWeb ? (
@@ -198,7 +201,7 @@ function Page(props) {
                         bottom: 0,
                         zIndex: 1,
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignItems: "center"
                       }}
                     >
                       <Fontisto
@@ -207,7 +210,7 @@ function Page(props) {
                         color="white"
                         style={{
                           padding: 20,
-                          backgroundColor: "rgba(0,0,0,0.6)",
+                          backgroundColor: "rgba(0,0,0,0.6)"
                         }}
                       />
                     </TouchableOpacity>
@@ -215,7 +218,7 @@ function Page(props) {
                   <Video
                     shouldPlay={isMobileHomePageVideoPlaying}
                     posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
-                    posterStyle={ {width:"100%", height:"100%"}}
+                    posterStyle={{ width: "100%", height: "100%" }}
                     source={{ uri: "https://spicygreenbook.org/intro.mp4" }}
                     useNativeControls
                     resizeMode="contain"
@@ -236,7 +239,7 @@ function Page(props) {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "space-between",
-                    alignItems: "center",
+                    alignItems: "center"
                   }
             }
           >
@@ -251,7 +254,7 @@ function Page(props) {
                 style={{
                   width: 804,
                   resizeMode: "contain",
-                  aspectRatio: 1.37245,
+                  aspectRatio: 1.37245
                 }}
                 alt="Spicy Green Book"
                 source={
@@ -302,14 +305,14 @@ function Page(props) {
           backgroundColor: Theme.green_bg,
           padding: 20,
           paddingTop: 60,
-          paddingBottom: 60,
+          paddingBottom: 60
         }}
       >
         <View
           style={{
             justifyContent: "center",
             flexDirection: "row",
-            flexWrap: "wrap",
+            flexWrap: "wrap"
           }}
         >
           {loadingPress ? (
@@ -331,14 +334,14 @@ function Page(props) {
                     style={{
                       width: GridWidth({ minWidth: 140 }),
                       margin: 20,
-                      height: 40,
+                      height: 40
                     }}
                     key={"press" + p}
                   >
                     <Link href={pressRow.link}>
                       <HybridImage
                         source={{
-                          uri: pressRow.press_site_logo_white.url + "&w=300",
+                          uri: pressRow.press_site_logo_white.url + "&w=300"
                         }}
                         style={{ height: "100%", resizeMode: "contain" }}
                         objectFit="contain"
@@ -400,7 +403,7 @@ function Page(props) {
                         paddingLeft: 20,
                         paddingRight: 20,
                         flexDirection: "column",
-                        justifyContent: "space-between",
+                        justifyContent: "space-between"
                       }}
                     >
                       <View style={{ flex: 2 }}>
@@ -431,16 +434,16 @@ function Page(props) {
                           onPress={() => {
                             dispatch({
                               type: "setView",
-                              view: "/biz/" + item.uid,
+                              view: "/biz/" + item.uid
                             });
                             props.navigation.navigate("Directory", {
                               screen: "Listing",
-                              home: true,
+                              home: true
                             });
                           }}
                         >
                           <View
-                            style={[styles.button_white, { marginTop: 40 }]}
+                            style={[styles.button_white, { marginTop: 40, maxWidth: "200px", justifyContent: "center" }]}
                           >
                             <Text style={styles.button_white_text}>
                               Learn More
@@ -462,13 +465,13 @@ function Page(props) {
                 left: 10,
                 right: 10,
                 height: 200,
-                flex: 1,
+                flex: 1
               }}
             >
               <View
                 style={{
                   justifyContent: "space-between",
-                  flexDirection: "row",
+                  flexDirection: "row"
                 }}
               >
                 <View style={{ flex: 1 }}>
@@ -477,7 +480,7 @@ function Page(props) {
                       scrollToIndexListing(
                         {
                           animated: true,
-                          index: currentIndexListing.current - 1,
+                          index: currentIndexListing.current - 1
                         },
                         10
                       )
@@ -492,7 +495,7 @@ function Page(props) {
                       scrollToIndexListing(
                         {
                           animated: true,
-                          index: currentIndexListing.current + 1,
+                          index: currentIndexListing.current + 1
                         },
                         10
                       )
@@ -515,8 +518,8 @@ function Page(props) {
             flex: 1,
             paddingBottom: 0,
             paddingTop: isWeb ? (dimensions.width < 500 ? 60 : 86) : 80,
-            marginBottom: 60,
-          },
+            marginBottom: 60
+          }
         ]}
       >
         <View style={[styles.content, { flex: 1 }]}>
@@ -533,7 +536,7 @@ function Page(props) {
               style={[
                 styles.text_body3,
                 { fontSize: 18, fontWeight: "bold" },
-                isWeb && { lineHeight: 36 },
+                isWeb && { lineHeight: 36 }
               ]}
             >
               We are a growing community of
@@ -545,7 +548,7 @@ function Page(props) {
                 style={[
                   styles.text_header,
                   { fontSize: 26, fontWeight: "normal" },
-                  { lineHeight: isWeb ? 1 : Platform.OS === "ios" ? 0 : 30 },
+                  { lineHeight: isWeb ? 1 : Platform.OS === "ios" ? 0 : 30 }
                 ]}
               >
                 {Listings.length}
@@ -556,7 +559,7 @@ function Page(props) {
               style={[
                 styles.text_body3,
                 { fontSize: 18, fontWeight: "bold" },
-                isWeb && { lineHeight: 36 },
+                isWeb && { lineHeight: 36 }
               ]}
             >
               and across{" "}
@@ -564,7 +567,7 @@ function Page(props) {
                 style={[
                   styles.text_header,
                   { fontSize: 26, fontWeight: "normal" },
-                  { lineHeight: isWeb ? 1 : Platform.OS === "ios" ? 0 : 30 },
+                  { lineHeight: isWeb ? 1 : Platform.OS === "ios" ? 0 : 30 }
                 ]}
               >
                 {Listings.length > 0
@@ -576,8 +579,7 @@ function Page(props) {
           </View>
           <SGBMap
             style={{
-              marginTop:
-                dimensions.width < 700 ? -40 : dimensions.width * -0.11,
+              marginTop: dimensions.width < 700 ? -40 : dimensions.width * -0.11
             }}
             listings={Listings}
             loadingListings={loadingListings}
@@ -585,59 +587,94 @@ function Page(props) {
         </View>
       </View>
 
-
-     <View style={[styles.section, { backgroundColor: "#006439", paddingTop: 80 }]}>
+      <View
+        style={[
+          styles.section,
+          { backgroundColor: Theme.green_bg, paddingTop: 80 }
+        ]}
+      >
         <View style={styles.content}>
-            <View style={dimensions.width < 700 ? {} : {flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
-                <View style={dimensions.width < 700 ? {} : {flex: 2}}>
-                    <ResponsiveImage
-                        style={{width: 797, height: 381, resizeMode: 'contain', aspectRatio: 0.4780426599749059}}
-                        alt="Spicy Green Book"
-                        source={isWeb ? { uri: '/images/home_store_image_new.png' } : require('../public/images/home_store_image_new.png')}
-                    />
-                </View>
-                <View style={dimensions.width < 700 ? {paddingTop: 40, justifyContent: 'center', alignItems: 'center'} : {flex: 1, paddingLeft: 20}}>
-                  <View style={{ flex: 1, maxWidth: 400, textAlign: 'center'}}>
+          <View
+            style={
+              dimensions.width < 700
+                ? {}
+                : {
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }
+            }
+          >
+            <View style={dimensions.width < 700 ? {} : { flex: 2 }}>
+              <ResponsiveImage
+                style={{
+                  width: 797,
+                  height: 381,
+                  resizeMode: "contain",
+                  aspectRatio: 0.4780426599749059
+                }}
+                alt="Spicy Green Book"
+                source={
+                  isWeb
+                    ? { uri: "/images/home_store_image_new.png" }
+                    : require("../public/images/home_store_image_new.png")
+                }
+              />
+            </View>
+            <View
+              style={
+                dimensions.width < 700
+                  ? {
+                      paddingTop: 40,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }
+                  : { flex: 1, paddingLeft: 20 }
+              }
+            >
+              <View style={{ flex: 1, maxWidth: 400, textAlign: "center" }}>
+                <Text
+                  accessibilityRole="header"
+                  aria-level="1"
+                  style={[
+                    responsiveStyles.text_hero,
+                    dimensions.width < 700
+                      ? { fontSize: 42, lineHeight: 42 }
+                      : { fontSize: 56, lineHeight: 60 },
+                    { textAlign: dimensions.width < 700 ? "center" : "left" }
+                  ]}
+                >
+                  Visit Our Store
+                </Text>
+              </View>
+              <Link href="https://shop.spicygreenbook.org">
+                <View style={{ flex: 1, width: 200, marginTop: 20 }}>
+                  <View
+                    style={[
+                      styles.button_green,
+                      {
+                        borderColor: "#fff",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }
+                    ]}
+                  >
                     <Text
-                      accessibilityRole="header"
-                      aria-level="1"
                       style={[
-                        responsiveStyles.text_hero,
-                        dimensions.width < 700 ? {fontSize: 42, lineHeight: 42} : {fontSize: 56, lineHeight: 60},
-                        {textAlign: dimensions.width < 700 ? 'center' : 'left'},
+                        styles.button_green_text,
+                        { textAlign: "center", color: "#fff" }
                       ]}
                     >
-                      Visit Our Store
+                      Shop Now
                     </Text>
                   </View>
-                  <Link href="https://shop.spicygreenbook.org">
-                    <View style={{ flex: 1, width: 200, marginTop: 20 }}>
-                      <View
-                        style={[
-                          styles.button_green,
-                          {
-                            borderColor: "#fff",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          },
-                        ]}
-                      >
-                        <Text
-                          style={[
-                            styles.button_green_text,
-                            { textAlign: "center", color: '#fff' },
-                          ]}
-                        >
-                          Shop Now
-                        </Text>
-                      </View>
-                    </View>
-                  </Link>
                 </View>
+              </Link>
             </View>
+          </View>
         </View>
       </View>
-
 
       {/* ABC VIDEO HIDDEN TO PROMOTE OUR OWN VIDEO OP AT THE TOP OF THE PAGE
             <View style={[styles.section, { paddingTop: 80 }]}>
@@ -701,6 +738,10 @@ function Page(props) {
                 </View>
             /*}}
 
+      {/* Call to Action Section: "BECOME A ..." */}
+      <CallToAction />
+
+
             {/* Testimonials */}
       {loadingTestimonial ? (
         <ActivityIndicator color={Theme.green} size="large" />
@@ -711,9 +752,6 @@ function Page(props) {
           testimonials={testimonials.filter((x) => x.type !== "Volunteer")}
         />
       )}
-
-      {/* Call to Action Section */}
-      <CallToAction />
 
       {/* Updates */}
       <View style={[styles.section, { paddingTop: 0 }]}>
@@ -743,7 +781,7 @@ function Page(props) {
                           style={{
                             width: 300,
                             height: 300,
-                            resizeMode: "cover",
+                            resizeMode: "cover"
                           }}
                         />
                       </View>
@@ -811,8 +849,10 @@ function Page(props) {
         </View>
       </View>
 
+      {/* Subscribe to Newsletter section */}
       <SubscribeSection />
 
+      {/* Quote section */}
       <View style={[styles.section]}>
         <View style={[styles.content, { flex: 1 }]}>
           <View>
