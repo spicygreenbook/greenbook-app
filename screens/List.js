@@ -112,7 +112,9 @@ json output to console to convert to a table to act as an export for people that
         
 
     const HeaderList = () => (
-        <View style={{ padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+        <View style={[ dimensions.width >= 800 ? { width: 'calc(50% - 1px)' } : 
+        { padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', zIndex: 1, backgroundColor: '#fff', width: '100%'}, isWeb && {position: 'fixed', padding: 20, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', zIndex: 1, backgroundColor: '#fff'}]}>
+            
             <Text style={[styles.text_header3, {marginBottom: 20}]}>
                 {filteredList.length === 1 ? '1 Black-Owned Business' : filteredList.length + ' Black-Owned Businesses'}
             </Text>
@@ -129,6 +131,7 @@ json output to console to convert to a table to act as an export for people that
             renderItem={({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} />)}
             keyExtractor={(_, index) => 'listing' + index}
             ListHeaderComponent={<HeaderList />}
+            stickyHeaderIndices={[0]}
         />
     )
 
@@ -137,7 +140,9 @@ json output to console to convert to a table to act as an export for people that
             <View style={[dimensions.width >= 800 ? {flexDirection: 'row'} : {}, isWeb && {borderTopWidth: 2, borderColor: Theme.green}]}>
                 <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: 'calc(100vh - 234px)'} : {}}>
                     <HeaderList />
-                    {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
+                    <View style={{paddingTop: 220}}>
+                        {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
+                    </View>
                 </View>
                 {dimensions.width >= 800 &&
                     <View style={{flex: 1}}>  
