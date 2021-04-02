@@ -1,18 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import {useStateValue} from "../components/State";
-import { getStyles, Theme } from '../utils';
+import { getStyles, Theme, serviceTagMap } from '../utils';
 import { Link } from "./Link"; 
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
 export default function ListItem({ listing, last }) {
 
     const [{ isWeb, theme }, dispatch] = useStateValue();
     const styles = StyleSheet.create(getStyles('text_header4, text_body, text_body3', {isWeb, theme}));
 
     const navigation = !isWeb ? useNavigation() : null
-    
+
+    let iconAr = (listing.cuisines || [])
+        .map(cuisine => cuisine.cuisine).concat((listing.services || [])
+        .map(service => service.service))
+        .map(keyword => serviceTagMap(keyword)).filter(icon => icon)
+        .filter((icon ,i, ar) => {
+            return ar.indexOf(icon) === i
+        })
+
     let content = (
         <View style={{borderBottomWidth: last ? 0 : 2, borderColor: Theme.green, padding: 20, flexDirection: 'row'}}>
             <View style={{flex: 1, flexDirection: 'row'}}>
@@ -30,6 +37,13 @@ export default function ListItem({ listing, last }) {
                         <Text style={[styles.text_body3]}>
                             {listing.cuisines.map(cuisine => cuisine.cuisine).filter(cuisine => cuisine).join(', ')}
                         </Text>
+                    </View>
+                </View>}
+                {iconAr && !!iconAr.length && <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10}}>
+                    <View>
+                        {iconAr.map(icon => (
+                            <Image key={icon} style={{width: 48, height: 48}} source={{uri: '/icons/' + icon + '.png' }} title={icon} alt={icon} />
+                        ))}
                     </View>
                 </View>}
                 {!!listing.phone_number && <Text style={[styles.text_body3,{fontSize: 16, paddingTop: 20}]}>{listing.phone_number}</Text>}

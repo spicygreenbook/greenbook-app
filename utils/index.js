@@ -4,3 +4,4 @@ export { getImage } from './getImage';
 export { StateReducer, InitialState} from './StateReducer';
 export { displayDate } from './DisplayDate';
 export { states, getListingsByState, statesObj, statesObjRev } from './cityState';
+export { serviceTagMap } from './serviceTagMap';

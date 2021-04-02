@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import {serviceTagMap } from '../utils';
 
 var lastInfoWindow;
 
@@ -45,9 +46,21 @@ export default function Map({
 					if(!row.geocoordinates || !row.geocoordinates.lat) return row; // Only valid listing with geocoordinates
 
 					if (row.geocoordinates) {
+
+					    let iconAr = (row.cuisines || []).map(cuisine => cuisine.cuisine).concat((row.services || []).map(service => service.service))
+					    let icons = '';
+		                if (iconAr && !!iconAr.length) {
+	                        icons = iconAr.map(keyword => serviceTagMap(keyword)).filter(icon => icon).filter((icon ,i, ar) => {
+            					return ar.indexOf(icon) === i
+        					}).map(icon => {
+	                            return '<img style="width: 48px; height: 48px;" src="/icons/' + icon + '.png" title="' + icon + '" alt="' + icon + '" />'
+	                        }).join('');
+	                    }
+
 						if (single) {
 							var infoWindowMarkup = `
 							<div style="font-size:18px; margin:8px 0"><b>${row.name[0]}</b></div>
+							<div>${icons}</div>
 							`;
 							if (row.address) {
 								infoWindowMarkup += `
@@ -59,15 +72,18 @@ export default function Map({
 						} else {
 							var infoWindowMarkup = `
 							<a href="/biz/${row.uid}" style="color:#000;text-decoration:none">
-							<img src="${row.primary_image.url}" width="${
-								row.primary_image.width
-							}" height="${
-								row.primary_image.height
-							}" style="max-width:100%;height:auto" />
-							<div style="font-size:18px; margin:8px 0"><b>${row.name[0]}</b></div>
-							${row.cuisines.map(cuisine => {
-								return cuisine.cuisine
-							}).join(", ")}
+								<img src="${row.primary_image.url}" width="${
+									row.primary_image.width
+								}" height="${
+									row.primary_image.height
+								}" style="max-width:100%;height:auto" />
+								<div style="font-size:18px; margin:8px 0"><b>${row.name[0]}</b></div>
+								<div>
+									${row.cuisines.map(cuisine => {
+										return cuisine.cuisine
+									}).join(", ")}
+								</div>
+								<div>${icons}</div>
 							</a>
 							`;
 						}
