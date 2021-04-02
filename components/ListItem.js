@@ -40,11 +40,9 @@ export default function ListItem({ listing, last }) {
                     </View>
                 </View>}
                 {iconAr && !!iconAr.length && <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10}}>
-                    <View>
-                        {iconAr.map(icon => (
-                            <Image key={icon} style={{width: 48, height: 48}} source={{uri: '/icons/' + icon + '.png' }} title={icon} alt={icon} />
-                        ))}
-                    </View>
+                    {iconAr.map(icon => (
+                        <Image key={icon} style={{width: 48, height: 48}} source={{uri: '/icons/' + icon + '.png' }} title={icon} alt={icon} />
+                    ))}
                 </View>}
                 {!!listing.phone_number && <Text style={[styles.text_body3,{fontSize: 16, paddingTop: 20}]}>{listing.phone_number}</Text>}
                 {!!listing.address && <Text style={[styles.text_body3,{fontSize: 16, paddingTop: 10, paddingBottom:20}]}>{listing.address}</Text>}
