@@ -89,6 +89,73 @@ function Page(props) {
                     <React.Fragment>
 
                         <PageTitle title={content.page_title} />
+
+                          <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+                            <View style={styles.content}>
+                              <View style={{ position: "relative", marginBottom: 0 }}>
+                                <View style={{ paddingTop: (1080 / 1920) * 100 + "%" }} />
+                                <View
+                                  style={{
+                                    position: "absolute",
+                                    left: 0,
+                                    top: 0,
+                                    bottom: 0,
+                                    right: 0,
+                                  }}
+                                >
+                                  {isWeb ? (
+                                    <video
+                                      //poster={require("../public/images/home_page_video_thumbnail.jpg")}
+                                      src={"/signUp.mp4"}
+                                      style={{ width: "100%", height: "100%" }}
+                                      controls
+                                    />
+                                  ) : (
+                                    <>
+                                      {/*!isMobileHomePageVideoPlaying && (
+                                        <TouchableOpacity
+                                          onPress={() => {
+                                            setisMobileHomePageVideoPlaying(true);
+                                          }}
+                                          style={{
+                                            position: "absolute",
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            bottom: 0,
+                                            zIndex: 1,
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                          }}
+                                        >
+                                          <Fontisto
+                                            name="play"
+                                            size={46}
+                                            color="white"
+                                            style={{
+                                              padding: 20,
+                                              backgroundColor: "rgba(0,0,0,0.6)",
+                                            }}
+                                          />
+                                        </TouchableOpacity>
+                                      )*/}
+                                      <Video
+                                        shouldPlay={false/*isMobileHomePageVideoPlaying*/}
+                                        //posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+                                        posterStyle={{ width: "100%", height: "100%" }}
+                                        source={{ uri: "https://spicygreenbook.org/signUp.mp4" }}
+                                        useNativeControls
+                                        resizeMode="contain"
+                                        isLooping
+                                        //usePoster={true}
+                                        style={{ flex: 1 }}
+                                      />
+                                    </>
+                                  )}
+                                </View>
+                              </View>
+                            </View>
+                          </View>
                         <View style={[styles.section]}>
                             <View style={[styles.content]}>
                                 <RichText render={_use_content} isWeb={isWeb} markupStyle={'fancy'} bullet={'check'} />

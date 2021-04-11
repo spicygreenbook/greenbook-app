@@ -60,3 +60,6 @@ The app is built with [Expo](https://expo.io/) + [NextJS](https://nextjs.org/) a
 ## Slack
 Our slack is at [spicy-green-book.slack.com](https://spicy-green-book.slack.com) if you want to be part of the community. We have a channel specifically for the coders to collaborate on.
 
+## developer notes
+make a video optimized for web
+`ffmpeg -y -i SGB_SignUp_v4.mov -c:v libx264 -crf 23 -profile:v high -pix_fmt yuv420p -color_primaries 1 -color_trc 1 -colorspace 1 -movflags +faststart -an signUp.mp4`

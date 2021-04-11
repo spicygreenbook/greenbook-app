@@ -98,14 +98,14 @@ function Page(props) {
                 >
                   {isWeb ? (
                     <video
-                      poster={require("../public/images/home_page_video_thumbnail.jpg")}
-                      src={"/intro.mp4"}
+                      //poster={require("../public/images/home_page_video_thumbnail.jpg")}
+                      src={"/addListing.mp4"}
                       style={{ width: "100%", height: "100%" }}
                       controls
                     />
                   ) : (
                     <>
-                      {!isMobileHomePageVideoPlaying && (
+                      {/*!isMobileHomePageVideoPlaying && (
                         <TouchableOpacity
                           onPress={() => {
                             setisMobileHomePageVideoPlaying(true);
@@ -131,16 +131,16 @@ function Page(props) {
                             }}
                           />
                         </TouchableOpacity>
-                      )}
+                      )*/}
                       <Video
-                        shouldPlay={isMobileHomePageVideoPlaying}
-                        posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+                        shouldPlay={false/*isMobileHomePageVideoPlaying*/}
+                        //posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
                         posterStyle={{ width: "100%", height: "100%" }}
-                        source={{ uri: "https://spicygreenbook.org/intro.mp4" }}
+                        source={{ uri: "https://spicygreenbook.org/addListing.mp4" }}
                         useNativeControls
                         resizeMode="contain"
                         isLooping
-                        usePoster={true}
+                        //usePoster={true}
                         style={{ flex: 1 }}
                       />
                     </>
