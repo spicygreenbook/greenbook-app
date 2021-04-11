@@ -7,13 +7,14 @@ import {
   StyleSheet,
   Linking,
   ActivityIndicator,
-  Image
+  Image,
 } from "react-native";
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from "../utils";
 import { ResponsiveImage } from "../components/ResponsiveImage";
+import { Video } from "expo-av";
 
 function Page(props) {
   const [{ isWeb, dimensions }] = useStateValue();
@@ -47,9 +48,9 @@ function Page(props) {
         {
           flexDirection: dimensions.width > 1015 ? "row" : "column",
           justifyContent: "flex-end",
-          alignItems: "center"
+          alignItems: "center",
         },
-        { ...style }
+        { ...style },
       ]}
     >
       <Text
@@ -58,7 +59,7 @@ function Page(props) {
           { fontSize: 18 },
           dimensions.width > 1015
             ? { marginRight: 60 }
-            : { marginRight: 0, marginBottom: 10 }
+            : { marginRight: 0, marginBottom: 10 },
         ]}
       >
         {text}
@@ -82,6 +83,72 @@ function Page(props) {
       ) : (
         <React.Fragment>
           <PageTitle title={content.page_title} />
+          <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+            <View style={styles.content}>
+              <View style={{ position: "relative", marginBottom: 0 }}>
+                <View style={{ paddingTop: (1080 / 1920) * 100 + "%" }} />
+                <View
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                  }}
+                >
+                  {isWeb ? (
+                    <video
+                      poster={require("../public/images/home_page_video_thumbnail.jpg")}
+                      src={"/intro.mp4"}
+                      style={{ width: "100%", height: "100%" }}
+                      controls
+                    />
+                  ) : (
+                    <>
+                      {!isMobileHomePageVideoPlaying && (
+                        <TouchableOpacity
+                          onPress={() => {
+                            setisMobileHomePageVideoPlaying(true);
+                          }}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            zIndex: 1,
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Fontisto
+                            name="play"
+                            size={46}
+                            color="white"
+                            style={{
+                              padding: 20,
+                              backgroundColor: "rgba(0,0,0,0.6)",
+                            }}
+                          />
+                        </TouchableOpacity>
+                      )}
+                      <Video
+                        shouldPlay={isMobileHomePageVideoPlaying}
+                        posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+                        posterStyle={{ width: "100%", height: "100%" }}
+                        source={{ uri: "https://spicygreenbook.org/intro.mp4" }}
+                        useNativeControls
+                        resizeMode="contain"
+                        isLooping
+                        usePoster={true}
+                        style={{ flex: 1 }}
+                      />
+                    </>
+                  )}
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={[styles.section, { paddingBottom: isWeb ? 0 : 80 }]}>
             <View style={styles.content}>
               <RichText render={content._body} isWeb={isWeb} />
@@ -92,8 +159,8 @@ function Page(props) {
                     styles.button_green,
                     {
                       alignSelf: "center",
-                      marginTop: 50
-                    }
+                      marginTop: 50,
+                    },
                   ]}
                   onPress={() => {
                     Linking.openURL(
@@ -118,7 +185,7 @@ function Page(props) {
                       : {
                           flexDirection: "row",
                           justifyContent: "center",
-                          alignItems: "center"
+                          alignItems: "center",
                         }
                   }
                 >
@@ -126,19 +193,19 @@ function Page(props) {
                     style={{
                       flex: 1,
                       paddingLeft: dimensions.width < 800 ? 0 : 20,
-                      paddingBottom: dimensions.width < 800 ? 40 : 0
+                      paddingBottom: dimensions.width < 800 ? 40 : 0,
                     }}
                   >
                     <ResponsiveImage
                       style={{
                         width: 1338,
                         resizeMode: "contain",
-                        aspectRatio: 873 / 1338
+                        aspectRatio: 873 / 1338,
                       }}
                       alt="Spicy Green Book"
                       source={{
                         uri:
-                          "https://res.cloudinary.com/honeybook/image/upload/c_crop,f_auto,fl_lossy,h_1305,q_auto,w_2003,x_0,y_608/v1/companies/5f0282afa1f62a61eedd082a/cover/EETeaCo_MorganWhitneyPhotography-112_sh58eu"
+                          "https://res.cloudinary.com/honeybook/image/upload/c_crop,f_auto,fl_lossy,h_1305,q_auto,w_2003,x_0,y_608/v1/companies/5f0282afa1f62a61eedd082a/cover/EETeaCo_MorganWhitneyPhotography-112_sh58eu",
                       }}
                     />
                   </View>
@@ -156,7 +223,7 @@ function Page(props) {
                         width: 173,
                         borderWidth: 2,
                         backgroundColor: "#fff",
-                        justifyContent: "center"
+                        justifyContent: "center",
                       }}
                       textStyle={{ color: Theme.green, textAlign: "center" }}
                       text="If you want to make a donation please click"
@@ -169,7 +236,7 @@ function Page(props) {
                         width: 173,
                         borderWidth: 2,
                         backgroundColor: "#fff",
-                        justifyContent: "center"
+                        justifyContent: "center",
                       }}
                       textStyle={{ color: Theme.green, textAlign: "center" }}
                       text={`Help spread the word about us by \n downloading and sharing our flyer`}
