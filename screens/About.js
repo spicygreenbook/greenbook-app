@@ -14,6 +14,9 @@ import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { WebView } from 'react-native-webview';
 
+import { Video } from "expo-av";
+
+
 let currentIndexListing = 0;
 const viewableItemsChangedListing = ({ viewableItems, changed }) => {
     //console.log("Visible items are", viewableItems);
@@ -126,6 +129,73 @@ function Page(props) {
 
                 <Text accessibilityRole="header" fontSize="1" aria-level="1" style={responsiveStyles.text_hero}>ABOUT US</Text>
             </View>
+
+          <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+            <View style={styles.content}>
+              <View style={{ position: "relative", marginBottom: 0 }}>
+                <View style={{ paddingTop: (1080 / 1920) * 100 + "%" }} />
+                <View
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                  }}
+                >
+                  {isWeb ? (
+                    <video
+                      //poster={require("../public/images/home_page_video_thumbnail.jpg")}
+                      src={"/about.mp4"}
+                      style={{ width: "100%", height: "100%" }}
+                      controls
+                    />
+                  ) : (
+                    <>
+                      {/*!isMobileHomePageVideoPlaying && (
+                        <TouchableOpacity
+                          onPress={() => {
+                            setisMobileHomePageVideoPlaying(true);
+                          }}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            zIndex: 1,
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Fontisto
+                            name="play"
+                            size={46}
+                            color="white"
+                            style={{
+                              padding: 20,
+                              backgroundColor: "rgba(0,0,0,0.6)",
+                            }}
+                          />
+                        </TouchableOpacity>
+                      )*/}
+                      <Video
+                        shouldPlay={false/*isMobileHomePageVideoPlaying*/}
+                        //posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+                        posterStyle={{ width: "100%", height: "100%" }}
+                        source={{ uri: "https://spicygreenbook.org/about.mp4" }}
+                        useNativeControls
+                        resizeMode="contain"
+                        isLooping
+                        //usePoster={true}
+                        style={{ flex: 1 }}
+                      />
+                    </>
+                  )}
+                </View>
+              </View>
+            </View>
+          </View>
 
             <View style={[styles.section, { fontSize: 24, paddingTop: 80 }]}>
                 <View style={styles.content}>

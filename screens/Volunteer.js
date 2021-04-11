@@ -7,6 +7,7 @@ import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent, getData } from '../utils';
 import styled from 'styled-components';
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
+import { Video } from "expo-av";
 
 
 function Page(props) {
