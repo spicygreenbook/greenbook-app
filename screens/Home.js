@@ -99,8 +99,8 @@ function Page(props) {
     <>
       <View style={{ height: 700, backgroundColor: "#000" }}>
         <HybridImageBackground
-          source={require("../public/images/home_hero.png")}
-          src={"/images/home_hero.png"}
+          source={require("../public/images/home_hero_crop.png")}
+          src={"/images/home_hero_crop.png"}
           style={{ height: 700 }}
         >
           <View
