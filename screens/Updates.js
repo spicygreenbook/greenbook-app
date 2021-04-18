@@ -93,7 +93,7 @@ function Page(props) {
                     data={social_media_items}
                     numColumns={numColumns}
                     ItemSeparatorComponent={(highlighted) => (
-                      <View style={{ paddingTop: 80 }}></View>
+                      <View style={{ paddingTop: 80 }} />
                     )}
                     renderItem={({ item, index, separators }) => (
                       <View

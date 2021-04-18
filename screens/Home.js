@@ -443,7 +443,7 @@ function Page(props) {
                           }}
                         >
                           <View
-                            style={[styles.button_white, { marginTop: 40, maxWidth: "200px", justifyContent: "center" }]}
+                            style={[styles.button_white, { marginTop: 40, maxWidth: 200, justifyContent: "center" }]}
                           >
                             <Text style={styles.button_white_text}>
                               Learn More
