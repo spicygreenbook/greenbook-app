@@ -103,6 +103,9 @@ function Page(props) {
           src={"/images/home_hero_crop.png"}
           style={{ height: 700 }}
         >
+        <View
+          style={{backgroundColor: 'rgba(0, 0, 0, 0.48)', height: 700}}
+        >
           <View
             style={[
               responsiveStyles.middle_all,
@@ -122,6 +125,7 @@ function Page(props) {
               <Search includeUseLocationOption />
             </View>
           </View>
+        </View>
         </HybridImageBackground>
       </View>
 
