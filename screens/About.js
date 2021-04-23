@@ -158,7 +158,7 @@ function Page(props) {
         </Text>
       </View>
 
-      <View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+      <View style={[styles.section, { paddingTop: isWeb ? 20 : 60, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View style={{ position: "relative", marginBottom: 0 }}>
             <View style={{ paddingTop: (1080 / 1920) * 100 + "%" }} />
@@ -223,7 +223,7 @@ function Page(props) {
         </View>
       </View>
 
-      <View style={[styles.section, { fontSize: 24 }]}>
+      <View style={[styles.section, { fontSize: 24, paddingTop: 40, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View
             style={
@@ -275,7 +275,7 @@ function Page(props) {
         </View>
       </View>
 
-      <View style={[styles.section, { fontSize: 24, paddingTop: 80 }]}>
+      <View style={[styles.section, { fontSize: 24, paddingTop: 40, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View
             style={
@@ -337,7 +337,7 @@ function Page(props) {
         </View>
       </View>
 
-      <View style={[styles.section, { fontSize: 24 }]}>
+      <View style={[styles.section, { fontSize: 24, paddingTop: 40 }]}>
         <View style={styles.content}>
           <View
             style={
@@ -590,7 +590,7 @@ function Page(props) {
         </View>
       </View>
 
-      <View style={[styles.section, { paddingTop: 80 }]}>
+      <View style={[styles.section, { paddingTop: 80, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View
             style={
@@ -648,7 +648,7 @@ function Page(props) {
         </View>
       </View>
 
-      <View style={[styles.section, { paddingTop: 80 }]}>
+      <View style={[styles.section, { paddingTop: 60, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View
             style={
@@ -714,7 +714,7 @@ function Page(props) {
         </View>
       </View>
 
-      <View style={[styles.section, { paddingTop: 80 }]}>
+      <View style={[styles.section, { paddingTop: 60, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View
             style={
