@@ -15,7 +15,7 @@ import { EvilIcons } from "@expo/vector-icons";
 import { useRouter } from "next/router";
 import { CustomDrawerContent } from "../navigations/MenuItems"
 
-export default function (props) {
+export default function Menu(props) {
   const [
     { view, isWeb, theme, dimensions, menuOpen },
     dispatch
