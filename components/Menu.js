@@ -13,6 +13,7 @@ import { useStateValue } from "../components/State";
 import { Link, Click } from "../components/Link";
 import { EvilIcons } from "@expo/vector-icons";
 import { useRouter } from "next/router";
+import { CustomDrawerContent } from "../navigations/MenuItems"
 
 export default function (props) {
   const [
@@ -21,65 +22,6 @@ export default function (props) {
   ] = useStateValue();
   const styles = StyleSheet.create(getStyles("text_menu", { isWeb, theme }));
   const router = useRouter();
-
-  const menu = [
-    {
-      title: "Directory",
-      href: "/search"
-    },
-    {
-      title: "Add Listing",
-      href: "/add"
-    },
-    {
-      title: "Donate",
-      href: "/donate"
-    },
-    {
-      title: "Sponsor Us",
-      href: "/sponsors"
-    },
-    {
-      title: "Volunteer",
-      href: "/volunteer"
-    },
-    {
-      title: "About",
-      href: "/about"
-    },
-    {
-      title: "Updates",
-      href: "/updates"
-    },
-    {
-      title: "Team",
-      href: "/team"
-    },
-    {
-      title: "Volunteers",
-      href: "/volunteers"
-    },
-    {
-      title: "Press",
-      href: "/press"
-    },
-    {
-      title: "Testomonials",
-      href: "/testimonials"
-    },
-    {
-      title: "FAQ",
-      href: "/faq"
-    },
-    {
-      title: "Contact",
-      href: "/contact"
-    },
-    {
-      title: "Store",
-      href: "/shop"
-    }
-  ];
 
   return (
     <View
@@ -93,14 +35,14 @@ export default function (props) {
         height: "100%",
         zIndex: 10,
         paddingTop: isWeb ? 0 : 40,
-        backgroundColor: Theme.green_bg
+        //backgroundColor: Theme.green_bg
       }}
     >
       <View
         style={{
           position: "absolute",
-          left: 10,
-          top: isWeb ? 10 : 60,
+          right: 10,
+          top: isWeb ? 0 : 60,
           zIndex: 10
         }}
       >
@@ -109,32 +51,10 @@ export default function (props) {
             dispatch({ type: "menuOpen", value: false });
           }}
         >
-          <EvilIcons name="close" size={48} color="#fff" />
+          <EvilIcons name="close" size={48} color={Theme.green} />
         </TouchableOpacity>
       </View>
-      {menu.map((item, i) => (
-        <View key={"nav" + i} style={{ flex: 1, flexDirection: "row" }}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              borderColor: "#fff",
-              borderBottomWidth: 2
-            }}
-          >
-            <TouchableOpacity
-              onPress={(e) => {
-                console.log("item", item);
-                dispatch({ type: "menuOpen", value: false });
-                dispatch({ type: "setView", view: item.href || "" });
-              }}
-            >
-              <Text style={styles.text_menu}>{item.title}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ))}
+      <CustomDrawerContent isWeb={true} />
     </View>
   );
 }
