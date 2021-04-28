@@ -653,7 +653,7 @@ function Page(props) {
                 </Text>
               </View>
               <Link href="https://shop.spicygreenbook.org">
-                <View style={{ flex: 1, width: 200, marginTop: 20 }}>
+                <View style={{ width: 200, marginTop: 20 }}>
                   <View
                     style={[
                       styles.button_green,
