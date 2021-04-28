@@ -17,6 +17,7 @@ import { getStyles, Theme } from "../utils";
 import { FontAwesome } from "@expo/vector-icons";
 const ios = Platform.OS === "ios";
 import Constants from "expo-constants";
+import { Video } from "expo-av";
 
 function Page(props) {
   const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
@@ -434,6 +435,44 @@ function Page(props) {
                     effort to alter that system for the better.” —Danilo Batson,
                     Founder of SGB.
                   </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={[styles.section, { paddingTop: isWeb ? 20 : 60, paddingBottom: 40 }]}>
+            <View style={styles.content}>
+              <View style={{ position: "relative", marginBottom: 0 }}>
+                <View style={{ paddingTop: (1920 / 1920) * 100 + "%" }} />
+                <View
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                  }}
+                >
+                  {isWeb ? (
+                    <video
+                      src={"/about.mp4"}
+                      style={{ width: "100%", height: "100%" }}
+                      controls
+                    />
+                  ) : (
+                    <>
+                      <Video
+                        shouldPlay={false /*isMobileHomePageVideoPlaying*/}
+                        //posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+                        posterStyle={{ width: "100%", height: "100%" }}
+                        source={{ uri: "https://spicygreenbook.org/about.mp4" }}
+                        useNativeControls
+                        resizeMode="contain"
+                        isLooping
+                        style={{ flex: 1 }}
+                      />
+                    </>
+                  )}
                 </View>
               </View>
             </View>
