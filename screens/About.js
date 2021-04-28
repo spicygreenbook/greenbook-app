@@ -161,7 +161,7 @@ function Page(props) {
       <View style={[styles.section, { paddingTop: isWeb ? 20 : 60, paddingBottom: 40 }]}>
         <View style={styles.content}>
           <View style={{ position: "relative", marginBottom: 0 }}>
-            <View style={{ paddingTop: (1080 / 1920) * 100 + "%" }} />
+            <View style={{ paddingTop: (1920 / 1920) * 100 + "%" }} />
             <View
               style={{
                 position: "absolute",
