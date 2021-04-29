@@ -101,8 +101,8 @@ function SGBMap(props) {
 												setCurState('');
 										}
 									}}>
-										<Path d={state.d[0]} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'}/>
-										<Path d={state.d[0]} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} stroke="#efefef" strokeWidth="0.5" fill="none" />
+										<Path d={state.d.join(" ")} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} fill={mappedState ? '#006233' : '#000'}/>
+										<Path d={state.d.join(" ")} transform={state.translate === false ? '' : 'translate(-74 -52.49)'} stroke="#efefef" strokeWidth="0.5" fill="none" />
 									</G>											
 							 )
 						})}
