@@ -122,13 +122,23 @@ json output to console to convert to a table to act as an export for people that
          </View>
     )
 
+    const EmptyList = () => (
+        <View style={[{padding: 20}]}>
+            <Text style={[styles.text_body, {marginBottom: 10}]}>
+                {
+                    'We didn\'t find any restaurants in your area.\n\nSign up for our newsletter below to get notifications on any and all new restaurants.'
+                }   
+            </Text>
+        </View>
+    )
+
     const NativeList = () => (
         <FlatList
             showsHorizontalScrollIndicator={true}
             data={filteredList}
             initialNumToRender={6}
             windowSize={3}
-            renderItem={({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} />)}
+            renderItem={filteredList.length > 0 ? ({ item, index }) => (<ListItem listing={item} last={index===filteredList.length-1} />) : <EmptyList />}
             keyExtractor={(_, index) => 'listing' + index}
             ListHeaderComponent={<HeaderList />}
             stickyHeaderIndices={[0]}
@@ -141,7 +151,11 @@ json output to console to convert to a table to act as an export for people that
                 <View style={dimensions.width >= 800 ? {flex: 1, borderRightWidth: 2, borderColor: Theme.green, minHeight: 'calc(100vh - 234px)'} : {}}>
                     <HeaderList />
                     <View style={{paddingTop: 220}}>
-                        {filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)}
+                        {
+                        filteredList.length > 0 
+                        ? filteredList.map((listing, n, ar) => <ListItem key={n} listing={listing} last={n===ar.length-1} />)
+                        : <EmptyList />
+                    }
                     </View>
                 </View>
                 {dimensions.width >= 800 &&
@@ -162,6 +176,6 @@ json output to console to convert to a table to act as an export for people that
                 : <NativeList />
 }
 
-const styles = StyleSheet.create(getStyles('text_header3, section, content'));
+const styles = StyleSheet.create(getStyles('text_header3, text_body, section, content'));
 
 export default Page;
