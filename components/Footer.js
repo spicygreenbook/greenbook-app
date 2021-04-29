@@ -38,22 +38,28 @@ export default function (props) {
         <View nativeID="footer" style={styles.footer}>
             <View style={{ flexDirection: 'column', alignItems: 'center', borderColor: '#fff', borderTopWidth: 2 }}>
                 <View style={[dimensions.width < 980 ? {} : { flexDirection: 'row' }, { flex: 1, width: 1024, maxWidth: '100%' }]}>
-                    <View style={[dimensions.width > 980 ? { borderColor: '#fff', borderRightWidth: 2, borderStyle: 'solid' } : {}, { flex: 2/3 }]}>
-                        <SubscribeForm />
-                    </View>
-                    <View style={{ flex: 1 / 3 }}>
+                    {/** Subscribe Form */}
+                    {view === '/' ? null
+                        : <View style={[dimensions.width > 980 ? { borderColor: '#fff', borderRightWidth: 2, borderStyle: 'solid' } : {}, { flex: 2 / 3 }]}>
+                            <SubscribeForm />
+                        </View>
+                    }
+                    {/** End Subscribe Form */}
+                    <View style={[view === '/' ? { flex: 1 } : { flex: 1 / 3 }]}>
                         {/** Social Area */}
                         <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', paddingTop: 24 }}>
                             <Text style={styles.text_footer}>Follow @spicygreenbook</Text>
                         </View>
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 24 }}>
+                        <View style={[view === '/' ? { flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', padding: 24, paddingTop: 0 }
+                            : { flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 24 }]}>
                             {SOCIAL_LINKS.map(({ name, url }) => (
                                 <Link key={url} href={url}>
                                     <FontAwesome name={name} size={32} color="#fff" />
                                 </Link>
                             ))}
                         </View>
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 24, paddingTop: 0 }}>
+                        <View style={[view === '/' ? { flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', padding: 24, paddingTop: 0 }
+                            : { flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 24, paddingTop: 0 }]}>
                             {SOCIAL_LINKS_2.map(({ name, url }) => (
                                 <Link key={url} href={url}>
                                     <FontAwesome name={name} size={32} color="#fff" />
@@ -67,7 +73,7 @@ export default function (props) {
                 {/** Navigation Area */}
                 <View style={{ flex: 1, justifyContent: 'center', maxWidth: '100%', alignItems: 'center', width: 1024, marginTop: 48, flexDirection: dimensions.width > 980 ? 'row' : 'column' }}>
                     {LINKS.map(({ url, label }) => (
-                        <Link key={url} style={{ display: 'block' }} href={url} target={url.includes('http') ? '__blank' : null}><Text style={[styles.text_footer, {padding: dimensions.width < 980 ? 5 : 24}]}>{label}</Text></Link>
+                        <Link key={url} style={{ display: 'block' }} href={url} target={url.includes('http') ? '__blank' : null}><Text style={[styles.text_footer, { padding: dimensions.width < 980 ? 5 : 24 }]}>{label}</Text></Link>
                     ))}
                 </View>
                 {/** End Navigation Area */}
