@@ -38,7 +38,7 @@ const BottomTabNavigator = ({ navigation }) => {
     <BottomTab.Navigator
       shifting={false}
       activeColor='white'
-      barStyle={{ backgroundColor: Theme.green, height: 100, paddingTop: 20 }}
+      barStyle={{ backgroundColor: Theme.green, height: 80, paddingTop: 10 }}
     >
       <BottomTab.Screen
         name="Home"
