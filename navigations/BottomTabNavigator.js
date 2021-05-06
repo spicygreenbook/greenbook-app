@@ -42,7 +42,7 @@ const BottomTabNavigator = ({ navigation }) => {
     <BottomTab.Navigator
       shifting={false}
       activeColor='white'
-      barStyle={{ backgroundColor: Theme.green, height: 80, paddingTop: 10 }}
+      barStyle={{ backgroundColor: Theme.green, height: 60, paddingTop: 10 }}
     >
       <BottomTab.Screen
         name="Home"
@@ -87,7 +87,10 @@ const BottomTabNavigator = ({ navigation }) => {
         options={{
           tabBarIcon: ({ color }) => <Icon type="FontAwesome5" style={{ fontSize: 22, color }} name="hands-helping" />
         }}
-      />   
+      />
+      {/* screen for the navigation button. Probably not the best way to implement it but it's the easiest and the only
+          solution i could think of that doesn't require redoing the whole bottom tab navigator
+      */}
       <BottomTab.Screen 
         name="Navigation"
         component={Placeholder}
