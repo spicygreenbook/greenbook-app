@@ -7,7 +7,7 @@ import HomeStackNavigator from './HomeStackNavigator';
 import BrowseStackNavigator from './BrowseStackNavigator';
 import AddListing from '../screens/AddListing';
 import Volunteer from '../screens/Volunteer';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { WithScrollView } from './helper';
 import CustomHeader from './CustomHeader';
 
@@ -31,6 +31,10 @@ const VolunteerStack = (props) => (
     }} />
   </VolunteerStackNavigator.Navigator>
 )
+
+//Placeholder component that will be used by the navigation button in the bottom bar but won't be rendered
+// a little unconventional but it's the easiest solution to bypass this required prop
+const Placeholder = () => (<> </>)
 
 const BottomTabNavigator = ({ navigation }) => {
 
@@ -84,6 +88,20 @@ const BottomTabNavigator = ({ navigation }) => {
           tabBarIcon: ({ color }) => <Icon type="FontAwesome5" style={{ fontSize: 22, color }} name="hands-helping" />
         }}
       />   
+      <BottomTab.Screen 
+        name="Navigation"
+        component={Placeholder}
+        options={{
+          tabBarLabel: null,
+          tabBarIcon: () => <MaterialCommunityIcons color="white" name="dots-vertical" size={28} />
+        }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault()
+            navigation.openDrawer()
+          }
+        })}
+      />
     </BottomTab.Navigator>
   )
 };
