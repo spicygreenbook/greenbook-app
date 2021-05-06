@@ -7,7 +7,7 @@ import HomeStackNavigator from './HomeStackNavigator';
 import BrowseStackNavigator from './BrowseStackNavigator';
 import AddListing from '../screens/AddListing';
 import Volunteer from '../screens/Volunteer';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { WithScrollView } from './helper';
 import CustomHeader from './CustomHeader';
 
@@ -32,13 +32,17 @@ const VolunteerStack = (props) => (
   </VolunteerStackNavigator.Navigator>
 )
 
+//Placeholder component that will be used by the navigation button in the bottom bar but won't be rendered
+// a little unconventional but it's the easiest solution to bypass this required prop
+const Placeholder = () => (<> </>)
+
 const BottomTabNavigator = ({ navigation }) => {
 
   return (
     <BottomTab.Navigator
       shifting={false}
       activeColor='white'
-      barStyle={{ backgroundColor: Theme.green, height: 100, paddingTop: 20 }}
+      barStyle={{ backgroundColor: Theme.green, height: 75, paddingTop: 10 }}
     >
       <BottomTab.Screen
         name="Home"
@@ -83,7 +87,24 @@ const BottomTabNavigator = ({ navigation }) => {
         options={{
           tabBarIcon: ({ color }) => <Icon type="FontAwesome5" style={{ fontSize: 22, color }} name="hands-helping" />
         }}
-      />   
+      />
+      {/* screen for the navigation button. Probably not the best way to implement it but it's the easiest and the only
+          solution i could think of that doesn't require redoing the whole bottom tab navigator
+      */}
+      <BottomTab.Screen 
+        name="Navigation"
+        component={Placeholder}
+        options={{
+          tabBarLabel: null,
+          tabBarIcon: () => <MaterialCommunityIcons color="white" name="dots-vertical" size={28} />
+        }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault()
+            navigation.openDrawer()
+          }
+        })}
+      />
     </BottomTab.Navigator>
   )
 };

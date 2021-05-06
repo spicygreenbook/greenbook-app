@@ -26,10 +26,10 @@ const CustomHeader = ({ navigation, backgroundColor, dark = false }) => {
         // backgroundColor: backgroundColor && backgroundColor
       }}>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Image style={{ width: 110, height: 110, resizeMode: 'contain' }} alt="Spicy Green Book" source={LightNav} />
+          <Image style={{ width: 80, height: 80, resizeMode: 'contain' }} alt="Spicy Green Book" source={LightNav} />
         </TouchableOpacity>
         {/* <Text style={{ fontWeight: '800', fontSize: 16, color: Theme.green }}>{route.name}</Text> */}
-        <MaterialCommunityIcons color={dark ? Theme.green : 'white'} name="menu" size={34} onPress={() => navigation.openDrawer()} />
+        {/* <MaterialCommunityIcons color={dark ? Theme.green : 'white'} name="menu" size={34} onPress={() => navigation.openDrawer()} /> */}
       </View>
     </SafeAreaView>
   )
