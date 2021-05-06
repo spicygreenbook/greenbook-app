@@ -27,7 +27,7 @@ const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => (
   <Drawer.Navigator
-    drawerContent={CustomDrawer}
+    // drawerContent={CustomDrawer} <-- is not being used by the app so I commented it out so it doesn't affect performance
     drawerPosition="right"
     drawerStyle={{
       backgroundColor: "white",
