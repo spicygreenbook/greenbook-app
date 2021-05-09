@@ -31,8 +31,10 @@ const Testimonial = ({ testimonials }) => {
     }
   }
 
+  let intervalId;
+
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    intervalId = setInterval(() => {
       let i;
 
       if (currentIndexListing < data.length - 1) {
@@ -43,11 +45,14 @@ const Testimonial = ({ testimonials }) => {
 
       currentIndexListing = i;
       testimonialListRef.current.scrollToIndex({ animated: true, index: i });
-    }, 5000);
+    }, 15000);
 
     return () => clearInterval(intervalId)
   }, [data])
 
+  const pauseScroll = () => {
+    clearInterval(intervalId)
+  }
 
   return (
     <View style={[styles.section, { backgroundColor: Theme.green_bg, paddingBottom: 40, marginBottom: 40 }]}>
@@ -109,13 +114,11 @@ const Testimonial = ({ testimonials }) => {
           keyExtractor={(item, index) => 'tistimonial' + index}
         />
 
-        <View style={{ position: 'absolute', top: isWeb ? dimensions.width < 900 ? '35%' : '50%' : '45%', width: '100%' }}>
+        <View style={{ position: 'absolute', top: isWeb ? dimensions.width < 900 ? '35%' : '50%' : '45%', width: '100%', height: '50%' }}>
           <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
             <View style={{ flex: 1, alignItems: 'flex-start' }}>
               <TouchableOpacity onPress={(e) => {
-
                 scrollToIndexListing({ animated: true, index: currentIndexListing - 1 }, data.length)
-
               }}>
                 <Entypo name="chevron-thin-left" size={isWeb ? 28 : 24} color="#fff" />
               </TouchableOpacity>
@@ -125,6 +128,13 @@ const Testimonial = ({ testimonials }) => {
                 <Entypo name="chevron-thin-right" size={isWeb ? 28 : 24} color="#fff" />
               </TouchableOpacity>
             </View>
+          </View>
+          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }} >
+            <TouchableOpacity onPress={(e) => {
+              pauseScroll({ animated: true, index: currentIndexListing }, true)
+            }}>
+              <Fontisto name="pause" size={isWeb ? dimensions.width < 900 ? 22 : 32 : 18} style={{ marginRight: 10, marginBottom: isWeb ? dimensions.width < 900 ? 10 : 0 : 10 }} color="#fff" />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
