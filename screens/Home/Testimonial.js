@@ -14,7 +14,9 @@ const viewableItemsChangedListing = ({ viewableItems }) => {
 
 const Testimonial = ({ testimonials }) => {
   let testimonialListRef = useRef(null);
+  let intervalId;
   const [{ isWeb, dimensions }, dispatch] = useStateValue();
+  const [isPaused, setIsPaused] = useState(false);
   const navigation = !isWeb ? useNavigation() : null;
   const data = testimonials.filter(data => data?.image && data); // render testimonial that has image only, for now
 
@@ -30,8 +32,6 @@ const Testimonial = ({ testimonials }) => {
       console.log('no listing ref')
     }
   }
-
-  let intervalId;
 
   useEffect(() => {
     intervalId = setInterval(() => {
@@ -50,8 +50,16 @@ const Testimonial = ({ testimonials }) => {
     return () => clearInterval(intervalId)
   }, [data])
 
-  const pauseScroll = () => {
-    clearInterval(intervalId)
+  useEffect(() => {
+    if (isPaused) {
+      clearInterval(intervalId)
+    } else {
+      scrollToIndexListing({ animated: true, index: currentIndexListing + 1 }, data.length)
+    }
+  }, [isPaused])
+
+  const pausePlayClick = () => {
+    setIsPaused(!isPaused)
   }
 
   return (
@@ -114,7 +122,7 @@ const Testimonial = ({ testimonials }) => {
           keyExtractor={(item, index) => 'tistimonial' + index}
         />
 
-        <View style={{ position: 'absolute', top: isWeb ? dimensions.width < 900 ? '35%' : '50%' : '45%', width: '100%', height: '50%' }}>
+        <View style={{ position: 'absolute', top: isWeb ? dimensions.width < 900 ? '35%' : '50%' : '45%', width: '100%' }}>
           <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
             <View style={{ flex: 1, alignItems: 'flex-start' }}>
               <TouchableOpacity onPress={(e) => {
@@ -129,13 +137,18 @@ const Testimonial = ({ testimonials }) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }} >
-            <TouchableOpacity onPress={(e) => {
-              pauseScroll({ animated: true, index: currentIndexListing }, true)
-            }}>
-              <Fontisto name="pause" size={isWeb ? dimensions.width < 900 ? 22 : 32 : 18} style={{ marginRight: 10, marginBottom: isWeb ? dimensions.width < 900 ? 10 : 0 : 10 }} color="#fff" />
+        </View>
+        <View style={{ position: 'absolute', bottom: '10%', right: 10}} >
+          {!isPaused ?
+            <TouchableOpacity onPress={(e) =>
+              pausePlayClick()}>
+              <Fontisto name="pause" size={isWeb ? 22 : 20} color="#fff" />
             </TouchableOpacity>
-          </View>
+            :
+            <TouchableOpacity onPress={(e) => pausePlayClick()}>
+              <Fontisto name="play" size={isWeb ? 22 : 20} color="#fff" />
+            </TouchableOpacity>
+          }
         </View>
       </View>
     </View>
