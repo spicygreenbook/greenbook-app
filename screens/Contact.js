@@ -71,7 +71,7 @@ function Page(props) {
                                     <Text style={styling.contact_links}>spicy-green-book.slack.com</Text> */}
                                 </View>
                             </View>
-                            <Image alt="strawberry waffles" source={isWeb ? { uri: '/images/contact_image.JPEG' } : require('../public/images/contact_image.png')} style={styling.contact_image}/>
+                            <Image alt="strawberry waffles" source={require('../public/images/contact_image.png')} style={[styling.contact_image, !isWeb ? {right:20}:'']}/>
                         </View>
 
                         <View style={styling.contact_form_container}>
