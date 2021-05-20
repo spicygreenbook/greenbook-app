@@ -134,9 +134,6 @@ export function ExpandableItem(props) {
 export function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props} style={{ padding: 0 }}>
-      <RegularItem label="Directory" link="Directory" navigation={props.navigation} />
-      <RegularItem label="Add Listing" link="Add Listing" navigation={props.navigation} />
-
       <ExpandableItem
         label="About"
         items={[
@@ -153,7 +150,6 @@ export function CustomDrawerContent(props) {
         items={[
           { label: "Donate", link: "Donate" },
           { label: "Sponsor", link: "Sponsor Us" },
-          { label: "Volunteer", link: "Volunteer" },
         ]}
         navigation={props.navigation} 
       />
