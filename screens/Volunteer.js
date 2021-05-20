@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, TouchableOpacity, Image} from 'react-native';
 import { Link } from "../components/Link";
 import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText";
@@ -8,6 +8,7 @@ import { getStyles, Theme, getContent, getData } from '../utils';
 import styled from 'styled-components';
 import { ResponsiveImage } from "../components/ResponsiveImage"; 
 import { Video } from "expo-av";
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 function Page(props) {
@@ -23,7 +24,7 @@ function Page(props) {
     const [loadingRoles, setLoadingRoles] = useState(!props.roles);
     const [errorRoles, setErrorRoles] = useState('');
     const [roles, setRoles] = useState(props.roles || []);
-
+    const [play, setPlay] = useState(false);
     if (!props.content) {
         useEffect(() => {
             getContent({ type: 'content', uid: 'volunteer' }).then(_content => {
@@ -106,52 +107,33 @@ function Page(props) {
                                 >
                                   {isWeb ? (
                                     <video
-                                      //poster={require("../public/images/home_page_video_thumbnail.jpg")}
+                                      poster={require("../public/images/volunteer_video_thumbnail.png")}
                                       src={"/signUp.mp4"}
-                                      style={{ width: "100%", height: "100%" }}
+                                      style={{ width: "100%", height: "100%"}}
                                       controls
                                     />
                                   ) : (
                                     <>
-                                      {/*!isMobileHomePageVideoPlaying && (
-                                        <TouchableOpacity
-                                          onPress={() => {
-                                            setisMobileHomePageVideoPlaying(true);
-                                          }}
-                                          style={{
-                                            position: "absolute",
-                                            top: 0,
-                                            left: 0,
-                                            right: 0,
-                                            bottom: 0,
-                                            zIndex: 1,
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                          }}
-                                        >
-                                          <Fontisto
-                                            name="play"
-                                            size={46}
-                                            color="white"
-                                            style={{
-                                              padding: 20,
-                                              backgroundColor: "rgba(0,0,0,0.6)",
-                                            }}
-                                          />
-                                        </TouchableOpacity>
-                                      )*/}
-                                      <Video
-                                        shouldPlay={false/*isMobileHomePageVideoPlaying*/}
-                                        //posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
-                                        posterStyle={{ width: "100%", height: "100%" }}
+                                        <Video
+                                        shouldPlay={play}
+                                        posterSource={require('../public/images/volunteer_video_thumbnail.png')}
+                                        posterStyle={{ width: '100%', height: '100%' }}
                                         source={{ uri: "https://spicygreenbook.org/signUp.mp4" }}
-                                        useNativeControls
-                                        resizeMode="contain"
+                                        useNativeControls = {true}
+                                        // resizeMode="contain"
                                         isLooping
-                                        //usePoster={true}
-                                        style={{ flex: 1 }}
-                                      />
-                                    </>
+                                        usePoster={true}
+                                        style={{ width:'100%', height:'100%' }}
+                                        />
+                                        {!play ?
+                                            <TouchableOpacity style={{position:'relative', bottom:'65%', left:'38%'}} onPress={()=>setPlay(!play)}>
+                                                <View style={{borderRadius:'50%', backgroundColor:'rgba(0,0,0,0.3)', width:70, height:70, padding:10, margin:0}}>
+                                                    <AntDesign name="caretright" size={50} color="white" style={{}}/>
+                                                </View>
+                                            </TouchableOpacity>
+                                            :<></>
+                                        } 
+                                   </>  
                                   )}
                                 </View>
                               </View>
