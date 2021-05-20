@@ -9,6 +9,20 @@ import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { useRoute, useNavigation } from '@react-navigation/native';
 
+import { WithScrollView } from "./helper";
+import Donate from "../screens/Donate";
+import Shop from "../screens/Shop";
+import About from "../screens/About";
+import Updates from "../screens/Updates";
+import Team from "../screens/Team";
+import Process from "../screens/Process";
+import Press from "../screens/Press";
+import Testimonials from "../screens/Testimonials";
+import Contact from "../screens/Contact";
+import FAQ from "../screens/FAQ";
+import Volunteers from "../screens/Volunteers";
+import Sponsors from "../screens/Sponsors";
+
 const Stack = createStackNavigator();
 
 export const CustomHeaderWrapper = ({ children }) => {
@@ -80,6 +94,54 @@ const HomeStack = (props) => (
     }} />
 
     <Stack.Screen name="StateListing" component={StateListingComponent} options={{headerShown: false}} />
+
+    <Stack.Screen name="Donate" component={WithScrollView(Donate)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Store" component={WithScrollView(Shop)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Sponsor Us" component={WithScrollView(Sponsors)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="About" component={WithScrollView(About)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Updates" component={WithScrollView(Updates)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Team" component={WithScrollView(Team)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Volunteers" component={WithScrollView(Volunteers)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Process" component={WithScrollView(Process)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Press" component={WithScrollView(Press)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Testimonials" component={WithScrollView(Testimonials)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="FAQ" component={WithScrollView(FAQ)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
+
+    <Stack.Screen name="Contact" component={WithScrollView(Contact)} options={{
+      header: () => <CustomHeader dark {...props} />
+    }} />
   </Stack.Navigator>
 )
 
