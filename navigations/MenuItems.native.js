@@ -118,7 +118,7 @@ export function ExpandableItem(props) {
           >
             {props.label}
           </Text>
-          <FontAwesome name={isCollapsed ? 'plus' : 'minus'} size={24} color={isCollapsed ? Theme.green : 'white'} style={{marginRight: 40}}/>
+          <FontAwesome name={isCollapsed ? 'plus' : 'minus'} size={14} color={isCollapsed ? Theme.green : 'white'} style={{marginRight: 40}}/>
         </View>
       </TouchableOpacity>
 
