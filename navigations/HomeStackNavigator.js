@@ -96,51 +96,51 @@ const HomeStack = (props) => (
     <Stack.Screen name="StateListing" component={StateListingComponent} options={{headerShown: false}} />
 
     <Stack.Screen name="Donate" component={WithScrollView(Donate)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Store" component={WithScrollView(Shop)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Sponsor Us" component={WithScrollView(Sponsors)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="About" component={WithScrollView(About)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Updates" component={WithScrollView(Updates)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Team" component={WithScrollView(Team)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Volunteers" component={WithScrollView(Volunteers)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Process" component={WithScrollView(Process)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Press" component={WithScrollView(Press)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Testimonials" component={WithScrollView(Testimonials)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="FAQ" component={WithScrollView(FAQ)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
     <Stack.Screen name="Contact" component={WithScrollView(Contact)} options={{
-      header: () => <CustomHeader dark {...props} />
+      header: () => <CustomHeader showBackButton dark {...props} />
     }} />
   </Stack.Navigator>
 )

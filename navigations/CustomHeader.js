@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Image, SafeAreaView, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons, MaterialIcons } from '@expo/vector-icons';
 // import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Theme } from '../utils';
 import LightNav from "../public/images/logo_nav_light.png"
 // import DarkNav from "../public/images/logo_nav_dark.png"
 
-const CustomHeader = ({ navigation, backgroundColor, dark = false }) => {
+const CustomHeader = ({ navigation, showBackButton, backgroundColor, dark = false }) => {
   // const insets = useSafeAreaInsets();
 
   return (
@@ -16,7 +16,6 @@ const CustomHeader = ({ navigation, backgroundColor, dark = false }) => {
         // paddingTop: backgroundColor ? insets.top : 0,
         // marginBottom: backgroundColor ? -insets.top : 0,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
         paddingLeft: 20,
@@ -25,6 +24,7 @@ const CustomHeader = ({ navigation, backgroundColor, dark = false }) => {
         borderColor: Theme.green,
         // backgroundColor: backgroundColor && backgroundColor
       }}>
+         { showBackButton && <MaterialIcons color={dark ? Theme.green : 'white'} style={{marginRight: 10}} name="keyboard-arrow-left" size={40} onPress={() => navigation.goBack()} /> }
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image style={{ width: 80, height: 80, resizeMode: 'contain' }} alt="Spicy Green Book" source={LightNav} />
         </TouchableOpacity>
