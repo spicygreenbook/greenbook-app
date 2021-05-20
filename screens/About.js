@@ -65,7 +65,7 @@ function Page(props) {
   const [errorListings, setErrorListings] = useState("");
   const [Listings, setListings] = useState(props.listings || []);
 
-  const responsiveStyles = StyleSheet.create(getStyles("middle_all, text_hero"));
+  const responsiveStyles = StyleSheet.create(getStyles("middle_all, text_header2"));
 
   useEffect(() => {
     if (!props.press) {
@@ -140,19 +140,19 @@ function Page(props) {
     <View>
       <View
         style={{
-          height: 400,
+          height: 80,
           flexDirection: "row",
           backgroundColor: Theme.green_bg,
           alignItems: "center",
           justifyContent: "center",
-          paddingTop: 120,
         }}
       >
         <Text
           accessibilityRole="header"
           fontSize="1"
           aria-level="1"
-          style={responsiveStyles.text_hero}
+          style={{ ...responsiveStyles.text_header2, color: 'white' }}
+          
         >
           ABOUT US
         </Text>
