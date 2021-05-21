@@ -12,9 +12,9 @@ const SocialLinks = () => {
     });
   return (
     <View>
-      <Footer style={{ backgroundColor: "white",borderBottomWidth: 2,
-        borderBottomColor: Theme.green }}> 
-        <FooterTab>
+      <Footer> 
+        <FooterTab style={{ backgroundColor: "white", borderBottomWidth: 2,
+        borderBottomColor: Theme.green }}>
           <Button onPress={() => Linking.openURL("https://instagram.com/spicygreenbook")} >
             <Icon type="FontAwesome" style={styles.default} name="instagram" size={22} />
           </Button>
@@ -32,9 +32,9 @@ const SocialLinks = () => {
           </Button>
         </FooterTab>
       </Footer>
-      <Footer style={{ backgroundColor: "white", backgroundColor: "white",borderBottomWidth: 2,
+      <Footer>
+        <FooterTab style={{ backgroundColor: "white", borderBottomWidth: 2,
         borderBottomColor: Theme.green }}>
-        <FooterTab>
           <Button onPress={() => Linking.openURL("https://github.com/spicygreenbook/greenbook-app")}>
             <Icon type="FontAwesome" style={styles.default} name="github" size={22} />
           </Button>
