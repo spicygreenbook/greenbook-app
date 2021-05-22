@@ -13,6 +13,7 @@ import { RichText } from "../components/RichText";
 import Attribution from "../components/Attribution";
 import { getStyles, Theme, getContent, getData } from "../utils";
 import { ResponsiveImage } from "../components/ResponsiveImage";
+import useFetchData from "../hooks/useFetchData";
 // import HybridImage from "../components/HybridImage";
 
 function Page(props) {
@@ -26,73 +27,23 @@ function Page(props) {
 
   const [pageLoading, setPageLoading] = useState(props.content ? false : true);
   const [content, setContent] = useState(props.content || {});
-  const [loadingUpdates, setLoadingUpdates] = useState(!props.updates);
-  const [errorUpdates, setErrorUpdates] = useState("");
-  const [updates, setUpdates] = useState(props.updates || []);
-  const [social_media_graphics, set_social_media_graphics] = useState(
-    props.social_media_graphics || []
-  );
-  const [loadingSocial, setLoadingSocial] = useState(
-    props.social_media_graphics ? false : true
-  );
-  const [errorSocial, setErrorSocial] = useState("");
+  const [updates, loadingUpdates, errorUpdates] = useFetchData("updates", props.updates);
+  const [social_media_graphics, loadingSocial, errorSocial] = useFetchData("social_media_graphics", props.social_media_graphics)
   console.log("social_media_graphics", social_media_graphics);
 
   useEffect(() => {
     if (!props.content) {
       getContent({ type: "content", uid: "updates" })
-      .then((_content) => {
-        setContent(_content.content);
-        setPageLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        .then((_content) => {
+          setContent(_content.content);
+          setPageLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
     return () => {
       setContent({});
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!props.social_media_graphics) {
-      getData({
-        type: "social_media_graphics",
-      })
-        .then((items) => {
-          set_social_media_graphics(items);
-          setLoadingSocial(false);
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoadingUpdates(false);
-          setErrorSocial("Failed to load social media content");
-        });
-    }
-    return () => {
-      set_social_media_graphics([]);
-      setErrorSocial("");
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!props.updates) {
-      getData({
-        type: "updates",
-      })
-        .then((updates) => {
-          setLoadingUpdates(false);
-          setUpdates(updates);
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoadingUpdates(false);
-          setErrorUpdates("Failed to load latest updates.");
-        });
-    }
-    return () => {
-      setErrorUpdates("");
-      setUpdates([]);
     };
   }, []);
 
@@ -132,7 +83,7 @@ function Page(props) {
             <View style={styles.content}>
               {loadingSocial ? (
                 <ActivityIndicator color={Theme.green} size="large" />
-              ) : errorSocial !== "" ? (
+              ) : errorSocial !== null ? (
                 <Text>{errorSocial}</Text>
               ) : (
                 <FlatList
@@ -193,7 +144,7 @@ function Page(props) {
             <View style={styles.content}>
               {loadingUpdates ? (
                 <ActivityIndicator color={Theme.green} size="large" />
-              ) : errorUpdates !== "" ? (
+              ) : errorUpdates !== null ? (
                 <Text>{errorUpdates}</Text>
               ) : (
                 <FlatList
