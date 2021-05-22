@@ -13,8 +13,7 @@ const SocialLinks = () => {
   return (
     <View>
       <Footer> 
-        <FooterTab style={{ backgroundColor: "white", borderBottomWidth: 2,
-        borderBottomColor: Theme.green }}>
+        <FooterTab style={{ backgroundColor: "white" }}>
           <Button onPress={() => Linking.openURL("https://instagram.com/spicygreenbook")} >
             <Icon type="FontAwesome" style={styles.default} name="instagram" size={22} />
           </Button>
