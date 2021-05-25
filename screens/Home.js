@@ -857,16 +857,14 @@ function Page(props) {
       <SubscribeSection />
 
       {/* Quote section */}
-      <View style={[styles.section]}>
+      <View style={[styles.section, {marginTop: 50}]}>
         <View style={[styles.content, { flex: 1 }]}>
-          <View>
-            <Fontisto name="quote-left" size={64} color={Theme.green} />
-            <Text style={[styles.text_quote, { marginTop: 10 }]}>
-              It is certain, in any case, that ignorance, allied with power, is
-              the most ferocious enemy justice can have.
-            </Text>
-            <Text style={[styles.text_quote]}>- James Baldwin</Text>
-          </View>
+          <Fontisto name="quote-left" size={64} color={Theme.green} />
+          <Text style={[styles.text_quote, { marginTop: 10 }]}>
+            It is certain, in any case, that ignorance, allied with power, is
+            the most ferocious enemy justice can have.
+          </Text>
+          <Text style={[styles.text_quote]}>- James Baldwin</Text>
         </View>
       </View>
     </>
