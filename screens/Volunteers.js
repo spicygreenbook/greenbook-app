@@ -76,7 +76,7 @@ function Page(props) {
     }, []);
   }
 
-  const TextCounter = ({title, count}) => <View>
+  const StatsCounter = ({title, count}) => <View>
     <Text style={[styles.text_body, styles.statsCounter],{fontSize: dimensions.width < 980 ? 26 : 40, alignSelf: "center"}}>{count}+</Text>
     <Text style={[styles.text_body, { fontSize: dimensions.width < 980 ? 13 : 24 } ]}>{title}</Text>
  </View>
@@ -98,9 +98,9 @@ function Page(props) {
             <>
               <View style={[styles.section, { backgroundColor: "#F2F2F2" }]}>
                 <View style={styles.statsContainer}>
-                  <TextCounter title='Total volunteers' count={stats.count}/>
-                  <TextCounter title='Hours donated' count={Math.round(stats.hours)}/>
-                  <TextCounter title='In time volunteered' count={stats.dollars}/>
+                  <StatsCounter title='Total Volunteers' count={stats.count}/>
+                  <StatsCounter title='Hours Donated' count={Math.round(stats.hours)}/>
+                  <StatsCounter title='In Time Volunteered' count={`${Math.round(stats.dollars / 1000)}K`}/>
                 </View>
               </View>
 
