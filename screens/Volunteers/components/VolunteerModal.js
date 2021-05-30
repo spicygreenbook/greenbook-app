@@ -27,11 +27,17 @@ const VolunteerModal = ({open, data, onClose}) => {
           height: dimensions.height
         }} onClick={(e) => close() } >
 
-        <View style={{ width: isWeb ? 400 : "100%", maxWidth: "100%", height: "100%", margin: "0 auto" }} onClick={(e) => { e.stopPropagation() }} >
+        <View style={{ width: isWeb ? 500 : "100%", maxWidth: "100%", height: "100%", margin: "0 auto" }} onClick={(e) => { e.stopPropagation() }} >
           {props.children}
         </View>
       </View>
     ) : props.children;
+  }
+
+  const VolunteerIconLink = (link) => {
+    const l = link.toLowerCase()
+    const n = l === 'portfolio' ? 'link' : l;
+    return <FontAwesome name={n} size={16} color={Theme.green_bg} style={{ marginRight: isWeb ? 5 : 20 }} />
   }
 
   return (
@@ -59,38 +65,12 @@ const VolunteerModal = ({open, data, onClose}) => {
                 )}
 
               {!!data.amount && <Text style={styles.text_body2}>${data.amount} in time volunteered </Text> }
-
               {data.links && data.links.length > 0 && (
                   <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 20 }} >
                     {data.links.map((link, index) => (
                       <Link key={"Link" + index} href={link.link}>
                         <Text key={"Text" + index} style={[styles.text_body2, {marginRight: 20}]}>
-                          {link && link.link_title && link.link_title
-                            .toLowerCase()
-                            .indexOf("instagram") > -1 && (
-                            <FontAwesome name="instagram" size={16} color={Theme.green_bg} style={{ marginRight: 10 }} />
-                          )}
-
-                          {link && link.link_title && link.link_title.toLowerCase().indexOf("site") > -1 && (
-                            <FontAwesome name="link" size={16} color={Theme.green_bg} style={{ marginRight: 10 }} />
-                          )}
-
-                          {link && link.link_title && link.link_title.toLowerCase().indexOf("portfolio") > -1 && (
-                            <FontAwesome name="link" size={16} color={Theme.green_bg} style={{ marginRight: 10 }} />
-                          )}
-
-                          {link && link.link_title && link.link_title.toLowerCase().indexOf("linkedin") > -1 && (
-                            <FontAwesome name="linkedin" size={16} color={Theme.green_bg} style={{ marginRight: 10 }} />
-                          )}
-
-                          {link && link.link_title && link.link_title.toLowerCase().indexOf("twitter") > -1 && (
-                            <FontAwesome name="twitter" size={16} color={Theme.green_bg} style={{ marginRight: 10 }} />
-                          )}
-
-                          {link && link.link_title && link.link_title.toLowerCase().indexOf("facebook") > -1 && (
-                            <FontAwesome name="facebook" size={16} color={Theme.green_bg} style={{ marginRight: 10 }} />
-                          )}
-
+                          {link && link.link_title && VolunteerIconLink(link.link_title)}
                           {isWeb ? link.link_title : " " + link.link_title}
                         </Text>
                       </Link>
