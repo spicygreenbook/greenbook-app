@@ -35,9 +35,11 @@ const VolunteerModal = ({open, data, onClose}) => {
   }
 
   const VolunteerIconLink = (link) => {
-    const l = link.toLowerCase()
-    const n = l === 'portfolio' ? 'link' : l;
-    return <FontAwesome name={n} size={16} color={Theme.green_bg} style={{ marginRight: isWeb ? 5 : 20 }} />
+    let l = link.toLowerCase();
+
+    if(l === 'upwork') return null;  // No icon listed
+    if(l === 'portfolio' || l === 'website') l = 'link';
+    return <FontAwesome name={l} size={16} color={Theme.green_bg} style={{ marginRight: isWeb ? 5 : 20 }} />
   }
 
   return (
