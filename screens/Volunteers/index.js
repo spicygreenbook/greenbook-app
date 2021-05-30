@@ -1,44 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useStateValue } from "../components/State";
+import { useStateValue } from "../../components/State";
 import {
   View,
   Text,
   StyleSheet,
   ActivityIndicator,
   FlatList,
-  TouchableOpacity
 } from "react-native";
-import { PageTitle } from "../components/PageTitle";
-import { getStyles, Theme, getContent } from "../utils";
-import { ResponsiveImage } from "../components/ResponsiveImage";
-import VolunteerModal from "../components/VolunteerModal";
-import useFetchData from "../hooks/useFetchData";
+import { PageTitle } from "../../components/PageTitle";
+import { getStyles, Theme, getContent } from "../../utils";
+import useFetchData from "../../hooks/useFetchData";
 
-const VolunteerCard = ({ item, updateModal }) => {
-  const [{ dimensions }] = useStateValue();
-  
-  return (
-    <View style={{ flex: 1 / dimensions.width < 600 ? 1 : 2, margin: 10 }} >
-      <TouchableOpacity
-        onPress={() => updateModal({data: item, open: true}) } >
-        <View style={{ flexDirection: "row", minHeight: 115 }} >
-          <View style={{ flex: 1 }}>
-            { item.image && item.image.url && (
-              <ResponsiveImage style={{ width: item.image.width, height: item.image.height }} source={{ uri: item.image.url + "&w=600" }} />
-            )}
-          </View>
-          <View style={{ flex: 2, paddingLeft: 20 }}>
-              <Text style={styles.text_header4}>{item.name}</Text>
-              <Text style={[styles.text_header4, {fontSize: 18, paddingBottom: 4, paddingTop: 4}]} >{item.role || ""}</Text>
-              <View style={{ maxHeight: 50, overflow: "hidden" }}>
-                <Text>{item.description || ""}...</Text>
-              </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    </View>
-  )
-}
+import VolunteerModal from "./components/VolunteerModal";
+import Card from './components/Card';
 
 function Page(props) {
   const [{ isWeb, dimensions }] = useStateValue();
@@ -46,8 +20,9 @@ function Page(props) {
   const [content, setContent] = useState(props.content || {});
   const [volunteers, loadingVolunteers, errorVolunteers] = useFetchData("volunteers", props.volunteers);
 
-  const [modal, setModal] = useState({ open: false, data: {} });
-  const updateModal = (data) => setModal(data);
+  const [modalData, setModalData] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
   let numColumns = dimensions.width < 600 ? 1 : 2;
   let stats = {
     count: 200,
@@ -80,7 +55,7 @@ function Page(props) {
     <Text style={[styles.text_body, styles.statsCounter],{fontSize: dimensions.width < 980 ? 26 : 40, alignSelf: "center"}}>{count}+</Text>
     <Text style={[styles.text_body, { fontSize: dimensions.width < 980 ? 13 : 24 } ]}>{title}</Text>
  </View>
-
+ 
   return (
     <>
       {pageLoading ? (
@@ -100,7 +75,7 @@ function Page(props) {
                 <View style={styles.statsContainer}>
                   <StatsCounter title='Total Volunteers' count={stats.count}/>
                   <StatsCounter title='Hours Donated' count={Math.round(stats.hours)}/>
-                  <StatsCounter title='In Time Volunteered' count={`${Math.round(stats.dollars / 1000)}K`}/>
+                  <StatsCounter title='In Time Volunteered' count={`$${Math.round(stats.dollars / 1000)}K`}/>
                 </View>
               </View>
 
@@ -108,18 +83,23 @@ function Page(props) {
                 <View style={styles.content}>
                   {
                     !isWeb 
-                      ? shuffledVolunteers.map((item, index) => <VolunteerCard key={"volunteers" + index} item={item} updateModal={updateModal} />)
+                      // Use FlatList for efficiently rendering ValunteerCard (not to rendered all at once)
+                      ? shuffledVolunteers.map((item, index) => <Card key={"volunteers" + index} item={item} />)
                       :  <FlatList
                           key={"cols" + numColumns}
                           data={shuffledVolunteers}
                           numColumns={numColumns}
-                          renderItem={({ item, index }) => <VolunteerCard key={"volunteers" + index} item={item} updateModal={updateModal} />}
+                          renderItem={({ item, index }) => <Card numColumns={numColumns} key={"volunteers" + index} item={item} openOnWeb={() => { 
+                            setModalVisible(true);
+                            setModalData(item);
+                          }}/> }
                           keyExtractor={(item, index) => "volunteers" + index}
                         /> 
                   }
                 </View>
               </View>
-              <VolunteerModal open={modal.open} data={modal.data} close={() => updateModal({open: false, data: {}})} />
+              {/* Create a separate Modal for Web */}
+              {isWeb && modalData && <VolunteerModal open={modalVisible} data={modalData}  onClose={() => setModalVisible(false) } /> }
             </>
           )}
         </>
@@ -129,7 +109,7 @@ function Page(props) {
 }
 
 const styles = StyleSheet.create({
-  ...getStyles("text_header2, text_header3, text_header4, text_header5, section, content, text_body"),
+  ...getStyles("section, content, text_body"),
   container: {
     flex: 1,
     justifyContent: "center",

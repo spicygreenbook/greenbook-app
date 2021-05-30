@@ -13,7 +13,7 @@ import Privacy from '../screens/Privacy';
 import Process from '../screens/Process';
 import Updates from '../screens/Updates';
 import Press from '../screens/Press';
-import Volunteers from '../screens/Volunteers';
+import { Volunteers } from '../screens';
 import Testimonials from '../screens/Testimonials';
 import Team from '../screens/Team';
 import Donate from '../screens/Donate';
