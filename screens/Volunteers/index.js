@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useStateValue } from "../../components/State";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  FlatList,
-} from "react-native";
+import {View, Text, StyleSheet, ActivityIndicator, FlatList } from "react-native";
 import { PageTitle } from "../../components/PageTitle";
 import { getStyles, Theme, getContent } from "../../utils";
 import useFetchData from "../../hooks/useFetchData";
-
 import VolunteerModal from "./components/VolunteerModal";
 import Card from './components/Card';
 
@@ -81,25 +74,23 @@ function Page(props) {
 
               <View style={[styles.section]} nativeID="volunteersLinks">
                 <View style={styles.content}>
-                  {
-                    !isWeb 
-                      // Use FlatList for efficiently rendering ValunteerCard (not to rendered all at once)
-                      ? shuffledVolunteers.map((item, index) => <Card key={"volunteers" + index} item={item} />)
-                      :  <FlatList
-                          key={"cols" + numColumns}
-                          data={shuffledVolunteers}
-                          numColumns={numColumns}
-                          renderItem={({ item, index }) => <Card numColumns={numColumns} key={"volunteers" + index} item={item} openOnWeb={() => { 
-                            setModalVisible(true);
-                            setModalData(item);
-                          }}/> }
-                          keyExtractor={(item, index) => "volunteers" + index}
-                        /> 
-                  }
+                  <FlatList
+                    key={"cols" + numColumns} 
+                    data={shuffledVolunteers}
+                    initialNumToRender={isWeb ? 10 : 5}
+                    showsVerticalScrollIndicator={false}
+                    windowSize={1}
+                    numColumns={numColumns}
+                    renderItem={({ item }) => <Card numColumns={numColumns} key={"volunteers" + item.id} item={item} openOnWeb={() => { 
+                      setModalVisible(true);
+                      setModalData(item);
+                    }}/> }
+                    keyExtractor={(item) => "volunteers" + item.id}
+                  /> 
                 </View>
               </View>
-              {/* Create a separate Modal for Web */}
-              {isWeb && modalData && <VolunteerModal open={modalVisible} data={modalData}  onClose={() => setModalVisible(false) } /> }
+              {/* A single modal for web */}
+              {isWeb && modalData && <VolunteerModal key={'modal' + modalData.id} open={modalVisible} data={modalData}  onClose={() => setModalVisible(false) } /> }
             </>
           )}
         </>

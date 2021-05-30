@@ -13,10 +13,9 @@ import VolunteerModal from "./VolunteerModal";
 const Card = ({ item, openOnWeb, numColumns }) => {
   const [{ dimensions, isWeb }] = useStateValue();
   
-  // We create this for Native, so it does not rerender when clicking on VolunteerCard
+  // We create this for Native, so it does not rerender/refresh the List when clicking on VolunteerCard
   const [modalVisible, setModalVisible] = useState(false);
 
-  console.log('Rerender inside VolunteerCard')
   return (
     <View style={{ flex: dimensions.width < 600 ? 1 : 1 / numColumns, margin: 10 }} >
       <TouchableOpacity

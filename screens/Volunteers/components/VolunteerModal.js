@@ -62,9 +62,9 @@ const VolunteerModal = ({open, data, onClose}) => {
 
               {data.links && data.links.length > 0 && (
                   <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 20 }} >
-                    {data.links.map((link) => (
-                      <Link href={link.link}>
-                        <Text style={[styles.text_body2, {marginRight: 20}]}>
+                    {data.links.map((link, index) => (
+                      <Link key={"Link" + index} href={link.link}>
+                        <Text key={"Text" + index} style={[styles.text_body2, {marginRight: 20}]}>
                           {link && link.link_title && link.link_title
                             .toLowerCase()
                             .indexOf("instagram") > -1 && (
@@ -103,7 +103,7 @@ const VolunteerModal = ({open, data, onClose}) => {
                     <Text style={[styles.text_body2, { color: '#000' }]}>SKILLS</Text>
                     <View style={{ marginTop: 10, flexDirection: "row", flexWrap: "wrap" }}>
                       {data.talents_donated.map((talent, i, ar) => (
-                        <Text style={[styles.text_body2, { fontSize: 14 }]}>
+                        <Text key={i} style={[styles.text_body2, { fontSize: 14 }]}>
                           {talent.talent}
                           {i < ar.length - 1 && ", "}
                         </Text>

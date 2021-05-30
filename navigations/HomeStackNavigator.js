@@ -8,7 +8,6 @@ import { getStyles, Theme } from '../utils';
 import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { useRoute, useNavigation } from '@react-navigation/native';
-
 import { WithScrollView } from "./helper";
 import Donate from "../screens/Donate";
 import Shop from "../screens/Shop";
@@ -119,7 +118,7 @@ const HomeStack = (props) => (
       header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
-    <Stack.Screen name="Volunteers" component={WithScrollView(Volunteers)} options={{
+    <Stack.Screen name="Volunteers" component={Volunteers} options={{
       header: () => <CustomHeader showBackButton dark {...props} />
     }} />
 
