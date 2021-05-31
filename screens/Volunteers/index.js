@@ -75,13 +75,13 @@ function Page(props) {
               <View style={[styles.section]} nativeID="volunteersLinks">
                 <View style={styles.content}>
                   <FlatList
-                    style={{marginBottom: isWeb ? 0 : 250}}
                     key={"cols" + numColumns} 
                     data={shuffledVolunteers}
-                    initialNumToRender={isWeb ? null : 5}
+                    initialNumToRender={isWeb ? 0 : 5}
                     showsVerticalScrollIndicator={false}
                     windowSize={isWeb ? 21 : 1}
                     numColumns={numColumns}
+                    ListFooterComponent={isWeb ? null : <View style={{height: 250}}/>}
                     renderItem={({ item }) => <Card numColumns={numColumns} key={"volunteers" + item.id} item={item} openOnWeb={() => { 
                       setModalVisible(true);
                       setModalData(item);
@@ -91,7 +91,7 @@ function Page(props) {
                 </View>
               </View>
               {/* A single modal for web, it does not refresh the list when opening the modal */}
-              {isWeb && modalData && <VolunteerModal key={'modal' + modalData.id} open={modalVisible} data={modalData}  onClose={() => setModalVisible(false) } /> }
+              {isWeb && modalData && <VolunteerModal open={modalVisible} data={modalData}  onClose={() => setModalVisible(false) } /> }
             </>
           )}
         </>
