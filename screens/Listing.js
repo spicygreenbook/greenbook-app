@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from "../components/State";
-import {View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity, ScrollView, Platform} from 'react-native';
 import { Link } from "../components/Link";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
 import Map from "../components/Map";
 //import MapView from 'react-native-maps'; this breaks web still
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import Attribution from "../components/Attribution";
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
 import Spinner from '../components/Spinner';
-
 
 function Page(props) {
 
@@ -88,6 +87,13 @@ function Page(props) {
             <React.Fragment>
                 <View style={{paddingTop: isWeb ? 120 : 0 }} />
                 <View style={{flexDirection: 'row', backgroundColor: Theme.green_bg}}>
+                    {!isWeb && (
+                        <TouchableOpacity style={{ zIndex: 1, position:'absolute', backgroundColor: Theme.green, top: Platform.OS === 'ios' ? 60 : 20, left: 15, width: 40, height: 40, borderRadius: 50, justifyContent: 'center', alignItems: 'center'}} onPress={() => navigation.goBack()}>
+                            <FontAwesome5 name="arrow-left" size={20} color="#fff" />
+                         </TouchableOpacity>
+                        )
+                    }
+
                     <View style={{flex: 2, borderRightWidth: 2, borderColor: '#fff'}}>
                         <TouchableOpacity onPress={e => clickImage(0)}>
                             <Image source={{uri: primaryImages[0].url + '&w=1200'}} style={{width: '100%', height: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602}} resizeMode="cover" />

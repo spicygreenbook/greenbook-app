@@ -16,5 +16,5 @@ export default function HybridImageBackground(props) {
       />
       {props.children}
     </View>
-    : <ImageBackground {...props}>{props.children}</ImageBackground>
+    : <ImageBackground source={props.source} style={props.style}>{props.children}</ImageBackground>
 }
