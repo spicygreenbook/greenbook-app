@@ -1,46 +1,84 @@
 import { useState, useEffect } from "react";
-import { getData } from '../utils';
+import { getData, getContent } from "../utils";
 
 const useFetchData = (type, preData = []) => {
+	const [fetchData, setFetchData] = useState({
+		data: preData,
+		isLoading: !preData.length,
+		error: null,
+	});
 
-  const [fetchData, setFetchData] = useState({
-    data: preData,
-    isLoading: !preData.length,
-    error: null
-  });
+	useEffect(() => {
+		const fetch = async () => {
+			try {
+				let data;
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        let data;
+				if (typeof type === "string") {
+					data = await getData({ type });
+				} else if (typeof type === "function") {
+					data = await type();
+				} else {
+					throw new Error(`must be a type function or string.`);
+				}
 
-        if(typeof type === 'string') {
-          data = await getData({ type });
-        } else if (typeof type === 'function') {
-          data = await type();
-        } else {
-          throw new Error(`must be a type function or string.`);
-        }
-        
-        setFetchData({
-          ...fetchData,
-          data,
-          isLoading: false,
-        })
-      } catch (error) {
-        setFetchData({
-          ...fetchData,
-          isLoading: false,
-          error: `Failed to load latest ${type} ${error}`
-        })
-      }
-    }
+				setFetchData({
+					...fetchData,
+					data,
+					isLoading: false,
+				});
+			} catch (error) {
+				setFetchData({
+					...fetchData,
+					isLoading: false,
+					error: `Failed to load latest ${type} ${error}`,
+				});
+			}
+		};
 
-    if(!preData.length) fetch();
-  }, []);
+		if (!preData.length) fetch();
+	}, []);
 
-  const { data, isLoading, error } = fetchData;
-  return [data, isLoading, error];
+	const { data, isLoading, error } = fetchData;
+	return [data, isLoading, error];
+};
+
+export const useFetchContent = (uid, preData = null) => {
+	const [fetchContent, setFetchContent] = useState({
+		content: preData,
+		isLoading: !preData,
+		error: null,
+	});
+
+	if (typeof uid !== "string") {
+		throw new Error(`type and uid must be a type string.`);
+	}
+
+	useEffect(() => {
+		const fetch = async () => {
+			try {
+				let ss = await getContent({ type: "content", uid });
+				const { content } = ss;
+				if (content) {
+					setFetchContent({
+						content: content,
+						isLoading: false,
+						error: null,
+					});
+				}
+			} catch (error) {
+				setFetchContent({
+					...fetchContent,
+					isLoading: false,
+					error: `Failed to load content with ${uid}`,
+				});
+			}
+		};
+
+		if (!preData) fetch();
+	}, []);
+
+	const { content, isLoading, error } = fetchContent;
+	return [content, isLoading, error];
 };
 
 export default useFetchData;
