@@ -45,7 +45,7 @@ export const CashAppButton = () => {
 export const DonateButtons = () => {
 	const [{ dimensions }] = useStateValue();
 	return (
-		<div className="flex-container" style={{ right: dimensions.width < 900 ? 0 : 60, position: "relative" }}>
+		<div style={{ display: "flex", justifyContent: "center", alignItems: "center", right: dimensions.width < 900 ? 0 : 60, position: "relative" }}>
 			<PayPalButton />
 			<Text
 				style={{
