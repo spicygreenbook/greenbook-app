@@ -16,8 +16,6 @@ const Alert = ({ severity, message }) => {
 	);
 };
 
-const styles = StyleSheet.create({
-	...getStyles("text_header3, section"),
-});
+const styles = StyleSheet.create(getStyles("text_header3, section"));
 
 export default Alert;
