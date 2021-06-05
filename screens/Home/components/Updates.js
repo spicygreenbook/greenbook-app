@@ -28,6 +28,7 @@ const Hero = ({ list }) => {
 									<React.Fragment>
 										<View>
 											<HybridImage
+												lists={true}
 												source={{ uri: item.image.url + "&w=600" }}
 												style={{
 													width: 300,
