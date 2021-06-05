@@ -1,13 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import useFetchData from "../../hooks/useFetchData";
 
 import Hero from "./components/Hero";
 import About from "./components/About";
 import DownloadApp from "../../components/DownloadApp";
 import VideoPlayer from "../../components/VideoPlayer";
 import PressRecognition from "./components/PressRecognition";
-import NewListings from "./components/NewListings";
 import SGBRoadMap from "./components/SGBRoadMap";
 import Shop from "./components/Shop";
 import CallToAction from "./components/CallToAction";
@@ -18,8 +16,6 @@ import SubscribeSection from "./components/SubscribeSection";
 import Quote from "./components/Quote";
 
 function Page(props) {
-	const [Listings, loadingListings, errorListings] = useFetchData("listing", props.listings);
-
 	return (
 		<>
 			{/* Hero Section */}
@@ -40,11 +36,8 @@ function Page(props) {
 			{/* Divider */}
 			<View style={{ height: 5, backgroundColor: "#000" }} />
 
-			{/* New Listing */}
-			<NewListings Listings={Listings} loadingListings={loadingListings} errorListings={errorListings} navigation={props.navigation} />
-
-			{/* Map */}
-			<SGBRoadMap Listings={Listings} loadingListings={loadingListings} />
+			{/* Map and New Listing section, sine both depends on listings data  */}
+			<SGBRoadMap list={props.listings} navigation={props.navigation} />
 
 			{/* Shop */}
 			<Shop />
