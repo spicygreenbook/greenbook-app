@@ -1,0 +1,30 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["react-app", "prettier"],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "prettier"],
+    "rules": {
+        "semi": "error",
+        "react/prop-types": 0,
+        "prettier/prettier": [
+            "error",
+            {
+                "printWidth": 160,
+                "trailingComma": "all",
+                "semi": true,
+                "jsxSingleQuote": false,
+                "singleQuote": false,
+                "useTabs": true,
+                "bracketSpacing": true,
+                "react-hooks/rules-of-hooks": false
+            }
+        ]
+    }
+}
+
