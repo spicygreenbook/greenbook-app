@@ -11,7 +11,7 @@ import Attribution from "../components/Attribution";
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
 import Spinner from '../components/Spinner';
-
+import SharingModal from '../components/SharingModal';
 
 function Page(props) {
 
@@ -21,12 +21,18 @@ function Page(props) {
     const [pageLoading, setPageLoading] = useState(!props.content);
     const [content, setContent] = useState(props.content);
     const [galleryOpen, setGalleryOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalData, setModalData] = useState({});
 
     const mapKeys = ['geocoordinates', 'name', 'address'];
     const [mapInfoStr, setMapStr] = useState('');
     const mapInfo = {};
 
     const navigation = !isWeb ? useNavigation() : null;
+
+    function closeModal() {
+        setModalOpen(false);
+    }
 
     useEffect(() => {
         setPageLoading(true);
@@ -89,6 +95,14 @@ function Page(props) {
                 : (
                     <React.Fragment>
                         <View style={{ paddingTop: isWeb ? 120 : 0 }} />
+                        <View>
+                            <SharingModal
+                                open={modalOpen}
+                                data={modalData}
+                                close={closeModal}
+                                isWeb={isWeb}
+                            />
+                        </View>
                         <View style={{ flexDirection: 'row', backgroundColor: Theme.green_bg }}>
                             <View style={{ flex: 2, borderRightWidth: 2, borderColor: '#fff' }}>
                                 <TouchableOpacity onPress={e => clickImage(0)}>
@@ -107,13 +121,22 @@ function Page(props) {
                         </View>
                         <View style={[dimensions.width < 600 ? {} : { flexDirection: 'row' }, { backgroundColor: Theme.green_bg, borderTopWidth: 2, borderColor: '#fff' }]}>
                             <View style={[dimensions.width < 600 ? {} : { flex: 2 }, { borderRightWidth: 2, borderColor: '#fff', alignItems: 'flex-end' }]}>
-                                {/* TODO: Share link with Modal window*/} 
-                                <View style={{ padding: 20, paddingBottom: 0, marginRight: 10, flexDirection: 'row' }}>
-                                    <View style={{ marginRight: 10}} >
-                                        <FontAwesome name="share" size={24} color="#fff" />
+                                {/* TODO: Share link with Modal window*/}
+                                <TouchableOpacity
+                                    onPress={(e) => {
+                                        console.log(content);
+                                        setModalData(content);
+                                        setModalOpen(true);
+                                    }}
+                                >
+                                    <View style={{ padding: 20, paddingBottom: 0, marginRight: 10, flexDirection: 'row' }}>
+
+                                        <View style={{ marginRight: 10 }} >
+                                            <FontAwesome name="share" size={24} color="#fff" />
+                                        </View>
+                                        <Text style={[styles.text_body, { color: '#fff', borderBottomWidth: 2, borderColor: '#fff', fontSize: 18, fontWeight: 700 }]}>SHARE</Text>
                                     </View>
-                                    <Text style={[styles.text_body, { color: '#fff', borderBottomWidth: 2, borderColor: '#fff', fontSize: 18, fontWeight: 700 }]}>SHARE</Text>
-                                </View>
+                                </TouchableOpacity>
                                 <View style={{ padding: 20, paddingBottom: dimensions.width < 600 ? 0 : 40, width: 795, maxWidth: '100%', marginLeft: 10 }}>
                                     <Text style={[styles.text_header2, { color: '#fff', textTransform: 'none', paddingBottom: 20 }]}>{content.name}</Text>
                                     {content.address &&
