@@ -534,7 +534,7 @@ function Page(props) {
         </View>
         {dimensions.width >= 800 && (
           <View style={{ flex: 1, backgroundColor: "#ffffff", position: "relative" }}>
-            <View style={{ position: "absolute", left: -20, top: 20, width: "100%" }}>
+            <View style={{ position: "absolute", left: -20, top: 20, maxHeight: 550, width: "100%" }}>
               <ResponsiveImage
                 style={{ position: "relative", top: 50, width: 400, aspectRatio: 1 }}
                 alt="Spicy Green Book"
