@@ -41,7 +41,8 @@
     "react-native-webview": "11.0.0",
     "stripe": "^8.121.0",
     "styled-components": "^5.2.1",
-    "unimodules-permissions-interface": "^6.0.0"
+    "unimodules-permissions-interface": "^6.0.0",
+    "expo-sharing": "~8.5.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
