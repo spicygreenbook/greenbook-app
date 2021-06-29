@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useStateValue } from "../components/State";
 import {
     Modal,
@@ -82,6 +82,8 @@ export default function App(props) {
     };
     const styles = StyleSheet.create({ ..._styles1, ..._styles });
 
+    console.log("modal visible", open);
+
     function WebWrapper(props) {
         return isWeb ? (
             <View
@@ -106,7 +108,6 @@ export default function App(props) {
             >
                 <View
                     style={{
-                        width: isWeb ? 500 : "100%",
                         maxWidth: "100%",
                         height: "100%",
                         margin: "0 auto"
@@ -118,9 +119,10 @@ export default function App(props) {
                     {props.children}
                 </View>
             </View>
-        ) : (
-            <React.Fragment>{props.children}</React.Fragment>
-        );
+        )
+            : (
+                <React.Fragment>{props.children}</React.Fragment>
+            );
     }
 
     return (
@@ -133,156 +135,148 @@ export default function App(props) {
                 onRequestClose={() => {
                     close();
                 }}
-                style={{ borderColor: "transparent" }}
+                style={{
+                    borderWidth: 0, width: dimensions.width < 600 ? 280 : '100%',
+                    top: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602
+                }}
             >
-                <View
-                    style={[
-                        styles.centeredView,
-                        isWeb
-                            ? {
-                                flex: 1,
-                                width: "100%",
-                            }
-                            : {}
+                <ScrollView
+                    contentContainerStyle={[
+                        styles.modalView,
+                        {
+                            top: isWeb ? 0 : 40,
+                            width: "100%",
+                            height: isWeb ? "100%" : null,
+                        }
                     ]}
                 >
-                    <ScrollView
-                        contentContainerStyle={[
-                            styles.modalView,
-                            {
-                                top: isWeb ? 170 : 0,
-                                width: "100%",
-                                height: "200px",
-                            }
-                        ]}
+                    <View
+                        style={{
+                            width: "100%",
+                            maxWidth: dimensions.width - 100,
+                            height: "100%"
+                        }}
                     >
                         <View
                             style={{
-                                width: "100%",
-                                maxWidth: dimensions.width - 100,
+                                marginHorizontal: 10,
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                         >
-                            <View
-                                style={{
-                                    marginHorizontal: 10,
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                                }}
-                            >
-                                <View>
-                                    <Text style={[styles.text_header4]}>
-                                        Share
-                                    </Text>
-                                </View>
-                                <ScrollView
-                                    horizontal={true}
-                                    showsHorizontalScrollIndicator={false}
-                                    contentContainerStyle={{ width: "100%" }}
-                                    style={{ marginTop: 15 }}>
-                                    {//TODO: Images in the share url}
-                                        <View style={[styles.linkContainer]}>
-                                            <View style={[styles.shareLink]}>
-                                                <Link href={`https://www.facebook.com/sharer.php?u=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}
-                                                >
-                                                    <FontAwesome
-                                                        name="facebook"
-                                                        size={24}
-                                                        color="#B56230"
-                                                        style={[styles.icon]}
-                                                    />
-                                                    <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                        Facebook
-                                                </Text>
-                                                </Link>
-                                            </View>
-                                            <View style={[styles.shareLink]}>
-                                                <Link href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
-                                                    <FontAwesome
-                                                        name="linkedin"
-                                                        size={24}
-                                                        color="#B56230"
-                                                        style={[styles.icon]}
-                                                    />
-                                                    <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                        LinkedIn
-                                                </Text>
-                                                </Link>
-                                            </View>
-                                            <View style={[styles.shareLink]}>
-                                                <Link href={`mailto:%7Bemail_address%7D?subject=&body=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
-                                                    <FontAwesome
-                                                        name="envelope"
-                                                        size={24}
-                                                        color="#B56230"
-                                                        style={[styles.icon]}
-                                                    />
-                                                    <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                        Email
-                                                </Text>
-                                                </Link>
-                                            </View>
-                                            <View style={[styles.shareLink]}>
-                                                <Link href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
-                                                    <FontAwesome
-                                                        name="twitter"
-                                                        size={24}
-                                                        color="#B56230"
-                                                        style={[styles.icon]}
-                                                    />
-                                                    <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                        Twitter
-                                                </Text>
-                                                </Link>
-                                            </View>
-                                            <View style={[styles.shareLink]}>
-                                                <Link href={`https://reddit.com/submit?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
-                                                    <FontAwesome
-                                                        name="reddit"
-                                                        size={24}
-                                                        color="#B56230"
-                                                        style={[styles.icon]}
-                                                    />
-                                                    <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                        Reddit
-                                                </Text>
-                                                </Link>
-                                            </View>
-                                            <View style={[styles.shareLink]}>
-                                                <Link href={`https://www.pinterest.com/pin/create/button?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
-                                                    <FontAwesome
-                                                        name="pinterest"
-                                                        size={24}
-                                                        color="#B56230"
-                                                        style={[styles.icon]}
-                                                    />
-                                                    <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                        Pinterest
-                                                </Text>
-                                                </Link>
-                                            </View>
-                                        </View>
-                                    }
-                                </ScrollView>
+                            <View>
+                                <Text style={[styles.text_header4]}>
+                                    Share
+                                </Text>
                             </View>
+                            <ScrollView
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                                contentContainerStyle={{ width: "100%" }}
+                                style={{ marginTop: 15 }}>
+                                {//TODO: Images in the share url}
+                                    <View style={[styles.linkContainer]}>
+                                        <View style={[styles.shareLink]}>
+                                            <Link href={`https://www.facebook.com/sharer.php?u=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}
+                                            >
+                                                <FontAwesome
+                                                    name="facebook"
+                                                    size={24}
+                                                    color="#B56230"
+                                                    style={[styles.icon]}
+                                                />
+                                                <Text style={[styles.text_body2, styles.linkTitle]}>
+                                                    Facebook
+                                                </Text>
+                                            </Link>
+                                        </View>
+                                        <View style={[styles.shareLink]}>
+                                            <Link href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                                <FontAwesome
+                                                    name="linkedin"
+                                                    size={24}
+                                                    color="#B56230"
+                                                    style={[styles.icon]}
+                                                />
+                                                <Text style={[styles.text_body2, styles.linkTitle]}>
+                                                    LinkedIn
+                                                </Text>
+                                            </Link>
+                                        </View>
+                                        <View style={[styles.shareLink]}>
+                                            <Link href={`mailto:%7Bemail_address%7D?subject=&body=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                                <FontAwesome
+                                                    name="envelope"
+                                                    size={24}
+                                                    color="#B56230"
+                                                    style={[styles.icon]}
+                                                />
+                                                <Text style={[styles.text_body2, styles.linkTitle]}>
+                                                    Email
+                                                </Text>
+                                            </Link>
+                                        </View>
+                                        <View style={[styles.shareLink]}>
+                                            <Link href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                                <FontAwesome
+                                                    name="twitter"
+                                                    size={24}
+                                                    color="#B56230"
+                                                    style={[styles.icon]}
+                                                />
+                                                <Text style={[styles.text_body2, styles.linkTitle]}>
+                                                    Twitter
+                                                </Text>
+                                            </Link>
+                                        </View>
+                                        <View style={[styles.shareLink]}>
+                                            <Link href={`https://reddit.com/submit?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                                <FontAwesome
+                                                    name="reddit"
+                                                    size={24}
+                                                    color="#B56230"
+                                                    style={[styles.icon]}
+                                                />
+                                                <Text style={[styles.text_body2, styles.linkTitle]}>
+                                                    Reddit
+                                                </Text>
+                                            </Link>
+                                        </View>
+                                        <View style={[styles.shareLink]}>
+                                            <Link href={`https://www.pinterest.com/pin/create/button?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                                <FontAwesome
+                                                    name="pinterest"
+                                                    size={24}
+                                                    color="#B56230"
+                                                    style={[styles.icon]}
+                                                />
+                                                <Text style={[styles.text_body2, styles.linkTitle]}>
+                                                    Pinterest
+                                                </Text>
+                                            </Link>
+                                        </View>
+                                    </View>
+                                }
+                            </ScrollView>
                         </View>
-                        <View
-                            style={{
-                                position: "absolute",
-                                top: 0,
-                                right: 0,
-                                minWidth: 40,
-                                minHeight: 40
-                            }}
-                        >
-                            <Button
-                                onPress={close}
-                                title="X"
-                                color={Theme.green}
-                                style={styles.button_green}
-                            />
-                        </View>
-                    </ScrollView>
-                </View>
+                    </View>
+                    <View
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            right: 0,
+                            minWidth: 40,
+                            minHeight: 40
+                        }}
+                    >
+                        <Button
+                            onPress={close}
+                            title="X"
+                            color={Theme.green}
+                            style={styles.button_green}
+                        />
+                    </View>
+                </ScrollView>
             </Modal>
         </WebWrapper>
     );
