@@ -69,7 +69,7 @@ export default function App(props) {
             justifyContent: "center",
             width: "60px",
             height: "60px",
-            borderRadius: "50%",
+            borderRadius: isWeb ? "50%" : null,
             color: "#fff",
             justifyContent: "center",
             alignItems: "center",
@@ -77,7 +77,7 @@ export default function App(props) {
         },
         linkTitle: {
             marginTop: "8px",
-            fontSize: "13px"
+            fontSize: 13
         }
     };
     const styles = StyleSheet.create({ ..._styles1, ..._styles });
@@ -144,16 +144,17 @@ export default function App(props) {
                     contentContainerStyle={[
                         styles.modalView,
                         {
-                            top: isWeb ? 0 : 40,
-                            width: "100%",
-                            height: isWeb ? "100%" : null,
+                            top: isWeb ? 120 : 40,
+                            height: isWeb ? "auto" : null,
+                            maxWidth: 375,
+                            marginRight: "auto",
+                            marginLeft: "auto"
                         }
                     ]}
                 >
                     <View
                         style={{
                             width: "100%",
-                            maxWidth: dimensions.width - 100,
                             height: "100%"
                         }}
                     >
@@ -239,19 +240,6 @@ export default function App(props) {
                                                 />
                                                 <Text style={[styles.text_body2, styles.linkTitle]}>
                                                     Reddit
-                                                </Text>
-                                            </Link>
-                                        </View>
-                                        <View style={[styles.shareLink]}>
-                                            <Link href={`https://www.pinterest.com/pin/create/button?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
-                                                <FontAwesome
-                                                    name="pinterest"
-                                                    size={24}
-                                                    color="#B56230"
-                                                    style={[styles.icon]}
-                                                />
-                                                <Text style={[styles.text_body2, styles.linkTitle]}>
-                                                    Pinterest
                                                 </Text>
                                             </Link>
                                         </View>

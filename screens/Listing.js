@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Share } from 'react-native';
 import { Link } from "../components/Link";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
@@ -88,21 +88,30 @@ function Page(props) {
         console.log('i', i, 'score', image.imageScore, 'ratio', image.ratio, 'widthxh', image.width, image.height)
     })*/
 
+    const share = async () => {
+        let sharingUrl = `https://spicygreenbook.org/biz/${content.uid}`;
+        // let imageUrl = primaryImages[0].url + '&w=1200';
+        await Share.share({
+            url: sharingUrl
+        })
+    }
+
     return (
         <ScrollView>
-            { pageLoading ?
+            {pageLoading ?
                 <Spinner />
                 : (
                     <React.Fragment>
                         <View style={{ paddingTop: isWeb ? 120 : 0 }} />
-                        <View>
+                        {isWeb ?
                             <SharingModal
                                 open={modalOpen}
                                 data={modalData}
                                 close={closeModal}
                                 isWeb={isWeb}
                             />
-                        </View>
+                            : null
+                        }
                         <View style={{ flexDirection: 'row', backgroundColor: Theme.green_bg }}>
                             <View style={{ flex: 2, borderRightWidth: 2, borderColor: '#fff' }}>
                                 <TouchableOpacity onPress={e => clickImage(0)}>
@@ -121,12 +130,15 @@ function Page(props) {
                         </View>
                         <View style={[dimensions.width < 600 ? {} : { flexDirection: 'row' }, { backgroundColor: Theme.green_bg, borderTopWidth: 2, borderColor: '#fff' }]}>
                             <View style={[dimensions.width < 600 ? {} : { flex: 2 }, { borderRightWidth: 2, borderColor: '#fff', alignItems: 'flex-end' }]}>
-                                {/* TODO: Share link with Modal window*/}
                                 <TouchableOpacity
                                     onPress={(e) => {
-                                        console.log(content);
-                                        setModalData(content);
-                                        setModalOpen(true);
+                                        if (isWeb) {
+                                            console.log(content);
+                                            setModalData(content);
+                                            setModalOpen(true);
+                                        } else {
+                                            share();
+                                        }
                                     }}
                                 >
                                     <View style={{ padding: 20, paddingBottom: 0, marginRight: 10, flexDirection: 'row' }}>
@@ -134,7 +146,7 @@ function Page(props) {
                                         <View style={{ marginRight: 10 }} >
                                             <FontAwesome name="share" size={24} color="#fff" />
                                         </View>
-                                        <Text style={[styles.text_body, { color: '#fff', borderBottomWidth: 2, borderColor: '#fff', fontSize: 18, fontWeight: 700 }]}>SHARE</Text>
+                                        <Text style={[styles.text_body, { color: '#fff', borderBottomWidth: 2, borderColor: '#fff', fontSize: 18, fontWeight: '700', textTransform: 'uppercase' }]}>Share</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <View style={{ padding: 20, paddingBottom: dimensions.width < 600 ? 0 : 40, width: 795, maxWidth: '100%', marginLeft: 10 }}>
