@@ -689,7 +689,7 @@ function Page(props) {
                 aria-level="3"
                 style={[styles.text_header3, { marginBottom: 20 }]}
               >
-                WHAT EXACTLY IS THE STORY?
+                WHAT EXACTLY IS THE STORY ?
               </Text>
               <Text style={styles.text_body}>
                 At Spicy Green Book we want to share the stories behind the businesses. We
