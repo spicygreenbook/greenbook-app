@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useStateValue } from "../components/State";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Share } from 'react-native';
+import { WebView } from 'react-native-webview';
+import { useNavigation } from '@react-navigation/native';
+import { useStateValue } from "../components/State";
 import { Link } from "../components/Link";
 import { RichText } from "../components/RichText";
 import { getStyles, Theme, getContent } from '../utils';
 import Map from "../components/Map";
 //import MapView from 'react-native-maps'; this breaks web still
-import { FontAwesome } from '@expo/vector-icons';
 import Attribution from "../components/Attribution";
-import { WebView } from 'react-native-webview';
-import { useNavigation } from '@react-navigation/native';
 import Spinner from '../components/Spinner';
 import SharingModal from '../components/SharingModal';
+import { FontAwesome } from '@expo/vector-icons';
 
 function Page(props) {
 
@@ -20,7 +20,6 @@ function Page(props) {
 
     const [pageLoading, setPageLoading] = useState(!props.content);
     const [content, setContent] = useState(props.content);
-    const [galleryOpen, setGalleryOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
 
@@ -90,7 +89,6 @@ function Page(props) {
 
     const share = async () => {
         let sharingUrl = `https://spicygreenbook.org/biz/${content.uid}`;
-        // let imageUrl = primaryImages[0].url + '&w=1200';
         await Share.share({
             url: sharingUrl
         })

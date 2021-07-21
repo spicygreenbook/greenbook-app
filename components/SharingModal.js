@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStateValue } from "../components/State";
 import {
     Modal,
     ScrollView,
@@ -8,9 +7,10 @@ import {
     View,
     Button,
 } from "react-native";
+import { useStateValue } from "../components/State";
+import { Link } from "../components/Link";
 import { getStyles, Theme } from "../utils";
 import { FontAwesome } from "@expo/vector-icons";
-import { Link } from "../components/Link";
 
 export default function App(props) {
     const { open, close, data, isWeb } = props;
@@ -31,6 +31,25 @@ export default function App(props) {
             justifyContent: "center",
             alignItems: "center"
         },
+        overlay: {
+            zIndex: 3,
+            elevation: 3,
+            opacity: open ? 1 : 0,
+            pointerEvents: open ? "" : "none",
+            position: "fixed",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+        },
+        modal: {
+            borderWidth: 0,
+            width: dimensions.width < 600 ? 280 : '100%',
+        },
         modalView: {
             backgroundColor: "white",
             alignItems: "flex-start",
@@ -41,7 +60,12 @@ export default function App(props) {
             },
             shadowOpacity: 0.25,
             shadowRadius: 3.84,
-            elevation: 5
+            elevation: 5,
+            top: dimensions.width < 600 ? 292 : dimensions.width < 900 ? 392 : 592,
+            height: isWeb ? "auto" : null,
+            maxWidth: 375,
+            marginRight: "auto",
+            marginLeft: "auto"
         },
         content: {
             flex: 1,
@@ -61,14 +85,13 @@ export default function App(props) {
             marginRight: 10,
             alignItems: "center",
             justifyContent: "center",
-            alignContent: "center"
         },
         icon: {
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-            width: "60px",
-            height: "60px",
+            width: dimensions.width < 375 ? 45 : 60,
+            height: dimensions.width < 375 ? 45 : 60,
             borderRadius: isWeb ? "50%" : null,
             color: "#fff",
             justifyContent: "center",
@@ -77,7 +100,20 @@ export default function App(props) {
         },
         linkTitle: {
             marginTop: "8px",
-            fontSize: 13
+            fontSize: 13,
+            alignSelf: "center"
+        },
+        iconContainer: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+        },
+        buttonContainer: {
+            position: "absolute",
+            top: 0,
+            right: 0,
+            minWidth: 40,
+            minHeight: 40
         }
     };
     const styles = StyleSheet.create({ ..._styles1, ..._styles });
@@ -87,21 +123,7 @@ export default function App(props) {
     function WebWrapper(props) {
         return isWeb ? (
             <View
-                style={{
-                    zIndex: 3,
-                    elevation: 3,
-                    opacity: open ? 1 : 0,
-                    pointerEvents: open ? "" : "none",
-                    position: "fixed",
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    backgroundColor: "rgba(0,0,0,0.5)",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                }}
+                style={[styles.overlay]}
                 onClick={(e) => {
                     close();
                 }}
@@ -135,22 +157,10 @@ export default function App(props) {
                 onRequestClose={() => {
                     close();
                 }}
-                style={{
-                    borderWidth: 0, width: dimensions.width < 600 ? 280 : '100%',
-                    top: dimensions.width < 600 ? 302 : dimensions.width < 900 ? 402 : 602
-                }}
+                style={[styles.modal]}
             >
                 <ScrollView
-                    contentContainerStyle={[
-                        styles.modalView,
-                        {
-                            top: isWeb ? 120 : 40,
-                            height: isWeb ? "auto" : null,
-                            maxWidth: 375,
-                            marginRight: "auto",
-                            marginLeft: "auto"
-                        }
-                    ]}
+                    contentContainerStyle={[styles.modalView]}
                 >
                     <View
                         style={{
@@ -175,11 +185,11 @@ export default function App(props) {
                                 showsHorizontalScrollIndicator={false}
                                 contentContainerStyle={{ width: "100%" }}
                                 style={{ marginTop: 15 }}>
-                                {//TODO: Images in the share url}
-                                    <View style={[styles.linkContainer]}>
-                                        <View style={[styles.shareLink]}>
-                                            <Link href={`https://www.facebook.com/sharer.php?u=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}
-                                            >
+                                <View style={[styles.linkContainer]}>
+                                    <View style={[styles.shareLink]}>
+                                        <Link href={`https://www.facebook.com/sharer.php?u=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}
+                                        >
+                                            <View style={[styles.iconContainer]}>
                                                 <FontAwesome
                                                     name="facebook"
                                                     size={24}
@@ -189,10 +199,12 @@ export default function App(props) {
                                                 <Text style={[styles.text_body2, styles.linkTitle]}>
                                                     Facebook
                                                 </Text>
-                                            </Link>
-                                        </View>
-                                        <View style={[styles.shareLink]}>
-                                            <Link href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            </View>
+                                        </Link>
+                                    </View>
+                                    <View style={[styles.shareLink]}>
+                                        <Link href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            <View style={[styles.iconContainer]}>
                                                 <FontAwesome
                                                     name="linkedin"
                                                     size={24}
@@ -202,10 +214,12 @@ export default function App(props) {
                                                 <Text style={[styles.text_body2, styles.linkTitle]}>
                                                     LinkedIn
                                                 </Text>
-                                            </Link>
-                                        </View>
-                                        <View style={[styles.shareLink]}>
-                                            <Link href={`mailto:%7Bemail_address%7D?subject=&body=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            </View>
+                                        </Link>
+                                    </View>
+                                    <View style={[styles.shareLink]}>
+                                        <Link href={`mailto:%7Bemail_address%7D?subject=&body=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            <View style={[styles.iconContainer]}>
                                                 <FontAwesome
                                                     name="envelope"
                                                     size={24}
@@ -215,10 +229,12 @@ export default function App(props) {
                                                 <Text style={[styles.text_body2, styles.linkTitle]}>
                                                     Email
                                                 </Text>
-                                            </Link>
-                                        </View>
-                                        <View style={[styles.shareLink]}>
-                                            <Link href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            </View>
+                                        </Link>
+                                    </View>
+                                    <View style={[styles.shareLink]}>
+                                        <Link href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            <View style={[styles.iconContainer]}>
                                                 <FontAwesome
                                                     name="twitter"
                                                     size={24}
@@ -228,10 +244,12 @@ export default function App(props) {
                                                 <Text style={[styles.text_body2, styles.linkTitle]}>
                                                     Twitter
                                                 </Text>
-                                            </Link>
-                                        </View>
-                                        <View style={[styles.shareLink]}>
-                                            <Link href={`https://reddit.com/submit?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            </View>
+                                        </Link>
+                                    </View>
+                                    <View style={[styles.shareLink]}>
+                                        <Link href={`https://reddit.com/submit?url=https%3A%2F%2Fspicygreenbook.org%2Fbiz%2F${data.uid}`}>
+                                            <View style={[styles.iconContainer]}>
                                                 <FontAwesome
                                                     name="reddit"
                                                     size={24}
@@ -241,21 +259,15 @@ export default function App(props) {
                                                 <Text style={[styles.text_body2, styles.linkTitle]}>
                                                     Reddit
                                                 </Text>
-                                            </Link>
-                                        </View>
+                                            </View>
+                                        </Link>
                                     </View>
-                                }
+                                </View>
                             </ScrollView>
                         </View>
                     </View>
                     <View
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            right: 0,
-                            minWidth: 40,
-                            minHeight: 40
-                        }}
+                        style={[styles.buttonContainer]}
                     >
                         <Button
                             onPress={close}
