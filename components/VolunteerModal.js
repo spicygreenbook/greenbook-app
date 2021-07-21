@@ -121,15 +121,15 @@ export default function App(props) {
               {
                 top: isWeb ? 120 : 0,
                 width: "100%",
-                height: isWeb ? "100%" : null,
-                minHeight: dimensions.height - 120
+                height: isWeb ? "auto" : null,
+                overflowY: isWeb ? "hidden" : "auto"
               }
             ]}
           >
             <View
               style={{
                 width: "100%",
-                maxWidth: dimensions.width,
+                maxWidth: 500,
                 height: "100%"
               }}
             >
