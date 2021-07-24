@@ -10,25 +10,25 @@
 @font-face {
   font-family: ApercuMedium;
   src: url(/fonts/ApercuRegular.ttf);
-  display: swap;
+  font-display: swap;
 }
 @font-face {
   font-family: ApercuLight;
   src: url(/fonts/ApercuLight.ttf);
-  display: swap;
+  font-display: swap;
 }
 @font-face {
   font-family: KnockoutBold;
   src: url(/fonts/Knockout_HTF71-FullMiddlewt_Regular.otf);
-  display: swap;
+  font-display: swap;
 }
 @font-face {
   font-family: KnockoutWelterWeight;
   src: url(/fonts/Knockout_HTF50-Welterweight_Regular.otf);
-  display: swap;
+  font-display: swap;
 }
 @font-face {
   font-family: KnockoutFeatherWeight;
   src: url(/fonts/Knockout_HTF48-Featherweight_Regular.otf);
-  display: swap;
+  font-display: swap;
 }
