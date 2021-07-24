@@ -47,6 +47,7 @@ export default function App(props) {
             flexDirection: "row",
         },
         modal: {
+            flex: 1,
             borderWidth: 0,
             width: dimensions.width < 600 ? 280 : '100%',
         },
@@ -130,6 +131,7 @@ export default function App(props) {
             >
                 <View
                     style={{
+                        flex: 1,
                         maxWidth: "100%",
                         height: "100%",
                         margin: "0 auto"
@@ -157,7 +159,7 @@ export default function App(props) {
                 onRequestClose={() => {
                     close();
                 }}
-                style={[styles.modal]}
+                style={styles.modal}
             >
                 <ScrollView
                     contentContainerStyle={[styles.modalView]}
