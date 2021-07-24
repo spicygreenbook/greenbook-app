@@ -90,7 +90,11 @@ function Page(props) {
     const share = async () => {
         let sharingUrl = `https://spicygreenbook.org/biz/${content.uid}`;
         await Share.share({
-            url: sharingUrl
+            title: `${content.name}`,
+            dialogTitle: `${content.name}`,
+            url: sharingUrl,
+            subject: `Check out ${content.name} on Spicy Green Book`,
+            message: `Check out ${content.name} on Spicy Green Book at ${sharingUrl}`
         })
     }
 
@@ -101,15 +105,6 @@ function Page(props) {
                 : (
                     <React.Fragment>
                         <View style={{ paddingTop: isWeb ? 120 : 0 }} />
-                        {isWeb ?
-                            <SharingModal
-                                open={modalOpen}
-                                data={modalData}
-                                close={closeModal}
-                                isWeb={isWeb}
-                            />
-                            : null
-                        }
                         <View style={{ flexDirection: 'row', backgroundColor: Theme.green_bg }}>
                             <View style={{ flex: 2, borderRightWidth: 2, borderColor: '#fff' }}>
                                 <TouchableOpacity onPress={e => clickImage(0)}>
@@ -267,6 +262,15 @@ function Page(props) {
                                 {!!(content.attribution && content.attribution.length) && <Attribution attribution={content.attribution} />}
                             </View>
                         </View>
+                        {isWeb ?
+                            <SharingModal
+                                open={modalOpen}
+                                data={modalData}
+                                close={closeModal}
+                                isWeb={isWeb}
+                            />
+                            : null
+                        }
                     </React.Fragment>
                 )}
         </ScrollView>
