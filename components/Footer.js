@@ -135,6 +135,7 @@ const Footer = (props) => {
 								<img
 									style={{ padding: 24 }}
 									height="24"
+									width="124"
 									src="https://d33wubrfki0l68.cloudfront.net/0e40536c3e870532a51f90f6f143eb4306c21192/32d29/images/logo_rgb_white.svg"
 									alt="Customer service software"
 								/>
@@ -145,6 +146,7 @@ const Footer = (props) => {
 								<img
 									style={{ padding: 24 }}
 									height="24"
+									width="124"
 									src="https://images.prismic.io/spicygreenbook/90c9280e-5f5f-4c96-9b22-40b5b28cb5d6_98997417-54959080-24e9-11eb-95a7-5e6da055dea7.png?auto=compress,format&w=400"
 									alt="Restore LA"
 								/>
