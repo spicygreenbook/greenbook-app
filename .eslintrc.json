@@ -22,7 +22,8 @@
                 "singleQuote": false,
                 "useTabs": true,
                 "bracketSpacing": true,
-                "react-hooks/rules-of-hooks": false
+                "react-hooks/rules-of-hooks": false,
+                "endOfLine" : "auto"
             }
         ]
     }
