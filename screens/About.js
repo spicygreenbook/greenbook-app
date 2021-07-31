@@ -759,7 +759,7 @@ function Page(props) {
               }
             >
               <ResponsiveImage
-                style={{ width: 804, resizeMode: "contain", aspectRatio: 1.37245 }}
+                style={{ width: 804, resizeMode: "contain", aspectRatio: 1.372450 }}
                 alt="Spicy Green Book"
                 source={
                   isWeb
