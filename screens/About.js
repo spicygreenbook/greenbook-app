@@ -639,8 +639,8 @@ function Page(props) {
                 alt="Spicy Green Book"
                 source={
                   isWeb
-                    ? { uri: "/images/Capture Spicy Green Book dos.png" }
-                    : require("../public/images/Capture Spicy Green Book dos.png")
+                    ? { uri: "/images/onecollage.jpg" }
+                    : require("../public/images/onecollage.jpg")
                 }
               />
             </View>
@@ -670,12 +670,12 @@ function Page(props) {
               }
             >
               <ResponsiveImage
-                style={{ width: 804, resizeMode: "contain", aspectRatio: 1.37245 }}
+                style={{ width: 800, height:100 , resizeMode: "contain", aspectRatio: 1 }}
                 alt="Spicy Green Book"
                 source={
                   isWeb
-                    ? { uri: "/images/spicygreenbookphotorowdos.png" }
-                    : require("../public/images/spicygreenbookphotorowdos.png")
+                    ? { uri: "/images/twocollage.jpg" }
+                    : require("../public/images/twocollage.jpg")
                 }
               />
             </View>
@@ -763,8 +763,8 @@ function Page(props) {
                 alt="Spicy Green Book"
                 source={
                   isWeb
-                    ? { uri: "/images/spicygreenbookphotorowtres.png" }
-                    : require("../public/images/spicygreenbookphotorowtres.png")
+                    ? { uri: "/images/threecollage.jpg" }
+                    : require("../public/images/threecollage.jpg")
                 }
               />
             </View>
