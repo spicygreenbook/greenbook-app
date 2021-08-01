@@ -718,7 +718,7 @@ function Page(props) {
 							<ResponsiveImage
 								style={{
 									width: 804,
-									height: 800,
+									height: 1000,
 									resizeMode: 'contain',
 									aspectRatio: 1.37245,
 								}}
