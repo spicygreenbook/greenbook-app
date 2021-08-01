@@ -53,7 +53,7 @@ const Footer = (props) => {
 						<View
 							style={[
 								view === "/"
-									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24, paddingTop: 0 }
+									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24 }
 									: { flex: 1, flexDirection: "row", justifyContent: "space-between", padding: 24 },
 							]}
 						>
@@ -66,8 +66,8 @@ const Footer = (props) => {
 						<View
 							style={[
 								view === "/"
-									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24, paddingTop: 0 }
-									: { flex: 1, flexDirection: "row", justifyContent: "space-between", padding: 24, paddingTop: 0 },
+									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24 }
+									: { flex: 1, flexDirection: "row", justifyContent: "space-between", padding: 24 },
 							]}
 						>
 							{SOCIAL_LINKS_2.map(({ name, url }) => (
