@@ -27,7 +27,7 @@ const VolunteerModal = ({ open, data, onClose }) => {
 					alignItems: 'center',
 					alignSelf: 'center',
 					justifyContent: 'center',
-					backgroundColor: 'rgba(0,0,0,0.7)',
+					backgroundColor: 'rgba(0, 0, 0, 0.2)',
 					left: 0,
 					right: 0,
 					borderWidth: 0,
@@ -70,7 +70,13 @@ const VolunteerModal = ({ open, data, onClose }) => {
 	return (
 		<Wrapper>
 			<Modal
-				style={{ borderWidth: 0, top: 120 }}
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					borderWidth: 0,
+					top: 120,
+				}}
 				animationType='slide'
 				transparent={true}
 				visible={open}
@@ -79,12 +85,21 @@ const VolunteerModal = ({ open, data, onClose }) => {
 					contentContainerStyle={[
 						styles.modalView,
 						{
+							display: 'flex',
+							backgroundColor: 'rgba(248,255,251, 1.0)',
+							alignItems: 'center',
 							top: isWeb ? 0 : 40,
 							width: '100%',
 							height: isWeb ? '100%' : null,
 						},
 					]}>
-					<View style={{ width: '100%', maxWidth: dimensions.width }}>
+					<View
+						style={{
+							margin: '20px',
+							boxShadow: '8px 8px 6px 0px rgba(0, 0, 0, .8)',
+							width: '15%',
+							maxWidth: dimensions.width,
+						}}>
 						{data.image && data.image.url && (
 							<ResponsiveImage
 								style={{ width: dimensions.width }}
@@ -95,7 +110,15 @@ const VolunteerModal = ({ open, data, onClose }) => {
 					<View style={{ padding: 20 }}>
 						<Text style={styles.text_header3}>{data.name}</Text>
 						<Text style={styles.text_header4}>{data.role}</Text>
-						<Text style={[styles.text_body2, { paddingVertical: 15 }]}>
+						<Text
+							style={[
+								styles.text_body2,
+								{
+									lineSpacing: '20px',
+									color: 'rgba(0,0,0,0.7)',
+									paddingVertical: 15,
+								},
+							]}>
 							{data.description}
 						</Text>
 
@@ -103,7 +126,7 @@ const VolunteerModal = ({ open, data, onClose }) => {
 							<View style={styles.volunteerDetailItem}>
 								{' '}
 								{!!isWeb ? (
-									<Text style={styles.text_body2}>
+									<Text style={[styles.text_body2, { color: 'black' }]}>
 										{' '}
 										Started on:{' '}
 										{' ' +
@@ -112,7 +135,7 @@ const VolunteerModal = ({ open, data, onClose }) => {
 											).toLocaleDateString()}{' '}
 									</Text>
 								) : (
-									<Text style={styles.text_body2}>
+									<Text style={[styles.text_body2, { color: 'black' }]}>
 										{' '}
 										Started on:{' '}
 										{' ' +
@@ -125,7 +148,7 @@ const VolunteerModal = ({ open, data, onClose }) => {
 						)}
 
 						{!!data.amount && (
-							<Text style={styles.text_body2}>
+							<Text style={[styles.text_body2, { color: 'black' }]}>
 								${data.amount} in time volunteered{' '}
 							</Text>
 						)}
@@ -140,7 +163,10 @@ const VolunteerModal = ({ open, data, onClose }) => {
 									<Link key={'Link' + index} href={link.link}>
 										<Text
 											key={'Text' + index}
-											style={[styles.text_body2, { marginRight: 20 }]}>
+											style={[
+												styles.text_body2,
+												{ color: 'rgba(0,0,0,0.7)', marginRight: 20 },
+											]}>
 											{link &&
 												link.link_title &&
 												VolunteerIconLink(link.link_title)}
@@ -162,7 +188,11 @@ const VolunteerModal = ({ open, data, onClose }) => {
 									paddingTop: 20,
 									paddingbottom: 20,
 								}}>
-								<Text style={[styles.text_body2, { color: '#000' }]}>
+								<Text
+									style={[
+										styles.text_body2,
+										{ fontWeight: 'bold', color: '#000' },
+									]}>
 									SKILLS
 								</Text>
 								<View
@@ -172,7 +202,7 @@ const VolunteerModal = ({ open, data, onClose }) => {
 										flexWrap: 'wrap',
 									}}>
 									{data.talents_donated.map((talent, i, ar) => (
-										<Text key={i} style={[styles.text_body2, { fontSize: 14 }]}>
+										<Text key={i} style={[styles.text_body2, { fontSize: 16 }]}>
 											{talent.talent}
 											{i < ar.length - 1 && ', '}
 										</Text>
