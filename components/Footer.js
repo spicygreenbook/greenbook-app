@@ -1,19 +1,29 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { getStyles } from "../utils";
+import { getStyles, Theme } from "../utils";
 import { useStateValue } from "../components/State";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "../components/Link";
 import SubscribeForm from "../screens/Home/components/SubscribeForm";
 
 const LINKS = [
+	{ url: "/search", label: "Directory" },
 	{ url: "/about", label: "About" },
 	{ url: "/add", label: "Add Listing" },
 	{ url: "/donate", label: "Donate" },
-	{ url: "https://shop.spicygreenbook.org", label: "Store" },
 	{ url: "/volunteer", label: "Volunteer" },
-	{ url: "https://spicygreenbook.cdn.prismic.io/spicygreenbook/28695689-cc0d-4f87-a4bd-c751a857aabe_SGB+PressKit+.pdf", label: "Press Kit" },
+];
+
+const LINKS2 = [
+	{ url: "https://shop.spicygreenbook.org/", label: "Store  |" },
+	{ url: "/updates", label: "Updates  |" },
+	{ url: "/team", label: "Team  |" },
+	{ url: "/volunteers", label: "Volunteers  |" },
+	{ url: "/press", label: "Press  |" },
+	{ url: "/testimonials", label: "Testimonial  |" },
+	{ url: "/faq", label: "FAQ  |" },
+	{ url: "/contact", label: "Contact Us" },
 ];
 
 const SOCIAL_LINKS = [
@@ -36,24 +46,49 @@ const Footer = (props) => {
 
 	return (
 		<View nativeID="footer" style={styles.footer}>
-			<View style={{ flexDirection: "column", alignItems: "center", borderColor: "#fff", borderTopWidth: 2 }}>
+			<View
+				style={{
+					flexDirection: "column",
+					alignItems: "center",
+					borderColor: "#fff",
+					borderTopWidth: 2,
+				}}
+			>
 				<View style={[dimensions.width < 980 ? {} : { flexDirection: "row" }, { flex: 1, width: 1024, maxWidth: "100%" }]}>
 					{/** Subscribe Form */}
 					{view === "/" ? null : (
-						<View style={[dimensions.width > 980 ? { borderColor: "#fff", borderRightWidth: 2, borderStyle: "solid" } : {}, { flex: 2 / 3 }]}>
-							<SubscribeForm />
+						<View
+							style={[
+								dimensions.width > 980
+									? {
+											borderColor: "#fff",
+											borderRightWidth: 2,
+											borderStyle: "solid",
+									  }
+									: {},
+								{ flex: 2 / 3 },
+							]}
+						>
+							<SubscribeForm style={{ marginBottom: 24 }} />
 						</View>
 					)}
 					{/** End Subscribe Form */}
-					<View style={[view === "/" ? { flex: 1 } : { flex: 1 / 3 }]}>
+					<View style={[view === "/" ? { flex: 1 } : { flex: 1 / 3, marginTop: dimensions.width > 980 ? 0 : 196 }]}>
 						{/** Social Area */}
-						<View style={{ flexDirection: "column", alignItems: "center", justifyContent: "space-between", paddingTop: 24 }}>
+						<View
+							style={{
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "space-between",
+								paddingTop: 24,
+							}}
+						>
 							<Text style={styles.text_footer}>Follow @spicygreenbook</Text>
 						</View>
 						<View
 							style={[
 								view === "/"
-									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24 }
+									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24, paddingTop: 0 }
 									: { flex: 1, flexDirection: "row", justifyContent: "space-between", padding: 24 },
 							]}
 						>
@@ -66,7 +101,7 @@ const Footer = (props) => {
 						<View
 							style={[
 								view === "/"
-									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24 }
+									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24, paddingTop: 0 }
 									: { flex: 1, flexDirection: "row", justifyContent: "space-between", padding: 24 },
 							]}
 						>
@@ -82,23 +117,66 @@ const Footer = (props) => {
 
 				{/** Navigation Area */}
 				<View
-					style={{
-						flex: 1,
-						justifyContent: "center",
-						maxWidth: "100%",
-						alignItems: "center",
-						width: 1024,
-						marginTop: 48,
-						flexDirection: dimensions.width > 980 ? "row" : "column",
-					}}
+					style={[
+						view === "/"
+							? {
+									flex: 1,
+									justifyContent: "center",
+									maxWidth: "100%",
+									alignItems: dimensions.width > 980 ? "space-between" : "center",
+									width: dimensions.width > 980 ? 1024 : "100%",
+									marginTop: dimensions.width > 980 ? 96 : 0,
+									flexDirection: dimensions.width > 980 ? "row" : "column",
+							  }
+							: {
+									flex: 1,
+									flexDirection: dimensions.width > 980 ? "row" : "column",
+									width: dimensions.width > 980 ? 1024 : "100%",
+									maxWidth: "100%",
+									marginTop: dimensions.width > 980 ? 148 : 48,
+									justifyContent: "center",
+									alignItems: dimensions.width > 980 ? "space-between" : "center",
+							  },
+					]}
 				>
 					{LINKS.map(({ url, label }) => (
 						<Link key={url} style={{ display: "block" }} href={url} target={url.includes("http") ? "__blank" : null}>
-							<Text style={[styles.text_footer, { padding: dimensions.width < 980 ? 5 : 24 }]}>{label}</Text>
+							<Text
+								style={[
+									styles.text_footer,
+									{ textDecorationThickness: "2.4px" },
+									{ textDecorationLine: "underline" },
+									{ textDecorationColor: "rgb(25,72,28)" },
+									{ textUnderlinePosition: "under" },
+									{ textDecorationStyle: "solid" },
+									{ padding: dimensions.width < 980 ? 5 : 24 },
+								]}
+							>
+								{label}
+							</Text>
 						</Link>
 					))}
 				</View>
 				{/** End Navigation Area */}
+
+				{/** Second Navigation Area */}
+				<View
+					style={{
+						flex: 1,
+						justifyContent: "center",
+						maxWidth: "100%",
+						alignItems: dimensions.width > 980 ? "space-between" : "center",
+						width: dimensions.width > 980 ? 1024 : "100%",
+						flexDirection: dimensions.width > 980 ? "row" : "column",
+					}}
+				>
+					{LINKS2.map(({ url, label }) => (
+						<Link key={url} style={{ display: "block" }} href={url} target={url.includes("http") ? "__blank" : null}>
+							<Text style={[styles.text_footer, { fontSize: "14px" }, { padding: "4px" }, { color: "rgb(94,94,94)" }]}>{label}</Text>
+						</Link>
+					))}
+				</View>
+				{/** End Second Navigation Area */}
 
 				{/** Sponsor Badge Area */}
 				{isWeb && (
@@ -109,11 +187,11 @@ const Footer = (props) => {
 							alignItems: "center",
 							justifyContent: "center",
 							flex: 1,
-							width: 1024,
+							width: dimensions.width > 980 ? 1024 : "100%",
 							maxWidth: "100%",
 						}}
 					>
-						<View style={dimensions.width < 980 ? { marginTop: 24, marginBottom: 20 } : {}}>
+						<View style={dimensions.width < 980 ? { marginTop: 24, marginBottom: 20 } : { margin: 0 }}>
 							<a href="https://vercel.com/?utm_source=spicygreenbook" style={{ color: "inherit", textDecoration: "none" }} target="_blank" rel="noreferrer">
 								<svg
 									style={{ padding: 24, display: "inline-block", verticalAlign: "middle" }}

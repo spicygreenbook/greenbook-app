@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 		padding: 24,
 		paddingLeft: 12,
 		paddingTop: 48,
+		minHeight: "auto",
 	},
 	header: {
 		color: "#fff",
