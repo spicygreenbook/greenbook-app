@@ -88,8 +88,19 @@ const Footer = (props) => {
 						<View
 							style={[
 								view === "/"
-									? { flex: 1, flexDirection: "row", justifyContent: "space-evenly", padding: 24, paddingTop: 0 }
-									: { flex: 1, flexDirection: "row", justifyContent: "space-between", padding: 24 },
+									? {
+											flex: 1,
+											flexDirection: "row",
+											justifyContent: "space-evenly",
+											padding: 24,
+											paddingTop: 0,
+									  }
+									: {
+											flex: 1,
+											flexDirection: "row",
+											justifyContent: "space-between",
+											padding: 24,
+									  },
 							]}
 						>
 							{SOCIAL_LINKS.map(({ name, url }) => (
@@ -194,7 +205,11 @@ const Footer = (props) => {
 						<View style={dimensions.width < 980 ? { marginTop: 24, marginBottom: 20 } : { margin: 0 }}>
 							<a href="https://vercel.com/?utm_source=spicygreenbook" style={{ color: "inherit", textDecoration: "none" }} target="_blank" rel="noreferrer">
 								<svg
-									style={{ padding: 24, display: "inline-block", verticalAlign: "middle" }}
+									style={{
+										padding: 24,
+										display: "inline-block",
+										verticalAlign: "middle",
+									}}
 									width="95"
 									height="24"
 									viewBox="0 0 283 64"
