@@ -19,7 +19,7 @@ const Testimonial = ({ list }) => {
 	const [testimonials, loadingTestimonial, errorTestimonials] = useFetchData("testimonial", list);
 
 	let testimonialListRef = useRef(null);
-	let intervalId;
+	let intervalId = useRef(null);
 	const [isPaused, setIsPaused] = useState(false);
 	const navigation = !isWeb ? useNavigation() : null;
 	const data = testimonials.filter((data) => data?.image && data); // render testimonial that has image only, for now
@@ -42,27 +42,26 @@ const Testimonial = ({ list }) => {
 	};
 
 	useEffect(() => {
-		intervalId = setInterval(() => {
+		intervalId.current = setInterval(() => {
 			let i;
-
 			if (currentIndexListing < data.length - 1) {
 				i = currentIndexListing + 1;
 			} else {
 				i = 0;
 			}
-
 			currentIndexListing = i;
-			testimonialListRef.current.scrollToIndex({ animated: true, index: i });
+			if (testimonialListRef.current != null) {
+				testimonialListRef.current.scrollToIndex({ animated: true, index: i });
+			}
 		}, 15000);
-
-		return () => clearInterval(intervalId);
+		return () => clearInterval(intervalId.current);
 	}, [data]);
 
 	useEffect(() => {
 		if (isPaused) {
-			clearInterval(intervalId);
+			clearInterval(intervalId.current);
 		} else {
-			scrollToIndexListing({ animated: true, index: currentIndexListing + 1 }, data.length);
+			scrollToIndexListing({ animated: true, index: currentIndexListing + 1 });
 		}
 	}, [isPaused]);
 
@@ -72,7 +71,7 @@ const Testimonial = ({ list }) => {
 
 	return (
 		<View style={[styles.section, { backgroundColor: Theme.green_bg, paddingBottom: 40, marginBottom: 40 }]}>
-			<View style={styles.content}>
+			<View style={[styles.content]}>
 				{loadingTestimonial ? (
 					<ActivityIndicator color={Theme.green} size="large" />
 				) : errorTestimonials ? (
@@ -82,115 +81,117 @@ const Testimonial = ({ list }) => {
 						<View style={[{ position: "absolute", zIndex: 99, paddingTop: isWeb ? 20 : 40, paddingLeft: 0 }]}>
 							<Text style={[styles.text_header5, { color: "#000", fontSize: isWeb ? 28 : 22 }]}>TESTIMONIALS</Text>
 						</View>
+						<View style={{ flex: 1 }}>
+							<FlatList
+								style={{ flex: 1 }}
+								horizontal
+								showsHorizontalScrollIndicator={false}
+								data={data}
+								ref={testimonialListRef}
+								onViewableItemsChanged={viewableItemsChangedListing}
+								getItemLayout={getItemLayout}
+								renderItem={({ item }) => {
+									const url = item.link !== undefined ? `/biz/${item.link.match(/[^/]*$/)}` : `/biz/undefined`;
 
-						<FlatList
-							horizontal
-							showsHorizontalScrollIndicator={false}
-							data={data}
-							ref={testimonialListRef}
-							onViewableItemsChanged={viewableItemsChangedListing}
-							getItemLayout={getItemLayout}
-							renderItem={({ item }) => {
-								const url = item.link !== undefined ? `/biz/${item.link.match(/[^/]*$/)}` : `/biz/undefined`;
-
-								return (
-									<View
-										style={[
-											{
-												width: dimensions.width - (isWeb ? 60 : 40),
-												maxWidth: 1024,
-												marginTop: isWeb ? 40 : 100,
-												padding: isWeb ? (dimensions.width < 900 ? 20 : 40) : 0,
-												flexDirection: isWeb ? (dimensions.width < 900 ? "column" : "row") : "column",
-												alignItems: "center",
-												justifyContent: "center",
-											},
-										]}
-									>
-										<ImageBackground
-											style={
-												isWeb
-													? { width: dimensions.width < 900 ? 280 : 380, height: dimensions.width < 900 ? 257 : 347, marginLeft: 40 }
-													: { width: 250, height: 227 }
-											}
-											resizeMode="cover"
-											alt={item.name}
-											source={{ uri: item.image.url + "&w=600" }}
+									return (
+										<View
+											style={[
+												{
+													width: dimensions.width - (isWeb ? 60 : 40),
+													maxWidth: 1024,
+													marginTop: isWeb ? 40 : 100,
+													padding: isWeb ? (dimensions.width < 900 ? 20 : 40) : 0,
+													flexDirection: isWeb ? (dimensions.width < 900 ? "column" : "row") : "column",
+													alignItems: "center",
+													justifyContent: "center",
+												},
+											]}
 										>
-											<Image
+											<ImageBackground
 												style={
 													isWeb
-														? { flex: 1, width: dimensions.width < 900 ? 280 : 380, height: dimensions.width < 900 ? 257 : 347 }
+														? { width: dimensions.width < 900 ? 280 : 380, height: dimensions.width < 900 ? 257 : 347, marginLeft: 40 }
 														: { width: 250, height: 227 }
 												}
-												alt="Testimonial cover"
-												source={isWeb ? "/images/testimonial.png" : require("../../../public/images/testimonial.png")}
-											/>
-										</ImageBackground>
+												resizeMode="cover"
+												alt={item.name}
+												source={{ uri: item.image.url + "&w=600" }}
+											>
+												<Image
+													style={
+														isWeb
+															? { flex: 1, width: dimensions.width < 900 ? 280 : 380, height: dimensions.width < 900 ? 257 : 347 }
+															: { width: 250, height: 227 }
+													}
+													alt="Testimonial cover"
+													source={isWeb ? "/images/testimonial.png" : require("../../../public/images/testimonial.png")}
+												/>
+											</ImageBackground>
 
-										<View
-											style={{
-												flex: 1,
-												flexDirection: isWeb ? (dimensions.width < 900 ? "column" : "row") : "column",
-												paddingHorizontal: isWeb ? (dimensions.width < 900 ? 0 : 28) : 0,
-												alignSelf: "stretch",
-											}}
-										>
-											<Fontisto
-												name="quote-left"
-												size={isWeb ? (dimensions.width < 900 ? 24 : 32) : 18}
-												style={{ marginBottom: isWeb ? (dimensions.width < 900 ? 10 : 0) : 10 }}
-											/>
+											<View
+												style={{
+													flex: 1,
+													flexDirection: isWeb ? (dimensions.width < 900 ? "column" : "row") : "column",
+													paddingHorizontal: isWeb ? (dimensions.width < 900 ? 0 : 28) : 0,
+													alignSelf: "stretch",
+												}}
+											>
+												<Fontisto
+													name="quote-left"
+													size={isWeb ? (dimensions.width < 900 ? 24 : 32) : 18}
+													style={{ marginBottom: isWeb ? (dimensions.width < 900 ? 10 : 0) : 10 }}
+												/>
 
-											<View style={{ flex: 1, justifyContent: isWeb ? "space-between" : "space-around" }}>
-												<Text
-													style={[
-														styles.text_quote,
-														{
-															paddingLeft: isWeb ? (dimensions.width < 900 ? 0 : 20) : 0,
-															color: "#fff",
-															fontFamily: "ApercuMedium",
-															fontSize: isWeb ? 18 : 16,
-															lineHeight: isWeb ? 26 : 22,
-														},
-													]}
-												>
-													{item.asdf[0]}
-												</Text>
-
-												<View
-													style={{
-														flex: 1,
-														paddingLeft: isWeb ? (dimensions.width < 900 ? 0 : 20) : 0,
-														justifyContent: "center",
-														marginTop: dimensions.width < 900 ? 5 : 0,
-													}}
-												>
-													<Text style={{ color: "#fff", fontFamily: "ApercuMedium", fontSize: 18 }}>{item.quote_credit}</Text>
-													<Text style={{ color: "#000", fontFamily: "ApercuMedium", fontSize: 14, fontWeight: "bold", marginBottom: 20 }}>
-														{item.sub_title}
+												<View style={{ flex: 1, justifyContent: isWeb ? "space-between" : "space-around" }}>
+													<Text
+														style={[
+															styles.text_quote,
+															{
+																paddingLeft: isWeb ? (dimensions.width < 900 ? 0 : 20) : 0,
+																color: "#fff",
+																fontFamily: "ApercuMedium",
+																fontSize: isWeb ? 18 : 16,
+																lineHeight: isWeb ? 26 : 22,
+															},
+														]}
+													>
+														{item.asdf[0]}
 													</Text>
 
-													<Link
-														href={url}
-														contain
-														onPress={() => {
-															dispatch({ type: "setView", view: url });
-															navigation.navigate("Browse", { screen: "Listing" });
+													<View
+														style={{
+															flex: 1,
+															paddingLeft: isWeb ? (dimensions.width < 900 ? 0 : 20) : 0,
+															justifyContent: "center",
+															marginTop: dimensions.width < 900 ? 5 : 0,
 														}}
 													>
-														<View style={[styles.button_green, { borderColor: "#fff", height: 40 }]}>
-															<Text style={[styles.button_green_text, { fontSize: isWeb ? 16 : 12 }]}>SEE LISTING</Text>
-														</View>
-													</Link>
+														<Text style={{ color: "#fff", fontFamily: "ApercuMedium", fontSize: 18 }}>{item.quote_credit}</Text>
+														<Text style={{ color: "#000", fontFamily: "ApercuMedium", fontSize: 14, fontWeight: "bold", marginBottom: 20 }}>
+															{item.sub_title}
+														</Text>
+
+														<Link
+															href={url}
+															contain
+															onPress={() => {
+																dispatch({ type: "setView", view: url });
+																navigation.navigate("Browse", { screen: "Listing" });
+															}}
+														>
+															<View style={[styles.button_green, { borderColor: "#fff", height: 40 }]}>
+																<Text style={[styles.button_green_text, { fontSize: isWeb ? 16 : 12 }]}>SEE LISTING</Text>
+															</View>
+														</Link>
+													</View>
 												</View>
 											</View>
 										</View>
-									</View>
-								);
-							}}
-							keyExtractor={(item, index) => "tistimonial" + index}
-						/>
+									);
+								}}
+								keyExtractor={(item, index) => "testimonial" + index}
+							/>
+						</View>
 
 						<View style={{ position: "absolute", top: isWeb ? (dimensions.width < 900 ? "35%" : "50%") : "45%", width: "100%" }}>
 							<View style={{ justifyContent: "space-between", flexDirection: "row" }}>
