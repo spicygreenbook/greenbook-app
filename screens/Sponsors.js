@@ -716,18 +716,26 @@ function Page(props) {
 										</View>
 									))}
 							</View>
-						</View>
-						<Text
-							accessibilityRole='header'
-							aria-level='3'
-							style={[styles.text_header3, { marginBottom: 20 }]}>
-							SPONSORS
-						</Text>
+						<View style={styles.section}>
+						<View style={(styles.content, moreStyles.sponsorLogoContent)}>
+							<View
+								style={
+									dimensions.width < 800
+										? { alignItems: 'center', paddingBottom: 30 }
+										: { alignSelf: 'flex-start', paddingBottom: 30 }
+								}>
+								<Text
+									accessibilityRole='header'
+									aria-level='3'
+									style={[styles.text_header3, { marginBottom: 20 }]}>
+									SPONSORS
+								</Text>
+							</View>
 						<View style={moreStyles.sponsorLogos}>
 							<View style={{ flexBasis: '30%', padding: 20 }}>
 								<ResponsiveImage
 									style={{
-										width: 250,
+										width: 150,
 										resizeMode: 'contain',
 										aspectRatio: 0.5,
 									}}
@@ -742,7 +750,7 @@ function Page(props) {
 							<View style={{ flexBasis: '30%', padding: 20 }}>
 								<ResponsiveImage
 									style={{
-										width: 250,
+										width: 150,
 										resizeMode: 'contain',
 										aspectRatio: 0.5,
 									}}
