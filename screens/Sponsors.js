@@ -716,57 +716,60 @@ function Page(props) {
 										</View>
 									))}
 							</View>
-						<View style={styles.section}>
-						<View style={(styles.content, moreStyles.sponsorLogoContent)}>
-							<View
-								style={
-									dimensions.width < 800
-										? { alignItems: 'center', paddingBottom: 30 }
-										: { alignSelf: 'flex-start', paddingBottom: 30 }
-								}>
-								<Text
-									accessibilityRole='header'
-									aria-level='3'
-									style={[styles.text_header3, { marginBottom: 20 }]}>
-									SPONSORS
-								</Text>
-							</View>
-						<View style={moreStyles.sponsorLogos}>
-							<View style={{ flexBasis: '30%', padding: 20 }}>
-								<ResponsiveImage
-									style={{
-										width: 150,
-										resizeMode: 'contain',
-										aspectRatio: 0.5,
-									}}
-									alt='verizon'
-									source={
-										isWeb
-											? { uri: '/images/sponsors/verizon.jpg' }
-											: require('../public/images/sponsors/verizon.jpg')
-									}
-								/>
-							</View>
-							<View style={{ flexBasis: '30%', padding: 20 }}>
-								<ResponsiveImage
-									style={{
-										width: 150,
-										resizeMode: 'contain',
-										aspectRatio: 0.5,
-									}}
-									alt='kinecta'
-									source={
-										isWeb
-											? { uri: '/images/sponsors/kinecta.jpeg' }
-											: require('../public/images/sponsors/kinecta.jpeg')
-									}
-								/>
-							</View>
 						</View>
-					</View>
+						<View style={styles.section}>
+							<View style={(styles.content, moreStyles.sponsorLogoContent)}>
+								<View
+									style={
+										dimensions.width < 800
+											? { alignItems: 'center', paddingBottom: 30 }
+											: { alignSelf: 'flex-start', paddingBottom: 30 }
+									}>
+									<Text
+										accessibilityRole='header'
+										aria-level='3'
+										style={[
+											styles.text_header3,
+											{ marginTop: 40, marginRight: 40, marginBottom: 20 },
+										]}>
+										SPONSORS
+									</Text>
+								</View>
+								<View style={moreStyles.sponsorLogos}>
+									<View style={{ flexBasis: '30%', padding: 20 }}>
+										<ResponsiveImage
+											style={{
+												width: 150,
+												resizeMode: 'contain',
+												aspectRatio: 0.5,
+											}}
+											alt='verizon'
+											source={
+												isWeb
+													? { uri: '/images/sponsors/verizon.png' }
+													: require('../public/images/sponsors/verizon.png')
+											}
+										/>
+									</View>
+									<View style={{ flexBasis: '30%', padding: 20 }}>
+										<ResponsiveImage
+											style={{
+												width: 150,
+												resizeMode: 'contain',
+												aspectRatio: 0.5,
+											}}
+											alt='kinecta'
+											source={
+												isWeb
+													? { uri: '/images/sponsors/kinecta.jpeg' }
+													: require('../public/images/sponsors/kinecta.jpeg')
+											}
+										/>
+									</View>
+								</View>
 
-					{/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
-					{/* <View ref={ourSponsors} style={styles.section}>
+								{/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
+								{/* <View ref={ourSponsors} style={styles.section}>
             <View style={styles.content}>
               <View
                 style={
@@ -883,97 +886,85 @@ function Page(props) {
           </View>
           */}
 
-					<View style={styles.section}>
-						<View style={(styles.content, moreStyles.sponsorLogoContent)}>
-							<View
-								style={
-									dimensions.width < 800
-										? { alignItems: 'center', paddingBottom: 30 }
-										: { alignSelf: 'flex-start', paddingBottom: 30 }
-								}>
-								<Text
-									accessibilityRole='header'
-									aria-level='3'
-									style={[styles.text_header3, { marginBottom: 20 }]}>
-									IN KIND SUPPORT
-								</Text>
-								<Text style={styles.text_body}>
-									Want to contribute another way? We will happily accept your in
-									kind support!{' '}
-									<Link href='mailto:d.batson@spicygreenbook.org'>
-										<Text style={{ color: '#246e43' }}>Contact Us</Text>
-									</Link>{' '}
-									to share your product/service.
-								</Text>
-								<Text style={styles.text_body}>
-									Thank you to our following supporters for helping us reduce
-									our operational expenses:
-								</Text>
+								<View style={styles.section}>
+									<View style={(styles.content, moreStyles.sponsorLogoContent)}>
+										<View
+											style={
+												dimensions.width < 800
+													? { alignItems: 'center', paddingBottom: 30 }
+													: { alignSelf: 'flex-start', paddingBottom: 30 }
+											}>
+											<Text
+												accessibilityRole='header'
+												aria-level='3'
+												style={[styles.text_header3, { marginBottom: 20 }]}>
+												IN KIND SUPPORT
+											</Text>
+											<Text style={styles.text_body}>
+												Want to contribute another way? We will happily accept
+												your in kind support!{' '}
+												<Link href='mailto:d.batson@spicygreenbook.org'>
+													<Text style={{ color: '#246e43' }}>Contact Us</Text>
+												</Link>{' '}
+												to share your product/service.
+											</Text>
+											<Text style={styles.text_body}>
+												Thank you to our following supporters for helping us
+												reduce our operational expenses:
+											</Text>
+										</View>
+										<View style={moreStyles.sponsorLogos}>
+											<View style={{ flexBasis: '30%', padding: 65, marginBottom: 0 }}>
+												<ResponsiveImage
+													style={{
+														width: 150,
+														resizeMode: 'contain',
+														aspectRatio: 0.5,
+													}}
+													alt='konnect'
+													source={
+														isWeb
+															? { uri: '/images/sponsors/konnect.jpg' }
+															: require('../public/images/sponsors/konnect.jpg')
+													}
+												/>
+											</View>
+														<View style={{ flexBasis: '30%', marginTop: 0 }}>
+															<ResponsiveImage
+																style={{
+																	width: 150,
+																	resizeMode: 'contain',
+																	aspectRatio: 0.5,
+																}}
+																alt='vercel'
+																source={
+																	isWeb
+																		? { uri: '/images/sponsors/vercel.svg' }
+																		: require('../public/images/sponsors/vercel.svg')
+																}
+															/>
+														</View>
+											<View style={{ flexBasis: '30%', padding: 95, marginBotom:0 }}>
+												<ResponsiveImage
+													style={{
+														width: 150,
+														resizeMode: 'contain',
+														aspectRatio: 0.35,
+													}}
+													alt='re-store'
+													source={
+														isWeb
+															? { uri: '/images/sponsors/re-store.png' }
+															: require('../public/images/sponsors/re-store.png')
+													}
+												/>
+											</View>
+										</View>
+										<View style={moreStyles.sponsorLogos}>
+										</View>
+									</View>
+								</View>
 							</View>
-							<View style={moreStyles.sponsorLogos}>
-							<View style={{ flexBasis: '30%', padding: 20 }}>
-								<ResponsiveImage
-									style={{
-										width: 150,
-										resizeMode: 'contain',
-										aspectRatio: 0.5,
-									}}
-									alt='konnect'
-									source={
-										isWeb
-											? { uri: '/images/sponsors/konnect.jpg' }
-											: require('../public/images/sponsors/konnect.jpg')
-									}
-								/>
-							</View>
-							<View style={{ flexBasis: '30%', padding: 20 }}>
-								<ResponsiveImage
-									style={{
-										width: 150,
-										resizeMode: 'contain',
-										aspectRatio: 0.5,
-									}}
-									alt='re-store'
-									source={
-										isWeb
-											? { uri: '/images/sponsors/re-store.png' }
-											: require('../public/images/sponsors/re-store.png')
-									}
-								/>
-							</View>
-						</View>
-						<View style={moreStyles.sponsorLogos}>
-							<View style={{ flexBasis: '30%', padding: 20 }}>
-								<ResponsiveImage
-									style={{
-										width: 150,
-										resizeMode: 'contain',
-										aspectRatio: 0.5,
-									}}
-									alt='prismic'
-									source={
-										isWeb
-											? { uri: '/images/sponsors/prismic.jpg' }
-											: require('../public/images/sponsors/prismic.jpg')
-									}
-								/>
-							</View>
-							<View style={{ flexBasis: '30%', padding: 20 }}>
-								<ResponsiveImage
-									style={{
-										width: 150,
-										resizeMode: 'contain',
-										aspectRatio: 0.5,
-									}}
-									alt='vercel'
-									source={
-										isWeb
-											? { uri: '/images/sponsors/vercel.jpeg' }
-											: require('../public/images/sponsors/vercel.jpeg')
-									}
-								/>
-							</View>
-						</View>
 						</View>
 					</View>
 				</View>
