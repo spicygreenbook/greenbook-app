@@ -911,84 +911,69 @@ function Page(props) {
 								</Text>
 							</View>
 							<View style={moreStyles.sponsorLogos}>
-								<View style={{ flexBasis: '30%', padding: 20 }}>
-									<ResponsiveImage
-										style={{
-											width: 250,
-											resizeMode: 'contain',
-											aspectRatio: 0.5,
-										}}
-										alt='sponsor'
-										source={
-											isWeb
-												? { uri: '/images/sponsors/konnect.jpg' }
-												: require('../public/images/sponsors/konnect.jpg')
-										}
-									/>
-								</View>
-								<View style={{ flexBasis: '30%', padding: 20 }}>
-									<ResponsiveImage
-										style={{
-											width: 250,
-											resizeMode: 'contain',
-											aspectRatio: 1.5,
-										}}
-										alt='re-store LA'
-										source={
-											isWeb
-												? { uri: '/images/sponsors/re-store.png' }
-												: require('../public/images/sponsors/re-store.png')
-										}
-									/>
-								</View>
-
-								<View style={{ flexBasis: '30%', padding: 20 }}>
-									<ResponsiveImage
-										style={{
-											width: 200,
-											resizeMode: 'contain',
-											aspectRatio: 1,
-										}}
-										alt='sponsor'
-										source={
-											isWeb
-												? { uri: '/images/sponsors/sponsorIcon.jpg' }
-												: require('../public/images/sponsors/sponsorIcon.jpg')
-										}
-									/>
-								</View>
-								<View style={{ flexBasis: '30%', padding: 20 }}>
-									<ResponsiveImage
-										style={{
-											width: 250,
-											resizeMode: 'contain',
-											aspectRatio: 0.8,
-										}}
-										alt='vercel'
-										source={
-											isWeb
-												? { uri: '/images/sponsors/vercel.png' }
-												: require('../public/images/sponsors/vercel.png')
-										}
-									/>
-								</View>
-								<View style={{ flexBasis: '30%', padding: 20 }}></View>
-								<View style={{ flexBasis: '30%', padding: 20 }}>
-									{/* <ResponsiveImage
-                    style={{
-                      width: 250,
-                      resizeMode: "contain",
-                      aspectRatio: 0.5
-                    }}
-                    alt="sponsor"
-                    source={
-                      isWeb
-                        ? { uri: "/images/sponsors/re-store.png" }
-                        : require("../public/images/sponsors/re-store.png")
-                    }
-                  /> */}
-								</View>
+							<View style={{ flexBasis: '30%', padding: 20 }}>
+								<ResponsiveImage
+									style={{
+										width: 150,
+										resizeMode: 'contain',
+										aspectRatio: 0.5,
+									}}
+									alt='konnect'
+									source={
+										isWeb
+											? { uri: '/images/sponsors/konnect.jpg' }
+											: require('../public/images/sponsors/konnect.jpg')
+									}
+								/>
 							</View>
+							<View style={{ flexBasis: '30%', padding: 20 }}>
+								<ResponsiveImage
+									style={{
+										width: 150,
+										resizeMode: 'contain',
+										aspectRatio: 0.5,
+									}}
+									alt='re-store'
+									source={
+										isWeb
+											? { uri: '/images/sponsors/re-store.png' }
+											: require('../public/images/sponsors/re-store.png')
+									}
+								/>
+							</View>
+						</View>
+						<View style={moreStyles.sponsorLogos}>
+							<View style={{ flexBasis: '30%', padding: 20 }}>
+								<ResponsiveImage
+									style={{
+										width: 150,
+										resizeMode: 'contain',
+										aspectRatio: 0.5,
+									}}
+									alt='prismic'
+									source={
+										isWeb
+											? { uri: '/images/sponsors/prismic.jpg' }
+											: require('../public/images/sponsors/prismic.jpg')
+									}
+								/>
+							</View>
+							<View style={{ flexBasis: '30%', padding: 20 }}>
+								<ResponsiveImage
+									style={{
+										width: 150,
+										resizeMode: 'contain',
+										aspectRatio: 0.5,
+									}}
+									alt='vercel'
+									source={
+										isWeb
+											? { uri: '/images/sponsors/vercel.jpeg' }
+											: require('../public/images/sponsors/vercel.jpeg')
+									}
+								/>
+							</View>
+						</View>
 						</View>
 					</View>
 				</View>
