@@ -730,16 +730,16 @@ function Page(props) {
 										aria-level='3'
 										style={[
 											styles.text_header3,
-											{ marginTop: 40, marginRight: 40, marginBottom: 20 },
+											{ marginTop: 40, marginRight: 40, marginBottom: 5 },
 										]}>
 										SPONSORS
 									</Text>
 								</View>
 								<View style={moreStyles.sponsorLogos}>
-									<View style={{ flexBasis: '30%', padding: 20 }}>
+									<View style={{ flexBasis: '30%', marginLeft: 15, marginTop: 0 }}>
 										<ResponsiveImage
 											style={{
-												width: 150,
+												width: 250,
 												resizeMode: 'contain',
 												aspectRatio: 0.5,
 											}}
@@ -751,10 +751,10 @@ function Page(props) {
 											}
 										/>
 									</View>
-									<View style={{ flexBasis: '30%', padding: 20 }}>
+									<View style={{ flexBasis: '30%', margin: 15 }}>
 										<ResponsiveImage
 											style={{
-												width: 150,
+												width: 250,
 												resizeMode: 'contain',
 												aspectRatio: 0.5,
 											}}
@@ -897,7 +897,7 @@ function Page(props) {
 											<Text
 												accessibilityRole='header'
 												aria-level='3'
-												style={[styles.text_header3, { marginBottom: 20 }]}>
+												style={[styles.text_header3, { marginTop: 20, marginBottom: 20 }]}>
 												IN KIND SUPPORT
 											</Text>
 											<Text style={styles.text_body}>
@@ -912,9 +912,11 @@ function Page(props) {
 												Thank you to our following supporters for helping us
 												reduce our operational expenses:
 											</Text>
+											<View style={{margin:30}}></View>
+
 										</View>
 										<View style={moreStyles.sponsorLogos}>
-											<View style={{ flexBasis: '30%', padding: 65, marginBottom: 0 }}>
+											<View style={{ flexBasis: '30%', marginBottom: 0}}>
 												<ResponsiveImage
 													style={{
 														width: 150,
@@ -929,22 +931,22 @@ function Page(props) {
 													}
 												/>
 											</View>
-														<View style={{ flexBasis: '30%', marginTop: 0 }}>
+														<View style={{ flexBasis: '30%'  }}>
 															<ResponsiveImage
 																style={{
 																	width: 150,
 																	resizeMode: 'contain',
-																	aspectRatio: 0.5,
+																	aspectRatio: 0.7,
 																}}
 																alt='vercel'
 																source={
 																	isWeb
-																		? { uri: '/images/sponsors/vercel.svg' }
-																		: require('../public/images/sponsors/vercel.svg')
+																		? { uri: '/images/sponsors/vercel.png' }
+																		: require('../public/images/sponsors/vercel.png')
 																}
 															/>
 														</View>
-											<View style={{ flexBasis: '30%', padding: 95, marginBotom:0 }}>
+											<View style={{ flexBasis: '30%'}}>
 												<ResponsiveImage
 													style={{
 														width: 150,
