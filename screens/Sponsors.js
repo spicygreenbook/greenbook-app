@@ -1,113 +1,113 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useStateValue } from "../components/State";
+import React, { useState, useEffect, useRef } from 'react';
+import { useStateValue } from '../components/State';
 import {
-  StyleSheet,
-  Platform,
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Button,
-  InteractionManager
-} from "react-native";
-import { Link } from "../components/Link";
-import { ResponsiveImage } from "../components/ResponsiveImage";
-import { getStyles, Theme } from "../utils";
-import { FontAwesome } from "@expo/vector-icons";
-const ios = Platform.OS === "ios";
-import Constants from "expo-constants";
-import { Video } from "expo-av";
+	StyleSheet,
+	Platform,
+	SafeAreaView,
+	View,
+	Text,
+	TouchableOpacity,
+	ScrollView,
+	Button,
+	InteractionManager,
+} from 'react-native';
+import { Link } from '../components/Link';
+import { ResponsiveImage } from '../components/ResponsiveImage';
+import { getStyles, Theme } from '../utils';
+import { FontAwesome } from '@expo/vector-icons';
+const ios = Platform.OS === 'ios';
+import Constants from 'expo-constants';
+import { Video } from 'expo-av';
 
 function Page(props) {
-  const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
+	const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
 
-  const styles = StyleSheet.create(
-    getStyles(
-      "button_green, button_white, button_white_text, button_link_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer",
-      { isWeb }
-    )
-  );
+	const styles = StyleSheet.create(
+		getStyles(
+			'button_green, button_white, button_white_text, button_link_text, button_green_text, text_header, text_header2, text_header3, text_header4, text_body, text_quote, section, content, footer',
+			{ isWeb }
+		)
+	);
 
-  // THESE PROPS ARE COMING FROM pages/sponsors.js
-  // THESE CAN BE USED TO SHOW ACTUAL NUMBERS ON THIS PAGE
-  // console.log(props.listingsCount);
-  console.log(`WE HAVE ${props.listingsCount} business listed!`);
-  // console.log(props.volunteersCount);
-  // console.log(`WE HAVE ${props.volunteersCount} volunteers!`);
-  // console.log(props.sponsors);
-  // console.log(`WE HAVE ${props.sponsorsCount} sponsors!`);
+	// THESE PROPS ARE COMING FROM pages/sponsors.js
+	// THESE CAN BE USED TO SHOW ACTUAL NUMBERS ON THIS PAGE
+	// console.log(props.listingsCount);
+	console.log(`WE HAVE ${props.listingsCount} business listed!`);
+	// console.log(props.volunteersCount);
+	// console.log(`WE HAVE ${props.volunteersCount} volunteers!`);
+	// console.log(props.sponsors);
+	// console.log(`WE HAVE ${props.sponsorsCount} sponsors!`);
 
-  const topPage = useRef();
-  const whySponsor = useRef();
-  const sponsorBenefit = useRef();
-  const sponsorLevel = useRef();
-  const ourSponsors = useRef();
+	const topPage = useRef();
+	const whySponsor = useRef();
+	const sponsorBenefit = useRef();
+	const sponsorLevel = useRef();
+	const ourSponsors = useRef();
 
-  const scrollViewRef = useRef();
+	const scrollViewRef = useRef();
 
-  const handleScroll = (index) => {
-    if (index === 0) {
-      // Temp topPage ref fix because fixed nav covers heading when jumping up
-      topPage.current.scrollIntoView({
-        behavior: "smooth",
-        block: !isWeb ? "center" : "start"
-      });
-    }
-    if (index === 1) {
-      sponsorBenefit.current.scrollIntoView({
-        behavior: "smooth",
-        block: !isWeb ? "nearest" : "nearest"
-      });
-    }
-    if (index === 2) {
-      sponsorLevel.current.scrollIntoView({
-        behavior: "smooth",
-        block: !isWeb ? "center" : "nearest"
-      });
-    }
-    if (index === 3) {
-      ourSponsors.current.scrollIntoView({
-        behavior: "smooth",
-        block: !isWeb ? "center" : "nearest"
-      });
-    }
-  };
+	const handleScroll = (index) => {
+		if (index === 0) {
+			// Temp topPage ref fix because fixed nav covers heading when jumping up
+			topPage.current.scrollIntoView({
+				behavior: 'smooth',
+				block: !isWeb ? 'center' : 'start',
+			});
+		}
+		if (index === 1) {
+			sponsorBenefit.current.scrollIntoView({
+				behavior: 'smooth',
+				block: !isWeb ? 'nearest' : 'nearest',
+			});
+		}
+		if (index === 2) {
+			sponsorLevel.current.scrollIntoView({
+				behavior: 'smooth',
+				block: !isWeb ? 'center' : 'nearest',
+			});
+		}
+		if (index === 3) {
+			ourSponsors.current.scrollIntoView({
+				behavior: 'smooth',
+				block: !isWeb ? 'center' : 'nearest',
+			});
+		}
+	};
 
-  const scrollToView = (index) => {
-    console.log("attempt scroll", index);
-    scrollViewRef.current.scrollTo({ x: 20, y: 400, animated: true });
-    // window.scrollTo(0, 400)
-  };
+	const scrollToView = (index) => {
+		console.log('attempt scroll', index);
+		scrollViewRef.current.scrollTo({ x: 20, y: 400, animated: true });
+		// window.scrollTo(0, 400)
+	};
 
-  const [layout, setLayout] = useState(null);
+	const [layout, setLayout] = useState(null);
 
-  const headerLinks =
-    isWeb && dimensions.width > 800
-      ? [
-          { href: "why_sponsor", title: "Why Sponsor?" },
-          { href: "sponsor_benefits", title: "Sponsorship Benefits" },
-          { href: "sponsor_levels", title: "Sponsorship Levels" },
-          // { href: "our_sponsors", title: "Our Sponsors" },
-          { href: "become_sponsor", title: "BECOME A SPONSOR" }
-        ]
-      : [];
-  // [ { href: "become_sponsor", title: "BECOME A SPONSOR" } ];
+	const headerLinks =
+		isWeb && dimensions.width > 800
+			? [
+					{ href: 'why_sponsor', title: 'Why Sponsor?' },
+					{ href: 'sponsor_benefits', title: 'Sponsorship Benefits' },
+					{ href: 'sponsor_levels', title: 'Sponsorship Levels' },
+					// { href: "our_sponsors", title: "Our Sponsors" },
+					{ href: 'become_sponsor', title: 'BECOME A SPONSOR' },
+			  ]
+			: [];
+	// [ { href: "become_sponsor", title: "BECOME A SPONSOR" } ];
 
-  const sponsorLevels = [
-    { title: "Seed", amount: "500" },
-    { title: "Earth", amount: "1K" },
-    { title: "Water", amount: "2K" },
-    { title: "Light", amount: "3K" },
-    { title: "Sprout", amount: "4K" },
-    { title: "Ramekin", amount: "5K" },
-    { title: "Rolling Pin", amount: "10K" },
-    { title: "Spatula", amount: "15K" },
-    { title: "Martini Glass", amount: "20K" },
-    { title: "Ladle", amount: "25K+" }
-  ];
+	const sponsorLevels = [
+		{ title: 'Seed', amount: '500' },
+		{ title: 'Earth', amount: '1K' },
+		{ title: 'Water', amount: '2K' },
+		{ title: 'Light', amount: '3K' },
+		{ title: 'Sprout', amount: '4K' },
+		{ title: 'Ramekin', amount: '5K' },
+		{ title: 'Rolling Pin', amount: '10K' },
+		{ title: 'Spatula', amount: '15K' },
+		{ title: 'Martini Glass', amount: '20K' },
+		{ title: 'Ladle', amount: '25K+' },
+	];
 
-  return (
+	return (
 		<SafeAreaView style={{ marginTop: Constants.statusBarHeight }}>
 			<ScrollView
 				ref={scrollViewRef}
@@ -420,7 +420,7 @@ function Page(props) {
 					<View
 						style={[
 							styles.section,
-							{ paddingTop: isWeb ? 20 : 60, paddingBottom: 40 },
+							{ paddingTop: isWeb ? 20 : 60, paddingBottom: 0 },
 						]}>
 						<View style={styles.content}>
 							<View style={{ position: 'relative', marginBottom: 0 }}>
@@ -435,17 +435,19 @@ function Page(props) {
 									}}>
 									{isWeb ? (
 										<video
-											src={'/about.mp4'}
-											style={{ width: '100%', height: '100%' }}
+											src={'/sponsors.mp4'}
+											style={{ width: '100%', height: '65%' }}
 											controls
 										/>
 									) : (
 										<>
 											<Video
 												shouldPlay={false /*isMobileHomePageVideoPlaying*/}
-												//posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+												posterSource={require('../public/images/eatwithintention.png')}
 												posterStyle={{ width: '100%', height: '100%' }}
-												source={{ uri: 'https://spicygreenbook.org/about.mp4' }}
+												source={{
+													uri: 'https://www.spicygreenbook.org/sponsors.mp4',
+												}}
 												useNativeControls
 												resizeMode='contain'
 												isLooping
@@ -457,7 +459,6 @@ function Page(props) {
 							</View>
 						</View>
 					</View>
-
 					<View
 						onLayout={(event) => setLayout(event.nativeEvent.layout)}
 						ref={sponsorBenefit}
@@ -717,6 +718,50 @@ function Page(props) {
 									))}
 							</View>
 						</View>
+
+						<View
+							style={[
+								styles.section,
+								{ paddingTop: isWeb ? 20 : 60, paddingBottom: 40 },
+							]}>
+							<View style={styles.content}>
+								<View style={{ position: 'relative', marginBottom: 0 }}>
+									<View style={{ paddingTop: (1920 / 1920) * 100 + '%' }} />
+									<View
+										style={{
+											position: 'absolute',
+											left: 0,
+											top: 0,
+											bottom: 0,
+											right: 0,
+										}}>
+										{isWeb ? (
+											<video
+												src={'/about.mp4'}
+												style={{ width: '100%', height: '100%' }}
+												controls
+											/>
+										) : (
+											<>
+												<Video
+													shouldPlay={false /*isMobileHomePageVideoPlaying*/}
+													//posterSource={require("../public/images/home_page_video_thumbnail.jpg")}
+													posterStyle={{ width: '100%', height: '100%' }}
+													source={{
+														uri: 'https://spicygreenbook.org/about.mp4',
+													}}
+													useNativeControls
+													resizeMode='contain'
+													isLooping
+													style={{ flex: 1 }}
+												/>
+											</>
+										)}
+									</View>
+								</View>
+							</View>
+						</View>
+
 						<View style={styles.section}>
 							<View style={(styles.content, moreStyles.sponsorLogoContent)}>
 								<View
@@ -736,7 +781,8 @@ function Page(props) {
 									</Text>
 								</View>
 								<View style={moreStyles.sponsorLogos}>
-									<View style={{ flexBasis: '30%', marginLeft: 15, marginTop: 0 }}>
+									<View
+										style={{ flexBasis: '30%', marginLeft: 15, marginTop: 0 }}>
 										<ResponsiveImage
 											style={{
 												width: 250,
@@ -897,7 +943,10 @@ function Page(props) {
 											<Text
 												accessibilityRole='header'
 												aria-level='3'
-												style={[styles.text_header3, { marginTop: 20, marginBottom: 20 }]}>
+												style={[
+													styles.text_header3,
+													{ marginTop: 20, marginBottom: 20 },
+												]}>
 												IN KIND SUPPORT
 											</Text>
 											<Text style={styles.text_body}>
@@ -912,11 +961,10 @@ function Page(props) {
 												Thank you to our following supporters for helping us
 												reduce our operational expenses:
 											</Text>
-											<View style={{margin:30}}></View>
-
+											<View style={{ margin: 30 }}></View>
 										</View>
 										<View style={moreStyles.sponsorLogos}>
-											<View style={{ flexBasis: '30%', marginBottom: 0}}>
+											<View style={{ flexBasis: '30%', marginBottom: 0 }}>
 												<ResponsiveImage
 													style={{
 														width: 150,
@@ -931,22 +979,22 @@ function Page(props) {
 													}
 												/>
 											</View>
-														<View style={{ flexBasis: '30%'  }}>
-															<ResponsiveImage
-																style={{
-																	width: 150,
-																	resizeMode: 'contain',
-																	aspectRatio: 0.7,
-																}}
-																alt='vercel'
-																source={
-																	isWeb
-																		? { uri: '/images/sponsors/vercel.png' }
-																		: require('../public/images/sponsors/vercel.png')
-																}
-															/>
-														</View>
-											<View style={{ flexBasis: '30%'}}>
+											<View style={{ flexBasis: '30%' }}>
+												<ResponsiveImage
+													style={{
+														width: 150,
+														resizeMode: 'contain',
+														aspectRatio: 0.7,
+													}}
+													alt='vercel'
+													source={
+														isWeb
+															? { uri: '/images/sponsors/vercel.png' }
+															: require('../public/images/sponsors/vercel.png')
+													}
+												/>
+											</View>
+											<View style={{ flexBasis: '30%' }}>
 												<ResponsiveImage
 													style={{
 														width: 150,
@@ -962,8 +1010,7 @@ function Page(props) {
 												/>
 											</View>
 										</View>
-										<View style={moreStyles.sponsorLogos}>
-										</View>
+										<View style={moreStyles.sponsorLogos}></View>
 									</View>
 								</View>
 							</View>
@@ -976,210 +1023,210 @@ function Page(props) {
 }
 
 const moreStyles = StyleSheet.create({
-  levels: {
-    backgroundColor: "black",
-    borderRadius: 100,
-    height: 180,
-    width: 180,
-    display: "flex"
-  },
-  amount: { fontWeight: "bold", fontSize: 60, marginTop: 80, color: "#fff" },
-  sponsorLogos: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    flexWrap: "wrap"
-  },
-  sponsorLogoContent: {
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  textList: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    paddingBottom: 15
-  },
-  checkMark: { color: "white", marginRight: 10 },
-  buildRepContainerSmall: {
-    backgroundColor: Theme.green_bg,
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingBottom: 30,
-    marginTop: 30,
-    marginBottom: 40
-  },
-  buildRepContainerLarge: {
-    flex: 1,
-    alignSelf: "stretch",
-    backgroundColor: Theme.green_bg,
-    paddingLeft: 60,
-    paddingRight: 60,
-    paddingTop: 18,
-    paddingBottom: 20
-  },
-  listTitle: {
-    fontSize: 24,
-    paddingTop: 20,
-    paddingBottom: 20,
-    color: "#ffffff",
-    marginTop: 40
-  },
-  imgTxtContainer2: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  broadVisContainerSmall: {
-    backgroundColor: Theme.green_bg,
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingBottom: 30
-  },
-  broadVisContainerLarge: {
-    flex: 1,
-    alignSelf: "stretch",
-    backgroundColor: Theme.green_bg,
-    paddingLeft: 60,
-    paddingRight: 60,
-    paddingTop: 20,
-    paddingBottom: 20
-  },
-  checkedText: {
-    fontSize: 24,
-    alignSelf: "flex-end",
-    color: "#ffffff",
-    flex: 1,
-    lineHeight: 35
-  },
-  quoteLarge: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
-  oppGapSmall: {
-    color: "white",
-    paddingTop: 10,
-    fontWeight: "bold",
-    fontSize: 20,
-    lineHeight: 24
-  },
-  oppGapLarge: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 22,
-    lineHeight: 35
-  },
-  oppGapContainerSmall: {
-    backgroundColor: Theme.green_bg,
-    padding: 10,
-    paddingBottom: 40
-  },
-  oppGapContainerLarge: {
-    backgroundColor: Theme.green_bg,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: 40,
-    paddingBottom: 40
-  },
-  whySponsorDiv: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  whySponsorSection: { fontSize: 24, paddingTop: 40, marginTop: 200 },
-  whySponsorContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingRight: 50
-  },
-  btnHeader2: { fontFamily: "ApercuMedium", padding: 5, fontWeight: "bold" },
-  btnHeader2Container: {
-    marginTop: 30,
-    backgroundColor: "black",
-    padding: 10,
-    width: 210,
-    alignItems: "center",
-    marginHorizontal: 90
-  },
-  webHeaderSmall: {
-    fontSize: 24,
-    lineHeight: 1,
-    fontFamily: "ApercuMedium",
-    color: "white",
-    fontWeight: "bold",
-    marginTop: 5
-  },
-  webHeaderLarge: {
-    fontFamily: "ApercuMedium",
-    fontSize: 18,
-    lineHeight: 16,
-    color: "white",
-    fontWeight: "bold"
-  },
-  webHeader2Small: {
-    fontSize: 24,
-    lineHeight: 1,
-    fontFamily: "ApercuMedium",
-    backgroundColor: "black",
-    padding: 10,
-    color: "white",
-    fontWeight: "bold",
-    marginTop: 5
-  },
-  webHeader2Large: {
-    backgroundColor: "black",
-    fontFamily: "ApercuMedium",
-    fontSize: 18,
-    lineHeight: 16,
-    color: "white",
-    fontWeight: "bold"
-  },
-  levelTitleSmall: {
-    alignSelf: "center",
-    marginTop: 15,
-    fontSize: 30,
-    lineHeight: 30
-  },
-  levelTitleLarge: { alignSelf: "center", marginTop: 15, fontSize: 30 },
-  becomeSponsorWebLarge: { alignSelf: "center" },
-  becomeSponsorWebSmall: {
-    marginLeft: 12,
-    marginRight: 20,
-    alignSelf: "stretch"
-  },
-  ourSponsorsBtnSmall: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center"
-  },
-  ourSponsorsBtnLarge: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignContent: "center"
-  }
-  // sponsorPacketBtn: {
-  //   backgroundColor: "white",
-  //   // marginRight: 10,
-  //   marginBottom: 10
-  // },
-  // sponsorPacketBtnText: {
-  //   color: "#246e43",
-  //   fontSize: 16,
-  //   lineHeight: 15,
-  //   fontFamily: "ApercuMedium",
-  //   textAlign: "center"
-  // }
+	levels: {
+		backgroundColor: 'black',
+		borderRadius: 100,
+		height: 180,
+		width: 180,
+		display: 'flex',
+	},
+	amount: { fontWeight: 'bold', fontSize: 60, marginTop: 80, color: '#fff' },
+	sponsorLogos: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		width: '100%',
+		flexWrap: 'wrap',
+	},
+	sponsorLogoContent: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	textList: {
+		flexDirection: 'row',
+		alignItems: 'flex-start',
+		justifyContent: 'space-between',
+		paddingBottom: 15,
+	},
+	checkMark: { color: 'white', marginRight: 10 },
+	buildRepContainerSmall: {
+		backgroundColor: Theme.green_bg,
+		paddingLeft: 30,
+		paddingRight: 30,
+		paddingBottom: 30,
+		marginTop: 30,
+		marginBottom: 40,
+	},
+	buildRepContainerLarge: {
+		flex: 1,
+		alignSelf: 'stretch',
+		backgroundColor: Theme.green_bg,
+		paddingLeft: 60,
+		paddingRight: 60,
+		paddingTop: 18,
+		paddingBottom: 20,
+	},
+	listTitle: {
+		fontSize: 24,
+		paddingTop: 20,
+		paddingBottom: 20,
+		color: '#ffffff',
+		marginTop: 40,
+	},
+	imgTxtContainer2: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	broadVisContainerSmall: {
+		backgroundColor: Theme.green_bg,
+		paddingLeft: 30,
+		paddingRight: 30,
+		paddingBottom: 30,
+	},
+	broadVisContainerLarge: {
+		flex: 1,
+		alignSelf: 'stretch',
+		backgroundColor: Theme.green_bg,
+		paddingLeft: 60,
+		paddingRight: 60,
+		paddingTop: 20,
+		paddingBottom: 20,
+	},
+	checkedText: {
+		fontSize: 24,
+		alignSelf: 'flex-end',
+		color: '#ffffff',
+		flex: 1,
+		lineHeight: 35,
+	},
+	quoteLarge: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+	},
+	oppGapSmall: {
+		color: 'white',
+		paddingTop: 10,
+		fontWeight: 'bold',
+		fontSize: 20,
+		lineHeight: 24,
+	},
+	oppGapLarge: {
+		color: 'white',
+		fontWeight: 'bold',
+		fontSize: 22,
+		lineHeight: 35,
+	},
+	oppGapContainerSmall: {
+		backgroundColor: Theme.green_bg,
+		padding: 10,
+		paddingBottom: 40,
+	},
+	oppGapContainerLarge: {
+		backgroundColor: Theme.green_bg,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingTop: 40,
+		paddingBottom: 40,
+	},
+	whySponsorDiv: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	whySponsorSection: { fontSize: 24, paddingTop: 40, marginTop: 200 },
+	whySponsorContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingRight: 50,
+	},
+	btnHeader2: { fontFamily: 'ApercuMedium', padding: 5, fontWeight: 'bold' },
+	btnHeader2Container: {
+		marginTop: 30,
+		backgroundColor: 'black',
+		padding: 10,
+		width: 210,
+		alignItems: 'center',
+		marginHorizontal: 90,
+	},
+	webHeaderSmall: {
+		fontSize: 24,
+		lineHeight: 1,
+		fontFamily: 'ApercuMedium',
+		color: 'white',
+		fontWeight: 'bold',
+		marginTop: 5,
+	},
+	webHeaderLarge: {
+		fontFamily: 'ApercuMedium',
+		fontSize: 18,
+		lineHeight: 16,
+		color: 'white',
+		fontWeight: 'bold',
+	},
+	webHeader2Small: {
+		fontSize: 24,
+		lineHeight: 1,
+		fontFamily: 'ApercuMedium',
+		backgroundColor: 'black',
+		padding: 10,
+		color: 'white',
+		fontWeight: 'bold',
+		marginTop: 5,
+	},
+	webHeader2Large: {
+		backgroundColor: 'black',
+		fontFamily: 'ApercuMedium',
+		fontSize: 18,
+		lineHeight: 16,
+		color: 'white',
+		fontWeight: 'bold',
+	},
+	levelTitleSmall: {
+		alignSelf: 'center',
+		marginTop: 15,
+		fontSize: 30,
+		lineHeight: 30,
+	},
+	levelTitleLarge: { alignSelf: 'center', marginTop: 15, fontSize: 30 },
+	becomeSponsorWebLarge: { alignSelf: 'center' },
+	becomeSponsorWebSmall: {
+		marginLeft: 12,
+		marginRight: 20,
+		alignSelf: 'stretch',
+	},
+	ourSponsorsBtnSmall: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignContent: 'center',
+	},
+	ourSponsorsBtnLarge: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignContent: 'center',
+	},
+	// sponsorPacketBtn: {
+	//   backgroundColor: "white",
+	//   // marginRight: 10,
+	//   marginBottom: 10
+	// },
+	// sponsorPacketBtnText: {
+	//   color: "#246e43",
+	//   fontSize: 16,
+	//   lineHeight: 15,
+	//   fontFamily: "ApercuMedium",
+	//   textAlign: "center"
+	// }
 });
 
 export default Page;
