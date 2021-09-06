@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../components/State";
-import { View, Text, StyleSheet, Button, Platform, ActivityIndicator, FlatList, TouchableOpacity, Image } from "react-native";
-import { Link } from "../components/Link";
+import { View, Text, StyleSheet, Button, ActivityIndicator, FlatList, TouchableOpacity } from "react-native";
 import { PageTitle } from "../components/PageTitle";
 import { RichText } from "../components/RichText";
+import { Link } from "../components/Link";
 import { getStyles, Theme, getContent, getData } from "../utils";
-import styled from "styled-components";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Video } from "expo-av";
 import { AntDesign } from "@expo/vector-icons";
+import VolunteerFormLink from "./VolunteerFormLink";
 
 function Page(props) {
-	const [{ view, isWeb, dimensions }, dispatch] = useStateValue();
-	const styles = StyleSheet.create(getStyles("text_header2, text_header3, button_green, button_green_text, text_header4, section, content", { isWeb }));
+	const [{ isWeb, dimensions }] = useStateValue();
+	const styles = StyleSheet.create(
+		getStyles("text_header2, text_header3, button_green, button_green_text, text_header4, section, container, content", { isWeb }),
+	);
 
 	const [pageLoading, setPageLoading] = useState(props.content ? false : true);
 	const [content, setContent] = useState(props.content || {});
-	const [bodyChanged, setBodyChanged] = useState(false);
 	const [selectedId, setSelectedId] = useState(null);
 
 	const [loadingRoles, setLoadingRoles] = useState(!props.roles);
-	const [errorRoles, setErrorRoles] = useState("");
+	const [setErrorRoles] = useState("");
 	const [roles, setRoles] = useState(props.roles || []);
 	const [play, setPlay] = useState(false);
 	if (!props.content) {
@@ -93,7 +94,8 @@ function Page(props) {
 				<React.Fragment>
 					<PageTitle title={content.page_title} />
 
-					<View style={[styles.section, { paddingTop: isWeb ? 20 : 60 }]}>
+					<View style={styles.container}>
+						<VolunteerFormLink text={"The biggest impact we can all have is by getting as many people as possible to patron a business that we have listed."} />
 						<View style={styles.content}>
 							<View style={{ position: "relative", marginBottom: 0 }}>
 								<View style={{ paddingTop: (1080 / 1920) * 100 + "%" }} />
@@ -141,22 +143,12 @@ function Page(props) {
 							</View>
 						</View>
 					</View>
-					<View style={[styles.section]}>
-						<View style={[styles.content]}>
-							<RichText render={_use_content} isWeb={isWeb} markupStyle={"fancy"} bullet={"check"} />
 
-							{isWeb && (
-								<View style={{ width: "50%" }}>
-									<Button nativeID="button" onPress={executeScroll} title="Scroll to Volunteer Form" color={Theme.green} style={styles.button_green} />
-								</View>
-							)}
-						</View>
-					</View>
-
-					<View style={[styles.section, { paddingTop: 0 }]}>
+					<View style={[styles.section, { paddingTop: dimensions.width < 900 ? 0 : 40, paddingBottom: 0 }]}>
 						<View style={styles.content}>
 							<View style={dimensions.width < 900 ? {} : { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start" }}>
-								<View style={dimensions.width < 900 ? {} : { flex: 3 }}>
+								{/* infographics */}
+								<View style={dimensions.width < 900 ? {} : { flex: 2 }}>
 									{_photo && _photo.value && _photo.value[0] && (
 										<ResponsiveImage
 											style={{
@@ -169,103 +161,87 @@ function Page(props) {
 										/>
 									)}
 								</View>
-								<View style={dimensions.width < 900 ? { paddingTop: 40 } : { flex: 2, paddingLeft: 20 }}>
-									<FlatList
-										nativeID="flatLIST"
-										key={"cols" + numColumns}
-										data={roles}
-										extraData={selectedId}
-										numColumns={1}
-										renderItem={({ item, index, separators }) => (
-											<View
-												key={"press" + index}
-												style={{
-													flex: 1,
-													margin: 10,
+
+								{/* introduction */}
+								<View style={dimensions.width < 900 ? { paddingTop: 0 } : { flex: 3, paddingLeft: 20, marginTop: -40 }}>
+									<RichText render={_use_content} isWeb={isWeb} markupStyle={"fancy"} bullet={"check"} />
+								</View>
+							</View>
+						</View>
+					</View>
+
+					<View style={[styles.section, { paddingTop: 0, paddingBottom: dimensions.width < 900 ? 0 : 80 }]}>
+						<View style={styles.content}>
+							{/* list of volunteer roles */}
+							<View style={dimensions.width < 900 ? { paddingTop: 0 } : { flex: 2, paddingLeft: 20 }}>
+								<FlatList
+									nativeID="flatLIST"
+									key={"cols" + numColumns}
+									data={roles}
+									extraData={selectedId}
+									numColumns={1}
+									renderItem={({ item, index, separators }) => (
+										<View
+											key={"press" + index}
+											style={{
+												flex: 1,
+												borderBottomColor: "#006633",
+												borderBottomWidth: 1,
+												borderStyle: "solid",
+												paddingTop: 20,
+												paddingBottom: dimensions.width > 900 ? 0 : 20,
+											}}
+										>
+											<TouchableOpacity
+												onPress={(e) => {
+													console.log("pressed");
+													setRoleState((prevState) => {
+														let newState = {};
+														newState[index] = prevState[index] ? false : true;
+														return { ...prevState, ...newState };
+													});
+
+													console.log("INDEX CURRENTLY AT:", index);
+													console.log("PREVIOUS ID:", selectedId);
+													if (selectedId === 1) {
+														setSelectedId(0);
+													} else {
+														setSelectedId(1);
+													}
+
+													// console.log("SET SELECTED INDEX TO:", selectedId)
 												}}
 											>
-												<TouchableOpacity
-													onPress={(e) => {
-														console.log("pressed");
-														setRoleState((prevState) => {
-															let newState = {};
-															newState[index] = prevState[index] ? false : true;
-															return { ...prevState, ...newState };
-														});
-
-														console.log("INDEX CURRENTLY AT:", index);
-														console.log("PREVIOUS ID:", selectedId);
-														if (selectedId === 1) {
-															setSelectedId(0);
-														} else {
-															setSelectedId(1);
-														}
-
-														// console.log("SET SELECTED INDEX TO:", selectedId)
-													}}
-												>
-													<Text accessibilityRole="header" aria-level={3} style={[styles.text_header3, { marginTop: 40 }]}>
-														{roleState[index] ? "-" : "+"} {item.title}
-													</Text>
-												</TouchableOpacity>
-												{!!roleState[index] && (
-													<View>
-														<Text style={[styles.text_body, { marginTop: 10, fontStyle: "italic" }]}>{item.location}</Text>
-														<RichText render={item._description} isWeb={isWeb} markupStyle={"fancy"} bullet={"check"} />
+												<Text accessibilityRole="header" aria-level={3} style={[styles.text_header3, { marginTop: dimensions.width < 900 ? 0 : 40 }]}>
+													{roleState[index] ? "-" : "+"} {item.title}
+												</Text>
+											</TouchableOpacity>
+											{!!roleState[index] && (
+												<View>
+													<Text style={[styles.text_body, { marginTop: 10, fontStyle: "italic" }]}>{item.location}</Text>
+													<RichText render={item._description} isWeb={isWeb} markupStyle={"fancy"} bullet={"check"} />
+													<View style={{ flex: 1, alignSelf: "center", padding: 20 }}>
+														<Link contain href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer">
+															<View style={[styles.button_green, { height: 40, marginBottom: 16 }]}>
+																<Text style={[styles.button_green_text]}>Volunteer</Text>
+															</View>
+														</Link>
 													</View>
-												)}
-											</View>
-										)}
-										keyExtractor={(item, index) => "press" + index}
-									/>
-								</View>
+												</View>
+											)}
+										</View>
+									)}
+									keyExtractor={(item, index) => "press" + index}
+								/>
 							</View>
 						</View>
 					</View>
 
-					<View ref={myRef} nativeID="formBelow" style={[styles.section]}>
-						<View style={styles.content}>
-							<View
-								style={[
-									{
-										flex: 1,
-										backgroundColor: "#000",
-										width: "100%",
-										flexDirection: dimensions.width < 900 ? "column" : "row",
-										justifyContent: "space-between",
-										alignItems: "center",
-									},
-								]}
-							>
-								<View style={{ flex: 3, padding: 20 }}>
-									<Text style={[styles.text_header4, { color: "#fff" }]}>
-										The biggest impact we can all have is by getting as many people as possible to patron a business that we have listed.
-									</Text>
-								</View>
-								<View style={{ flex: 1, padding: 20, justifyContent: "flex-end" }}>
-									<View style={{ flex: 1 }}>
-										<Link contain href="https://forms.gle/vJ114r7J3JkE8jrs9" title="Volunteer Form">
-											<View style={[styles.button_green]}>
-												<Text style={styles.button_green_text}>Volunteer Form</Text>
-											</View>
-										</Link>
-									</View>
-								</View>
-							</View>
-						</View>
-					</View>
+					<VolunteerFormLink style={{ maxHeight: 144, paddingTop: 40 }} text={"Are you ready to be part of this awesome team?"} />
 				</React.Fragment>
 			)}
 		</React.Fragment>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-});
 
 export default Page;
