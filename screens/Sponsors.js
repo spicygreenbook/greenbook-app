@@ -288,7 +288,8 @@ function Page(props) {
 												our growth. Together, we can empower more Black-owned
 												businesses, diversify the world’s business landscape,
 												and bring amazing food, culture, and experiences to all!
-												Spicy Green Book is a <b>501(c)(3) nonprofit organization,</b> EIN 85-1876971.
+												<br/>
+												Spicy Green Book is a 501(c)(3) nonprofit organization, EIN 85-1876971.
 											</Text>
 										</View>
 									</View>
