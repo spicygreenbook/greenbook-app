@@ -803,6 +803,8 @@ function Page(props) {
 								We are a nonprofit organization, so all contributions received
 								go toward the upkeep and growth of the online directory, new SGB
 								projects, and other causes which benefit the Black community.
+								<br/>
+												Spicy Green Book is a 501(c)(3) nonprofit organization, EIN 85-1876971.
 							</Text>
 						</View>
 						<View
