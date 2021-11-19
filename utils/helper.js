@@ -231,7 +231,7 @@ export function findListings (listings, geoLocation, keywords, sort) {
 
       switch(sort.toLowerCase()) {
         case "relevance":
-            sortedArray = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+            sortedArray = listings.filter(filter).sort(sortDistance);
             break;
         case "asc":
             sortedArray = listings.filter(filter).sort(ascendingSortSearch);
@@ -240,7 +240,7 @@ export function findListings (listings, geoLocation, keywords, sort) {
             sortedArray = listings.filter(filter).sort(ascendingSortSearch).reverse();
             break;
         default:
-            sortedArray = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+            sortedArray = listings.filter(filter).sort(sortDistance);
       }
     return sortedArray;
 
