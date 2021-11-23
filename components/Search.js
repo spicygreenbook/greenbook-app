@@ -417,7 +417,9 @@ const Search = ({
             Sort By:
           </Text>
           <View style={{ flex: 1 }}>
-            <Picker
+            <Picker 
+              style={{height: 44}} 
+              itemStyle={{height: 44}}
               selectedValue={sortOption}
               onValueChange={(value) => {
                 handleSortChange(value);
