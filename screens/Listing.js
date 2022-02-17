@@ -218,7 +218,7 @@ function Page(props) {
                                             </View>
                                         </Link>
                                     }
-                                    {content.cuisines && content.cuisines.length && <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10 }}>
+                                    {content.cuisines && !!content.cuisines.length && <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10 }}>
                                         <View style={{ marginRight: 10 }}>
                                             <FontAwesome name="tags" size={24} color="#fff" />
                                         </View>
