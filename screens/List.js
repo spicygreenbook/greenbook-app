@@ -53,7 +53,7 @@ json output to console to convert to a table to act as an export for people that
 		} else {
 			newListings = findListings(data, false, toSearch, sortOption);
 		}
-
+		console.log({newListings})
 		setFilteredList(newListings);
 		dispatch({ type: 'loading', value: false });
 	};
@@ -217,7 +217,7 @@ json output to console to convert to a table to act as an export for people that
 							: {}
 					}>
 					<HeaderList />
-					<View style={{ paddingTop: 220 }}>
+					<View style={{ paddingTop: 320 }}>
 						{filteredList.length > 0 ? (
 							filteredList.map((listing, n, ar) => (
 								<ListItem

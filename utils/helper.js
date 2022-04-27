@@ -199,6 +199,7 @@ function ascendingSortSearch(a,b) {
 export function findListings (listings, geoLocation, keywords, sort) {
     const filter = (row) => {
         var go = true;
+        row._searchRank = 0
         if (keywords.words.length) {
             row._searchRank = searchRank(keywords, row)
             if (!row._searchRank) {
@@ -230,9 +231,6 @@ export function findListings (listings, geoLocation, keywords, sort) {
       let sortedArray = [];
 
       switch(sort.toLowerCase()) {
-        case "relevance":
-            sortedArray = listings.filter(filter).sort(sortDistance);
-            break;
         case "asc":
             sortedArray = listings.filter(filter).sort(ascendingSortSearch);
             break;
@@ -240,7 +238,10 @@ export function findListings (listings, geoLocation, keywords, sort) {
             sortedArray = listings.filter(filter).sort(ascendingSortSearch).reverse();
             break;
         default:
-            sortedArray = listings.filter(filter).sort(sortDistance);
+            sortedArray = listings.filter(filter).sort(sortDistance).sort(sortSearchRank);
+            if (keywords.words.length) {
+                sortedArray.sort(sortSearchRank)
+            }
       }
     return sortedArray;
 
