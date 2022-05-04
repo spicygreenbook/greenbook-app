@@ -812,6 +812,22 @@ function Page(props) {
 											}
 										/>
 									</View>
+<View
+										style={{ flexBasis: '30%', marginLeft: 15, marginTop: 0 }}>
+										<ResponsiveImage
+											style={{
+												width: 250,
+												resizeMode: 'contain',
+												aspectRatio: 0.5,
+											}}
+											alt='mongoose'
+											source={
+												isWeb
+													? { uri: '/images/sponsors/mongoose.jpg' }
+													: require('../public/images/sponsors/mongoose.jpg')
+											
+										/>
+									</View>
 								</View>
 
 								{/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
