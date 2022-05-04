@@ -789,11 +789,11 @@ function Page(props) {
 												resizeMode: 'contain',
 												aspectRatio: 0.5,
 											}}
-											alt='verizon'
+											alt='yahoo'
 											source={
 												isWeb
-													? { uri: '/images/sponsors/verizon.png' }
-													: require('../public/images/sponsors/verizon.png')
+													? { uri: '/images/sponsors/yahoo.png' }
+													: require('../public/images/sponsors/yahoo.png')
 											}
 										/>
 									</View>
