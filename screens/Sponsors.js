@@ -964,21 +964,7 @@ function Page(props) {
 											<View style={{ margin: 30 }}></View>
 										</View>
 										<View style={moreStyles.sponsorLogos}>
-											<View style={{ flexBasis: '30%', marginBottom: 0 }}>
-												<ResponsiveImage
-													style={{
-														width: 150,
-														resizeMode: 'contain',
-														aspectRatio: 0.5,
-													}}
-													alt='konnect'
-													source={
-														isWeb
-															? { uri: '/images/sponsors/konnect.jpg' }
-															: require('../public/images/sponsors/konnect.jpg')
-													}
-												/>
-											</View>
+											
 											<View style={{ flexBasis: '30%' }}>
 												<ResponsiveImage
 													style={{
