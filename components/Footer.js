@@ -37,7 +37,7 @@ const SOCIAL_LINKS_2 = [
 	{ name: "github", url: "https://github.com/spicygreenbook/greenbook-app" },
 	{ name: "behance", url: "https://www.behance.net/spicygreenbook/" },
 	{ name: "pinterest", url: "https://www.pinterest.com/spicygreenbook/" },
-	{ name: "envelope", url: "mailto:admin@spicygreenbook.org" },
+	{ name: "envelope", url: "mailto:d.batson@spicygreenbook.org" },
 ];
 
 const Footer = (props) => {
