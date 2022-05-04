@@ -223,17 +223,7 @@ const Footer = (props) => {
 								</svg>
 							</a>
 						</View>
-						<View style={dimensions.width < 980 ? { marginTop: 24 } : {}}>
-							<a href="https://www.livechat.com/" target="_blank" rel="noreferrer">
-								<img
-									style={{ padding: 24 }}
-									height="24"
-									width="124"
-									src="https://d33wubrfki0l68.cloudfront.net/0e40536c3e870532a51f90f6f143eb4306c21192/32d29/images/logo_rgb_white.svg"
-									alt="Customer service software"
-								/>
-							</a>
-						</View>
+						
 						<View style={dimensions.width < 980 ? { marginTop: 24 } : {}}>
 							<a href="https://www.re-store.info/" target="_blank" rel="noreferrer">
 								<img
