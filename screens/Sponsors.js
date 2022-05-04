@@ -661,7 +661,7 @@ function Page(props) {
 									SPONSORSHIP LEVELS
 								</Text>
 								<Text style={styles.text_body}>
-									Each Sponsorship contribution level has its own benefits. 
+									Each Sponsorship contribution level has its own benefits. Click the icons below to learn more.
 								</Text>
 							</View>
 							<View
