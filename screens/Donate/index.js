@@ -55,7 +55,7 @@ function Page(props) {
 									Transparency is fundamental to our organization's purpose and success. It is important to us that our donors know exactly how we work to
 									create change within their communities. We do not charge the businesses to be listed on Spicy Green Book. We are grateful for the support of
 									our dedicated donors. Our work would not be possible without you. Your contributions will go to the upkeep of the site, and addition of new
-									resources and events. Spicy Green Book is a legally incorporated nonprofit organization pending our 501(c)(3) status.
+									resources and events. Spicy Green Book is a 501(c)(3) nonprofit organization, EIN 85-1876971.
 								</Part>
 
 								<Part
