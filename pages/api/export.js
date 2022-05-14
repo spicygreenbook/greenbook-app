@@ -9,7 +9,7 @@ function displayField(val) {
     } else if (type === 'object') {
         return JSON.stringify(val);
     } else {
-        return 'unknown data type ' + type
+        return ''
     }
 }
 
@@ -19,13 +19,18 @@ const listings = async (req, res) => {
     type: 'listing'
   });
 
-  console.log(listings);
-  let cols = Object.keys(listings[0]).filter(key => {
-    return key[0] !== '_'
+  let _cols = new Set();
+  listings.map(listing => {
+    Object.keys(listing).forEach(key => {
+      if (key.indexOf('_') !== 0){
+        _cols.add(key)
+      }
+    })
   })
+  let cols = Array.from(_cols)
 
   let table = `
-    <table border="1">
+    <table border="1" cellspacing="0" cellpadding="2">
     <thead>
     <tr>
         ${cols.map(col => `<td>${col}</td>`).join('')}

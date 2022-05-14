@@ -425,6 +425,9 @@ export async function getData(config) {
 
 		rows = parsed_data
 			.map((doc, i) => {
+				if (doc.uid === 'comfortwingz') {
+					console.log(doc)
+				}
 				let content = {
 					id: doc.id,
 					uid: doc.uid,
