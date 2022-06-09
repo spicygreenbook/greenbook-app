@@ -110,7 +110,7 @@ export function CustomDrawerContent(props) {
         label="How to Help"
         items={[
           { label: "Donate", link: "/donate" },
-          { label: "Sponsor", link: "/sponsor" },
+          { label: "Sponsor", link: "/sponsors" },
           { label: "Volunteer", link: "/volunteer" },
         ]}
         navigation={props.navigation} 
