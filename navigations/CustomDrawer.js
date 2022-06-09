@@ -49,7 +49,7 @@ const CustomDrawer = (props) => {
             <Icon type="FontAwesome" style={styles.default} name="pinterest" size={22} />
           </Button>
           
-          <Button onPress={() => Linking.openURL("mailto:admin@spicygreenbook.org")}>
+          <Button onPress={() => Linking.openURL("mailto:hello@spicygreenbook.org")}>
             <Icon type="FontAwesome" style={styles.default} name="envelope" size={22} />
           </Button>
         </FooterTab>
