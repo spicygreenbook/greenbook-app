@@ -60,10 +60,7 @@ function Page(props) {
                         <View style={styling.contact_container}>
                             <View style={styling.contact_inner_container}>
                                 <View style={styling.contact_text_container}>
-                                    <Text style={styling.contact_heading_2}>QUESTIONS ABOUT PHOTOGRAPHY?</Text>
-                                    <Text onPress={() => Linking.openURL('mailto:photography@spicygreenbook.com')} style={styling.contact_links}>
-                                        photography@spicygreenbook.com</Text>
-                                    <Text style={styling.contact_heading_2}>FIND AN ISSUE WITH THE WEBSITE?</Text>
+                                    <Text style={styling.contact_heading_2}>FOUND AN ISSUE WITH THE WEBSITE?</Text>
                                     <Text style={styling.contact_details}>Open a new issue / bug report on our github page:</Text>
                                     <Text onPress={() => Linking.openURL("https://github.com/spicygreenbook/greenbook-app")} style={[styling.contact_links, isWeb ? {cursor:'pointer'} : '']}>
                                         https://github.com/spicygreenbook-app</Text>
