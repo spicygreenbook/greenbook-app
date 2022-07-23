@@ -787,7 +787,7 @@ function Page(props) {
 											style={{
 												width: 250,
 												resizeMode: 'contain',
-												aspectRatio: 0.5,
+												aspectRatio: 0.27718960538979787,
 											}}
 											alt='yahoo'
 											source={
@@ -802,7 +802,7 @@ function Page(props) {
 											style={{
 												width: 250,
 												resizeMode: 'contain',
-												aspectRatio: 0.5,
+												aspectRatio: 0.30520833333333336,
 											}}
 											alt='kinecta'
 											source={
