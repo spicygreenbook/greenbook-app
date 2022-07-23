@@ -669,7 +669,7 @@ function Page(props) {
 								style={{
 									width: 804,
 									resizeMode: 'contain',
-									aspectRatio: 1.37245,
+									aspectRatio: 1.1514522821576763,
 								}}
 								alt='Spicy Green Book'
 								source={
@@ -706,7 +706,7 @@ function Page(props) {
 								style={{
 									width: 804,
 									resizeMode: 'contain',
-									aspectRatio: 1.37245,
+									aspectRatio: 1.0402298850574712,
 								}}
 								alt='Spicy Green Book'
 								source={
@@ -822,7 +822,7 @@ function Page(props) {
 								style={{
 									width: 804,
 									resizeMode: 'contain',
-									aspectRatio: 1.37245,
+									aspectRatio: 0.9465648854961832,
 								}}
 								alt='Spicy Green Book'
 								source={
