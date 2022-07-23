@@ -807,8 +807,8 @@ function Page(props) {
 											alt='kinecta'
 											source={
 												isWeb
-													? { uri: '/images/sponsors/kinecta.jpeg' }
-													: require('../public/images/sponsors/kinecta.jpeg')
+													? { uri: '/images/sponsors/kinecta_tagline.png' }
+													: require('../public/images/sponsors/kinecta_tagline.png')
 											}
 										/>
 									</View>
