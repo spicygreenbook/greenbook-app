@@ -782,7 +782,7 @@ function Page(props) {
 								</View>
 								<View style={moreStyles.sponsorLogos}>
 									<View
-										style={{ flexBasis: '30%', marginLeft: 15, marginTop: 0 }}>
+										style={{ flex: dimensions.width < 600 ? null : 1, width: dimensions.width < 600 ? 200 : null, marginLeft: 15, marginTop: 0 }}>
 										<ResponsiveImage
 											style={{
 												width: 250,
@@ -797,7 +797,7 @@ function Page(props) {
 											}
 										/>
 									</View>
-									<View style={{ flexBasis: '30%', margin: 15 }}>
+									<View style={{ flex: dimensions.width < 600 ? null : 1, width: dimensions.width < 600 ? 200 : null, margin: 15, marginHorizontal: 40 }}>
 										<ResponsiveImage
 											style={{
 												width: 250,
@@ -812,22 +812,25 @@ function Page(props) {
 											}
 										/>
 									</View>
-<View
-										style={{ flexBasis: '30%', marginLeft: 15, marginTop: 0 }}>
-										<ResponsiveImage
+									<View style={{ flex: dimensions.width < 600 ? null : 1, width: dimensions.width < 600 ? 200 : null, margin: 15 }}>
+									<ResponsiveImage
 											style={{
 												width: 250,
 												resizeMode: 'contain',
-												aspectRatio: 0.5,
+												aspectRatio: 0.25,
 											}}
 											alt='mongoose'
 											source={
 												isWeb
 													? { uri: '/images/sponsors/mongoose.jpg' }
 													: require('../public/images/sponsors/mongoose.jpg')
+											}
 											
 										/>
 									</View>
+
+										
+									
 								</View>
 
 								{/* Section below is hidden due to issue#233, but left it for easy re-activation once Sponsorship info packet becomes available */}
