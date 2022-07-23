@@ -662,13 +662,7 @@ function Page(props) {
 						<View
 							style={
 								dimensions.width < 700
-									? {
-											paddingLeft: 15,
-											paddingRight: 15,
-											paddingTop: 20,
-											paddingBottom: 10,
-											marginBottom: 10,
-									  }
+									? { paddingLeft: 40, paddingRight: 40 }
 									: { flex: 1, paddingLeft: 80, paddingRight: 80 }
 							}>
 							<ResponsiveImage
@@ -680,8 +674,8 @@ function Page(props) {
 								alt='Spicy Green Book'
 								source={
 									isWeb
-										? { uri: '/images/bookandjerk.jpg' }
-										: require('../public/images/bookandjerk.jpg')
+										? { uri: '/images/onecollage.jpg' }
+										: require('../public/images/onecollage.jpg')
 								}
 							/>
 						</View>
@@ -705,31 +699,44 @@ function Page(props) {
 						<View
 							style={
 								dimensions.width < 700
-									? {
-											paddingLeft: 15,
-											paddingRight: 15,
-											marginTop: 10,
-											marginBottom: 10,
-											paddingTop: 10,
-											paddingBottom: 10,
-									  }
+									? { paddingLeft: 40, paddingRight: 40 }
 									: { flex: 1, paddingLeft: 80, paddingRight: 80 }
 							}>
 							<ResponsiveImage
 								style={{
 									width: 804,
-									height: 1000,
 									resizeMode: 'contain',
 									aspectRatio: 1.37245,
 								}}
 								alt='Spicy Green Book'
 								source={
 									isWeb
-										? { uri: '/images/soulandbowl.jpg' }
-										: require('../public/images/soulandbowl.jpg')
+										? { uri: '/images/twocollage.jpg' }
+										: require('../public/images/twocollage.jpg')
 								}
 							/>
 						</View>
+						{/* <View
+							style={
+								dimensions.width < 700
+									? { paddingLeft: 40, paddingRight: 40 }
+									: { flex: 1, paddingLeft: 80, paddingRight: 80 }
+							}>
+							<ResponsiveImage
+								style={{
+									width: 800,
+									height: 100,
+									resizeMode: 'contain',
+									aspectRatio: 1,
+								}}
+								alt='Spicy Green Book'
+								source={
+									isWeb
+										? { uri: '/images/twocollage.jpg' }
+										: require('../public/images/twocollage.jpg')
+								}
+							/>
+						</View> */}
 						<View
 							style={
 								dimensions.width < 700
@@ -803,8 +810,6 @@ function Page(props) {
 								We are a nonprofit organization, so all contributions received
 								go toward the upkeep and growth of the online directory, new SGB
 								projects, and other causes which benefit the Black community.
-								<br/>
-												Spicy Green Book is a 501(c)(3) nonprofit organization, EIN 85-1876971.
 							</Text>
 						</View>
 						<View
@@ -816,15 +821,14 @@ function Page(props) {
 							<ResponsiveImage
 								style={{
 									width: 804,
-									height: 900,
 									resizeMode: 'contain',
 									aspectRatio: 1.37245,
 								}}
 								alt='Spicy Green Book'
 								source={
 									isWeb
-										? { uri: '/images/akadi.jpg' }
-										: require('../public/images/akadi.jpg')
+										? { uri: '/images/threecollage.jpg' }
+										: require('../public/images/threecollage.jpg')
 								}
 							/>
 						</View>
