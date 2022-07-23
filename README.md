@@ -35,7 +35,7 @@ The app is built with [Expo](https://expo.io/) + [NextJS](https://nextjs.org/) a
     cd greenbook-app
 
     # install node modules
-    npm install
+    yarn install
 
     # install expo
     npm install expo-cli --global
