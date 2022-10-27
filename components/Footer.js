@@ -31,7 +31,7 @@ const SOCIAL_LINKS = [
 	{ name: "twitter", url: "https://twitter.com/spicygreenbook" },
 	{ name: "linkedin", url: "https://www.linkedin.com/company/spicy-green-book/" },
 	{ name: "facebook", url: "https://www.facebook.com/SpicyGreenBook/" },
-	{ name: "youtube", url: "https://www.youtube.com/channel/UCS5gEWNUF2fibLwwxFibKGg" },
+	{ name: "youtube", url: "https://youtube.com/@spicygreenbook" },
 ];
 const SOCIAL_LINKS_2 = [
 	{ name: "github", url: "https://github.com/spicygreenbook/greenbook-app" },
